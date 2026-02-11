@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>For Laura</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #010101; }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(0,0,0,0.25), rgba(0,0,0,0.85));
+      pointer-events: none;
+    }
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: url("./image.jpg") center / cover no-repeat;
+      animation: fadeInBg 1.5s ease forwards;
+    }
+    @keyframes fadeInBg { from { filter: brightness(0.6); } to { filter: brightness(1); } }
+
+    .text-line {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      color: #fefefe;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      text-shadow: 0 12px 32px rgba(0, 0, 0, 0.65);
+      letter-spacing: 0.02em;
+    }
+    .text-line.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #line1 { top: 22%; font-size: clamp(48px, 11vw, 72px); font-weight: 600; text-align: left; }
+    #line2 { top: 55%; font-size: clamp(22px, 5vw, 28px); text-align: center; }
+    #line3 { top: 68%; font-size: clamp(20px, 4.8vw, 26px); text-align: center; }
+    .caption {
+      position: absolute;
+      bottom: 4%;
+      width: 100%;
+      text-align: center;
+      color: rgba(255,255,255,0.78);
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .controls {
+      position: absolute;
+      top: 4%;
+      right: 5%;
+      display: flex;
+      gap: 8px;
+    }
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 8px 14px;
+      background: rgba(0,0,0,0.45);
+      color: white;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="container">
+    <div class="controls">
+      <button id="soundToggle" aria-pressed="false">Sound</button>
+    </div>
+
+    <div class="text-line" id="line1">Tokyo teaches attention.</div>
+    <div class="text-line" id="line2">Even in crowds, there is room to breathe.</div>
+    <div class="text-line" id="line3">Wish you were here.</div>
+
+    <div class="caption">Tokyo · Feb 2026</div>
+
+    <audio id="ambience" loop preload="auto" src="./ambient-rain.mp3"></audio>
+  </div>
+
+  <script>
+    const lines = ["line1","line2","line3"].map(id => document.getElementById(id));
+    const audio = document.getElementById("ambience");
+    const soundToggle = document.getElementById("soundToggle");
+    let index = 0;
+
+    document.getElementById("container").addEventListener("click", () => {
+      if (index < lines.length) {
+        lines[index].classList.add("visible");
+        index++;
+        if ("vibrate" in navigator) navigator.vibrate(15);
+      }
+    });
+
+    soundToggle.addEventListener("click", (event) => {
+      const next = soundToggle.getAttribute("aria-pressed") === "true" ? "false" : "true";
+      soundToggle.setAttribute("aria-pressed", next);
+      soundToggle.textContent = next === "true" ? "Sound ▸" : "Sound";
+      if (next === "true") {
+        audio.currentTime = 0;
+        audio.play().catch(() => {});
+      } else {
+        audio.pause();
+      }
+      event.stopPropagation();
+    });
+  </script>
+</body>
+</html>
