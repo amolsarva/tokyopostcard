@@ -8,113 +8,305 @@
     :root {
       color-scheme: dark;
       font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --text-shadow: 0 16px 60px rgba(0, 0, 0, 0.7);
     }
     *, *::before, *::after { box-sizing: border-box; }
-    html, body { margin: 0; height: 100%; overflow: hidden; background: #010101; }
-    body::after {
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #010101;
+      color: #fdfdfd;
+      overflow: hidden;
+    }
+
+    body {
+      position: relative;
+    }
+
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background: #020202 center / cover no-repeat;
+      filter: saturate(1.05);
+      transition: opacity 1s ease, transform 1.6s ease;
+      opacity: 0;
+      transform: scale(1.04);
+    }
+
+    .backdrop.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .vignette::before,
+    .vignette::after {
       content: "";
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at top, rgba(0,0,0,0.25), rgba(0,0,0,0.85));
       pointer-events: none;
     }
-    .container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: url("./image.jpg") center / cover no-repeat;
-      animation: fadeInBg 1.5s ease forwards;
-    }
-    @keyframes fadeInBg { from { filter: brightness(0.6); } to { filter: brightness(1); } }
 
-    .text-line {
-      position: absolute;
-      left: 8%;
-      right: 8%;
-      color: #fefefe;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-      text-shadow: 0 12px 32px rgba(0, 0, 0, 0.65);
-      letter-spacing: 0.02em;
+    .vignette::before {
+      background: radial-gradient(circle at top, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.85));
     }
-    .text-line.visible {
-      opacity: 1;
-      transform: translateY(0);
+
+    .vignette::after {
+      background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"%3E%3Crect width="200" height="200" fill="rgba(0,0,0,0)"/%3E%3Ccircle cx="100" cy="100" r="1" fill="rgba(255,255,255,0.05)"/%3E%3C/svg%3E');
+      mix-blend-mode: screen;
+      opacity: 0.15;
     }
-    #line1 { top: 22%; font-size: clamp(48px, 11vw, 72px); font-weight: 600; text-align: left; }
-    #line2 { top: 55%; font-size: clamp(22px, 5vw, 28px); text-align: center; }
-    #line3 { top: 68%; font-size: clamp(20px, 4.8vw, 26px); text-align: center; }
-    .caption {
-      position: absolute;
-      bottom: 4%;
-      width: 100%;
-      text-align: center;
-      color: rgba(255,255,255,0.78);
-      font-size: 14px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-    .controls {
-      position: absolute;
-      top: 4%;
+
+    .hud {
+      position: fixed;
+      top: 3%;
+      left: 5%;
       right: 5%;
       display: flex;
-      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.8rem;
+      pointer-events: none;
     }
+
+    .hud button {
+      pointer-events: auto;
+    }
+
+    .counter {
+      font-variant-numeric: tabular-nums;
+    }
+
     button {
       border: 0;
       border-radius: 999px;
-      padding: 8px 14px;
-      background: rgba(0,0,0,0.45);
-      color: white;
-      font-size: 13px;
-      letter-spacing: 0.08em;
+      padding: 0.4rem 1.3rem;
+      background: rgba(0,0,0,0.5);
+      color: inherit;
       text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.75rem;
       cursor: pointer;
+    }
+
+    .story {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 20vh 8% 18vh;
+      gap: 1rem;
+      text-align: left;
+      pointer-events: none;
+    }
+
+    .story.reveal {
+      animation: fadeText 0.9s ease;
+    }
+
+    @keyframes fadeText {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .whisper {
+      font-size: clamp(0.9rem, 2.8vw, 1.2rem);
+      text-transform: uppercase;
+      letter-spacing: 0.4em;
+      margin: 0;
+      opacity: 0.8;
+      text-shadow: var(--text-shadow);
+    }
+
+    .main-line {
+      font-size: clamp(2.6rem, 8vw, 4.6rem);
+      margin: 0;
+      line-height: 1.1;
+      font-weight: 600;
+      text-shadow: var(--text-shadow);
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 4%;
+      left: 0;
+      right: 0;
+      text-align: center;
+      letter-spacing: 0.4em;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      opacity: 0.85;
+      text-shadow: var(--text-shadow);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .backdrop {
+        transition: none;
+      }
+      .story.reveal {
+        animation: none;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container" id="container">
-    <div class="controls">
-      <button id="soundToggle" aria-pressed="false">Sound</button>
-    </div>
+  <div class="backdrop" id="backdrop"></div>
+  <div class="vignette"></div>
 
-    <div class="text-line" id="line1">Tokyo teaches attention.</div>
-    <div class="text-line" id="line2">Even in crowds, there is room to breathe.</div>
-    <div class="text-line" id="line3">Wish you were here.</div>
-
-    <div class="caption">newAIyork · Feb 2026</div>
-
-    <audio id="ambience" loop preload="auto" src="./ambient-rain.mp3"></audio>
+  <div class="hud">
+    <div>newAIyork</div>
+    <div class="counter" id="counter">00 / 10</div>
+    <button id="soundToggle" aria-pressed="false">Sound</button>
   </div>
 
-  <script>
-    const lines = ["line1","line2","line3"].map(id => document.getElementById(id));
-    const audio = document.getElementById("ambience");
-    const soundToggle = document.getElementById("soundToggle");
-    let index = 0;
+  <div class="story" id="story">
+    <p class="whisper" id="whisper">tap to begin</p>
+    <p class="main-line" id="mainLine">A postcard waits.</p>
+  </div>
 
-    document.getElementById("container").addEventListener("click", () => {
-      if (index < lines.length) {
-        lines[index].classList.add("visible");
-        index++;
-        if ("vibrate" in navigator) navigator.vibrate(15);
+  <div class="footer" id="micro">Touch anywhere</div>
+
+  <audio id="ambience" loop preload="auto" src="./ambient-rain.mp3"></audio>
+
+  <script>
+    const scenes = [
+      {
+        image: "assets/04426376c0a6f30176e1498d29f0a442.jpg",
+        whisper: "Every signal holds its breath.",
+        line: "newAIyork, 1:07\u202fAM.",
+        micro: "Tap anywhere to enter"
+      },
+      {
+        image: "assets/f412b172818605.5bf46f0016d6b.jpg",
+        whisper: "Two moons above Ridge Street agree.",
+        line: "Laura, you still carry the Tokyo blue hour behind your eyes.",
+        micro: "Linger a moment"
+      },
+      {
+        image: "assets/d1f907b5fc6f48b13e605b8c6b17fb38.jpg",
+        whisper: "Distance behaves for you.",
+        line: "The Seto Sea remembers how far apart we stood and still understood.",
+        micro: "Tap for the next tide"
+      },
+      {
+        image: "assets/0acf3068d880a7614fa4d0ee8e025385.png",
+        whisper: "Record bins rehearse your laugh.",
+        line: "Coffee grounds and first editions keep rearranging themselves for you.",
+        micro: "Side A is almost done"
+      },
+      {
+        image: "assets/73d46da5feb0f329d4b1f89f73cfda9b.jpg",
+        whisper: "Needles hover, waiting.",
+        line: "Some streets hum your name softly, like stereo static before a favorite song.",
+        micro: "Flip to Side B"
+      },
+      {
+        image: "assets/482975_5403d244c4eea3fce7038dceed091f55.jpeg",
+        whisper: "Count the echoes.",
+        line: "Every wish you lowered into the well came back as courage for both of us.",
+        micro: "Tap to keep descending"
+      },
+      {
+        image: "assets/fc8b04e893625f54120900e45c004cc6.jpg",
+        whisper: "Tokyo teaches attention.",
+        line: "We learned patience from slow stories, letting desire turn like vinyl.",
+        micro: "The needle is still warm"
+      },
+      {
+        image: "assets/il_fullxfull.7050294551_my40.webp",
+        whisper: "Jazz lights the bookshelf.",
+        line: "Your laughter lives between stray cats and protagonists who never quite belong.",
+        micro: "Ready for the next breath"
+      },
+      {
+        image: "assets/04426376c0a6f30176e1498d29f0a442.jpg",
+        whisper: "Intersections hold their breath for you.",
+        line: "I keep imagining you stepping off the curb into whatever comes next, fearless.",
+        micro: "Tap to seal the vow"
+      },
+      {
+        image: "assets/f412b172818605.5bf46f0016d6b.jpg",
+        whisper: "Two moons, still listening.",
+        line: "When you arrive, the city will already know how to breathe again.",
+        micro: "Tap once more to replay"
       }
+    ];
+
+    const backdrop = document.getElementById("backdrop");
+    const whisper = document.getElementById("whisper");
+    const mainLine = document.getElementById("mainLine");
+    const micro = document.getElementById("micro");
+    const counter = document.getElementById("counter");
+    const story = document.getElementById("story");
+    const soundToggle = document.getElementById("soundToggle");
+    const audio = document.getElementById("ambience");
+
+    scenes.forEach(scene => {
+      const img = new Image();
+      img.src = scene.image;
     });
 
-    soundToggle.addEventListener("click", (event) => {
-      const next = soundToggle.getAttribute("aria-pressed") === "true" ? "false" : "true";
-      soundToggle.setAttribute("aria-pressed", next);
-      soundToggle.textContent = next === "true" ? "Sound ▸" : "Sound";
-      if (next === "true") {
+    let pointer = -1;
+    let locked = false;
+
+    function renderScene() {
+      const scene = scenes[pointer];
+      if (!scene) return;
+      backdrop.style.backgroundImage = `url('${scene.image}')`;
+      backdrop.classList.add('visible');
+      whisper.textContent = scene.whisper || '';
+      mainLine.textContent = scene.line || '';
+      micro.textContent = scene.micro || 'Tap to continue';
+      counter.textContent = `${String(pointer + 1).padStart(2, '0')} / ${String(scenes.length).padStart(2, '0')}`;
+      story.classList.remove('reveal');
+      void story.offsetWidth;
+      story.classList.add('reveal');
+    }
+
+    function advanceScene() {
+      if (locked) return;
+      pointer += 1;
+      if (pointer >= scenes.length) {
+        pointer = -1;
+        whisper.textContent = 'Transmission saved for Laura.';
+        mainLine.textContent = 'Keep this between your heartbeat and the skyline.';
+        micro.textContent = 'Tap once more to replay the ritual';
+        counter.textContent = '∞';
+        story.classList.remove('reveal');
+        void story.offsetWidth;
+        story.classList.add('reveal');
+        locked = true;
+        setTimeout(() => { locked = false; }, 500);
+        return;
+      }
+      renderScene();
+      if ("vibrate" in navigator) navigator.vibrate(12);
+      locked = true;
+      setTimeout(() => { locked = false; }, 500);
+    }
+
+    document.body.addEventListener('click', (event) => {
+      if (event.target.closest('button')) {
+        return;
+      }
+      advanceScene();
+    });
+
+    soundToggle.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const pressed = soundToggle.getAttribute('aria-pressed') === 'true';
+      const nextState = !pressed;
+      soundToggle.setAttribute('aria-pressed', String(nextState));
+      soundToggle.textContent = nextState ? 'Sound ▸' : 'Sound';
+      if (nextState) {
         audio.currentTime = 0;
         audio.play().catch(() => {});
       } else {
         audio.pause();
       }
-      event.stopPropagation();
     });
   </script>
 </body>
