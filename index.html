@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>newAIyork</title>
+  <title>newAIyork · London Relay</title>
   <style>
     :root {
       color-scheme: dark;
       font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      --text-shadow: 0 16px 60px rgba(0, 0, 0, 0.7);
+      --text-shadow: 0 16px 60px rgba(0, 0, 0, 0.75);
     }
     *, *::before, *::after { box-sizing: border-box; }
     html, body {
@@ -18,21 +18,18 @@
       color: #fdfdfd;
       overflow: hidden;
     }
-
-    body {
-      position: relative;
-    }
+    body { position: relative; }
 
     .backdrop {
       position: fixed;
       inset: 0;
-      background: #020202 center / cover no-repeat;
-      filter: saturate(1.05);
-      transition: opacity 1s ease, transform 1.6s ease;
+      background: #050505;
+      background-size: cover;
+      background-position: center;
+      transition: opacity 1.2s ease, transform 1.8s ease;
       opacity: 0;
       transform: scale(1.04);
     }
-
     .backdrop.visible {
       opacity: 1;
       transform: scale(1);
@@ -45,11 +42,9 @@
       inset: 0;
       pointer-events: none;
     }
-
     .vignette::before {
-      background: radial-gradient(circle at top, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.85));
+      background: radial-gradient(circle at top, rgba(0,0,0,0.25), rgba(0,0,0,0.82));
     }
-
     .vignette::after {
       background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"%3E%3Crect width="200" height="200" fill="rgba(0,0,0,0)"/%3E%3Ccircle cx="100" cy="100" r="1" fill="rgba(255,255,255,0.05)"/%3E%3C/svg%3E');
       mix-blend-mode: screen;
@@ -67,27 +62,22 @@
       gap: 1rem;
       text-transform: uppercase;
       letter-spacing: 0.2em;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       pointer-events: none;
+      z-index: 2;
     }
-
-    .hud button {
-      pointer-events: auto;
-    }
-
-    .counter {
-      font-variant-numeric: tabular-nums;
-    }
+    .hud button { pointer-events: auto; }
+    .counter { font-variant-numeric: tabular-nums; }
 
     button {
       border: 0;
       border-radius: 999px;
-      padding: 0.4rem 1.3rem;
+      padding: 0.45rem 1.4rem;
       background: rgba(0,0,0,0.5);
       color: inherit;
       text-transform: uppercase;
       letter-spacing: 0.2em;
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       cursor: pointer;
     }
 
@@ -97,58 +87,91 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 20vh 8% 18vh;
-      gap: 1rem;
+      padding: 20vh 8% 22vh;
+      gap: 0.9rem;
       text-align: left;
       pointer-events: none;
+      z-index: 1;
     }
-
     .story.reveal {
-      animation: fadeText 0.9s ease;
+      animation: fadeText 0.95s ease;
     }
-
     @keyframes fadeText {
-      from { opacity: 0; transform: translateY(18px); }
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .whisper {
-      font-size: clamp(0.9rem, 2.8vw, 1.2rem);
+      font-size: clamp(0.9rem, 2.6vw, 1.1rem);
       text-transform: uppercase;
       letter-spacing: 0.4em;
       margin: 0;
-      opacity: 0.8;
+      opacity: 0.85;
       text-shadow: var(--text-shadow);
     }
-
     .main-line {
-      font-size: clamp(2.6rem, 8vw, 4.6rem);
-      margin: 0;
+      font-size: clamp(2.4rem, 7.8vw, 4.4rem);
       line-height: 1.1;
+      margin: 0;
       font-weight: 600;
       text-shadow: var(--text-shadow);
     }
 
     .footer {
       position: fixed;
-      bottom: 4%;
-      left: 0;
-      right: 0;
+      bottom: 3%;
+      left: 5%;
+      right: 5%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
       text-align: center;
-      letter-spacing: 0.4em;
-      font-size: 0.75rem;
       text-transform: uppercase;
-      opacity: 0.85;
-      text-shadow: var(--text-shadow);
+      letter-spacing: 0.3em;
+      font-size: 0.72rem;
+      z-index: 2;
+    }
+    .archives {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      letter-spacing: 0.2em;
+    }
+    .archives-title {
+      opacity: 0.8;
+      font-size: 0.7rem;
+    }
+    .archives-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.4rem 1rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      letter-spacing: 0.1em;
+    }
+    .archives-list a {
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding-bottom: 2px;
+    }
+    .archives-list a:hover,
+    .archives-list a:focus {
+      color: #fff;
+      border-color: #fff;
+    }
+
+    @media (max-width: 540px) {
+      .hud { font-size: 0.7rem; letter-spacing: 0.14em; }
+      button { letter-spacing: 0.12em; font-size: 0.68rem; }
+      .footer { letter-spacing: 0.2em; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .backdrop {
-        transition: none;
-      }
-      .story.reveal {
-        animation: none;
-      }
+      .backdrop { transition: none; }
+      .story.reveal { animation: none; }
     }
   </style>
 </head>
@@ -157,106 +180,125 @@
   <div class="vignette"></div>
 
   <div class="hud">
-    <div>newAIyork</div>
+    <div>newAIyork · London relay</div>
     <div class="counter" id="counter">00 / 10</div>
     <button id="soundToggle" aria-pressed="false">Sound</button>
   </div>
 
   <div class="story" id="story">
     <p class="whisper" id="whisper">tap to begin</p>
-    <p class="main-line" id="mainLine">A postcard waits.</p>
+    <p class="main-line" id="mainLine">A new transmission is arming.</p>
   </div>
 
-  <div class="footer" id="micro">Touch anywhere</div>
+  <div class="footer">
+    <div id="micro">Touch anywhere</div>
+    <div class="archives">
+      <span class="archives-title">Filed archives</span>
+      <ul class="archives-list" id="archiveList">
+        <li><span style="opacity:0.5">Loading…</span></li>
+      </ul>
+    </div>
+  </div>
 
   <audio id="ambience" loop preload="auto" src="./ambient-rain.mp3"></audio>
 
   <script>
     const scenes = [
       {
-        image: "assets/04426376c0a6f30176e1498d29f0a442.jpg",
-        whisper: "Every signal holds its breath.",
-        line: "newAIyork, 1:07\u202fAM.",
-        micro: "Tap anywhere to enter"
+        background: "linear-gradient(120deg, #04102c, #0b3d91, #98d5ff)",
+        whisper: "Departure board hums",
+        line: "London isn't just a place; it's a promise already in motion.",
+        micro: "Tap to feel the approach"
       },
       {
-        image: "assets/f412b172818605.5bf46f0016d6b.jpg",
-        whisper: "Two moons above Ridge Street agree.",
-        line: "Laura, you still carry the Tokyo blue hour behind your eyes.",
-        micro: "Linger a moment"
+        background: "linear-gradient(130deg, #1b1b2f, #53354a, #f08a5d)",
+        whisper: "Uncharted",
+        line: "\"The streets of London have their map, but our passions are uncharted.\" — Virginia Woolf",
+        micro: "Tap to keep wandering"
       },
       {
-        image: "assets/d1f907b5fc6f48b13e605b8c6b17fb38.jpg",
-        whisper: "Distance behaves for you.",
-        line: "The Seto Sea remembers how far apart we stood and still understood.",
-        micro: "Tap for the next tide"
+        background: "linear-gradient(140deg, #050505, #2d033b, #810955)",
+        whisper: "Curiosity crackles",
+        line: "\"If you're curious, London's an amazing place.\" — David Bailey",
+        micro: "Tap for the next spark"
       },
       {
-        image: "assets/0acf3068d880a7614fa4d0ee8e025385.png",
-        whisper: "Record bins rehearse your laugh.",
-        line: "Coffee grounds and first editions keep rearranging themselves for you.",
-        micro: "Side A is almost done"
+        background: "linear-gradient(135deg, #0c0b24, #591c21, #c73e1d)",
+        whisper: "Modern Babylon",
+        line: "\"London is a modern Babylon.\" — Benjamin Disraeli",
+        micro: "Tap to step into the swirl"
       },
       {
-        image: "assets/73d46da5feb0f329d4b1f89f73cfda9b.jpg",
-        whisper: "Needles hover, waiting.",
-        line: "Some streets hum your name softly, like stereo static before a favorite song.",
-        micro: "Flip to Side B"
+        background: "linear-gradient(120deg, #031a1f, #144552, #ec9f05)",
+        whisper: "Quiet vows",
+        line: "London holds love quietly — in the pauses, in the unspoken promise of return.",
+        micro: "Tap to listen closer"
       },
       {
-        image: "assets/482975_5403d244c4eea3fce7038dceed091f55.jpeg",
-        whisper: "Count the echoes.",
-        line: "Every wish you lowered into the well came back as courage for both of us.",
-        micro: "Tap to keep descending"
+        background: "linear-gradient(150deg, #1e3c72, #2a5298, #f44336)",
+        whisper: "Handwritten greetings",
+        line: "Warm greetings from London: red buses, quiet parks, and even warmer reunions.",
+        micro: "Tap for the next card"
       },
       {
-        image: "assets/fc8b04e893625f54120900e45c004cc6.jpg",
-        whisper: "Tokyo teaches attention.",
-        line: "We learned patience from slow stories, letting desire turn like vinyl.",
-        micro: "The needle is still warm"
+        background: "linear-gradient(130deg, #501f3a, #cb2d3e, #ef473a)",
+        whisper: "Converging routes",
+        line: "From the Thames to Trafalgar Square — all roads led here, and all my thoughts led to you.",
+        micro: "Tap to cross the bridge"
       },
       {
-        image: "assets/il_fullxfull.7050294551_my40.webp",
-        whisper: "Jazz lights the bookshelf.",
-        line: "Your laughter lives between stray cats and protagonists who never quite belong.",
-        micro: "Ready for the next breath"
+        background: "linear-gradient(135deg, #16222a, #3a6073, #ffd194)",
+        whisper: "Cobblestone hugs",
+        line: "Sending hugs across cobblestones and bridges — the city glows when you are in mind.",
+        micro: "Tap to open the gate"
       },
       {
-        image: "assets/04426376c0a6f30176e1498d29f0a442.jpg",
-        whisper: "Intersections hold their breath for you.",
-        line: "I keep imagining you stepping off the curb into whatever comes next, fearless.",
-        micro: "Tap to seal the vow"
+        background: "linear-gradient(115deg, #0f2027, #203a43, #2c5364)",
+        whisper: "Arrivals hall",
+        line: "All this anticipation condenses into one hello, Laura — the door from imagination to arrival.",
+        micro: "Tap to seal the greeting"
       },
       {
-        image: "assets/f412b172818605.5bf46f0016d6b.jpg",
-        whisper: "Two moons, still listening.",
-        line: "When you arrive, the city will already know how to breathe again.",
+        background: "linear-gradient(125deg, #42275a, #734b6d, #ffa17f)",
+        whisper: "Soft landing",
+        line: "London feels more alive with you on my mind — consider this a hug left on the skyline.",
         micro: "Tap once more to replay"
       }
     ];
 
-    const backdrop = document.getElementById("backdrop");
-    const whisper = document.getElementById("whisper");
-    const mainLine = document.getElementById("mainLine");
-    const micro = document.getElementById("micro");
-    const counter = document.getElementById("counter");
-    const story = document.getElementById("story");
-    const soundToggle = document.getElementById("soundToggle");
-    const audio = document.getElementById("ambience");
-
-    scenes.forEach(scene => {
-      const img = new Image();
-      img.src = scene.image;
-    });
+    const backdrop = document.getElementById('backdrop');
+    const whisper = document.getElementById('whisper');
+    const mainLine = document.getElementById('mainLine');
+    const micro = document.getElementById('micro');
+    const counter = document.getElementById('counter');
+    const story = document.getElementById('story');
+    const soundToggle = document.getElementById('soundToggle');
+    const audio = document.getElementById('ambience');
+    const archiveList = document.getElementById('archiveList');
 
     let pointer = -1;
     let locked = false;
 
+    function applyBackground(scene) {
+      if (scene.image) {
+        backdrop.style.backgroundImage = `url('${scene.image}')`;
+        backdrop.style.backgroundSize = 'cover';
+        backdrop.style.backgroundPosition = 'center';
+      } else if (scene.background) {
+        backdrop.style.backgroundImage = scene.background;
+        backdrop.style.backgroundSize = 'cover';
+        backdrop.style.backgroundPosition = 'center';
+      } else {
+        backdrop.style.backgroundImage = 'none';
+        backdrop.style.backgroundColor = '#050505';
+      }
+      backdrop.classList.add('visible');
+    }
+
     function renderScene() {
       const scene = scenes[pointer];
       if (!scene) return;
-      backdrop.style.backgroundImage = `url('${scene.image}')`;
-      backdrop.classList.add('visible');
+      applyBackground(scene);
       whisper.textContent = scene.whisper || '';
       mainLine.textContent = scene.line || '';
       micro.textContent = scene.micro || 'Tap to continue';
@@ -266,26 +308,28 @@
       story.classList.add('reveal');
     }
 
+    function showEpilogue() {
+      pointer = -1;
+      whisper.textContent = 'Transmission filed.';
+      mainLine.textContent = 'Tap anywhere when you are ready for another London lap.';
+      micro.textContent = 'Replay ritual';
+      counter.textContent = '∞';
+      story.classList.remove('reveal');
+      void story.offsetWidth;
+      story.classList.add('reveal');
+    }
+
     function advanceScene() {
       if (locked) return;
+      locked = true;
+      setTimeout(() => { locked = false; }, 500);
       pointer += 1;
       if (pointer >= scenes.length) {
-        pointer = -1;
-        whisper.textContent = 'Transmission saved for Laura.';
-        mainLine.textContent = 'Keep this between your heartbeat and the skyline.';
-        micro.textContent = 'Tap once more to replay the ritual';
-        counter.textContent = '∞';
-        story.classList.remove('reveal');
-        void story.offsetWidth;
-        story.classList.add('reveal');
-        locked = true;
-        setTimeout(() => { locked = false; }, 500);
+        showEpilogue();
         return;
       }
       renderScene();
-      if ("vibrate" in navigator) navigator.vibrate(12);
-      locked = true;
-      setTimeout(() => { locked = false; }, 500);
+      if ('vibrate' in navigator) navigator.vibrate(12);
     }
 
     document.body.addEventListener('click', (event) => {
@@ -308,6 +352,39 @@
         audio.pause();
       }
     });
+
+    async function hydrateArchives() {
+      try {
+        const response = await fetch('./archives/manifest.json', { cache: 'no-store' });
+        if (!response.ok) return;
+        const entries = await response.json();
+        renderArchiveList(entries);
+      } catch (err) {
+        renderArchiveList([]);
+      }
+    }
+
+    function renderArchiveList(entries) {
+      archiveList.innerHTML = '';
+      if (!entries.length) {
+        const li = document.createElement('li');
+        li.style.opacity = '0.5';
+        li.textContent = 'No archives yet';
+        archiveList.appendChild(li);
+        return;
+      }
+      entries.forEach(entry => {
+        const li = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = `./archives/${entry.slug}/`;
+        link.textContent = entry.label || entry.slug;
+        link.setAttribute('title', entry.blurb || 'Open archived postcard');
+        li.appendChild(link);
+        archiveList.appendChild(li);
+      });
+    }
+
+    hydrateArchives();
   </script>
 </body>
 </html>
