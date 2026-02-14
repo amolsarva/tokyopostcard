@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>newAIyork · Shoreditch Relay Edition</title>
+  <title>newAIyork · London Postcard Edition II</title>
   <style>
     :root {
       color-scheme: dark;
@@ -168,14 +168,14 @@
   <div class="vignette"></div>
 
   <div class="hud">
-    <div>newAIyork · Shoreditch relay i</div>
+    <div>newAIyork · London postcard ii</div>
     <div class="counter" id="counter">00 / 11</div>
     <button id="soundToggle" aria-pressed="false">Sound</button>
   </div>
 
   <div class="story" id="story">
     <p class="whisper" id="whisper">tap to begin</p>
-    <p class="main-line" id="mainLine">Shoreditch relay: eleven frames, one ride-long letter for Laura.</p>
+    <p class="main-line" id="mainLine">London edition: eleven frames, one letter for Laura.</p>
   </div>
 
   <div class="footer">
@@ -193,81 +193,81 @@
   <script>
     const scenes = [
       {
-        image: 'assets/shoreditch/hanbury-crane.avif',
-        fallback: 'linear-gradient(125deg, #0b0d18, #2b1b3f, #ff7b39)',
-        whisper: 'Hanbury guardians',
-        line: 'ROA\'s heron and the cobalt mask keep watch on Hanbury Street while we map the first turn in the puddles.',
-        micro: 'Tap to push off the curb'
+        image: 'assets/london/3036.avif',
+        fallback: 'linear-gradient(125deg, #182848, #4b6cb7, #b6d0ff)',
+        whisper: 'Blitz night opener',
+        line: 'We start like Grace at the Blitz--coat undone, spotlight yours, me laughing in the frame behind you.',
+        micro: 'Tap to keep the runway moving'
       },
       {
-        image: 'assets/shoreditch/buxton-wall.avif',
-        fallback: 'linear-gradient(120deg, #1f1b2c, #7c2a90, #fdd835)',
-        whisper: 'Buxton sprayline',
-        line: 'Cartoon teeth, QR posters, and an idling cab make Buxton Street feel like our loudest lead car.',
-        micro: 'Tap to sling past the graffiti'
+        image: 'assets/london/4649.avif',
+        fallback: 'linear-gradient(130deg, #141e30, #243b55, #7f8da6)',
+        whisper: 'Glove semaphore',
+        line: 'Those laced gloves signal a whole alphabet across Piccadilly; every taxi slows to read you.',
+        micro: 'Tap to translate another pose'
       },
       {
-        image: 'assets/shoreditch/cycle-pack.avif',
-        fallback: 'linear-gradient(125deg, #0d0f1c, #2f3f6b, #f05f57)',
-        whisper: 'Pack release',
-        line: 'A peloton of Shoreditch riders funnels down Great Eastern Street, jackets unzipped, bells syncopated.',
-        micro: 'Tap to fall into cadence'
+        image: 'assets/london/5925.avif',
+        fallback: 'linear-gradient(125deg, #3a1c71, #d76d77, #ffaf7b)',
+        whisper: 'Serpentine tide',
+        line: 'London water never looked tropical until you made the Serpentine feel like a private sea.',
+        micro: 'Tap to drift further in'
       },
       {
-        image: 'assets/shoreditch/double-ride.avif',
-        fallback: 'linear-gradient(125deg, #1b1a2f, #90323d, #f4a259)',
-        whisper: 'Hoxton relay',
-        line: 'Two frames lean into the mural glow off Curtain Road, each spoke catching a different billboard flare.',
-        micro: 'Tap to trade the lead'
+        image: 'assets/london/3984.avif',
+        fallback: 'linear-gradient(120deg, #0f2027, #203a43, #2c5364)',
+        whisper: 'Bond Street fitting',
+        line: 'A satin bow the size of Soho gossip; the designer whispering like he knows our secret itinerary.',
+        micro: 'Tap for the next fitting'
       },
       {
-        image: 'assets/shoreditch/bike-bridge.avif',
-        fallback: 'linear-gradient(120deg, #041221, #13334c, #f19c79)',
-        whisper: 'Under the viaduct',
-        line: 'Beneath the old railway arches you coast one-handed, letting the headlight paint the brick ribs.',
-        micro: 'Tap to duck back into daylight'
+        image: 'assets/london/2918.avif',
+        fallback: 'linear-gradient(120deg, #1f4037, #99f2c8)',
+        whisper: 'Silver drill',
+        line: 'Your body is metronome and flashbulb at once; Covent Garden dancers keep time with that stance.',
+        micro: 'Tap to catch the beat'
       },
       {
-        image: 'assets/shoreditch/old-street-hire.avif',
-        fallback: 'linear-gradient(120deg, #0c1a24, #205072, #56cfe1)',
-        whisper: 'Docked interlude',
-        line: 'Old Street\'s hire racks glint cobalt; commuters swap passcodes like we\'re sharing the same call sheet.',
-        micro: 'Tap to grab a fresh frame'
+        image: 'assets/london/5722.avif',
+        fallback: 'linear-gradient(120deg, #232526, #414345, #7a8c8d)',
+        whisper: 'Dockside siesta',
+        line: 'You fall asleep on the luggage at St. Katharine Docks and even the cranes pause to stare.',
+        micro: 'Tap to roll the bags onward'
       },
       {
-        image: 'assets/shoreditch/brick-lane-neon.avif',
-        fallback: 'linear-gradient(120deg, #13061b, #722e5d, #fba834)',
-        whisper: 'Brick Lane glow',
-        line: 'Curry house neon throws magenta stripes across the wet lane and even the tuk-tuk flyers cheer.',
-        micro: 'Tap to chase the lights'
+        image: 'assets/london/3256.avif',
+        fallback: 'linear-gradient(125deg, #42275a, #734b6d, #c9b6d6)',
+        whisper: 'Coat-wings',
+        line: 'Grace takes a victory lap down Kings Road, jacket wide as wings, daring me to follow.',
+        micro: 'Tap to chase the echo'
       },
       {
-        image: 'assets/shoreditch/vintage-market.avif',
-        fallback: 'linear-gradient(125deg, #2c1b2f, #93425f, #f6c28b)',
-        whisper: 'Truman breather',
-        line: 'Inside the Brick Lane Vintage Market the corsets, lamps, and helmets become our impromptu pit wall.',
-        micro: 'Tap to lace back up'
+        image: 'assets/london/3176.avif',
+        fallback: 'linear-gradient(130deg, #1d4350, #a43931, #e4c1a1)',
+        whisper: 'Kensington icon',
+        line: 'There\'s a quiet storm in your eyes--the kind that once waved from palace balconies.',
+        micro: 'Tap to bow back'
       },
       {
-        image: 'assets/shoreditch/walala-blocks.avif',
-        fallback: 'linear-gradient(120deg, #0d1821, #ff3cac, #ffdd00)',
-        whisper: 'Walala finish gate',
-        line: 'Camille Walala\'s dots and stripes turn Old Street into a finish gantry you can spot from space.',
-        micro: 'Tap to coast through the confetti'
+        image: 'assets/london/3181.avif',
+        fallback: 'linear-gradient(120deg, #283048, #859398, #d7d2cc)',
+        whisper: 'Backstage static',
+        line: 'Hair like an electric storm over Soho, palm at hip, you turn rehearsal into premiere night.',
+        micro: 'Tap to cue the next flash'
       },
       {
-        image: 'assets/shoreditch/adore-endure.avif',
-        fallback: 'linear-gradient(125deg, #11121b, #2d3e52, #efd28d)',
-        whisper: 'Depot promise',
-        line: 'The "Adore and Endure" wall and the rooftop Tube cars hold the vow as we circle the depot.',
-        micro: 'Tap to bank the vow'
+        image: 'assets/london/3119.avif',
+        fallback: 'linear-gradient(125deg, #0f0c29, #302b63, #24243e)',
+        whisper: 'Balcony heat',
+        line: 'Brick terrace, thunderclouds, and you wrapped in scarlet; London feels tropical when you lean in.',
+        micro: 'Tap to stay on the balcony'
       },
       {
-        image: 'assets/shoreditch/sunrise-cycle.avif',
-        fallback: 'linear-gradient(125deg, #02111b, #0b4f6c, #f5901e)',
-        whisper: 'Dawn cool-down',
-        line: 'Sunrise over the canal lays apricot light on the towpath while the last rider drifts into your arms.',
-        micro: 'Tap to let the city exhale'
+        image: 'assets/london/3973.avif',
+        fallback: 'linear-gradient(120deg, #16222a, #3a6073, #a3bded)',
+        whisper: 'Pearl lullaby',
+        line: 'You lift our future like a jewel, kissing calm into the night before we step outside again.',
+        micro: 'Tap to replay the promise'
       }
     ];
 
@@ -331,7 +331,7 @@
     function showEpilogue() {
       pointer = -1;
       whisper.textContent = 'Edition complete';
-      mainLine.textContent = "Tap anywhere when you want to reopen the Shoreditch relay.";
+      mainLine.textContent = "Tap anywhere when you want to reopen the London edition.";
       micro.textContent = 'Replay ritual';
       counter.textContent = '∞';
       story.classList.remove('reveal');
