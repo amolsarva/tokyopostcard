@@ -194,7 +194,6 @@
     const scenes = [
       {
         image: 'assets/london/3036.avif',
-        backupImage: 'assets/tokyo/04426376c0a6f30176e1498d29f0a442.jpg',
         fallback: 'linear-gradient(125deg, #182848, #4b6cb7, #b6d0ff)',
         whisper: 'Thames at first light',
         line: 'Laura, the river opens in soft silver and the whole city looks freshly tailored.',
@@ -202,7 +201,6 @@
       },
       {
         image: 'assets/london/4649.avif',
-        backupImage: 'assets/tokyo/f412b172818605.5bf46f0016d6b.jpg',
         fallback: 'linear-gradient(130deg, #141e30, #243b55, #7f8da6)',
         whisper: 'Station rhythm',
         line: 'Platform noise fades and your name is the only clean line I hear in London.',
@@ -210,7 +208,6 @@
       },
       {
         image: 'assets/london/5925.avif',
-        backupImage: 'assets/tokyo/d1f907b5fc6f48b13e605b8c6b17fb38.jpg',
         fallback: 'linear-gradient(125deg, #3a1c71, #d76d77, #ffaf7b)',
         whisper: 'Bridge hour',
         line: 'Every bridge holds the skyline like a runway rail, waiting for your step.',
@@ -218,7 +215,6 @@
       },
       {
         image: 'assets/london/3984.avif',
-        backupImage: 'assets/tokyo/0acf3068d880a7614fa4d0ee8e025385.png',
         fallback: 'linear-gradient(120deg, #0f2027, #203a43, #2c5364)',
         whisper: 'Rain on glass',
         line: 'Rain polishes every window and leaves London glowing like lacquer after dusk.',
@@ -226,7 +222,6 @@
       },
       {
         image: 'assets/london/2918.avif',
-        backupImage: 'assets/tokyo/73d46da5feb0f329d4b1f89f73cfda9b.jpg',
         fallback: 'linear-gradient(120deg, #1f4037, #99f2c8)',
         whisper: 'Quiet lane',
         line: 'Brick, brass, and lamp light—this corner keeps the exact warmth of your laugh.',
@@ -234,7 +229,6 @@
       },
       {
         image: 'assets/london/5722.avif',
-        backupImage: 'assets/tokyo/482975_5403d244c4eea3fce7038dceed091f55.jpeg',
         fallback: 'linear-gradient(120deg, #232526, #414345, #7a8c8d)',
         whisper: 'Midnight carriage',
         line: 'The city slows at every turn, as if it knows you are about to look back.',
@@ -242,7 +236,6 @@
       },
       {
         image: 'assets/london/3256.avif',
-        backupImage: 'assets/tokyo/fc8b04e893625f54120900e45c004cc6.jpg',
         fallback: 'linear-gradient(125deg, #42275a, #734b6d, #c9b6d6)',
         whisper: 'Museum hush',
         line: 'Even marble seems to soften in this light, like London learning your pace.',
@@ -250,7 +243,6 @@
       },
       {
         image: 'assets/london/3176.avif',
-        backupImage: 'assets/tokyo/il_fullxfull.7050294551_my40.webp',
         fallback: 'linear-gradient(130deg, #1d4350, #a43931, #e4c1a1)',
         whisper: 'Red bus glow',
         line: 'Streetlight threads gold across the window and saves one seat beside me for you.',
@@ -258,7 +250,6 @@
       },
       {
         image: 'assets/london/3181.avif',
-        backupImage: 'assets/tokyo/04426376c0a6f30176e1498d29f0a442.jpg',
         fallback: 'linear-gradient(120deg, #283048, #859398, #d7d2cc)',
         whisper: 'Blue-hour promise',
         line: 'London is beautiful in blue hour, but it becomes true only when you are in frame.',
@@ -266,7 +257,6 @@
       },
       {
         image: 'assets/london/3119.avif',
-        backupImage: 'assets/tokyo/f412b172818605.5bf46f0016d6b.jpg',
         fallback: 'linear-gradient(125deg, #0f0c29, #302b63, #24243e)',
         whisper: 'After-hours pulse',
         line: 'I would cross every borough for one real-time hello and your footsteps beside mine.',
@@ -274,7 +264,6 @@
       },
       {
         image: 'assets/london/3973.avif',
-        backupImage: 'assets/tokyo/fc8b04e893625f54120900e45c004cc6.jpg',
         fallback: 'linear-gradient(120deg, #16222a, #3a6073, #a3bded)',
         whisper: 'Postmark complete',
         line: 'Until then, keep this London night folded carefully—luminous, precise, and yours.',
@@ -293,15 +282,6 @@
     const archiveList = document.getElementById('archiveList');
 
     const imageAvailability = new Map();
-    const supportsAvif = (() => {
-      try {
-        const canvas = document.createElement('canvas');
-        return canvas.toDataURL('image/avif').startsWith('data:image/avif');
-      } catch {
-        return false;
-      }
-    })();
-
     function preloadImage(path) {
       if (!path || imageAvailability.has(path)) return;
       imageAvailability.set(path, null);
@@ -310,27 +290,25 @@
         imageAvailability.set(path, true);
         if (pointer >= 0) applyBackground(scenes[pointer]);
       };
-      img.onerror = () => imageAvailability.set(path, false);
+      img.onerror = () => {
+        imageAvailability.set(path, false);
+        if (pointer >= 0) applyBackground(scenes[pointer]);
+      };
       img.src = path;
     }
 
     scenes.forEach((scene) => {
       preloadImage(scene.image);
-      preloadImage(scene.backupImage);
     });
 
     let pointer = -1;
     let locked = false;
 
     function applyBackground(scene) {
-      const candidateImages = [];
-      if (scene.image && (!scene.image.endsWith('.avif') || supportsAvif)) candidateImages.push(scene.image);
-      if (scene.backupImage) candidateImages.push(scene.backupImage);
-      if (scene.image && !candidateImages.includes(scene.image)) candidateImages.push(scene.image);
-
-      const loadedImage = candidateImages.find((path) => imageAvailability.get(path) === true);
-      if (loadedImage) {
-        backdrop.style.backgroundImage = `url('${loadedImage}')`;
+      const primaryImage = scene.image;
+      const availability = primaryImage ? imageAvailability.get(primaryImage) : null;
+      if (primaryImage && availability !== false) {
+        backdrop.style.backgroundImage = `url('${primaryImage}')`;
       } else {
         backdrop.style.backgroundImage = scene.fallback || 'linear-gradient(120deg, #111, #333)';
       }
