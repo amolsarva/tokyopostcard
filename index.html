@@ -194,6 +194,7 @@
     const scenes = [
       {
         image: 'assets/3036.avif',
+        backupImage: 'assets/04426376c0a6f30176e1498d29f0a442.jpg',
         fallback: 'linear-gradient(125deg, #182848, #4b6cb7, #b6d0ff)',
         whisper: 'First light on the Thames',
         line: 'Laura, London keeps borrowing your softness and returning it as sky.',
@@ -201,6 +202,7 @@
       },
       {
         image: 'assets/4649.avif',
+        backupImage: 'assets/f412b172818605.5bf46f0016d6b.jpg',
         fallback: 'linear-gradient(130deg, #141e30, #243b55, #7f8da6)',
         whisper: 'Station piano hum',
         line: 'Your name sounds like a train announcement I never want to miss.',
@@ -208,6 +210,7 @@
       },
       {
         image: 'assets/5925.avif',
+        backupImage: 'assets/d1f907b5fc6f48b13e605b8c6b17fb38.jpg',
         fallback: 'linear-gradient(125deg, #3a1c71, #d76d77, #ffaf7b)',
         whisper: 'Evening glint',
         line: 'Every bridge is practicing how to hold us in one frame.',
@@ -215,6 +218,7 @@
       },
       {
         image: 'assets/3984.avif',
+        backupImage: 'assets/0acf3068d880a7614fa4d0ee8e025385.png',
         fallback: 'linear-gradient(120deg, #0f2027, #203a43, #2c5364)',
         whisper: 'City rain confessional',
         line: 'When London rains, it writes little love notes in your handwriting.',
@@ -222,6 +226,7 @@
       },
       {
         image: 'assets/2918.avif',
+        backupImage: 'assets/73d46da5feb0f329d4b1f89f73cfda9b.jpg',
         fallback: 'linear-gradient(120deg, #1f4037, #99f2c8)',
         whisper: 'Quiet lane magic',
         line: 'I found your laugh hiding between old brick and warm lamps.',
@@ -229,6 +234,7 @@
       },
       {
         image: 'assets/5722.avif',
+        backupImage: 'assets/482975_5403d244c4eea3fce7038dceed091f55.jpeg',
         fallback: 'linear-gradient(120deg, #232526, #414345, #7a8c8d)',
         whisper: 'Midnight carriage',
         line: 'The city slows down exactly where I imagine you looking back.',
@@ -236,6 +242,7 @@
       },
       {
         image: 'assets/3256.avif',
+        backupImage: 'assets/fc8b04e893625f54120900e45c004cc6.jpg',
         fallback: 'linear-gradient(125deg, #42275a, #734b6d, #c9b6d6)',
         whisper: 'Museum hush',
         line: 'Laura, even the statues seem charmed when you cross their silence.',
@@ -243,6 +250,7 @@
       },
       {
         image: 'assets/3176.avif',
+        backupImage: 'assets/il_fullxfull.7050294551_my40.webp',
         fallback: 'linear-gradient(130deg, #1d4350, #a43931, #e4c1a1)',
         whisper: 'Bus window glow',
         line: 'I keep saving this seat beside me for your impossible timing.',
@@ -250,6 +258,7 @@
       },
       {
         image: 'assets/3181.avif',
+        backupImage: 'assets/04426376c0a6f30176e1498d29f0a442.jpg',
         fallback: 'linear-gradient(120deg, #283048, #859398, #d7d2cc)',
         whisper: 'Blue-hour promise',
         line: 'This city is lovely, but it becomes true only when it includes you.',
@@ -257,6 +266,7 @@
       },
       {
         image: 'assets/3119.avif',
+        backupImage: 'assets/f412b172818605.5bf46f0016d6b.jpg',
         fallback: 'linear-gradient(125deg, #0f0c29, #302b63, #24243e)',
         whisper: 'After-hours heartbeat',
         line: 'I would cross every borough just to hear your "hey" in real time.',
@@ -264,6 +274,7 @@
       },
       {
         image: 'assets/3973.avif',
+        backupImage: 'assets/fc8b04e893625f54120900e45c004cc6.jpg',
         fallback: 'linear-gradient(120deg, #16222a, #3a6073, #a3bded)',
         whisper: 'Postmark complete',
         line: 'Until then, consider this London sky folded carefully and mailed to you.',
@@ -282,22 +293,44 @@
     const archiveList = document.getElementById('archiveList');
 
     const imageAvailability = new Map();
-    scenes.forEach((scene) => {
-      if (!scene.image) return;
+    const supportsAvif = (() => {
+      try {
+        const canvas = document.createElement('canvas');
+        return canvas.toDataURL('image/avif').startsWith('data:image/avif');
+      } catch {
+        return false;
+      }
+    })();
+
+    function preloadImage(path) {
+      if (!path || imageAvailability.has(path)) return;
+      imageAvailability.set(path, null);
       const img = new Image();
-      img.onload = () => imageAvailability.set(scene.image, true);
-      img.onerror = () => imageAvailability.set(scene.image, false);
-      img.src = scene.image;
+      img.onload = () => {
+        imageAvailability.set(path, true);
+        if (pointer >= 0) applyBackground(scenes[pointer]);
+      };
+      img.onerror = () => imageAvailability.set(path, false);
+      img.src = path;
+    }
+
+    scenes.forEach((scene) => {
+      preloadImage(scene.image);
+      preloadImage(scene.backupImage);
     });
 
     let pointer = -1;
     let locked = false;
 
     function applyBackground(scene) {
-      const loaded = imageAvailability.get(scene.image);
-      const canUseImage = scene.image && loaded !== false;
-      if (canUseImage) {
-        backdrop.style.backgroundImage = `url('${scene.image}')`;
+      const candidateImages = [];
+      if (scene.image && (!scene.image.endsWith('.avif') || supportsAvif)) candidateImages.push(scene.image);
+      if (scene.backupImage) candidateImages.push(scene.backupImage);
+      if (scene.image && !candidateImages.includes(scene.image)) candidateImages.push(scene.image);
+
+      const loadedImage = candidateImages.find((path) => imageAvailability.get(path) === true);
+      if (loadedImage) {
+        backdrop.style.backgroundImage = `url('${loadedImage}')`;
       } else {
         backdrop.style.backgroundImage = scene.fallback || 'linear-gradient(120deg, #111, #333)';
       }
