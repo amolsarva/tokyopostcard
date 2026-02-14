@@ -175,7 +175,7 @@
 
   <div class="story" id="story">
     <p class="whisper" id="whisper">tap to begin</p>
-    <p class="main-line" id="mainLine">A new London edition just arrived for Laura.</p>
+    <p class="main-line" id="mainLine">London edition: eleven frames, one letter for Laura.</p>
   </div>
 
   <div class="footer">
@@ -193,91 +193,91 @@
   <script>
     const scenes = [
       {
-        image: 'assets/3036.avif',
-        backupImage: 'assets/04426376c0a6f30176e1498d29f0a442.jpg',
+        image: 'assets/london/3036.avif',
+        backupImage: 'assets/tokyo/04426376c0a6f30176e1498d29f0a442.jpg',
         fallback: 'linear-gradient(125deg, #182848, #4b6cb7, #b6d0ff)',
-        whisper: 'First light on the Thames',
-        line: 'Laura, London keeps borrowing your softness and returning it as sky.',
-        micro: 'Tap for the next window'
+        whisper: 'Thames at first light',
+        line: 'Laura, the river opens in soft silver and the whole city looks freshly tailored.',
+        micro: 'Tap for the next frame'
       },
       {
-        image: 'assets/4649.avif',
-        backupImage: 'assets/f412b172818605.5bf46f0016d6b.jpg',
+        image: 'assets/london/4649.avif',
+        backupImage: 'assets/tokyo/f412b172818605.5bf46f0016d6b.jpg',
         fallback: 'linear-gradient(130deg, #141e30, #243b55, #7f8da6)',
-        whisper: 'Station piano hum',
-        line: 'Your name sounds like a train announcement I never want to miss.',
+        whisper: 'Station rhythm',
+        line: 'Platform noise fades and your name is the only clean line I hear in London.',
         micro: 'Tap to continue'
       },
       {
-        image: 'assets/5925.avif',
-        backupImage: 'assets/d1f907b5fc6f48b13e605b8c6b17fb38.jpg',
+        image: 'assets/london/5925.avif',
+        backupImage: 'assets/tokyo/d1f907b5fc6f48b13e605b8c6b17fb38.jpg',
         fallback: 'linear-gradient(125deg, #3a1c71, #d76d77, #ffaf7b)',
-        whisper: 'Evening glint',
-        line: 'Every bridge is practicing how to hold us in one frame.',
-        micro: 'Tap for another postcard'
+        whisper: 'Bridge hour',
+        line: 'Every bridge holds the skyline like a runway rail, waiting for your step.',
+        micro: 'Tap for the next look'
       },
       {
-        image: 'assets/3984.avif',
-        backupImage: 'assets/0acf3068d880a7614fa4d0ee8e025385.png',
+        image: 'assets/london/3984.avif',
+        backupImage: 'assets/tokyo/0acf3068d880a7614fa4d0ee8e025385.png',
         fallback: 'linear-gradient(120deg, #0f2027, #203a43, #2c5364)',
-        whisper: 'City rain confessional',
-        line: 'When London rains, it writes little love notes in your handwriting.',
-        micro: 'Tap to read the next one'
+        whisper: 'Rain on glass',
+        line: 'Rain polishes every window and leaves London glowing like lacquer after dusk.',
+        micro: 'Tap for another line'
       },
       {
-        image: 'assets/2918.avif',
-        backupImage: 'assets/73d46da5feb0f329d4b1f89f73cfda9b.jpg',
+        image: 'assets/london/2918.avif',
+        backupImage: 'assets/tokyo/73d46da5feb0f329d4b1f89f73cfda9b.jpg',
         fallback: 'linear-gradient(120deg, #1f4037, #99f2c8)',
-        whisper: 'Quiet lane magic',
-        line: 'I found your laugh hiding between old brick and warm lamps.',
+        whisper: 'Quiet lane',
+        line: 'Brick, brass, and lamp light—this corner keeps the exact warmth of your laugh.',
         micro: 'Tap and keep wandering'
       },
       {
-        image: 'assets/5722.avif',
-        backupImage: 'assets/482975_5403d244c4eea3fce7038dceed091f55.jpeg',
+        image: 'assets/london/5722.avif',
+        backupImage: 'assets/tokyo/482975_5403d244c4eea3fce7038dceed091f55.jpeg',
         fallback: 'linear-gradient(120deg, #232526, #414345, #7a8c8d)',
         whisper: 'Midnight carriage',
-        line: 'The city slows down exactly where I imagine you looking back.',
+        line: 'The city slows at every turn, as if it knows you are about to look back.',
         micro: 'Tap for the next stop'
       },
       {
-        image: 'assets/3256.avif',
-        backupImage: 'assets/fc8b04e893625f54120900e45c004cc6.jpg',
+        image: 'assets/london/3256.avif',
+        backupImage: 'assets/tokyo/fc8b04e893625f54120900e45c004cc6.jpg',
         fallback: 'linear-gradient(125deg, #42275a, #734b6d, #c9b6d6)',
         whisper: 'Museum hush',
-        line: 'Laura, even the statues seem charmed when you cross their silence.',
+        line: 'Even marble seems to soften in this light, like London learning your pace.',
         micro: 'Tap to turn the page'
       },
       {
-        image: 'assets/3176.avif',
-        backupImage: 'assets/il_fullxfull.7050294551_my40.webp',
+        image: 'assets/london/3176.avif',
+        backupImage: 'assets/tokyo/il_fullxfull.7050294551_my40.webp',
         fallback: 'linear-gradient(130deg, #1d4350, #a43931, #e4c1a1)',
-        whisper: 'Bus window glow',
-        line: 'I keep saving this seat beside me for your impossible timing.',
+        whisper: 'Red bus glow',
+        line: 'Streetlight threads gold across the window and saves one seat beside me for you.',
         micro: 'Tap and ride onward'
       },
       {
-        image: 'assets/3181.avif',
-        backupImage: 'assets/04426376c0a6f30176e1498d29f0a442.jpg',
+        image: 'assets/london/3181.avif',
+        backupImage: 'assets/tokyo/04426376c0a6f30176e1498d29f0a442.jpg',
         fallback: 'linear-gradient(120deg, #283048, #859398, #d7d2cc)',
         whisper: 'Blue-hour promise',
-        line: 'This city is lovely, but it becomes true only when it includes you.',
+        line: 'London is beautiful in blue hour, but it becomes true only when you are in frame.',
         micro: 'Tap to seal the line'
       },
       {
-        image: 'assets/3119.avif',
-        backupImage: 'assets/f412b172818605.5bf46f0016d6b.jpg',
+        image: 'assets/london/3119.avif',
+        backupImage: 'assets/tokyo/f412b172818605.5bf46f0016d6b.jpg',
         fallback: 'linear-gradient(125deg, #0f0c29, #302b63, #24243e)',
-        whisper: 'After-hours heartbeat',
-        line: 'I would cross every borough just to hear your "hey" in real time.',
+        whisper: 'After-hours pulse',
+        line: 'I would cross every borough for one real-time hello and your footsteps beside mine.',
         micro: 'Tap for one last note'
       },
       {
-        image: 'assets/3973.avif',
-        backupImage: 'assets/fc8b04e893625f54120900e45c004cc6.jpg',
+        image: 'assets/london/3973.avif',
+        backupImage: 'assets/tokyo/fc8b04e893625f54120900e45c004cc6.jpg',
         fallback: 'linear-gradient(120deg, #16222a, #3a6073, #a3bded)',
         whisper: 'Postmark complete',
-        line: 'Until then, consider this London sky folded carefully and mailed to you.',
+        line: 'Until then, keep this London night folded carefully—luminous, precise, and yours.',
         micro: 'Tap once more to replay'
       }
     ];
@@ -353,7 +353,7 @@
     function showEpilogue() {
       pointer = -1;
       whisper.textContent = 'Edition complete';
-      mainLine.textContent = 'Tap anywhere when you want to drift through London again.';
+      mainLine.textContent = "Tap anywhere when you want to reopen the London edition.";
       micro.textContent = 'Replay ritual';
       counter.textContent = '∞';
       story.classList.remove('reveal');
