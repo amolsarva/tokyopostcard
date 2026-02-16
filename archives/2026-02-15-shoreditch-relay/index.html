@@ -3,31 +3,31 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>newAIyork · Shoreditch Walk Draft</title>
+  <title>newAIyork · Shoreditch Relay Edition</title>
   <style>
     :root {
       color-scheme: dark;
       font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      --text-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+      --text-shadow: 0 18px 60px rgba(0, 0, 0, 0.78);
     }
     *, *::before, *::after { box-sizing: border-box; }
     html, body {
       margin: 0;
       height: 100%;
-      background: #050505;
-      color: #f7f4ef;
+      background: #060606;
+      color: #f8f8f8;
       overflow: hidden;
     }
 
     .backdrop {
       position: fixed;
       inset: 0;
-      background: #050505;
+      background: #0a0a0a;
       background-size: cover;
       background-position: center;
-      transition: opacity 1.15s ease, transform 1.6s ease;
+      transition: opacity 1.05s ease, transform 1.7s ease;
       opacity: 0;
-      transform: scale(1.02);
+      transform: scale(1.03);
     }
     .backdrop.visible { opacity: 1; transform: scale(1); }
 
@@ -39,7 +39,7 @@
       pointer-events: none;
     }
     .vignette::before {
-      background: radial-gradient(circle at 45% 20%, rgba(0,0,0,0.25), rgba(0,0,0,0.85));
+      background: radial-gradient(circle at 50% 15%, rgba(0,0,0,0.2), rgba(0,0,0,0.86));
     }
     .vignette::after {
       background-image: linear-gradient(rgba(255,255,255,0.04), rgba(255,255,255,0));
@@ -57,10 +57,10 @@
       align-items: center;
       gap: 1rem;
       text-transform: uppercase;
-      letter-spacing: 0.24em;
-      font-size: 0.74rem;
-      pointer-events: none;
+      letter-spacing: 0.2em;
+      font-size: 0.76rem;
       z-index: 2;
+      pointer-events: none;
     }
     .hud button { pointer-events: auto; }
     .counter { font-variant-numeric: tabular-nums; }
@@ -69,7 +69,7 @@
       border: 0;
       border-radius: 999px;
       padding: 0.45rem 1.35rem;
-      background: rgba(0,0,0,0.6);
+      background: rgba(0,0,0,0.5);
       color: inherit;
       text-transform: uppercase;
       letter-spacing: 0.16em;
@@ -86,26 +86,26 @@
       justify-content: center;
       gap: 0.9rem;
       text-align: left;
-      padding: 18vh 8% 22vh;
+      padding: 19vh 8% 20vh;
       pointer-events: none;
     }
     .story.reveal { animation: fadeText 0.85s ease; }
     @keyframes fadeText {
-      from { opacity: 0; transform: translateY(18px); }
+      from { opacity: 0; transform: translateY(16px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .whisper {
       margin: 0;
-      font-size: clamp(0.86rem, 2.4vw, 1.08rem);
-      letter-spacing: 0.42em;
+      font-size: clamp(0.88rem, 2.4vw, 1.08rem);
+      letter-spacing: 0.38em;
       text-transform: uppercase;
-      opacity: 0.92;
+      opacity: 0.9;
       text-shadow: var(--text-shadow);
     }
     .main-line {
       margin: 0;
-      font-size: clamp(2.1rem, 7.2vw, 4.3rem);
+      font-size: clamp(2.25rem, 7vw, 4.2rem);
       line-height: 1.12;
       font-weight: 600;
       max-width: 18ch;
@@ -119,11 +119,11 @@
       right: 5%;
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.62rem;
       text-align: center;
-      letter-spacing: 0.28em;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       z-index: 2;
     }
 
@@ -133,7 +133,7 @@
       gap: 0.35rem;
       letter-spacing: 0.18em;
     }
-    .archives-title { opacity: 0.85; font-size: 0.66rem; }
+    .archives-title { opacity: 0.85; font-size: 0.68rem; }
     .archives-list {
       margin: 0;
       padding: 0;
@@ -152,8 +152,8 @@
     }
 
     @media (max-width: 540px) {
-      .hud { font-size: 0.68rem; letter-spacing: 0.14em; }
-      button { font-size: 0.64rem; letter-spacing: 0.12em; }
+      .hud { font-size: 0.7rem; letter-spacing: 0.14em; }
+      button { font-size: 0.66rem; letter-spacing: 0.12em; }
       .footer { letter-spacing: 0.2em; }
     }
 
@@ -163,19 +163,19 @@
     }
   </style>
 </head>
-<body data-manifest="./archives/manifest.json" data-audio="./ambient-rain.mp3" data-archives-base="./archives">
+<body>
   <div class="backdrop" id="backdrop"></div>
   <div class="vignette"></div>
 
   <div class="hud">
-    <div>newAIyork · Shoreditch walk draft</div>
-    <div class="counter" id="counter">00 / 16</div>
+    <div>newAIyork · Shoreditch relay i</div>
+    <div class="counter" id="counter">00 / 11</div>
     <button id="soundToggle" aria-pressed="false">Sound</button>
   </div>
 
   <div class="story" id="story">
     <p class="whisper" id="whisper">tap to begin</p>
-    <p class="main-line" id="mainLine">Sixteen wet-morning pages for the Shoreditch walk we owe each other.</p>
+    <p class="main-line" id="mainLine">Shoreditch relay: eleven frames, one ride-long letter for Laura.</p>
   </div>
 
   <div class="footer">
@@ -188,121 +188,86 @@
     </div>
   </div>
 
-  <audio id="ambience" loop preload="auto"></audio>
+  <audio id="ambience" loop preload="auto" src="../ambient-rain.mp3"></audio>
 
   <script>
     const scenes = [
       {
-        image: 'assets/shoreditch-01.avif',
-        fallback: 'linear-gradient(125deg, #132743, #ff965e)',
-        whisper: 'Cartoon threshold',
-        line: 'The coral-and-cobalt faces on Chance Street blink us into Sunday, their tongues daring us to kiss the drizzle.',
-        micro: 'Tap to lean into their grin'
+        image: 'assets/shoreditch/hanbury-crane.avif',
+        fallback: 'linear-gradient(125deg, #0b0d18, #2b1b3f, #ff7b39)',
+        whisper: 'Hanbury sentries',
+        line: 'Dale Grimshaw\'s cobalt face and ROA\'s lanky heron survey Hanbury Street beneath a sky so blue it hums.',
+        micro: 'Tap to stand beneath both lookouts'
       },
       {
-        image: 'assets/shoreditch-02.avif',
-        fallback: 'linear-gradient(125deg, #2b1310, #f08c4b, #ffd6a3)',
-        whisper: 'Laminate altar',
-        line: 'Stacks of Jolene croissants fog the glass, butter steam drawing halos over your reflection.',
-        micro: 'Tap to fog another pane'
+        image: 'assets/shoreditch/buxton-wall.avif',
+        fallback: 'linear-gradient(120deg, #1f1b2c, #7c2a90, #fdd835)',
+        whisper: 'Poster barrage',
+        line: 'The Buxton Street wall stacks protest wheatpastes, a \u201cFake Views\u201d Trump, stickers, and scrawled handles until the bricks disappear.',
+        micro: 'Tap to decode the bulletin board'
       },
       {
-        image: 'assets/shoreditch-03.avif',
-        fallback: 'linear-gradient(125deg, #442019, #ff725e, #fab07b)',
-        whisper: 'Jolene shelter',
-        line: 'Red awnings on Redchurch Street glow like cinema curtains holding us between rain cues.',
-        micro: 'Tap to tuck under the marquee'
+        image: 'assets/shoreditch/cycle-pack.avif',
+        fallback: 'linear-gradient(125deg, #0d0f1c, #2f3f6b, #f05f57)',
+        whisper: 'Hanbury meetup',
+        line: 'Friends idle on Lime bikes outside Ens\u014d Lounge, helmets unbuckled while the corner becomes an impromptu rollout.',
+        micro: 'Tap to push off from the caf\u00e9 curb'
       },
       {
-        image: 'assets/shoreditch-04.avif',
-        fallback: 'linear-gradient(130deg, #0c1a2a, #3c4f63)',
-        whisper: 'Angel Alley',
-        line: 'Bicycles drip along a double yellow ribbon, and we whisper routes to church bells we might ignore.',
-        micro: 'Tap to follow the shine'
+        image: 'assets/shoreditch/double-ride.avif',
+        fallback: 'linear-gradient(125deg, #1b1a2f, #90323d, #f4a259)',
+        whisper: 'Hire rank',
+        line: 'A monochrome row of docked bikes guards the Old Street forecourt while HELCH lettering and warehouses stretch down the horizon.',
+        micro: 'Tap to claim a saddle before the whistle'
       },
       {
-        image: 'assets/shoreditch-05.avif',
-        fallback: 'linear-gradient(120deg, #211f21, #f9d548, #7bc2ff)',
-        whisper: 'Tile-wing omen',
-        line: 'A tiny bird by Ant Atlas points north with sugar-yellow feathers and we treat it like a compass.',
-        micro: 'Tap to take its lead'
+        image: 'assets/shoreditch/bike-bridge.avif',
+        fallback: 'linear-gradient(120deg, #041221, #13334c, #f19c79)',
+        whisper: 'Lalaland gate',
+        line: 'A rider blurs past the bamboo lattice and neon script of the Lalaland entrance, city towers stacking above the courtyard jungle.',
+        micro: 'Tap to glide through the pop-up portal'
       },
       {
-        image: 'assets/shoreditch-06.avif',
-        fallback: 'linear-gradient(125deg, #1f252e, #5c6f7f)',
-        whisper: 'Rooftop psalm',
-        line: 'From the loft window, spires and skylights haze in pewter light—the city humming softer than a hymn.',
-        micro: 'Tap to breathe on the glass'
+        image: 'assets/shoreditch/old-street-hire.avif',
+        fallback: 'linear-gradient(120deg, #0c1a24, #205072, #56cfe1)',
+        whisper: 'Legacy fleet',
+        line: 'Close-up Barclays blue fenders remind us how many night shifts began on these sturdy hire wheels.',
+        micro: 'Tap to grab the next classic frame'
       },
       {
-        image: 'assets/shoreditch-07.avif',
-        fallback: 'linear-gradient(125deg, #201818, #dcb16b)',
-        whisper: 'Loft nave',
-        line: 'Paper stars swing over wooden pew-bench chairs and we rehearse our vows between coffee and charcoal.',
-        micro: 'Tap to set the table'
+        image: 'assets/shoreditch/brick-lane-neon.avif',
+        fallback: 'linear-gradient(120deg, #13061b, #722e5d, #fba834)',
+        whisper: 'Brick Lane neon',
+        line: 'Curry house signs drench the wet cobbles in magenta, amber, and cobalt while a white van idles between late-night diners.',
+        micro: 'Tap to weave through the light spill'
       },
       {
-        image: 'assets/shoreditch-08.avif',
-        fallback: 'linear-gradient(125deg, #071109, #2a3628, #f35c53)',
-        whisper: 'Freedom letterpress',
-        line: 'Rob Ryan\\'s cut-paper sermon says freedom for everybody; we mouth it like a private gospel.',
-        micro: 'Tap to underline the vow'
+        image: 'assets/shoreditch/vintage-market.avif',
+        fallback: 'linear-gradient(125deg, #2c1b2f, #93425f, #f6c28b)',
+        whisper: 'Curio huddle',
+        line: 'Ship models, porcelain, brass goblets, and toy caravans crowd the Brick Lane vintage stall like treasures from a dozen timelines.',
+        micro: 'Tap to dig up the team talisman'
       },
       {
-        image: 'assets/shoreditch-09.avif',
-        fallback: 'linear-gradient(125deg, #130c12, #444b52)',
-        whisper: 'Lift liturgy',
-        line: 'Four brass buttons, one red eye, and the elevator hum becomes a psalm for going back upstairs.',
-        micro: 'Tap to choose the floor'
+        image: 'assets/shoreditch/walala-blocks.avif',
+        fallback: 'linear-gradient(120deg, #0d1821, #ff3cac, #ffdd00)',
+        whisper: 'Taxi mural loop',
+        line: 'A black cab noses along Buxton Street while QR-coded posters, blocky initials, and candy-bright tags overload the warehouse wall.',
+        micro: 'Tap to trail the cab past the glyphs'
       },
       {
-        image: 'assets/shoreditch-10.avif',
-        fallback: 'linear-gradient(125deg, #ececec, #4f5964)',
-        whisper: 'Menlo window box',
-        line: 'Menlo Works spells itself backwards in the glass, as if even the sign wants to wander with us.',
-        micro: 'Tap to trace the letters'
+        image: 'assets/shoreditch/adore-endure.avif',
+        fallback: 'linear-gradient(125deg, #11121b, #2d3e52, #efd28d)',
+        whisper: 'Depot vow',
+        line: 'The "Let\'s Adore and Endure" wall and the rooftop Tube cars spell out the promise every time we roll beneath the viaduct.',
+        micro: 'Tap to bank the vow'
       },
       {
-        image: 'assets/shoreditch-11.avif',
-        fallback: 'linear-gradient(125deg, #160f0b, #bf2a2a, #3ba34a)',
-        whisper: 'Resistance chorus',
-        line: 'Stacked letters shout RESISTANCE in cadences of black, white, and neon mint—our street choir.',
-        micro: 'Tap to echo the chant'
-      },
-      {
-        image: 'assets/shoreditch-12.avif',
-        fallback: 'linear-gradient(125deg, #050708, #193a2a, #0d6c90)',
-        whisper: 'Monstera chapel',
-        line: 'Banana-leaf wallpaper wraps the bed like a rainforest pew, unmade and waiting for confession.',
-        micro: 'Tap to smooth the sheets'
-      },
-      {
-        image: 'assets/shoreditch-13.avif',
-        fallback: 'linear-gradient(125deg, #2a1b12, #8a6a4a)',
-        whisper: 'Greengrocer ghosts',
-        line: 'A sepia storefront keeps baskets of produce suspended in time, reminding us how long markets can love.',
-        micro: 'Tap to borrow their patience'
-      },
-      {
-        image: 'assets/shoreditch-14.avif',
-        fallback: 'linear-gradient(125deg, #1a1020, #a84b8a, #5fc4ff)',
-        whisper: 'Mythic mural',
-        line: 'Athena\\'s pink face watches over the alley, paint cracked like old film yet still decidedly divine.',
-        micro: 'Tap to pass under her gaze'
-      },
-      {
-        image: 'assets/shoreditch-15.avif',
-        fallback: 'linear-gradient(125deg, #2d231b, #6f4a2e)',
-        whisper: 'Pavement note',
-        line: 'Chalk says \"I hear you... I don't understand but I disagree anyway\" and we laugh at how honest puddles can be.',
-        micro: 'Tap to leave your reply'
-      },
-      {
-        image: 'assets/shoreditch-16.avif',
-        fallback: 'linear-gradient(125deg, #07090f, #555c63)',
-        whisper: 'Curtain call',
-        line: 'Curtain Road stretches pale and empty, just for us, double yellows leading toward the bells we might still catch.',
-        micro: 'Tap to let the city exhale'
+        image: 'assets/shoreditch/sunrise-cycle.avif',
+        fallback: 'linear-gradient(125deg, #02111b, #0b4f6c, #f5901e)',
+        whisper: 'Blossom lane',
+        line: 'Cherry branches explode in pink bloom above the path, turning the last stretch into a floral tunnel.',
+        micro: 'Tap to soft-pedal through the petals'
       }
     ];
 
@@ -315,8 +280,6 @@
     const soundToggle = document.getElementById('soundToggle');
     const audio = document.getElementById('ambience');
     const archiveList = document.getElementById('archiveList');
-    const manifestPath = document.body.dataset.manifest || './archives/manifest.json';
-    const archiveBase = document.body.dataset.archivesBase || './archives';
 
     const imageAvailability = new Map();
     function preloadImage(path) {
@@ -334,12 +297,9 @@
       img.src = path;
     }
 
-    scenes.forEach((scene) => preloadImage(scene.image));
-    if (document.body.dataset.audio) {
-      audio.src = document.body.dataset.audio;
-    } else {
-      audio.src = './ambient-rain.mp3';
-    }
+    scenes.forEach((scene) => {
+      preloadImage(scene.image);
+    });
 
     let pointer = -1;
     let locked = false;
@@ -371,7 +331,7 @@
     function showEpilogue() {
       pointer = -1;
       whisper.textContent = 'Edition complete';
-      mainLine.textContent = 'Tap anywhere when you want to resume the Shoreditch walk draft.';
+      mainLine.textContent = "Tap anywhere when you want to reopen the Shoreditch relay.";
       micro.textContent = 'Replay ritual';
       counter.textContent = '∞';
       story.classList.remove('reveal');
@@ -382,14 +342,14 @@
     function advanceScene() {
       if (locked) return;
       locked = true;
-      setTimeout(() => { locked = false; }, 460);
+      setTimeout(() => { locked = false; }, 480);
       pointer += 1;
       if (pointer >= scenes.length) {
         showEpilogue();
         return;
       }
       renderScene();
-      if ('vibrate' in navigator) navigator.vibrate(12);
+      if ('vibrate' in navigator) navigator.vibrate(10);
     }
 
     document.body.addEventListener('click', (event) => {
@@ -413,7 +373,7 @@
 
     async function hydrateArchives() {
       try {
-        const response = await fetch(manifestPath, { cache: 'no-store' });
+        const response = await fetch('../manifest.json', { cache: 'no-store' });
         if (!response.ok) return;
         const entries = await response.json();
         renderArchiveList(entries);
@@ -434,7 +394,7 @@
       entries.forEach((entry) => {
         const li = document.createElement('li');
         const link = document.createElement('a');
-        link.href = `${archiveBase}/${entry.slug}/`;
+        link.href = `../${entry.slug}/`;
         link.textContent = entry.label || entry.slug;
         link.title = entry.blurb || 'Open archived postcard';
         li.appendChild(link);
