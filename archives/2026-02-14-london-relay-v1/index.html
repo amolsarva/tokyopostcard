@@ -356,7 +356,7 @@
     async function hydrateArchives() {
       try {
         const response = await fetch('./archives/manifest.json', { cache: 'no-store' });
-        if (!response.ok) return;
+        if (!response.ok) { renderArchiveList([]); return; }
         const entries = await response.json();
         renderArchiveList(entries);
       } catch (err) {
