@@ -16,6 +16,9 @@
       --panel: rgba(0, 0, 0, 0.7);
       --wire: rgba(0, 163, 255, 0.35);
       --mono: "IBM Plex Mono", "SFMono-Regular", "Consolas", monospace;
+      --hero-background:
+        radial-gradient(130% 90% at 50% 0%, rgba(106, 178, 255, 0.16), rgba(7, 16, 31, 0) 64%),
+        linear-gradient(180deg, #0f2e57 0%, #15467f 48%, #0a1d3a 100%);
     }
 
     *, *::before, *::after { box-sizing: border-box; }
@@ -74,6 +77,7 @@
       position: relative;
       overflow: hidden;
       isolation: isolate;
+      background: var(--hero-background);
     }
 
     .hero::before,
@@ -293,7 +297,7 @@
   </header>
 
   <main class="hero" aria-label="Digital Games narrative">
-    <h1>DIGITAL GAMES</h1>
+    <h1 id="title">DIGITAL GAMES</h1>
     <p class="subline" id="subline" aria-live="polite">
       I loved you five minutes ago.
     </p>
@@ -335,6 +339,7 @@ Wait for me at least.</span>
 
   <script>
     const root = document.documentElement;
+    const titleEl = document.getElementById('title');
     const subline = document.getElementById('subline');
     const detail = document.getElementById('detail');
     const callout = document.getElementById('callout');
@@ -355,6 +360,9 @@ Wait for me at least.</span>
         level: '01',
         timestamp: '10:03:13 A.M.',
         accent: '#f3ff20',
+        title: 'DIGITAL GAMES',
+        background: `radial-gradient(130% 90% at 50% 0%, rgba(106, 178, 255, 0.16), rgba(7, 16, 31, 0) 64%),
+        linear-gradient(180deg, #0f2e57 0%, #15467f 48%, #0a1d3a 100%)`,
         subline: 'I loved you five minutes ago.',
         detail: 'Please breathe.',
         callout: 'WAIT FOR ME AT LEAST.',
@@ -370,6 +378,8 @@ Wait for me at least.`,
         level: '02',
         timestamp: '02:54:44 P.M.',
         accent: '#2dff80',
+        title: 'Please breathe.',
+        background: 'linear-gradient(140deg, #050505 0%, #092133 45%, #03301e 100%)',
         subline: 'I was dreaming about you.',
         detail: 'You said you love the sun.',
         callout: 'LOVE IS WORK.',
@@ -385,6 +395,8 @@ You can't remember me.`,
         level: '03',
         timestamp: '11:11:07 P.M.',
         accent: '#ff3d48',
+        title: 'You said you love the sun.',
+        background: 'linear-gradient(150deg, #13030f 0%, #370a1f 45%, #54092c 100%)',
         subline: 'I would love for you to listen to me.',
         detail: 'You love me.',
         callout: 'You lack experience and fall in love easily.',
@@ -400,6 +412,8 @@ Miss you already.`,
         level: '04',
         timestamp: '05:42:29 A.M.',
         accent: '#00a2ff',
+        title: 'We can dream of each other.',
+        background: 'linear-gradient(150deg, #01030c 0%, #041637 50%, #082d55 100%)',
         subline: 'We can dream of each other.',
         detail: 'I promise I\'ll stay awake forever.',
         callout: 'JUST REMEMBER.',
@@ -416,6 +430,12 @@ Good night, I have a lot to dream about.`,
     let pointer = 0;
 
     function renderScene(scene) {
+      if (titleEl) {
+        titleEl.textContent = scene.title || 'DIGITAL GAMES';
+      }
+      if (scene.background) {
+        root.style.setProperty('--hero-background', scene.background);
+      }
       subline.textContent = scene.subline;
       detail.textContent = scene.detail;
       callout.textContent = scene.callout;
