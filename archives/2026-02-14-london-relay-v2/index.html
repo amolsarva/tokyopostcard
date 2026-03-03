@@ -396,7 +396,7 @@
 
     async function hydrateArchives() {
       try {
-        const response = await fetch('./archives/manifest.json', { cache: 'no-store' });
+        const response = await fetch(manifestPath, { cache: 'no-store' });
         if (!response.ok) { renderArchiveList([]); return; }
         const entries = await response.json();
         renderArchiveList(entries);
@@ -417,7 +417,7 @@
       entries.forEach((entry) => {
         const li = document.createElement('li');
         const link = document.createElement('a');
-        link.href = `./archives/${entry.slug}/`;
+        link.href = `${archivesBase}/${entry.slug}/`;
         link.textContent = entry.label || entry.slug;
         link.title = entry.blurb || 'Open archived postcard';
         li.appendChild(link);
