@@ -3,413 +3,517 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>a new AI York · Hard Days Edition</title>
+  <title>NEWAIYORK · Digital Games</title>
   <style>
     :root {
       color-scheme: dark;
-      font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      --ink: #dceaff;
-      --panel: rgba(3, 9, 20, 0.82);
-      --border: rgba(180, 214, 255, 0.28);
-      --top-blue-1: #0f2e57;
-      --top-blue-2: #15467f;
-      --top-blue-3: #0a1d3a;
+      font-family: "SF Pro Display", "IBM Plex Mono", "JetBrains Mono", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --bg: #020202;
+      --ink: #f5f5f2;
+      --accent: #f3ff20;
+      --accent-soft: rgba(243, 255, 32, 0.12);
+      --grid: rgba(0, 255, 161, 0.2);
+      --panel: rgba(0, 0, 0, 0.7);
+      --wire: rgba(0, 163, 255, 0.35);
+      --mono: "IBM Plex Mono", "SFMono-Regular", "Consolas", monospace;
+      --hero-background:
+        radial-gradient(130% 90% at 50% 0%, rgba(106, 178, 255, 0.16), rgba(7, 16, 31, 0) 64%),
+        linear-gradient(180deg, #0f2e57 0%, #15467f 48%, #0a1d3a 100%);
     }
 
     *, *::before, *::after { box-sizing: border-box; }
 
-    html,
-    body {
+    html, body {
       margin: 0;
       min-height: 100%;
-      background: #07101f;
+      background: radial-gradient(circle at 40% -10%, rgba(255, 255, 255, 0.08), transparent 55%), var(--bg);
       color: var(--ink);
     }
 
     body {
       min-height: 100vh;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
     }
 
     .hud {
+      position: fixed;
+      top: 1.8rem;
+      left: clamp(1.5rem, 5vw, 4rem);
+      right: clamp(1.5rem, 5vw, 4rem);
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 1rem clamp(1.2rem, 4vw, 3rem);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      font-size: 0.75rem;
+      justify-content: space-between;
       gap: 1rem;
-      flex-wrap: wrap;
+      z-index: 3;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
     }
 
     .brand-link {
-      color: rgba(243, 248, 255, 0.85);
+      color: var(--ink);
       text-decoration: none;
-      border-bottom: 1px solid rgba(243, 248, 255, 0.35);
-      padding-bottom: 2px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+      padding-bottom: 3px;
+      font-weight: 600;
     }
 
     .brand-link:hover,
     .brand-link:focus-visible {
-      border-bottom-color: rgba(243, 248, 255, 0.8);
-      color: #f6fbff;
+      border-bottom-color: var(--accent);
       outline: none;
     }
 
-    .edition-tag {
-      letter-spacing: 0.3em;
-      font-size: 0.6rem;
-      opacity: 0.7;
-    }
+    .hud span { opacity: 0.8; font-variant-numeric: tabular-nums; }
 
-    .hero {
-      position: relative;
+    main.hero {
+      flex: 1;
       display: grid;
-      place-items: center;
+      gap: 1.2rem;
+      padding: 15vh clamp(1.5rem, 6vw, 7rem) 6vh;
+      position: relative;
       overflow: hidden;
-      text-align: center;
       isolation: isolate;
-      padding: 4vh clamp(1.2rem, 6vw, 4rem);
-      min-height: 60vh;
-      background:
-        radial-gradient(130% 90% at 50% 0%, rgba(106, 178, 255, 0.16), rgba(7, 16, 31, 0) 64%),
-        linear-gradient(180deg, var(--top-blue-1) 0%, var(--top-blue-2) 48%, var(--top-blue-3) 100%);
+      background: var(--hero-background);
     }
 
     .hero::before,
     .hero::after {
       content: "";
       position: absolute;
-      inset: -18%;
-      pointer-events: none;
-      opacity: 0.95;
+      inset: -20%;
+      background: repeating-linear-gradient(120deg, rgba(243, 255, 32, 0.08) 0 12px, transparent 12px 36px);
       mix-blend-mode: screen;
-    }
-
-    .hero::before {
-      background:
-        repeating-conic-gradient(from 0deg, rgba(132, 190, 255, 0.16) 0deg 12deg, rgba(8, 31, 66, 0) 12deg 24deg),
-        radial-gradient(circle at 18% 20%, rgba(126, 190, 255, 0.2), rgba(0, 0, 0, 0) 34%),
-        radial-gradient(circle at 80% 70%, rgba(129, 172, 255, 0.16), rgba(0, 0, 0, 0) 40%);
-      transform: rotate(8deg) scale(1.15);
-      filter: blur(0.5px);
-      animation: drift 26s linear infinite;
+      opacity: 0.35;
+      animation: sweep 18s linear infinite;
+      pointer-events: none;
+      z-index: -1;
     }
 
     .hero::after {
-      background:
-        repeating-linear-gradient(90deg, rgba(165, 212, 255, 0.1) 0 4px, rgba(0, 0, 0, 0) 4px 12px),
-        repeating-linear-gradient(0deg, rgba(130, 182, 255, 0.08) 0 3px, rgba(0, 0, 0, 0) 3px 11px);
-      transform: scale(1.22);
-      opacity: 0.54;
-      animation: pulse 7.5s ease-in-out infinite alternate;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.95rem;
-      padding: 1rem;
+      background: repeating-linear-gradient(0deg, rgba(0, 255, 166, 0.08) 0 8px, transparent 8px 26px);
+      animation-duration: 24s;
+      opacity: 0.25;
     }
 
     h1 {
       margin: 0;
-      padding: 1.2rem 1.5rem;
-      position: relative;
-      z-index: 1;
-      font-size: clamp(2.2rem, 10.5vw, 6.7rem);
-      letter-spacing: 0.09em;
+      font-size: clamp(2.6rem, 12vw, 8rem);
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: #f6fbff;
-      text-shadow: 0 0 28px rgba(129, 193, 255, 0.5);
+      color: var(--accent);
+      text-shadow: 0 0 25px rgba(243, 255, 32, 0.5);
+    }
+
+    .subline {
+      margin: 0;
+      font-size: clamp(1rem, 3.8vw, 2rem);
+      max-width: 70ch;
+      line-height: 1.35;
+    }
+
+    .detail {
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.34em;
+      font-size: 0.74rem;
+      opacity: 0.75;
+    }
+
+    .grid-panel {
+      margin-top: 1rem;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0.75rem;
       background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 0.7rem;
-      backdrop-filter: blur(2px);
+      backdrop-filter: blur(6px);
+      position: relative;
+      overflow: hidden;
     }
 
-    .hero-audio-toggle {
+    .grid-panel::before {
+      content: "";
       position: absolute;
-      top: clamp(1rem, 5vw, 2.6rem);
-      right: clamp(1rem, 6vw, 3rem);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.45rem 1rem;
-      border-radius: 999px;
-      border: 1px solid rgba(231, 242, 255, 0.78);
-      background: rgba(6, 19, 37, 0.68);
-      color: #f4fbff;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 0.6rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 0 0 1px rgba(120, 177, 238, 0.2) inset;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      inset: 0;
+      background:
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+        linear-gradient(0deg, var(--grid) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mix-blend-mode: screen;
+      opacity: 0.6;
+      animation: gridpulse 12s linear infinite;
     }
 
-    .hero-audio-toggle::before {
-      content: '';
-      width: 0.45rem;
-      height: 0.45rem;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.4);
-      box-shadow: 0 0 6px rgba(255, 255, 255, 0.45);
+    .grid-panel strong {
+      display: inline-block;
+      letter-spacing: 0.3em;
     }
 
-    .hero-audio-toggle[data-state="playing"] {
-      border-color: rgba(137, 221, 255, 0.95);
-      box-shadow: 0 0 18px rgba(120, 200, 255, 0.4), inset 0 0 0 1px rgba(120, 200, 255, 0.4);
-      background: rgba(8, 27, 49, 0.78);
+    .grid-panel p {
+      margin: 0.4rem 0 0;
+      font-family: var(--mono);
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
     }
 
-    .hero-audio-toggle[data-state="playing"]::before {
-      background: #a2ffd3;
-      box-shadow: 0 0 12px rgba(162, 255, 211, 0.9);
+    .sprite {
+      position: absolute;
+      top: clamp(1rem, 7vh, 4rem);
+      right: clamp(1rem, 5vw, 4rem);
+      width: min(260px, 32vw);
+      padding: 0.65rem;
+      border-radius: 1.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(0, 0, 0, 0.6);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      pointer-events: none;
     }
 
-    .hero-audio-toggle:focus-visible {
-      outline: 2px solid rgba(231, 242, 255, 0.9);
-      outline-offset: 3px;
+    .sprite.is-hidden {
+      display: none;
     }
 
-    .archives {
+    .sprite img {
+      display: block;
       width: 100%;
+      height: auto;
+      border-radius: 0.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.55);
+    }
+
+    .sprite figcaption {
+      margin: 0.35rem 0 0;
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(245, 245, 245, 0.72);
+    }
+
+    .ascii-panel {
+      margin: 2rem clamp(1rem, 6vw, 6rem);
+      border: 1px solid rgba(0, 255, 166, 0.4);
+      border-radius: 0.6rem;
+      background: #010101;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      padding: 1.4rem;
+      font-family: var(--mono);
+      font-size: clamp(0.62rem, 2vw, 0.9rem);
+      line-height: 1.4;
+      color: #2dff80;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ascii-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0));
+      mix-blend-mode: screen;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .ascii-panel span {
+      display: block;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin: 0 clamp(1rem, 6vw, 6rem) 2rem;
+    }
+
+    .pillar {
+      padding: 1rem 1.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 0.65rem;
+      background: rgba(3, 3, 3, 0.72);
+      font-family: var(--mono);
+      min-height: 120px;
       display: flex;
-      justify-content: center;
-      padding: 1.4rem 1.6rem 1.8rem;
-      background: #07101f;
-      border-top: 1px solid rgba(126, 175, 232, 0.25);
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .pillar .quote-line {
+      margin: 0;
+      font-size: clamp(0.72rem, 2.4vw, 1rem);
+      line-height: 1.45;
+      color: rgba(245, 245, 245, 0.82);
+      letter-spacing: 0.04em;
+    }
+
+    .cycle-controls {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+
+    .cycle-button {
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(0, 0, 0, 0.5);
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.7rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .cycle-button:focus-visible,
+    .cycle-button:hover {
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.08);
+      outline: none;
+    }
+
+    footer.archives {
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 1.5rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.64rem;
+      background: #030303;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      align-items: center;
     }
 
     .archives-link {
-      margin-top: 0.3rem;
+      margin-top: 0.5rem;
       display: inline-block;
-      color: rgba(225, 240, 255, 0.9);
-      text-decoration: none;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.2em;
       font-size: 0.65rem;
-      border-bottom: 1px solid rgba(212, 232, 255, 0.34);
+      color: rgba(246, 246, 246, 0.9);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.25);
       padding-bottom: 2px;
     }
 
     .archives-link:hover,
     .archives-link:focus-visible {
-      color: #f6fbff;
-      border-bottom-color: #f6fbff;
+      border-bottom-color: var(--accent);
+      color: #fff;
       outline: none;
     }
 
-    @keyframes drift {
-      from { transform: rotate(8deg) scale(1.15) translate3d(-2%, -1%, 0); }
-      to { transform: rotate(368deg) scale(1.15) translate3d(1%, 2%, 0); }
+    @keyframes sweep {
+      from { transform: translate3d(-4%, -3%, 0) rotate(2deg); }
+      to { transform: translate3d(4%, 3%, 0) rotate(8deg); }
     }
 
-    @keyframes pulse {
-      from { opacity: 0.34; }
-      to { opacity: 0.62; }
+    @keyframes gridpulse {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-42px, -42px, 0); }
     }
 
     @media (max-width: 640px) {
-      .hud { flex-direction: column; align-items: flex-start; }
-      .hero-audio-toggle {
-        position: static;
-        margin-top: 1rem;
-        align-self: center;
+      .hud { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+      .detail { letter-spacing: 0.22em; }
+      .pillars { margin: 0 1rem 2rem; }
+      .ascii-panel { margin: 2rem 1rem; }
+      .sprite {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 100%;
+        margin-top: 1.5rem;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .hero::before,
-      .hero::after { animation: none; }
+      .hero::after,
+      .grid-panel::before { animation: none; }
     }
   </style>
 </head>
-<body>
+<body data-cycles="./assets/data/digital-games.json" data-assets-base=".">
   <header class="hud">
     <a class="brand-link" href="./">NEWAIYORK</a>
-    <span class="edition-tag">Hard Days Edition</span>
+    <span>LEVEL <span id="level">01</span></span>
+    <span id="clock">Jan 12 · 1:10 AM</span>
   </header>
 
-  <main class="hero" aria-label="Hard Days Edition hero">
-    <button type="button" class="hero-audio-toggle" data-audio-toggle aria-pressed="false" data-state="idle">Audio</button>
-    <div class="hero-content">
-      <h1>Good Morning Laura</h1>
+  <main class="hero" aria-label="Digital Games narrative">
+    <h1 id="title">Great meeting you Amol!</h1>
+    <p class="subline" id="subline" aria-live="polite">
+      I think I met you properly
+    </p>
+    <p class="detail" id="detail">You met me properly</p>
+    <div class="grid-panel">
+      <strong id="callout">Better than my LinkedIn could ever portray!</strong>
+      <p id="microcopy">We are 100% aligned</p>
     </div>
+    <div class="cycle-controls" aria-label="Page controls">
+      <button type="button" class="cycle-button" data-cycle-button="-1">Prev</button>
+      <button type="button" class="cycle-button" data-cycle-button="1">Next</button>
+    </div>
+    <figure class="sprite" aria-hidden="true">
+      <img id="sceneImage" src="assets/digital-games/digital-game-user-01.png" alt="" decoding="async" loading="lazy" />
+      <figcaption id="spriteCaption">I’m a big fan of 'owning manhattan' so I appreciate you built a full building haha</figcaption>
+    </figure>
   </main>
+
+  <section class="ascii-panel" aria-label="Console output">
+    <span id="asciiPanel">Oh waw great minds haha
+All out
+Exactly</span>
+  </section>
+
+  <section class="pillars" aria-label="Echoed quotes">
+    <article class="pillar">
+      <p class="quote-line" data-echo-index="0">Can ask my intern to vibe code something if you want</p>
+    </article>
+    <article class="pillar">
+      <p class="quote-line" data-echo-index="1">I met you</p>
+    </article>
+    <article class="pillar">
+      <p class="quote-line" data-echo-index="2">Guess I’ll just have to go back to Bruges</p>
+    </article>
+  </section>
 
   <footer class="archives">
     <a class="archives-link" href="./archive.html">LAURARCHIVE</a>
   </footer>
 
-  <audio id="ambience" loop preload="auto" data-src="./assets/audio/hard-days-birds.mp3" hidden></audio>
-
+  
   <script>
-    (() => {
-      const audioToggle = document.querySelector('[data-audio-toggle]');
-      const audioElement = document.getElementById('ambience');
-      if (!audioToggle) {
-        return;
+    const root = document.documentElement;
+    const bodyEl = document.body;
+    const assetsBase = bodyEl.dataset.assetsBase || '.';
+    const cyclesPath = bodyEl.dataset.cycles || 'cycles.json';
+    const titleEl = document.getElementById('title');
+    const subline = document.getElementById('subline');
+    const detail = document.getElementById('detail');
+    const callout = document.getElementById('callout');
+    const microcopy = document.getElementById('microcopy');
+    const asciiPanel = document.getElementById('asciiPanel');
+    const level = document.getElementById('level');
+    const clock = document.getElementById('clock');
+    const sprite = document.querySelector('.sprite');
+    const sceneImage = document.getElementById('sceneImage');
+    const spriteCaption = document.getElementById('spriteCaption');
+    const echoNodes = Array.from(document.querySelectorAll('[data-echo-index]'));
+    const navButtons = document.querySelectorAll('[data-cycle-button]');
+
+    let cycles = [];
+    let pointer = 0;
+
+    const applyQuote = (target, value) => {
+      if (target) target.textContent = value || '';
+    };
+
+    const resolveAssetPath = (path) => {
+      if (!path) return '';
+      if (/^(?:[a-z]+:)?\/\//i.test(path) || path.startsWith('data:') || path.startsWith('/')) {
+        return path;
       }
+      const base = assetsBase.replace(/\/$/, '');
+      const clean = path.replace(/^\.\//, '').replace(/^\//, '');
+      return `${base ? base + '/' : ''}${clean}`;
+    };
 
-      const state = {
-        playing: false,
-        mode: audioElement ? 'element' : 'fallback',
-        fallbackCtx: null,
-        fallbackGain: null,
-      };
-
-      function updateToggle() {
-        audioToggle.dataset.state = state.playing ? 'playing' : 'idle';
-        audioToggle.setAttribute('aria-pressed', state.playing ? 'true' : 'false');
+    function renderScene(scene) {
+      if (!scene) return;
+      applyQuote(titleEl, scene.title || 'DIGITAL GAMES');
+      applyQuote(subline, scene.subline || '');
+      applyQuote(detail, scene.detail || '');
+      applyQuote(callout, scene.callout || '');
+      applyQuote(microcopy, scene.micro || '');
+      level.textContent = scene.level || '01';
+      clock.textContent = scene.timestamp || '';
+      const accent = scene.accent || '#f3ff20';
+      root.style.setProperty('--accent', accent);
+      root.style.setProperty('--grid', accent + '55');
+      if (scene.background) {
+        root.style.setProperty('--hero-background', scene.background);
       }
-
-      function ensureElementSource() {
-        if (!audioElement) return false;
-        if (!audioElement.src) {
-          const src = audioElement.dataset.src;
-          if (src) {
-            audioElement.src = src;
-          } else {
-            return false;
-          }
-        }
-        return true;
-      }
-
-      async function startElement() {
-        if (!audioElement) throw new Error('missing audio element');
-        if (!ensureElementSource()) throw new Error('missing audio source');
-        await audioElement.play();
-      }
-
-      function stopElement() {
-        if (!audioElement) return;
-        audioElement.pause();
-        audioElement.currentTime = 0;
-      }
-
-      function ensureFallbackNodes() {
-        if (state.fallbackCtx) return;
-        const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        if (!AudioCtx) throw new Error('AudioContext not supported');
-        const ctx = state.fallbackCtx = new AudioCtx();
-        const bufferSize = 2 * ctx.sampleRate;
-        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-        const output = buffer.getChannelData(0);
-        let lastOut = 0;
-        for (let i = 0; i < bufferSize; i += 1) {
-          const white = Math.random() * 2 - 1;
-          lastOut = (lastOut + (0.02 * white)) / 1.02;
-          output[i] = lastOut * 0.5;
-        }
-        const source = ctx.createBufferSource();
-        source.buffer = buffer;
-        source.loop = true;
-        const gain = state.fallbackGain = ctx.createGain();
-        gain.gain.value = 0;
-        source.connect(gain).connect(ctx.destination);
-        source.start();
-      }
-
-      async function startFallback() {
-        ensureFallbackNodes();
-        if (state.fallbackCtx.state === 'suspended') {
-          await state.fallbackCtx.resume();
-        }
-        const now = state.fallbackCtx.currentTime;
-        state.fallbackGain.gain.cancelScheduledValues(now);
-        state.fallbackGain.gain.linearRampToValueAtTime(0.35, now + 0.4);
-      }
-
-      function stopFallback() {
-        if (!state.fallbackCtx || !state.fallbackGain) return;
-        const now = state.fallbackCtx.currentTime;
-        state.fallbackGain.gain.cancelScheduledValues(now);
-        state.fallbackGain.gain.linearRampToValueAtTime(0, now + 0.3);
-      }
-
-      async function handleToggle() {
-        if (state.playing) {
-          if (state.mode === 'element') {
-            stopElement();
-          } else {
-            stopFallback();
-          }
-          state.playing = false;
-          updateToggle();
-          return;
-        }
-
-        if (state.mode === 'element') {
-          try {
-            await startElement();
-            state.playing = true;
-            updateToggle();
-            return;
-          } catch (error) {
-            console.warn('Falling back to generated ambience.', error);
-            state.mode = 'fallback';
-          }
-        }
-
-        try {
-          await startFallback();
-          state.playing = true;
-        } catch (error) {
-          console.error('Unable to initialize fallback audio', error);
-        }
-        updateToggle();
-      }
-
-      audioToggle.addEventListener('click', () => {
-        handleToggle();
+      asciiPanel.textContent = (scene.ascii || []).join('\n');
+      echoNodes.forEach((node, idx) => {
+        node.textContent = scene.echoes && scene.echoes[idx] ? scene.echoes[idx] : '';
       });
+      if (scene.image) {
+        if (sprite) sprite.classList.remove('is-hidden');
+        sceneImage.src = resolveAssetPath(scene.image);
+        sceneImage.alt = scene.caption || scene.title || 'Digital games still';
+        spriteCaption.textContent = scene.caption || '';
+        spriteCaption.style.opacity = scene.caption ? '1' : '0.4';
+      } else {
+        if (sprite) sprite.classList.add('is-hidden');
+        sceneImage.removeAttribute('src');
+        spriteCaption.textContent = '';
+      }
+    }
 
-      audioElement?.addEventListener('pause', () => {
-        if (state.mode === 'element' && state.playing && audioElement.paused) {
-          state.playing = false;
-          updateToggle();
-        }
+    function advanceCycle(direction = 1) {
+      if (!cycles.length) return;
+      pointer = (pointer + direction + cycles.length) % cycles.length;
+      renderScene(cycles[pointer]);
+    }
+
+    function shouldIgnoreInteraction(target) {
+      return !!target.closest('a');
+    }
+
+    navButtons.forEach((button) => {
+      const direction = Number(button.dataset.cycleButton) || 1;
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        advanceCycle(direction);
       });
+    });
 
-      audioElement?.addEventListener('ended', () => {
-        state.playing = false;
-        updateToggle();
+    document.body.addEventListener('click', (event) => {
+      if (event.target.closest('[data-cycle-button]')) return;
+      if (shouldIgnoreInteraction(event.target)) return;
+      advanceCycle();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      const forwardKeys = ['ArrowRight', 'ArrowDown', ' ', 'Spacebar', 'Enter'];
+      const backKeys = ['ArrowLeft', 'ArrowUp'];
+      if (forwardKeys.includes(event.key)) {
+        event.preventDefault();
+        advanceCycle(1);
+      } else if (backKeys.includes(event.key)) {
+        event.preventDefault();
+        advanceCycle(-1);
+      }
+    });
+
+    if (sceneImage) {
+      sceneImage.addEventListener('error', () => {
+        if (sprite) sprite.classList.add('is-hidden');
       });
+    }
 
-      audioElement?.addEventListener('error', () => {
-        if (state.mode === 'element') {
-          state.mode = 'fallback';
-          if (state.playing) {
-            state.playing = false;
-            updateToggle();
-          }
-        }
-      });
+    async function loadCycles() {
+      try {
+        const response = await fetch(cyclesPath, { cache: 'no-store' });
+        if (!response.ok) throw new Error('Failed to load cycles data');
+        cycles = await response.json();
+        renderScene(cycles[pointer]);
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden && state.playing) {
-          if (state.mode === 'element') {
-            stopElement();
-          } else {
-            stopFallback();
-          }
-          state.playing = false;
-          updateToggle();
-        }
-      });
-
-      updateToggle();
-    })();
+    loadCycles();
   </script>
+
 </body>
 </html>

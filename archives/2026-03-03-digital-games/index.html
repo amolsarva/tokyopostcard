@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NEWAIYORK · Digital Games Draft</title>
+  <title>NEWAIYORK · Digital Games</title>
   <style>
     :root {
       color-scheme: dark;
@@ -341,48 +341,48 @@
     }
   </style>
 </head>
-<body data-manifest="../manifest.json" data-archives-base="..">
+<body data-cycles="../../assets/data/digital-games.json" data-assets-base="../..">
   <header class="hud">
     <a class="brand-link" href="../../">NEWAIYORK</a>
     <span>LEVEL <span id="level">01</span></span>
-    <span id="clock">10:03:13 A.M.</span>
+    <span id="clock">Jan 12 · 1:10 AM</span>
   </header>
 
   <main class="hero" aria-label="Digital Games narrative">
-    <h1 id="title">I loved you five minutes ago</h1>
+    <h1 id="title">Great meeting you Amol!</h1>
     <p class="subline" id="subline" aria-live="polite">
-      Stop tormenting me
+      I think I met you properly
     </p>
-    <p class="detail" id="detail">You are more interesting</p>
+    <p class="detail" id="detail">You met me properly</p>
     <div class="grid-panel">
-      <strong id="callout">Than your LinkedIn</strong>
-      <p id="microcopy">What a charmer</p>
+      <strong id="callout">Better than my LinkedIn could ever portray!</strong>
+      <p id="microcopy">We are 100% aligned</p>
     </div>
     <div class="cycle-controls" aria-label="Page controls">
       <button type="button" class="cycle-button" data-cycle-button="-1">Prev</button>
       <button type="button" class="cycle-button" data-cycle-button="1">Next</button>
     </div>
     <figure class="sprite" aria-hidden="true">
-      <img id="sceneImage" src="" alt="I think I met you properly" decoding="async" loading="lazy" />
-      <figcaption id="spriteCaption">I think I met you properly</figcaption>
+      <img id="sceneImage" src="../../assets/digital-games/digital-game-user-01.png" alt="" decoding="async" loading="lazy" />
+      <figcaption id="spriteCaption">I’m a big fan of 'owning manhattan' so I appreciate you built a full building haha</figcaption>
     </figure>
   </main>
 
   <section class="ascii-panel" aria-label="Console output">
-    <span id="asciiPanel">I loved you five minutes ago
-I hate you now
-Stop tormenting me</span>
+    <span id="asciiPanel">Oh waw great minds haha
+All out
+Exactly</span>
   </section>
 
   <section class="pillars" aria-label="Echoed quotes">
     <article class="pillar">
-      <p class="quote-line" data-echo-index="0"></p>
+      <p class="quote-line" data-echo-index="0">Can ask my intern to vibe code something if you want</p>
     </article>
     <article class="pillar">
-      <p class="quote-line" data-echo-index="1"></p>
+      <p class="quote-line" data-echo-index="1">I met you</p>
     </article>
     <article class="pillar">
-      <p class="quote-line" data-echo-index="2"></p>
+      <p class="quote-line" data-echo-index="2">Guess I’ll just have to go back to Bruges</p>
     </article>
   </section>
 
@@ -393,6 +393,9 @@ Stop tormenting me</span>
   
   <script>
     const root = document.documentElement;
+    const bodyEl = document.body;
+    const assetsBase = bodyEl.dataset.assetsBase || '.';
+    const cyclesPath = bodyEl.dataset.cycles || 'cycles.json';
     const titleEl = document.getElementById('title');
     const subline = document.getElementById('subline');
     const detail = document.getElementById('detail');
@@ -414,6 +417,16 @@ Stop tormenting me</span>
       if (target) target.textContent = value || '';
     };
 
+    const resolveAssetPath = (path) => {
+      if (!path) return '';
+      if (/^(?:[a-z]+:)?\/\//i.test(path) || path.startsWith('data:') || path.startsWith('/')) {
+        return path;
+      }
+      const base = assetsBase.replace(/\/$/, '');
+      const clean = path.replace(/^\.\//, '').replace(/^\//, '');
+      return `${base ? base + '/' : ''}${clean}`;
+    };
+
     function renderScene(scene) {
       if (!scene) return;
       applyQuote(titleEl, scene.title || 'DIGITAL GAMES');
@@ -429,13 +442,13 @@ Stop tormenting me</span>
       if (scene.background) {
         root.style.setProperty('--hero-background', scene.background);
       }
-      asciiPanel.textContent = (scene.ascii || []).join('\\n');
+      asciiPanel.textContent = (scene.ascii || []).join('\n');
       echoNodes.forEach((node, idx) => {
         node.textContent = scene.echoes && scene.echoes[idx] ? scene.echoes[idx] : '';
       });
       if (scene.image) {
         if (sprite) sprite.classList.remove('is-hidden');
-        sceneImage.src = scene.image;
+        sceneImage.src = resolveAssetPath(scene.image);
         sceneImage.alt = scene.caption || scene.title || 'Digital games still';
         spriteCaption.textContent = scene.caption || '';
         spriteCaption.style.opacity = scene.caption ? '1' : '0.4';
@@ -490,7 +503,7 @@ Stop tormenting me</span>
 
     async function loadCycles() {
       try {
-        const response = await fetch('cycles.json', { cache: 'no-store' });
+        const response = await fetch(cyclesPath, { cache: 'no-store' });
         if (!response.ok) throw new Error('Failed to load cycles data');
         cycles = await response.json();
         renderScene(cycles[pointer]);
