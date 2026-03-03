@@ -133,37 +133,49 @@
       backdrop-filter: blur(2px);
     }
 
-    .hero-audio-link {
+    .hero-audio-toggle {
       position: absolute;
-      top: clamp(1.2rem, 5vw, 2.8rem);
-      right: clamp(1.2rem, 6vw, 3.2rem);
+      top: clamp(1rem, 5vw, 2.6rem);
+      right: clamp(1rem, 6vw, 3rem);
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(231, 242, 255, 0.78);
+      background: rgba(6, 19, 37, 0.68);
       color: #f4fbff;
       text-decoration: none;
-      border: 1px solid rgba(231, 242, 255, 0.78);
-      border-radius: 999px;
-      padding: 0.45rem 1.05rem;
-      font-size: 0.62rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
       text-transform: uppercase;
-      background: rgba(6, 19, 37, 0.68);
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
-      z-index: 2;
+      letter-spacing: 0.16em;
+      font-size: 0.6rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 0 0 1px rgba(120, 177, 238, 0.2) inset;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
 
-    .hero-audio-link::before {
+    .hero-audio-toggle::before {
       content: '';
-      width: 0.4rem;
-      height: 0.4rem;
+      width: 0.45rem;
+      height: 0.45rem;
       border-radius: 50%;
-      background: #8dd0ff;
-      box-shadow: 0 0 12px rgba(141, 208, 255, 0.7);
+      background: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.45);
     }
 
-    .hero-audio-link:focus-visible {
+    .hero-audio-toggle[data-state="playing"] {
+      border-color: rgba(137, 221, 255, 0.95);
+      box-shadow: 0 0 18px rgba(120, 200, 255, 0.4), inset 0 0 0 1px rgba(120, 200, 255, 0.4);
+      background: rgba(8, 27, 49, 0.78);
+    }
+
+    .hero-audio-toggle[data-state="playing"]::before {
+      background: #a2ffd3;
+      box-shadow: 0 0 12px rgba(162, 255, 211, 0.9);
+    }
+
+    .hero-audio-toggle:focus-visible {
       outline: 2px solid rgba(231, 242, 255, 0.9);
       outline-offset: 3px;
     }
@@ -189,9 +201,11 @@
       padding-bottom: 2px;
     }
 
-    .archives-link:hover {
+    .archives-link:hover,
+    .archives-link:focus-visible {
       color: #f6fbff;
       border-bottom-color: #f6fbff;
+      outline: none;
     }
 
     @keyframes drift {
@@ -206,9 +220,10 @@
 
     @media (max-width: 640px) {
       .hud { flex-direction: column; align-items: flex-start; }
-      .hero-audio-link {
+      .hero-audio-toggle {
         position: static;
         margin-top: 1rem;
+        align-self: center;
       }
     }
 
@@ -225,14 +240,176 @@
   </header>
 
   <main class="hero" aria-label="Hard Days Edition hero">
+    <button type="button" class="hero-audio-toggle" data-audio-toggle aria-pressed="false" data-state="idle">Audio</button>
     <div class="hero-content">
       <h1>Good Morning Laura</h1>
     </div>
-    <a class="hero-audio-link" href="../2026-03-03-shoreditch-walk-draft/" title="Open the Shoreditch walk with audio controls" aria-label="Open the Shoreditch walk with audio controls">Audio</a>
   </main>
 
   <footer class="archives">
     <a class="archives-link" href="../../archive.html">LAURARCHIVE</a>
   </footer>
+
+  <audio id="ambience" loop preload="auto" data-src="../2026-03-03-shoreditch-walk-draft/ambient-rain.mp3" hidden></audio>
+
+  <script>
+    (() => {
+      const audioToggle = document.querySelector('[data-audio-toggle]');
+      const audioElement = document.getElementById('ambience');
+      if (!audioToggle) {
+        return;
+      }
+
+      const state = {
+        playing: false,
+        mode: audioElement ? 'element' : 'fallback',
+        fallbackCtx: null,
+        fallbackGain: null,
+      };
+
+      function updateToggle() {
+        audioToggle.dataset.state = state.playing ? 'playing' : 'idle';
+        audioToggle.setAttribute('aria-pressed', state.playing ? 'true' : 'false');
+      }
+
+      function ensureElementSource() {
+        if (!audioElement) return false;
+        if (!audioElement.src) {
+          const src = audioElement.dataset.src;
+          if (src) {
+            audioElement.src = src;
+          } else {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      async function startElement() {
+        if (!audioElement) throw new Error('missing audio element');
+        if (!ensureElementSource()) throw new Error('missing audio source');
+        await audioElement.play();
+      }
+
+      function stopElement() {
+        if (!audioElement) return;
+        audioElement.pause();
+        audioElement.currentTime = 0;
+      }
+
+      function ensureFallbackNodes() {
+        if (state.fallbackCtx) return;
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) throw new Error('AudioContext not supported');
+        const ctx = state.fallbackCtx = new AudioCtx();
+        const bufferSize = 2 * ctx.sampleRate;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const output = buffer.getChannelData(0);
+        let lastOut = 0;
+        for (let i = 0; i < bufferSize; i += 1) {
+          const white = Math.random() * 2 - 1;
+          lastOut = (lastOut + (0.02 * white)) / 1.02;
+          output[i] = lastOut * 0.5;
+        }
+        const source = ctx.createBufferSource();
+        source.buffer = buffer;
+        source.loop = true;
+        const gain = state.fallbackGain = ctx.createGain();
+        gain.gain.value = 0;
+        source.connect(gain).connect(ctx.destination);
+        source.start();
+      }
+
+      async function startFallback() {
+        ensureFallbackNodes();
+        if (state.fallbackCtx.state === 'suspended') {
+          await state.fallbackCtx.resume();
+        }
+        const now = state.fallbackCtx.currentTime;
+        state.fallbackGain.gain.cancelScheduledValues(now);
+        state.fallbackGain.gain.linearRampToValueAtTime(0.35, now + 0.4);
+      }
+
+      function stopFallback() {
+        if (!state.fallbackCtx || !state.fallbackGain) return;
+        const now = state.fallbackCtx.currentTime;
+        state.fallbackGain.gain.cancelScheduledValues(now);
+        state.fallbackGain.gain.linearRampToValueAtTime(0, now + 0.3);
+      }
+
+      async function handleToggle() {
+        if (state.playing) {
+          if (state.mode === 'element') {
+            stopElement();
+          } else {
+            stopFallback();
+          }
+          state.playing = false;
+          updateToggle();
+          return;
+        }
+
+        if (state.mode === 'element') {
+          try {
+            await startElement();
+            state.playing = true;
+            updateToggle();
+            return;
+          } catch (error) {
+            console.warn('Falling back to generated ambience.', error);
+            state.mode = 'fallback';
+          }
+        }
+
+        try {
+          await startFallback();
+          state.playing = true;
+        } catch (error) {
+          console.error('Unable to initialize fallback audio', error);
+        }
+        updateToggle();
+      }
+
+      audioToggle.addEventListener('click', () => {
+        handleToggle();
+      });
+
+      audioElement?.addEventListener('pause', () => {
+        if (state.mode === 'element' && state.playing && audioElement.paused) {
+          state.playing = false;
+          updateToggle();
+        }
+      });
+
+      audioElement?.addEventListener('ended', () => {
+        state.playing = false;
+        updateToggle();
+      });
+
+      audioElement?.addEventListener('error', () => {
+        if (state.mode === 'element') {
+          state.mode = 'fallback';
+          if (state.playing) {
+            state.playing = false;
+            updateToggle();
+          }
+        }
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden && state.playing) {
+          if (state.mode === 'element') {
+            stopElement();
+          } else {
+            stopFallback();
+          }
+          state.playing = false;
+          updateToggle();
+        }
+      });
+
+      updateToggle();
+    })();
+  </script>
 </body>
 </html>
