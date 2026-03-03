@@ -1,0 +1,462 @@
+[
+  {
+    "level": "01",
+    "timestamp": "01:43 A.M.",
+    "accent": "#f3ff20",
+    "background": "radial-gradient(130% 90% at 50% 0%, rgba(106, 178, 255, 0.16), rgba(7, 16, 31, 0) 64%), linear-gradient(180deg, #0f2e57 0%, #15467f 48%, #0a1d3a 100%)",
+    "title": "I loved you five minutes ago",
+    "subline": "I hate you now",
+    "detail": "Stop tormenting me",
+    "callout": "You are more interesting",
+    "micro": "Than your LinkedIn",
+    "ascii": [
+      "I loved you five minutes ago",
+      "I hate you now",
+      "Stop tormenting me"
+    ],
+    "echoes": [
+      "Please breathe",
+      "You seem far too young and beautiful",
+      "What a charmer"
+    ],
+    "image": "../../assets/digital-games/digital-game-user-01.png",
+    "caption": "I think I met you properly"
+  },
+  {
+    "level": "02",
+    "timestamp": "01:20 A.M.",
+    "accent": "#2dff80",
+    "background": "linear-gradient(135deg, #041822 0%, #0b3b2b 45%, #00100a 100%)",
+    "title": "Please breathe",
+    "subline": "We are 100% aligned",
+    "detail": "Guess I'll just have to go back to Bruges",
+    "callout": "Watch the movie!!",
+    "micro": "Says the guy living in Ny!",
+    "ascii": [
+      "Please breathe",
+      "We are 100% aligned",
+      "Guess I'll just have to go back to Bruges"
+    ],
+    "echoes": [
+      "NY is legendary",
+      "Great architecture",
+      "Better than my LinkedIn could ever portray!"
+    ],
+    "image": "../../assets/digital-games/digital-game-user-04.png",
+    "caption": "Please remind me the movie"
+  },
+  {
+    "level": "03",
+    "timestamp": "10:38 P.M.",
+    "accent": "#ffc857",
+    "background": "linear-gradient(120deg, #120f00 0%, #2f1a00 50%, #000000 100%)",
+    "title": "Wait for me at least",
+    "subline": "No rush I'll be here for a while :)",
+    "detail": "Let me meet you half way",
+    "callout": "Oki text me when you are almost here",
+    "micro": "See you soonnnnn",
+    "ascii": [
+      "Wait for me at least",
+      "No rush I'll be here for a while :)",
+      "Let me meet you half way"
+    ],
+    "echoes": [
+      "Cant stop thinking about you",
+      "Meet me here",
+      "I was starting to have withdrawal"
+    ],
+    "image": "../../assets/digital-games/digital-game-user-02.png",
+    "caption": "I will be slightly later than you"
+  },
+  {
+    "level": "04",
+    "timestamp": "11:29 P.M.",
+    "accent": "#ff3d48",
+    "background": "linear-gradient(140deg, #060017 0%, #280046 45%, #57005b 100%)",
+    "title": "I was dreaming about you",
+    "subline": "And I opened my eyes and this last 5 minutes began",
+    "detail": "As if you were dreaming about me",
+    "callout": "Go back to bed!",
+    "micro": "3hrs until touchdown",
+    "ascii": [
+      "I was dreaming about you",
+      "As if you were dreaming about me",
+      "3hrs until touchdown"
+    ],
+    "echoes": [
+      "I was sleeping",
+      "And dreams",
+      "Now you're just recollecting dream"
+    ],
+    "image": "../../assets/digital-games/digital-game-user-06.png",
+    "caption": "How long till you land"
+  },
+  {
+    "level": "05",
+    "timestamp": "11:49 P.M.",
+    "accent": "#ff9f1c",
+    "background": "linear-gradient(140deg, #2b0101 0%, #601403 50%, #120200 100%)",
+    "title": "Then I said I love you",
+    "subline": "And you said you love the sun",
+    "detail": "You said please stop guessing what I want",
+    "callout": "You: I know what I want",
+    "micro": "And dreams",
+    "ascii": [
+      "Then I said I love you",
+      "And you said you love the sun",
+      "You said please stop guessing what I want"
+    ],
+    "echoes": [
+      "Me: you have no idea what you really want",
+      "Now you're just recollecting dream",
+      "But I will do anything to see you and be quietly and peacefully in love with you then"
+    ],
+    "image": "../../assets/digital-games/digital-game-user-03.png",
+    "caption": "You like songs and music right"
+  },
+  {
+    "level": "06",
+    "timestamp": "11:28 P.M.",
+    "accent": "#d5a6ff",
+    "background": "linear-gradient(150deg, #050505 0%, #121212 45%, #400b52 100%)",
+    "title": "Love is work",
+    "subline": "Wishful thinking beautiful",
+    "detail": "The danger is it is intense and it fucks up our lives because it is real",
+    "callout": "There is zero chance and zero surprise when we meeet",
+    "micro": "I want to be with you",
+    "ascii": [
+      "Love is work",
+      "Wishful thinking beautiful",
+      "I want to be with you"
+    ],
+    "echoes": [
+      "Wouldn't that be so easy as the resolution to your current obsession?",
+      "No",
+      "That would be tragic and unnecessary"
+    ],
+    "image": "../../assets/digital-games/digital-game-user-05.png",
+    "caption": "Or maybe we have dinner"
+  },
+  {
+    "level": "07",
+    "timestamp": "11:30 P.M.",
+    "accent": "#ff5af1",
+    "background": "linear-gradient(150deg, #1b0012 0%, #4d0030 50%, #090007 100%)",
+    "title": "And love is a drug",
+    "subline": "I like the intensity",
+    "detail": "It's fun",
+    "callout": "Maybe I just show up at your next event",
+    "micro": "Unless you only want to live of my pictures forever",
+    "ascii": [
+      "And love is a drug",
+      "I like the intensity",
+      "It's fun"
+    ],
+    "echoes": [
+      "You are the opposite - nearly an OCD type",
+      "So many ways to be in the same room",
+      "Then you don't know me"
+    ],
+    "image": "../../assets/digital-games/digital-game-user-07.png",
+    "caption": "Then you don't know me"
+  },
+  {
+    "level": "08",
+    "timestamp": "10:23 P.M.",
+    "accent": "#50c7ff",
+    "background": "linear-gradient(150deg, #00142a 0%, #012b49 50%, #053a63 100%)",
+    "title": "I promise I'll stay awake forever",
+    "subline": "Bother me now",
+    "detail": "Because I'm about to burst",
+    "callout": "Just seeing these words",
+    "micro": "Just absolute turmoil in my head",
+    "ascii": [
+      "I promise I'll stay awake forever",
+      "Bother me now",
+      "Just seeing these words"
+    ],
+    "echoes": [
+      "Where to start",
+      "I'm here",
+      "Are you crying now?"
+    ],
+    "image": "../../assets/digital-games/digital-game-user-07.png",
+    "caption": "I know"
+  },
+  {
+    "level": "09",
+    "timestamp": "05:20 P.M.",
+    "accent": "#ffe066",
+    "background": "linear-gradient(150deg, #1d1400 0%, #413000 50%, #070300 100%)",
+    "title": "Sun on my skin",
+    "subline": "I want hot sex after walking around naked",
+    "detail": "Making you breakfast",
+    "callout": "On my breast",
+    "micro": "Everywhere",
+    "ascii": [
+      "Sun on my skin",
+      "I want hot sex after walking around naked",
+      "Making you breakfast"
+    ],
+    "echoes": [
+      "Tell me yours",
+      "What are your kinks",
+      "Enlighten me"
+    ],
+    "image": "../../assets/digital-games/digital-game-user-01.png",
+    "caption": "Youre not telling me"
+  },
+  {
+    "level": "10",
+    "timestamp": "05:51 A.M.",
+    "accent": "#8ab4ff",
+    "background": "linear-gradient(160deg, #01060f 0%, #0b1a29 50%, #112941 100%)",
+    "title": "Rainy church time",
+    "subline": "First time since SF",
+    "detail": "Maybe I'll go up in flames when entering",
+    "callout": "It's very wet and cold",
+    "micro": "Next birthday big rooftop party!!",
+    "ascii": [
+      "Rainy church time",
+      "First time since SF",
+      "Maybe I'll go up in flames when entering"
+    ],
+    "echoes": [
+      "So much light!",
+      "Does it have a rooftop/terrace too?",
+      "Will indeed be no problem"
+    ],
+    "image": "../../assets/digital-games/digital-game-user-06.png",
+    "caption": "It's actually a great place if you want to eat something"
+  },
+  {
+    "level": "11",
+    "timestamp": "08:16 A.M.",
+    "accent": "#ff5c8a",
+    "background": "linear-gradient(150deg, #1a0010 0%, #3f0125 45%, #050005 100%)",
+    "title": "See you soonnnnn",
+    "subline": "Oki text me when you are almost here",
+    "detail": "And just fyi maybe dont make out with me in front of my office",
+    "callout": "Let me meet you half way",
+    "micro": "I will be slightly later than you",
+    "ascii": [
+      "See you soonnnnn",
+      "Oki text me when you are almost here",
+      "Let me meet you half way"
+    ],
+    "echoes": [
+      "Meet me here",
+      "But I walk faster anyway",
+      "It's actually a great place if you want to eat something"
+    ],
+    "image": "../../assets/digital-games/digital-game-user-05.png",
+    "caption": "It's actually a great place if you want to eat something"
+  },
+  {
+    "level": "12",
+    "timestamp": "11:04 A.M.",
+    "accent": "#9be9ff",
+    "background": "linear-gradient(150deg, #001323 0%, #00384d 50%, #001219 100%)",
+    "title": "It will be the end of a beautiful love story",
+    "subline": "My beloved is cute",
+    "detail": "Say the name of the beloved? (KInd of an old school King James Bible way of talking no?)",
+    "callout": "My love for Layla has no end,",
+    "micro": "My beloved forever",
+    "ascii": [
+      "My beloved forever",
+      "My beloved is cute",
+      "It will be the end of a beautiful love story"
+    ],
+    "echoes": [
+      "My beloved is cute",
+      "It will be the end of a beautiful love story",
+      "I will tell you I love you because I will be exploding from everything"
+    ],
+    "image": null,
+    "caption": ""
+  },
+  {
+    "level": "13",
+    "timestamp": "06:30 P.M.",
+    "accent": "#a29bfe",
+    "background": "linear-gradient(150deg, #07001a 0%, #1f0d3b 50%, #030007 100%)",
+    "title": "Good night. I have a lot to dream about.",
+    "subline": "Tonight was everything one could wish for",
+    "detail": "Arrived",
+    "callout": "Hi let's go?",
+    "micro": "When you are ready you can find me right?",
+    "ascii": [
+      "Good night. I have a lot to dream about.",
+      "Tonight was everything one could wish for",
+      "Arrived"
+    ],
+    "echoes": [
+      "OK!",
+      "Hi",
+      "Hi let's go?"
+    ],
+    "image": "../../assets/digital-games/digital-game-user-07.png",
+    "caption": "Tonight was everything one could wish for"
+  },
+  {
+    "level": "14",
+    "timestamp": "03:13 P.M.",
+    "accent": "#ff6b6b",
+    "background": "linear-gradient(150deg, #2a0000 0%, #4d0505 50%, #060000 100%)",
+    "title": "And missing you intensely",
+    "subline": "I was starting to have withdrawal",
+    "detail": "Well call me if you are alone now",
+    "callout": "Really",
+    "micro": "Very strange",
+    "ascii": [
+      "And missing you intensely",
+      "I was starting to have withdrawal",
+      "Well call me if you are alone now"
+    ],
+    "echoes": [
+      "He came back to talk",
+      "A very wise man indeed",
+      "Hahaha"
+    ],
+    "image": "../../assets/digital-games/digital-game-user-03.png",
+    "caption": "Yes"
+  },
+  {
+    "level": "15",
+    "timestamp": "07:53 P.M.",
+    "accent": "#b2f2ff",
+    "background": "linear-gradient(150deg, #001012 0%, #002d36 50%, #010607 100%)",
+    "title": "You can't remember me",
+    "subline": "Still can't believe you thought I was 40",
+    "detail": "It's my cute business shirt",
+    "callout": "Don't want you to see that thing ever again",
+    "micro": "Why you being responsible",
+    "ascii": [
+      "You can't remember me",
+      "Still can't believe you thought I was 40",
+      "It's my cute business shirt"
+    ],
+    "echoes": [
+      "It's like we met on the phone",
+      "Old Laura",
+      "She is beautiful"
+    ],
+    "image": "../../assets/digital-games/digital-game-user-04.png",
+    "caption": "Would def bring it to NY as cute going out outfit"
+  },
+  {
+    "level": "16",
+    "timestamp": "07:55 P.M.",
+    "accent": "#ffd6ff",
+    "background": "linear-gradient(150deg, #13000d 0%, #330022 50%, #050003 100%)",
+    "title": "I mainly saw your eyes and heard what you said",
+    "subline": "It was dark",
+    "detail": "It is cute!!",
+    "callout": "Sophisticated hair and face",
+    "micro": "Ridiculous",
+    "ascii": [
+      "I mainly saw your eyes and heard what you said",
+      "It was dark",
+      "It is cute!!"
+    ],
+    "echoes": [
+      "Business pants",
+      "Colorful shirt",
+      "Which was all nothing and jokes"
+    ],
+    "image": "../../assets/digital-games/digital-game-user-05.png",
+    "caption": "Ursula van der Leyen is also hot"
+  },
+  {
+    "level": "17",
+    "timestamp": "05:59 A.M.",
+    "accent": "#f7aef8",
+    "background": "linear-gradient(150deg, #1c1000 0%, #3c2804 50%, #0b0500 100%)",
+    "title": "Id love to meet you for coffee!",
+    "subline": "Look no stress you don't have to meet me for coffee",
+    "detail": "Do your thing",
+    "callout": "I'm not going to be tired",
+    "micro": "Remember I sleep",
+    "ascii": [
+      "Id love to meet you for coffee!",
+      "Look no stress you don't have to meet me for coffee",
+      "Do your thing"
+    ],
+    "echoes": [
+      "Whatttt",
+      "Why you blocking this",
+      "You tell me tomorrow midday how you feel"
+    ],
+    "image": "../../assets/digital-games/digital-game-user-02.png",
+    "caption": "You tell me tomorrow midday how you feel"
+  },
+  {
+    "level": "18",
+    "timestamp": "07:46 A.M.",
+    "accent": "#74c0fc",
+    "background": "linear-gradient(150deg, #021627 0%, #032c4b 50%, #050f16 100%)",
+    "title": "look you love me",
+    "subline": "come and join this insane life we are going to have togehter",
+    "detail": "and yes we are intesne but we love eacht other passionately and deeply",
+    "callout": "and leave your life of boring expected behaviour behind",
+    "micro": "theres this person that comes (back) into her life",
+    "ascii": [
+      "look you love me",
+      "come and join this insane life we are going to have togehter",
+      "and yes we are intesne but we love eacht other passionately and deeply"
+    ],
+    "echoes": [
+      "adn they have this whirlwind romance",
+      "and he is like",
+      "Pick up"
+    ],
+    "image": null,
+    "caption": ""
+  },
+  {
+    "level": "19",
+    "timestamp": "05:39 P.M.",
+    "accent": "#ff85a1",
+    "background": "linear-gradient(150deg, #2b0018 0%, #570036 50%, #0a0006 100%)",
+    "title": "You are amazing. I can't live without you.",
+    "subline": "I can't live with you like this either",
+    "detail": "I haven't slept",
+    "callout": "My alarm already went off",
+    "micro": "One mind",
+    "ascii": [
+      "You are amazing. I can't live without you.",
+      "I can't live with you like this either",
+      "I love love your words"
+    ],
+    "echoes": [
+      "Two bodies",
+      "Insanity",
+      "I love love your words"
+    ],
+    "image": "../../assets/digital-games/digital-game-user-07.png",
+    "caption": "Go to bed"
+  },
+  {
+    "level": "20",
+    "timestamp": "04:29 P.M.",
+    "accent": "#ffde59",
+    "background": "linear-gradient(150deg, #110900 0%, #342000 50%, #050200 100%)",
+    "title": "Were going to explode",
+    "subline": "Its great - my boobs are enormous right now",
+    "detail": "So hot",
+    "callout": "You are soo hot",
+    "micro": "I will very much fuck you in all the ways and in all the places",
+    "ascii": [
+      "Were going to explode",
+      "Its great - my boobs are enormous right now",
+      "So hot"
+    ],
+    "echoes": [
+      "You are soo hot",
+      "Trust",
+      "Couldnt agree more"
+    ],
+    "image": "../../assets/digital-games/digital-game-user-07.png",
+    "caption": "So hot"
+  }
+]
