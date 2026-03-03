@@ -159,6 +159,38 @@
       letter-spacing: 0.08em;
     }
 
+    .sprite {
+      position: absolute;
+      top: clamp(1rem, 7vh, 4rem);
+      right: clamp(1rem, 5vw, 4rem);
+      width: min(260px, 32vw);
+      padding: 0.65rem;
+      border-radius: 1.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(0, 0, 0, 0.6);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      pointer-events: none;
+    }
+
+    .sprite img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 0.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.55);
+    }
+
+    .sprite figcaption {
+      margin: 0.35rem 0 0;
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(245, 245, 245, 0.72);
+    }
+
     .ascii-panel {
       margin: 2rem clamp(1rem, 6vw, 6rem);
       border: 1px solid rgba(0, 255, 166, 0.4);
@@ -221,6 +253,10 @@
       letter-spacing: 0.18em;
       font-size: 0.64rem;
       background: #030303;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      align-items: center;
     }
 
     .archives-list {
@@ -238,6 +274,12 @@
       text-decoration: none;
       border-bottom: 1px solid rgba(255, 255, 255, 0.25);
       padding-bottom: 2px;
+    }
+
+    .archives-list a:hover,
+    .archives-list a:focus-visible {
+      border-bottom-color: var(--accent);
+      outline: none;
     }
 
     .archives-link {
@@ -259,12 +301,6 @@
       outline: none;
     }
 
-    .archives-list a:hover,
-    .archives-list a:focus-visible {
-      border-bottom-color: var(--accent);
-      outline: none;
-    }
-
     @keyframes sweep {
       from { transform: translate3d(-4%, -3%, 0) rotate(2deg); }
       to { transform: translate3d(4%, 3%, 0) rotate(8deg); }
@@ -280,6 +316,13 @@
       .detail { letter-spacing: 0.22em; }
       .pillars { margin: 0 1rem 2rem; }
       .ascii-panel { margin: 2rem 1rem; }
+      .sprite {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 100%;
+        margin-top: 1.5rem;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -306,6 +349,10 @@
       <strong id="callout">WAIT FOR ME AT LEAST.</strong>
       <p id="microcopy">And missing you intensely.</p>
     </div>
+    <figure class="sprite" aria-hidden="true">
+      <img id="sceneImage" src="" alt="" decoding="async" loading="lazy" />
+      <figcaption id="spriteCaption"></figcaption>
+    </figure>
   </main>
 
   <section class="ascii-panel" aria-label="Console output">
@@ -351,79 +398,353 @@ Wait for me at least.</span>
     const level = document.getElementById('level');
     const clock = document.getElementById('clock');
     const archiveList = document.getElementById('archiveList');
-
     const manifestPath = document.body.dataset.manifest || '../manifest.json';
     const archivesBase = document.body.dataset.archivesBase || '..';
+    const sprite = document.querySelector('.sprite');
+    const sceneImage = document.getElementById('sceneImage');
+    const spriteCaption = document.getElementById('spriteCaption');
 
     const cycles = [
       {
         level: '01',
-        timestamp: '10:03:13 A.M.',
+        timestamp: '01:07 A.M.',
         accent: '#f3ff20',
         title: 'DIGITAL GAMES',
         background: `radial-gradient(130% 90% at 50% 0%, rgba(106, 178, 255, 0.16), rgba(7, 16, 31, 0) 64%),
         linear-gradient(180deg, #0f2e57 0%, #15467f 48%, #0a1d3a 100%)`,
-        subline: 'I loved you five minutes ago.',
+        subline: 'I loved you five minutes ago and typed it before the buffering finished.',
         detail: 'Please breathe.',
         callout: 'WAIT FOR ME AT LEAST.',
         micro: 'And missing you intensely.',
-        ascii: `I loved you five minutes ago
-Please breathe
-Wait for me at least.`,
+        ascii: `I loved you five minutes ago\nPlease breathe\nWait for me at least.`,
         vector: 'The beauty of life are the constraints of it.',
-        mood: 'I have a deep resonant hug to offer you.',
-        audio: 'Blue skies, damn.'
+        mood: 'Private cabinet of glitch art and half-built consoles.',
+        audio: 'Blue skies, damn.',
+        image: '../../assets/digital-games/glitch-grid-01.png',
+        caption: 'Wireframe lattice capture - CUQ start screen.'
       },
       {
         level: '02',
-        timestamp: '02:54:44 P.M.',
+        timestamp: '01:20 A.M.',
         accent: '#2dff80',
         title: 'Please breathe.',
-        background: 'linear-gradient(140deg, #050505 0%, #092133 45%, #03301e 100%)',
-        subline: 'I was dreaming about you.',
-        detail: 'You said you love the sun.',
-        callout: 'LOVE IS WORK.',
-        micro: 'Love is a drug.',
-        ascii: `I mainly saw your eyes
-and heard what you said
-You can't remember me.`,
-        vector: 'I don\'t think you understand what a huge deal that was for me back then.',
-        mood: 'And yes we are intense but we love each other passionately and deeply.',
-        audio: 'Talk soon.'
+        background: 'linear-gradient(135deg, #041822 0%, #0b3b2b 45%, #00100a 100%)',
+        subline: '"Please breathe," you typed at 1:20 AM like the modem could hear it.',
+        detail: 'Hold still for two beats.',
+        callout: 'PLEASE BREATHE.',
+        micro: '1:20 AM ping acknowledged.',
+        ascii: `[01] please breathe\n[02] please breathe\n[03] please breathe`,
+        vector: 'X:51.507 / Y:-0.127',
+        mood: 'Receiver mode, palms over the keyboard.',
+        audio: 'Fan noise + status LEDs.',
+        image: '../../assets/digital-games/ascii-stream-02.png',
+        caption: 'Screenshot: green ASCII flood.'
       },
       {
         level: '03',
-        timestamp: '11:11:07 P.M.',
-        accent: '#ff3d48',
-        title: 'You said you love the sun.',
-        background: 'linear-gradient(150deg, #13030f 0%, #370a1f 45%, #54092c 100%)',
-        subline: 'I would love for you to listen to me.',
-        detail: 'You love me.',
-        callout: 'You lack experience and fall in love easily.',
-        micro: 'Would love to meet you for coffee.',
-        ascii: `Sun on my skin
-Rainy church time
-Miss you already.`,
-        vector: 'I love love your words.',
-        mood: 'I mainly saw your eyes and heard what you said.',
-        audio: 'I love talking to you.'
+        timestamp: '01:33 A.M.',
+        accent: '#ffc857',
+        title: 'Wait for me at least.',
+        background: 'linear-gradient(120deg, #120f00 0%, #2f1a00 50%, #000000 100%)',
+        subline: '"Wait for me at least" kept looping while the gate numbers shuffled.',
+        detail: 'Hold the checkpoint.',
+        callout: 'WAIT FOR ME.',
+        micro: 'Boarding countdown 00:59.',
+        ascii: `wait > wait > wait\ngate: hold\ndepart: later`,
+        vector: 'Gate B14 - 00:59 left.',
+        mood: 'Departure board hum meets heart monitor.',
+        audio: 'PA chimes layered with your DM tone.',
+        image: '../../assets/digital-games/vector-field.png',
+        caption: 'Screenshot: amber vector grid.'
       },
       {
         level: '04',
-        timestamp: '05:42:29 A.M.',
-        accent: '#00a2ff',
-        title: 'We can dream of each other.',
-        background: 'linear-gradient(150deg, #01030c 0%, #041637 50%, #082d55 100%)',
-        subline: 'We can dream of each other.',
-        detail: 'I promise I\'ll stay awake forever.',
-        callout: 'JUST REMEMBER.',
-        micro: 'See you soon.',
-        ascii: `Miss Zimbabwe is arriving soon
-See you soonnnnn
-Good night, I have a lot to dream about.`,
-        vector: 'I have a lot to dream about.',
-        mood: 'The flat in front definitely has a lot of sunlight.',
-        audio: 'Good night.'
+        timestamp: '01:47 A.M.',
+        accent: '#ff3d48',
+        title: 'I was dreaming about you.',
+        background: 'linear-gradient(140deg, #060017 0%, #280046 45%, #57005b 100%)',
+        subline: 'I was dreaming about you and woke up exactly when your bubble lit.',
+        detail: 'Keep the window open.',
+        callout: 'I WAS DREAMING ABOUT YOU.',
+        micro: 'REM log uploaded.',
+        ascii: `dream> you\nwake> ping\nloop> repeat`,
+        vector: 'X:40.712 / Y:-73.989',
+        mood: 'Half-asleep, half neon.',
+        audio: 'Muted playlist + typing.',
+        image: '../../assets/digital-games/signal-pigeon.png',
+        caption: 'Screenshot: timestamped pigeon tracker.'
+      },
+      {
+        level: '05',
+        timestamp: '01:50 A.M.',
+        accent: '#ff9f1c',
+        title: 'You said you love the sun.',
+        background: 'linear-gradient(140deg, #2b0101 0%, #601403 50%, #120200 100%)',
+        subline: 'You said you love the sun and I believed the pixelated glow.',
+        detail: 'Aim toward light.',
+        callout: 'YOU SAID YOU LOVE THE SUN.',
+        micro: 'Sun worship queued.',
+        ascii: `sun>>>\nlove>>>\neyes>>>`,
+        vector: 'X:34.693 / Y:135.502',
+        mood: 'Retro HUD warmed with sodium vapor.',
+        audio: 'Hiss of CRT plus gulls.',
+        image: '../../assets/digital-games/wireframe-gold.png',
+        caption: 'Screenshot: gold wireframe tunnel.'
+      },
+      {
+        level: '06',
+        timestamp: '02:11 A.M.',
+        accent: '#d5a6ff',
+        title: 'Love is work.',
+        background: 'linear-gradient(150deg, #050505 0%, #121212 45%, #400b52 100%)',
+        subline: 'Love is work, you wrote, like a systems prompt I needed to obey.',
+        detail: 'Reboot feelings.',
+        callout: 'LOVE IS WORK.',
+        micro: 'Manual override granted.',
+        ascii: `love = work\nwork = loop\nloop = us`,
+        vector: 'Team chat: 04 - priority high.',
+        mood: 'Soft doctrine overlined with code.',
+        audio: 'Distant Zoom ringtone.',
+        image: '../../assets/digital-games/retro-console.png',
+        caption: 'Screenshot: console HUD with magenta code.'
+      },
+      {
+        level: '07',
+        timestamp: '02:25 A.M.',
+        accent: '#ff5af1',
+        title: 'Love is a drug.',
+        background: 'linear-gradient(150deg, #1b0012 0%, #4d0030 50%, #090007 100%)',
+        subline: 'Love is a drug, you admitted, and I felt the latency spike.',
+        detail: 'Dose carefully.',
+        callout: 'LOVE IS A DRUG.',
+        micro: 'Side effects: gleam + blur.',
+        ascii: `love.exe\ndose ++\nsidefx ??`,
+        vector: 'Chemistry log 0027ug hope.',
+        mood: 'Subwoofer heartbeat with neon edges.',
+        audio: 'Mylar bag crinkle + synth.',
+        image: '../../assets/digital-games/grid-blue.png',
+        caption: 'Screenshot: cyan grid pulse.'
+      },
+      {
+        level: '08',
+        timestamp: '02:34 A.M.',
+        accent: '#50c7ff',
+        title: 'I promise I\'ll stay awake forever.',
+        background: 'linear-gradient(150deg, #00142a 0%, #012b49 50%, #053a63 100%)',
+        subline: 'I promise I\'ll stay awake forever, even if forever is until the next gate.',
+        detail: 'No sleep mode.',
+        callout: 'STAY AWAKE.',
+        micro: 'Diet Coke engaged.',
+        ascii: `awake++\nawake++\nawake++`,
+        vector: 'Caffeine register - infinite.',
+        mood: 'Blue tunnel with breath fog.',
+        audio: 'Can tab snap + typewriter keys.',
+        image: '../../assets/digital-games/scope-dream.png',
+        caption: 'Screenshot: oscilloscope bloom.'
+      },
+      {
+        level: '09',
+        timestamp: '02:50 A.M.',
+        accent: '#ffe066',
+        title: 'Sun on my skin.',
+        background: 'linear-gradient(150deg, #1d1400 0%, #413000 50%, #070300 100%)',
+        subline: 'Sun on my skin became a command, not a forecast.',
+        detail: 'Expose for warmth.',
+        callout: 'SUN ON MY SKIN.',
+        micro: 'Light therapy pending.',
+        ascii: `sun>>bed\nbed>>sun\nloop`,
+        vector: 'Latitude 51deg - craving photons.',
+        mood: 'Amber mesh overlaying velvet black.',
+        audio: 'Window blind rattles.',
+        image: '../../assets/digital-games/glitch-grid-01.png',
+        caption: 'Screenshot: yellow mesh repeat.'
+      },
+      {
+        level: '10',
+        timestamp: '03:05 A.M.',
+        accent: '#8ab4ff',
+        title: 'Rainy church time.',
+        background: 'linear-gradient(160deg, #01060f 0%, #0b1a29 50%, #112941 100%)',
+        subline: 'Rainy church time hit my phone with incense and drizzle.',
+        detail: 'Let the nave echo.',
+        callout: 'RAINY CHURCH TIME.',
+        micro: 'Bell towers sync.',
+        ascii: `rain rain\namen amen\nping ping`,
+        vector: 'X:51.515 / Y:-0.075',
+        mood: 'Midnight mass re-skinned as HUD.',
+        audio: 'Organ pad under rainfall.',
+        image: '../../assets/digital-games/signal-pigeon.png',
+        caption: 'Screenshot: dotted tracking grid.'
+      },
+      {
+        level: '11',
+        timestamp: '03:28 A.M.',
+        accent: '#ff5c8a',
+        title: 'See you soonnnnn.',
+        background: 'linear-gradient(150deg, #1a0010 0%, #3f0125 45%, #050005 100%)',
+        subline: '"See you soonnnnn" stretched the n to infinity and I clutched my phone.',
+        detail: 'Extend the vowel.',
+        callout: 'SEE YOU SOONNNNN.',
+        micro: 'Hold the tunnel.',
+        ascii: `soon>>>>>>>\nsoon>>>>>>>\nsoon`,
+        vector: 'Estimated arrival 02:54 PM.',
+        mood: 'Rose noise over midnight velvet.',
+        audio: 'Carriage brakes + breath.',
+        image: '../../assets/digital-games/retro-console.png',
+        caption: 'Screenshot: signal relay console.'
+      },
+      {
+        level: '12',
+        timestamp: '03:39 A.M.',
+        accent: '#9be9ff',
+        title: 'Blue skies damn.',
+        background: 'linear-gradient(150deg, #001323 0%, #00384d 50%, #001219 100%)',
+        subline: 'Blue skies damn, you sighed, toggling between windows and weather.',
+        detail: 'Update the wallpaper.',
+        callout: 'BLUE SKIES DAMN.',
+        micro: 'Sky cache refreshed.',
+        ascii: `blue blue blue\ndamn damn damn`,
+        vector: 'Satellite feed 0004.',
+        mood: 'Cobalt gradient with glitch bloom.',
+        audio: 'Looped takeoff ambience.',
+        image: '../../assets/digital-games/grid-blue.png',
+        caption: 'Screenshot: cyan beam grid.'
+      },
+      {
+        level: '13',
+        timestamp: '04:06 A.M.',
+        accent: '#a29bfe',
+        title: 'I have a lot to dream about.',
+        background: 'linear-gradient(150deg, #07001a 0%, #1f0d3b 50%, #030007 100%)',
+        subline: '"Good night. I have a lot to dream about." became the exit key.',
+        detail: 'Queue the dream list.',
+        callout: 'LOT TO DREAM ABOUT.',
+        micro: 'Night mode engaged.',
+        ascii: `dream: queue\ndream: queue\ndream: queue`,
+        vector: 'REM stack: 04 entries.',
+        mood: 'Violet hush with faint gridlines.',
+        audio: 'Soft fan + memory tape.',
+        image: '../../assets/digital-games/scope-dream.png',
+        caption: 'Screenshot: oscilloscope bloom.'
+      },
+      {
+        level: '14',
+        timestamp: '04:33 A.M.',
+        accent: '#ff6b6b',
+        title: 'Missing you intensely.',
+        background: 'linear-gradient(150deg, #2a0000 0%, #4d0505 50%, #060000 100%)',
+        subline: '"And missing you intensely" came through like a red alert.',
+        detail: 'Acknowledge the flare.',
+        callout: 'MISSING YOU INTENSELY.',
+        micro: 'Alert cleared.',
+        ascii: `miss++\nmiss++\nmiss++`,
+        vector: 'Heartbeat backlog: 12.',
+        mood: 'Infrared bloom with scanlines.',
+        audio: 'Monitor beep + thunder.',
+        image: '../../assets/digital-games/wireframe-gold.png',
+        caption: 'Screenshot: gold beam detail.'
+      },
+      {
+        level: '15',
+        timestamp: '04:42 A.M.',
+        accent: '#b2f2ff',
+        title: 'You can\'t remember me.',
+        background: 'linear-gradient(150deg, #001012 0%, #002d36 50%, #010607 100%)',
+        subline: '"You can\'t remember me," you teased, knowing I only saw your eyes.',
+        detail: 'Rebuild the memory.',
+        callout: 'YOU CAN\'T REMEMBER ME.',
+        micro: 'Cache restored.',
+        ascii: `remember?\nremember?\nremember.`,
+        vector: 'Memory slot 07 unlocked.',
+        mood: 'Teal pulses with static.',
+        audio: 'Tape rewind + laugh.',
+        image: '../../assets/digital-games/ascii-stream-02.png',
+        caption: 'Screenshot: green glyph repeat.'
+      },
+      {
+        level: '16',
+        timestamp: '04:55 A.M.',
+        accent: '#ffd6ff',
+        title: 'I mainly saw your eyes.',
+        background: 'linear-gradient(150deg, #13000d 0%, #330022 50%, #050003 100%)',
+        subline: '"I mainly saw your eyes" rewired every pixel on screen.',
+        detail: 'Zoom into pupils.',
+        callout: 'I MAINLY SAW YOUR EYES.',
+        micro: 'Retina focus locked.',
+        ascii: `eyes eyes\neyes eyes\neyes`,
+        vector: 'Gaze tracker: 99.7%.',
+        mood: 'Crimson glass with film grain.',
+        audio: 'Breathover + pen click.',
+        image: '../../assets/digital-games/retro-console.png',
+        caption: 'Screenshot: magenta scope field.'
+      },
+      {
+        level: '17',
+        timestamp: '05:06 A.M.',
+        accent: '#f7aef8',
+        title: 'Would love to meet you for coffee.',
+        background: 'linear-gradient(150deg, #1c1000 0%, #3c2804 50%, #0b0500 100%)',
+        subline: '"Would love to meet you for coffee!" arrived while you were still on the train.',
+        detail: 'Reserve the booth.',
+        callout: 'MEET FOR COFFEE.',
+        micro: 'Farringdon ETA five minutes.',
+        ascii: `coffee++\ncoffee++\ncoffee++`,
+        vector: 'Latte index: +2 foams.',
+        mood: 'Steam plus neon reflections.',
+        audio: 'Milk frother hiss.',
+        image: '../../assets/digital-games/vector-field.png',
+        caption: 'Screenshot: RGB grid overlay.'
+      },
+      {
+        level: '18',
+        timestamp: '05:14 A.M.',
+        accent: '#74c0fc',
+        title: 'Still wet from London rain.',
+        background: 'linear-gradient(150deg, #021627 0%, #032c4b 50%, #050f16 100%)',
+        subline: 'Still wet from London rain landed as both warning and brag.',
+        detail: 'Towel off the interface.',
+        callout: 'STILL WET FROM LONDON RAIN.',
+        micro: 'Umbrella emoji x4.',
+        ascii: `rain rain rain\ncoat coat coat\n<3 <3 <3`,
+        vector: 'Weather API: soaked.',
+        mood: 'Slick pavement glow.',
+        audio: 'Shoes squeak + drizzle.',
+        image: '../../assets/digital-games/signal-pigeon.png',
+        caption: 'Screenshot: dotted rain grid.'
+      },
+      {
+        level: '19',
+        timestamp: '05:21 A.M.',
+        accent: '#ff85a1',
+        title: 'I love love your words.',
+        background: 'linear-gradient(150deg, #2b0018 0%, #570036 50%, #0a0006 100%)',
+        subline: '"I love love your words" rewired the HUD to blush.',
+        detail: 'Archive the compliment.',
+        callout: 'I LOVE LOVE YOUR WORDS.',
+        micro: 'Compliment stored in ROM.',
+        ascii: `love love love\nwords words words\nkeep keep keep`,
+        vector: 'Memory slot 11 glowing.',
+        mood: 'Rose static with glitter noise.',
+        audio: 'Soft gasp + pencil scribble.',
+        image: '../../assets/digital-games/scope-dream.png',
+        caption: 'Screenshot: magenta radar haze.'
+      },
+      {
+        level: '20',
+        timestamp: '05:31 A.M.',
+        accent: '#ffde59',
+        title: 'Miss Zimbabwe is arriving soon.',
+        background: 'linear-gradient(150deg, #110900 0%, #342000 50%, #050200 100%)',
+        subline: '"Miss Zimbabwe is arriving soon with her crew" felt like final boss copy.',
+        detail: 'Prep the arrivals hall.',
+        callout: 'MISS ZIMBABWE IS ARRIVING SOON.',
+        micro: 'Crew status: inbound.',
+        ascii: `miss z >>\ncrew >>\narrive >>`,
+        vector: 'Arrivals board flashing amber.',
+        mood: 'Final-level energy with gold sparks.',
+        audio: 'Crowd murmur + suitcase wheels.',
+        image: '../../assets/digital-games/grid-blue.png',
+        caption: 'Screenshot: terminal radar nodes.'
       }
     ];
 
@@ -448,6 +769,24 @@ Good night, I have a lot to dream about.`,
       clock.textContent = scene.timestamp;
       root.style.setProperty('--accent', scene.accent);
       root.style.setProperty('--grid', scene.accent + '55');
+      if (sceneImage) {
+        if (scene.image) {
+          sceneImage.src = scene.image;
+          sceneImage.style.visibility = 'visible';
+        } else {
+          sceneImage.removeAttribute('src');
+          sceneImage.style.visibility = 'hidden';
+        }
+      }
+      if (spriteCaption) {
+        spriteCaption.textContent = scene.caption || '';
+        spriteCaption.style.opacity = scene.caption ? '1' : '0.4';
+      }
+      if (sprite) {
+        const accent = scene.accent || '#ffffff';
+        sprite.style.borderColor = `${accent}55`;
+        sprite.style.boxShadow = `0 30px 80px ${accent}26`;
+      }
     }
 
     renderScene(cycles[pointer]);
@@ -479,6 +818,7 @@ Good night, I have a lot to dream about.`,
     });
 
     async function hydrateArchives() {
+      if (!archiveList) return;
       try {
         const response = await fetch(manifestPath, { cache: 'no-store' });
         if (!response.ok) { renderArchiveList([]); return; }
@@ -511,6 +851,7 @@ Good night, I have a lot to dream about.`,
     }
 
     hydrateArchives();
+
   </script>
 </body>
 </html>
