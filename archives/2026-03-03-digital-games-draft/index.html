@@ -236,6 +236,25 @@
       padding-bottom: 2px;
     }
 
+    .archives-link {
+      margin-top: 0.5rem;
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.65rem;
+      color: rgba(246, 246, 246, 0.9);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+      padding-bottom: 2px;
+    }
+
+    .archives-link:hover,
+    .archives-link:focus-visible {
+      border-bottom-color: var(--accent);
+      color: #fff;
+      outline: none;
+    }
+
     .archives-list a:hover,
     .archives-list a:focus-visible {
       border-bottom-color: var(--accent);
@@ -276,31 +295,33 @@
   <main class="hero" aria-label="Digital Games narrative">
     <h1>DIGITAL GAMES</h1>
     <p class="subline" id="subline" aria-live="polite">
-      Neon pigeons cross the plaza like couriers, trailing coordinates and cheat codes.
+      I loved you five minutes ago.
     </p>
-    <p class="detail" id="detail">Insert coin to keep the signal awake.</p>
+    <p class="detail" id="detail">Please breathe.</p>
     <div class="grid-panel">
-      <strong id="callout">// LOOP 01</strong>
-      <p id="microcopy">Grid-surf reports syncing +04 new pulses.</p>
+      <strong id="callout">WAIT FOR ME AT LEAST.</strong>
+      <p id="microcopy">And missing you intensely.</p>
     </div>
   </main>
 
   <section class="ascii-panel" aria-label="Console output">
-    <span id="asciiPanel">>>> \__/ calibrating neon mesh ...</span>
+    <span id="asciiPanel">I loved you five minutes ago
+Please breathe
+Wait for me at least.</span>
   </section>
 
   <section class="pillars" aria-label="Scene telemetry">
     <article class="pillar">
       <span class="label">Vector</span>
-      <div id="vector">X:41.386 / Y:-73.972</div>
+      <div id="vector">The beauty of life are the constraints of it.</div>
     </article>
     <article class="pillar">
       <span class="label">Mood</span>
-      <div id="mood">Private cabinet of glitch art and half-built consoles.</div>
+      <div id="mood">I have a deep resonant hug to offer you.</div>
     </article>
     <article class="pillar">
       <span class="label">Audio</span>
-      <div id="audio">Soft fan noise + menu hover clicks.</div>
+      <div id="audio">Blue skies, damn.</div>
     </article>
   </section>
 
@@ -309,6 +330,7 @@
     <ul class="archives-list" id="archiveList">
       <li><span style="opacity:0.5">Loading...</span></li>
     </ul>
+    <a class="archives-link" href="../../archive.html">LAURARCHIVE</a>
   </footer>
 
   <script>
@@ -333,53 +355,61 @@
         level: '01',
         timestamp: '10:03:13 A.M.',
         accent: '#f3ff20',
-        subline: 'Wireframe continents bloom over the blacktop like secret bosses waiting for the debug whistle.',
-        detail: 'Press any key to continue the relay.',
-        callout: '// LOOP 01',
-        micro: 'Mesh rewrite completed in 0042 frames.',
-        ascii: `\\=\\=\\_ _ _-_-\\==\\=\\-\\//\\--__\n/\\\\///////\\\\////\\\\///////\\\\////\\\\\\\\\n<1> 0 0 0 0 <2>    <3> 0 0 0 0 <4>`,
-        vector: 'X:35.663 / Y:139.698',
-        mood: 'Golden wireframe gull wings hovering over Shinjuku rain.',
-        audio: 'CRT hiss + subway door chime.'
+        subline: 'I loved you five minutes ago.',
+        detail: 'Please breathe.',
+        callout: 'WAIT FOR ME AT LEAST.',
+        micro: 'And missing you intensely.',
+        ascii: `I loved you five minutes ago
+Please breathe
+Wait for me at least.`,
+        vector: 'The beauty of life are the constraints of it.',
+        mood: 'I have a deep resonant hug to offer you.',
+        audio: 'Blue skies, damn.'
       },
       {
         level: '02',
         timestamp: '02:54:44 P.M.',
         accent: '#2dff80',
-        subline: 'Text rivers scroll faster than whispers, leaving little anchor lights in your periphery.',
-        detail: 'Hold for manual override.',
-        callout: '// LOOP 02',
-        micro: 'Telemetry packets returned intact.',
-        ascii: `[01]|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n>>>>> :::::: ::::: :::::;:;:;:;:;:;:;\n[CTRL] 00000000 11110000 00001111`,
-        vector: 'X:51.507 / Y:-0.127',
-        mood: 'Matrix green script meets London sodium fog.',
-        audio: 'Menu hover clicks stacked into drumline.'
+        subline: 'I was dreaming about you.',
+        detail: 'You said you love the sun.',
+        callout: 'LOVE IS WORK.',
+        micro: 'Love is a drug.',
+        ascii: `I mainly saw your eyes
+and heard what you said
+You can't remember me.`,
+        vector: 'I don\'t think you understand what a huge deal that was for me back then.',
+        mood: 'And yes we are intense but we love each other passionately and deeply.',
+        audio: 'Talk soon.'
       },
       {
         level: '03',
         timestamp: '11:11:07 P.M.',
         accent: '#ff3d48',
-        subline: 'A grayscale pigeon charges across the sensor grid, scattering waypoint orbs for luck.',
-        detail: 'Auto-save engaged.',
-        callout: '// LOOP 03',
-        micro: 'Twenty-three markers follow the flight path.',
-        ascii: `10:03:13 A.M. [REC]\n...o..o.o....o...o....o\n--==*==--==*==--==*==--`,
-        vector: 'X:40.712 / Y:-73.989',
-        mood: 'Documentary glitch with timestamp stickers.',
-        audio: 'Footsteps across wet marble + UI beeps.'
+        subline: 'I would love for you to listen to me.',
+        detail: 'You love me.',
+        callout: 'You lack experience and fall in love easily.',
+        micro: 'Would love to meet you for coffee.',
+        ascii: `Sun on my skin
+Rainy church time
+Miss you already.`,
+        vector: 'I love love your words.',
+        mood: 'I mainly saw your eyes and heard what you said.',
+        audio: 'I love talking to you.'
       },
       {
         level: '04',
         timestamp: '05:42:29 A.M.',
         accent: '#00a2ff',
-        subline: 'Blue grids float like silent arenas, waiting for someone to redraw the rules.',
-        detail: 'Player two, tap to spawn.',
-        callout: '// LOOP 04',
-        micro: 'Two arenas active · latency clean.',
-        ascii: `+---------+   +---------+\n|\\\\\\\\\\|   |////////|\nF·K·C·Z ·  Lateral shift ready.`,
-        vector: 'X:34.693 / Y:135.502',
-        mood: 'Osaka after-midnight dev club energy.',
-        audio: 'Projector fan + synth heartbeat.'
+        subline: 'We can dream of each other.',
+        detail: 'I promise I\'ll stay awake forever.',
+        callout: 'JUST REMEMBER.',
+        micro: 'See you soon.',
+        ascii: `Miss Zimbabwe is arriving soon
+See you soonnnnn
+Good night, I have a lot to dream about.`,
+        vector: 'I have a lot to dream about.',
+        mood: 'The flat in front definitely has a lot of sunlight.',
+        audio: 'Good night.'
       }
     ];
 

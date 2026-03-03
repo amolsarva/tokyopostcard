@@ -163,6 +163,24 @@
       padding-bottom: 2px;
     }
 
+    .archives-link {
+      margin-top: 0.35rem;
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding-bottom: 2px;
+    }
+
+    .archives-link:hover,
+    .archives-link:focus-visible {
+      color: #fff;
+      border-color: #fff;
+    }
+
     @media (max-width: 540px) {
       .hud { font-size: 0.68rem; letter-spacing: 0.14em; }
       button { font-size: 0.64rem; letter-spacing: 0.12em; }
@@ -197,6 +215,7 @@
       <ul class="archives-list" id="archiveList">
         <li><span style="opacity:0.5">Loading...</span></li>
       </ul>
+      <a class="archives-link" href="../../archive.html">LAURARCHIVE</a>
     </div>
   </div>
 

@@ -122,6 +122,23 @@
       padding-bottom: 2px;
     }
 
+    .archives-link {
+      margin-top: 0.3rem;
+      display: inline-block;
+      color: rgba(225, 240, 255, 0.9);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.65rem;
+      border-bottom: 1px solid rgba(212, 232, 255, 0.34);
+      padding-bottom: 2px;
+    }
+
+    .archives-link:hover {
+      color: #f6fbff;
+      border-bottom-color: #f6fbff;
+    }
+
     @keyframes drift {
       from { transform: rotate(8deg) scale(1.15) translate3d(-2%, -1%, 0); }
       to { transform: rotate(368deg) scale(1.15) translate3d(1%, 2%, 0); }
@@ -148,6 +165,7 @@
     <ul class="archives-list" id="archiveList">
       <li><span style="opacity:0.5">Loading...</span></li>
     </ul>
+    <a class="archives-link" href="./archive.html">LAURARCHIVE</a>
   </footer>
 
   <script>
