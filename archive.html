@@ -72,6 +72,14 @@
       color: var(--ink-muted);
     }
 
+    .edition-count {
+      margin: 0.4rem 0 0;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245, 251, 255, 0.6);
+    }
+
     main {
       flex: 1;
       width: 100%;
@@ -243,7 +251,8 @@
     <div class="site-hero">
       <a class="home-link" href="./">a new AI York</a>
       <h1>LAURARCHIVE</h1>
-      <p>Your gift box of little works.</p>
+      <p>The full run of postcards, from Tokyo nights to private glitch galleries.</p>
+      <p class="edition-count" id="editionCount">Tracking editions…</p>
     </div>
   </header>
 
@@ -269,6 +278,7 @@
     const gallery = document.getElementById('gallery');
     const galleryStatus = document.getElementById('galleryStatus');
     const cardTemplate = document.getElementById('edition-card-template');
+    const editionCount = document.getElementById('editionCount');
 
     const thumbnailHints = {
       '2026-02-14-tokyo': {
@@ -328,6 +338,9 @@
       } catch (error) {
         galleryStatus.textContent = 'Could not load archives right now';
         galleryStatus.className = 'error-state';
+        if (editionCount) {
+          editionCount.textContent = '0 editions filed (error)';
+        }
       }
     }
 
@@ -335,6 +348,9 @@
       if (!Array.isArray(entries) || entries.length === 0) {
         galleryStatus.textContent = 'No editions filed yet';
         galleryStatus.className = 'loading-state';
+        if (editionCount) {
+          editionCount.textContent = '0 editions filed';
+        }
         return;
       }
 
@@ -343,6 +359,10 @@
         ...entry,
         dateValue: parseEditionDate(entry.slug)
       })).sort((a, b) => b.dateValue - a.dateValue);
+
+      if (editionCount) {
+        editionCount.textContent = `${normalized.length} editions filed`;
+      }
 
       normalized.forEach((entry) => {
         const instance = cardTemplate.content.cloneNode(true);
