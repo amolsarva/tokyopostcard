@@ -336,8 +336,8 @@
     }
 
     const archiveList = document.getElementById('archiveList');
-    const manifestPath = document.body.dataset.manifest || './archives/manifest.json';
-    const archiveBase = document.body.dataset.archivesBase || './archives';
+    const manifestPath = document.body.dataset.manifest || '../manifest.json';
+    const archiveBase = document.body.dataset.archivesBase || '..';
 
     const imageAvailability = new Map();
     function preloadImage(path) {
