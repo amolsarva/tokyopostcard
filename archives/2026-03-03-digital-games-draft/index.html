@@ -742,9 +742,11 @@ Wait for me at least.</span>
       if (sceneImage) {
         if (scene.image) {
           sceneImage.src = scene.image;
+          sceneImage.alt = scene.caption || scene.title || 'Digital games still';
           sceneImage.style.visibility = 'visible';
         } else {
           sceneImage.removeAttribute('src');
+          sceneImage.removeAttribute('alt');
           sceneImage.style.visibility = 'hidden';
         }
       }
