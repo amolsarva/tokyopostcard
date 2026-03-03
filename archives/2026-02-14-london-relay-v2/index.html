@@ -188,7 +188,7 @@
     </div>
   </div>
 
-  <audio id="ambience" loop preload="auto" src="./ambient-rain.mp3"></audio>
+  <audio id="ambience" loop preload="auto"></audio>
 
   <script>
     const scenes = [
@@ -279,6 +279,15 @@
     const story = document.getElementById('story');
     const soundToggle = document.getElementById('soundToggle');
     const audio = document.getElementById('ambience');
+    const audioSource = document.body.dataset.audio || '';
+    if (audioSource) {
+      audio.src = audioSource;
+    } else {
+      soundToggle.hidden = true;
+      soundToggle.disabled = true;
+      soundToggle.setAttribute('aria-hidden', 'true');
+    }
+
     const archiveList = document.getElementById('archiveList');
 
     const imageAvailability = new Map();

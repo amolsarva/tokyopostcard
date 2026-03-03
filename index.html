@@ -163,7 +163,7 @@
     }
   </style>
 </head>
-<body data-manifest="./archives/manifest.json" data-audio="./ambient-rain.mp3" data-archives-base="./archives">
+<body data-manifest="./archives/manifest.json" data-archives-base="./archives">
   <div class="backdrop" id="backdrop"></div>
   <div class="vignette"></div>
 
@@ -314,6 +314,15 @@
     const story = document.getElementById('story');
     const soundToggle = document.getElementById('soundToggle');
     const audio = document.getElementById('ambience');
+    const audioSource = document.body.dataset.audio || '';
+    if (audioSource) {
+      audio.src = audioSource;
+    } else {
+      soundToggle.hidden = true;
+      soundToggle.disabled = true;
+      soundToggle.setAttribute('aria-hidden', 'true');
+    }
+
     const archiveList = document.getElementById('archiveList');
     const manifestPath = document.body.dataset.manifest || './archives/manifest.json';
     const archiveBase = document.body.dataset.archivesBase || './archives';
@@ -335,12 +344,6 @@
     }
 
     scenes.forEach((scene) => preloadImage(scene.image));
-    if (document.body.dataset.audio) {
-      audio.src = document.body.dataset.audio;
-    } else {
-      audio.src = './ambient-rain.mp3';
-    }
-
     let pointer = -1;
     let locked = false;
 
