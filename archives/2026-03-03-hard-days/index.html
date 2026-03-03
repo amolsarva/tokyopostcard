@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NEWAIYORK · Hard Days Edition</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --ink: #dceaff;
+      --panel: rgba(3, 9, 20, 0.82);
+      --border: rgba(180, 214, 255, 0.28);
+      --top-blue-1: #0f2e57;
+      --top-blue-2: #15467f;
+      --top-blue-3: #0a1d3a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: #07101f;
+      color: var(--ink);
+    }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    .hud {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem clamp(1.2rem, 4vw, 3rem);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+    }
+
+    .brand-link {
+      color: rgba(243, 248, 255, 0.85);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(243, 248, 255, 0.35);
+      padding-bottom: 2px;
+    }
+
+    .brand-link:hover,
+    .brand-link:focus-visible {
+      border-bottom-color: rgba(243, 248, 255, 0.8);
+      color: #f6fbff;
+      outline: none;
+    }
+
+    .edition-tag {
+      letter-spacing: 0.3em;
+      font-size: 0.6rem;
+      opacity: 0.7;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      text-align: center;
+      isolation: isolate;
+      padding: 4vh clamp(1.2rem, 6vw, 4rem);
+      min-height: 60vh;
+      background:
+        radial-gradient(130% 90% at 50% 0%, rgba(106, 178, 255, 0.16), rgba(7, 16, 31, 0) 64%),
+        linear-gradient(180deg, var(--top-blue-1) 0%, var(--top-blue-2) 48%, var(--top-blue-3) 100%);
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: -18%;
+      pointer-events: none;
+      opacity: 0.95;
+      mix-blend-mode: screen;
+    }
+
+    .hero::before {
+      background:
+        repeating-conic-gradient(from 0deg, rgba(132, 190, 255, 0.16) 0deg 12deg, rgba(8, 31, 66, 0) 12deg 24deg),
+        radial-gradient(circle at 18% 20%, rgba(126, 190, 255, 0.2), rgba(0, 0, 0, 0) 34%),
+        radial-gradient(circle at 80% 70%, rgba(129, 172, 255, 0.16), rgba(0, 0, 0, 0) 40%);
+      transform: rotate(8deg) scale(1.15);
+      filter: blur(0.5px);
+      animation: drift 26s linear infinite;
+    }
+
+    .hero::after {
+      background:
+        repeating-linear-gradient(90deg, rgba(165, 212, 255, 0.1) 0 4px, rgba(0, 0, 0, 0) 4px 12px),
+        repeating-linear-gradient(0deg, rgba(130, 182, 255, 0.08) 0 3px, rgba(0, 0, 0, 0) 3px 11px);
+      transform: scale(1.22);
+      opacity: 0.54;
+      animation: pulse 7.5s ease-in-out infinite alternate;
+    }
+
+    h1 {
+      margin: 0;
+      padding: 1.2rem 1.5rem;
+      position: relative;
+      z-index: 1;
+      font-size: clamp(2.2rem, 10.5vw, 6.7rem);
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #f6fbff;
+      text-shadow: 0 0 28px rgba(129, 193, 255, 0.5);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 0.7rem;
+      backdrop-filter: blur(2px);
+    }
+
+    .archives {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.48rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.66rem;
+      padding: 1.2rem 1.6rem 1.6rem;
+      background: #07101f;
+      border-top: 1px solid rgba(126, 175, 232, 0.25);
+    }
+
+    .archives-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.45rem 1rem;
+      letter-spacing: 0.1em;
+    }
+
+    .archives-list a {
+      color: rgba(225, 240, 255, 0.95);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(212, 232, 255, 0.34);
+      padding-bottom: 2px;
+    }
+
+    .archives-link {
+      margin-top: 0.3rem;
+      display: inline-block;
+      color: rgba(225, 240, 255, 0.9);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.65rem;
+      border-bottom: 1px solid rgba(212, 232, 255, 0.34);
+      padding-bottom: 2px;
+    }
+
+    .archives-link:hover {
+      color: #f6fbff;
+      border-bottom-color: #f6fbff;
+    }
+
+    @keyframes drift {
+      from { transform: rotate(8deg) scale(1.15) translate3d(-2%, -1%, 0); }
+      to { transform: rotate(368deg) scale(1.15) translate3d(1%, 2%, 0); }
+    }
+
+    @keyframes pulse {
+      from { opacity: 0.34; }
+      to { opacity: 0.62; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero::before,
+      .hero::after { animation: none; }
+    }
+  </style>
+</head>
+<body data-manifest="../manifest.json" data-archives-base="..">
+  <header class="hud">
+    <a class="brand-link" href="../../">NEWAIYORK</a>
+    <span class="edition-tag">Hard Days Edition</span>
+  </header>
+
+  <main class="hero" aria-label="Hard Days Edition hero">
+    <h1>Good Morning Laura</h1>
+  </main>
+
+  <footer class="archives">
+    <span>Filed archives</span>
+    <ul class="archives-list" id="archiveList">
+      <li><span style="opacity:0.5">Loading...</span></li>
+    </ul>
+    <a class="archives-link" href="../../archive.html">LAURARCHIVE</a>
+  </footer>
+
+  <script>
+    const archiveList = document.getElementById('archiveList');
+    const manifestPath = document.body.dataset.manifest || '../manifest.json';
+    const archivesBase = document.body.dataset.archivesBase || '..';
+
+    async function hydrateArchives() {
+      try {
+        const response = await fetch(manifestPath, { cache: 'no-store' });
+        if (!response.ok) {
+          renderArchiveList([]);
+          return;
+        }
+
+        const entries = await response.json();
+        renderArchiveList(entries);
+      } catch {
+        renderArchiveList([]);
+      }
+    }
+
+    function renderArchiveList(entries) {
+      archiveList.innerHTML = '';
+
+      if (!Array.isArray(entries) || !entries.length) {
+        const li = document.createElement('li');
+        li.style.opacity = '0.5';
+        li.textContent = 'No archives yet';
+        archiveList.appendChild(li);
+        return;
+      }
+
+      entries.forEach((entry) => {
+        const li = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = `${archivesBase}/${entry.slug}/`;
+        link.textContent = entry.label || entry.slug;
+        link.title = entry.blurb || 'Open archived postcard';
+        li.appendChild(link);
+        archiveList.appendChild(li);
+      });
+    }
+
+    hydrateArchives();
+  </script>
+</body>
+</html>
