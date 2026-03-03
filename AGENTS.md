@@ -1,5 +1,5 @@
 # Repository agent instructions
 
-## Pull request workflow reminder
-- After completing any code changes, always create a commit and open a pull request for those changes.
-- If there are no code changes, do not create a pull request.
+## Main-branch workflow reminder
+- Commit directly to `main` and push after completing any code changes; do not open a pull request.
+- If there are no code changes, do not push.
