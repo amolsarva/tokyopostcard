@@ -432,10 +432,31 @@ Good night, I have a lot to dream about.`,
 
     renderScene(cycles[pointer]);
 
-    setInterval(() => {
-      pointer = (pointer + 1) % cycles.length;
+    function advanceCycle(direction = 1) {
+      pointer = (pointer + direction + cycles.length) % cycles.length;
       renderScene(cycles[pointer]);
-    }, 5200);
+    }
+
+    function shouldIgnoreInteraction(target) {
+      return target.closest && target.closest('a, button');
+    }
+
+    document.body.addEventListener('click', (event) => {
+      if (shouldIgnoreInteraction(event.target)) return;
+      advanceCycle();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      const forwardKeys = ['ArrowRight', 'ArrowDown', ' ', 'Spacebar', 'Enter'];
+      const backKeys = ['ArrowLeft', 'ArrowUp'];
+      if (forwardKeys.includes(event.key)) {
+        event.preventDefault();
+        advanceCycle();
+      } else if (backKeys.includes(event.key)) {
+        event.preventDefault();
+        advanceCycle(-1);
+      }
+    });
 
     async function hydrateArchives() {
       try {
