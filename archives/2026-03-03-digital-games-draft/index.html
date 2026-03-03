@@ -429,8 +429,7 @@ Stop tormenting me</span>
       if (scene.background) {
         root.style.setProperty('--hero-background', scene.background);
       }
-      asciiPanel.textContent = (scene.ascii || []).join('
-');
+      asciiPanel.textContent = (scene.ascii || []).join('\\n');
       echoNodes.forEach((node, idx) => {
         node.textContent = scene.echoes && scene.echoes[idx] ? scene.echoes[idx] : '';
       });
