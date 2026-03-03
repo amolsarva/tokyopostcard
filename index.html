@@ -186,6 +186,32 @@
       .hero::before,
       .hero::after { animation: none; }
     }
+
+    .audio-link {
+      color: #d5e9ff;
+      text-decoration: none;
+      border: 1px solid rgba(212, 232, 255, 0.34);
+      border-radius: 999px;
+      padding: 0.35rem 0.7rem;
+      letter-spacing: 0.14em;
+      font-size: 0.58rem;
+      margin-top: 0.2rem;
+    }
+
+    @keyframes drift {
+      from { transform: rotate(8deg) scale(1.15) translate3d(-2%, -1%, 0); }
+      to { transform: rotate(368deg) scale(1.15) translate3d(1%, 2%, 0); }
+    }
+
+    @keyframes pulse {
+      from { opacity: 0.34; }
+      to { opacity: 0.62; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero::before,
+      .hero::after { animation: none; }
+    }
   </style>
 </head>
 <body>
@@ -202,6 +228,9 @@
       <li><span style="opacity:0.5">Loading...</span></li>
     </ul>
     <a class="audio-link" href="./archives/2026-03-03-shoreditch-walk-draft/" title="Open the edition with sound controls">Audio link</a>
+<<<<<<< ours
+>>>>>>> theirs
+=======
 >>>>>>> theirs
   </footer>
 </body>
