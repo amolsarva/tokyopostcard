@@ -162,32 +162,7 @@
 
     .archives {
       display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      letter-spacing: 0.2em;
-    }
-
-    .archives-title {
-      opacity: 0.8;
-      font-size: 0.7rem;
-    }
-
-    .archives-list {
-      display: flex;
-      flex-wrap: wrap;
       justify-content: center;
-      gap: 0.4rem 1rem;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      letter-spacing: 0.1em;
-    }
-
-    .archives-list a {
-      color: rgba(255,255,255,0.9);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.3);
-      padding-bottom: 2px;
     }
 
     .archives-link {
@@ -204,12 +179,6 @@
 
     .archives-link:hover,
     .archives-link:focus-visible {
-      color: #fff;
-      border-color: #fff;
-    }
-
-    .archives-list a:hover,
-    .archives-list a:focus {
       color: #fff;
       border-color: #fff;
     }
@@ -242,10 +211,6 @@
   <div class="footer">
     <div id="micro">Touch anywhere</div>
     <div class="archives">
-      <span class="archives-title">Filed archives</span>
-      <ul class="archives-list" id="archiveList">
-        <li><span style="opacity:0.5">Loading...</span></li>
-      </ul>
       <a class="archives-link" href="../../archive.html">LAURARCHIVE</a>
     </div>
   </div>
@@ -320,13 +285,10 @@
     const whisper = document.getElementById("whisper");
     const mainLine = document.getElementById("mainLine");
     const micro = document.getElementById("micro");
-    const archiveList = document.getElementById("archiveList");
     const counter = document.getElementById("counter");
     const story = document.getElementById("story");
     const soundToggle = document.getElementById("soundToggle");
     const audio = document.getElementById("ambience");
-    const manifestPath = document.body.dataset.manifest || "../manifest.json";
-    const archivesBase = document.body.dataset.archivesBase || "..";
     const audioSource = document.body.dataset.audio || '';
     if (audioSource) {
       audio.src = audioSource;
@@ -402,42 +364,6 @@
       }
     });
 
-    async function hydrateArchives() {
-      try {
-        const response = await fetch(manifestPath, { cache: 'no-store' });
-        if (!response.ok) {
-          renderArchiveList([]);
-          return;
-        }
-        const entries = await response.json();
-        renderArchiveList(entries);
-      } catch (error) {
-        renderArchiveList([]);
-      }
-    }
-
-    function renderArchiveList(entries) {
-      if (!archiveList) return;
-      archiveList.innerHTML = '';
-      if (!Array.isArray(entries) || !entries.length) {
-        const li = document.createElement('li');
-        li.style.opacity = '0.5';
-        li.textContent = 'No archives yet';
-        archiveList.appendChild(li);
-        return;
-      }
-      entries.forEach((entry) => {
-        const li = document.createElement('li');
-        const link = document.createElement('a');
-        link.href = `${archivesBase}/${entry.slug}/`;
-        link.textContent = entry.label || entry.slug;
-        link.title = entry.blurb || 'Open archived postcard';
-        li.appendChild(link);
-        archiveList.appendChild(li);
-      });
-    }
-
-    hydrateArchives();
   </script>
 </body>
 </html>

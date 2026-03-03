@@ -223,23 +223,6 @@
       background: #030303;
     }
 
-    .archives-list {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.45rem 0.9rem;
-      margin: 0.6rem 0 0;
-      padding: 0;
-    }
-
-    .archives-list a {
-      color: rgba(246, 246, 246, 0.9);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-      padding-bottom: 2px;
-    }
-
     .archives-link {
       margin-top: 0.5rem;
       display: inline-block;
@@ -256,12 +239,6 @@
     .archives-link:focus-visible {
       border-bottom-color: var(--accent);
       color: #fff;
-      outline: none;
-    }
-
-    .archives-list a:hover,
-    .archives-list a:focus-visible {
-      border-bottom-color: var(--accent);
       outline: none;
     }
 
@@ -330,10 +307,6 @@ Wait for me at least.</span>
   </section>
 
   <footer class="archives">
-    <span>Filed archives</span>
-    <ul class="archives-list" id="archiveList">
-      <li><span style="opacity:0.5">Loading...</span></li>
-    </ul>
     <a class="archives-link" href="../../archive.html">LAURARCHIVE</a>
   </footer>
 
@@ -350,10 +323,8 @@ Wait for me at least.</span>
     const audio = document.getElementById('audio');
     const level = document.getElementById('level');
     const clock = document.getElementById('clock');
-    const archiveList = document.getElementById('archiveList');
 
-    const manifestPath = document.body.dataset.manifest || '../manifest.json';
-    const archivesBase = document.body.dataset.archivesBase || '..';
+    // archive link now handled via static footer
 
     const cycles = [
       {
@@ -478,39 +449,6 @@ Good night, I have a lot to dream about.`,
       }
     });
 
-    async function hydrateArchives() {
-      try {
-        const response = await fetch(manifestPath, { cache: 'no-store' });
-        if (!response.ok) { renderArchiveList([]); return; }
-        const entries = await response.json();
-        renderArchiveList(entries);
-      } catch (err) {
-        renderArchiveList([]);
-      }
-    }
-
-    function renderArchiveList(entries) {
-      archiveList.innerHTML = '';
-      if (!Array.isArray(entries) || !entries.length) {
-        const li = document.createElement('li');
-        li.style.opacity = '0.5';
-        li.textContent = 'No archives yet';
-        archiveList.appendChild(li);
-        return;
-      }
-
-      entries.forEach((entry) => {
-        const li = document.createElement('li');
-        const link = document.createElement('a');
-        link.href = `${archivesBase}/${entry.slug}/`;
-        link.textContent = entry.label || entry.slug;
-        link.title = entry.blurb || 'Open archived edition';
-        li.appendChild(link);
-        archiveList.appendChild(li);
-      });
-    }
-
-    hydrateArchives();
   </script>
 </body>
 </html>

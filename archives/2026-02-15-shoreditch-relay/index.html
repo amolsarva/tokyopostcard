@@ -141,26 +141,7 @@
 
     .archives {
       display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-      letter-spacing: 0.18em;
-    }
-    .archives-title { opacity: 0.85; font-size: 0.68rem; }
-    .archives-list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.4rem 1rem;
-      letter-spacing: 0.1em;
-    }
-    .archives-list a {
-      color: rgba(255,255,255,0.9);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.3);
-      padding-bottom: 2px;
     }
 
     .archives-link {
@@ -211,10 +192,6 @@
   <div class="footer">
     <div id="micro">Touch anywhere</div>
     <div class="archives">
-      <span class="archives-title">Filed archives</span>
-      <ul class="archives-list" id="archiveList">
-        <li><span style="opacity:0.5">Loading...</span></li>
-      </ul>
       <a class="archives-link" href="../../archive.html">LAURARCHIVE</a>
     </div>
   </div>
@@ -319,10 +296,6 @@
       soundToggle.setAttribute('aria-hidden', 'true');
     }
 
-    const archiveList = document.getElementById('archiveList');
-    const manifestPath = document.body.dataset.manifest || '../manifest.json';
-    const archivesBase = document.body.dataset.archivesBase || '..';
-
     const imageAvailability = new Map();
     function preloadImage(path) {
       if (!path || imageAvailability.has(path)) return;
@@ -413,38 +386,6 @@
       }
     });
 
-    async function hydrateArchives() {
-      try {
-        const response = await fetch(manifestPath, { cache: 'no-store' });
-        if (!response.ok) { renderArchiveList([]); return; }
-        const entries = await response.json();
-        renderArchiveList(entries);
-      } catch {
-        renderArchiveList([]);
-      }
-    }
-
-    function renderArchiveList(entries) {
-      archiveList.innerHTML = '';
-      if (!entries.length) {
-        const li = document.createElement('li');
-        li.style.opacity = '0.5';
-        li.textContent = 'No archives yet';
-        archiveList.appendChild(li);
-        return;
-      }
-      entries.forEach((entry) => {
-        const li = document.createElement('li');
-        const link = document.createElement('a');
-        link.href = `${archivesBase}/${entry.slug}/`;
-        link.textContent = entry.label || entry.slug;
-        link.title = entry.blurb || 'Open archived postcard';
-        li.appendChild(link);
-        archiveList.appendChild(li);
-      });
-    }
-
-    hydrateArchives();
   </script>
 </body>
 </html>
