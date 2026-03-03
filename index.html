@@ -15,22 +15,33 @@
     html, body {
       margin: 0;
       min-height: 100%;
-      background: #7a0014;
+      background: #081221;
       color: #ffffff;
     }
 
     body {
       min-height: 100vh;
       display: grid;
-      grid-template-rows: 1fr auto;
-      padding: 2rem;
-      gap: 2rem;
+      grid-template-rows: minmax(18rem, 66vh) auto;
+      padding: 0;
+      gap: 0;
     }
 
     .hero {
       display: grid;
       place-items: center;
       text-align: center;
+      background: linear-gradient(180deg, #1d4f89 0%, #123b6d 58%, #0d2d54 100%);
+      position: relative;
+      padding: 2rem;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
+      pointer-events: none;
     }
 
     h1 {
@@ -39,9 +50,12 @@
       font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
+      position: relative;
+      z-index: 1;
     }
 
     .archives {
+      padding: 1.4rem 2rem 1.8rem;
       justify-self: center;
       display: flex;
       flex-direction: column;
@@ -50,6 +64,8 @@
       text-transform: uppercase;
       letter-spacing: 0.18em;
       font-size: 0.66rem;
+      width: 100%;
+      background: #081221;
     }
 
     .archives-list {
@@ -73,7 +89,7 @@
 </head>
 <body>
   <main class="hero">
-    <h1>Hello Laura</h1>
+    <h1>Good Morning Laura</h1>
   </main>
 
   <footer class="archives">
