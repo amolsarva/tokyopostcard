@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NEWAIYORK · Digital Games Draft</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: "SF Pro Display", "IBM Plex Mono", "JetBrains Mono", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --bg: #020202;
+      --ink: #f5f5f2;
+      --accent: #f3ff20;
+      --accent-soft: rgba(243, 255, 32, 0.12);
+      --grid: rgba(0, 255, 161, 0.2);
+      --panel: rgba(0, 0, 0, 0.7);
+      --wire: rgba(0, 163, 255, 0.35);
+      --mono: "IBM Plex Mono", "SFMono-Regular", "Consolas", monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: radial-gradient(circle at 40% -10%, rgba(255, 255, 255, 0.08), transparent 55%), var(--bg);
+      color: var(--ink);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .hud {
+      position: fixed;
+      top: 1.8rem;
+      left: clamp(1.5rem, 5vw, 4rem);
+      right: clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      z-index: 3;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .brand-link {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+      padding-bottom: 3px;
+      font-weight: 600;
+    }
+
+    .brand-link:hover,
+    .brand-link:focus-visible {
+      border-bottom-color: var(--accent);
+      outline: none;
+    }
+
+    .hud span { opacity: 0.8; font-variant-numeric: tabular-nums; }
+
+    main.hero {
+      flex: 1;
+      display: grid;
+      gap: 1.2rem;
+      padding: 15vh clamp(1.5rem, 6vw, 7rem) 6vh;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background: repeating-linear-gradient(120deg, rgba(243, 255, 32, 0.08) 0 12px, transparent 12px 36px);
+      mix-blend-mode: screen;
+      opacity: 0.35;
+      animation: sweep 18s linear infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero::after {
+      background: repeating-linear-gradient(0deg, rgba(0, 255, 166, 0.08) 0 8px, transparent 8px 26px);
+      animation-duration: 24s;
+      opacity: 0.25;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.6rem, 12vw, 8rem);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-shadow: 0 0 25px rgba(243, 255, 32, 0.5);
+    }
+
+    .subline {
+      margin: 0;
+      font-size: clamp(1rem, 3.8vw, 2rem);
+      max-width: 70ch;
+      line-height: 1.35;
+    }
+
+    .detail {
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.34em;
+      font-size: 0.74rem;
+      opacity: 0.75;
+    }
+
+    .grid-panel {
+      margin-top: 1rem;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0.75rem;
+      background: var(--panel);
+      backdrop-filter: blur(6px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grid-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+        linear-gradient(0deg, var(--grid) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mix-blend-mode: screen;
+      opacity: 0.6;
+      animation: gridpulse 12s linear infinite;
+    }
+
+    .grid-panel strong {
+      display: inline-block;
+      letter-spacing: 0.3em;
+    }
+
+    .grid-panel p {
+      margin: 0.4rem 0 0;
+      font-family: var(--mono);
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+    }
+
+    .ascii-panel {
+      margin: 2rem clamp(1rem, 6vw, 6rem);
+      border: 1px solid rgba(0, 255, 166, 0.4);
+      border-radius: 0.6rem;
+      background: #010101;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      padding: 1.4rem;
+      font-family: var(--mono);
+      font-size: clamp(0.62rem, 2vw, 0.9rem);
+      line-height: 1.4;
+      color: #2dff80;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ascii-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0));
+      mix-blend-mode: screen;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .ascii-panel span {
+      display: block;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin: 0 clamp(1rem, 6vw, 6rem) 2rem;
+    }
+
+    .pillar {
+      padding: 1rem 1.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 0.65rem;
+      background: rgba(3, 3, 3, 0.72);
+      font-family: var(--mono);
+      min-height: 120px;
+    }
+
+    .pillar .label {
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      font-size: 0.62rem;
+      opacity: 0.7;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    footer.archives {
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 1.5rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.64rem;
+      background: #030303;
+    }
+
+    .archives-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.45rem 0.9rem;
+      margin: 0.6rem 0 0;
+      padding: 0;
+    }
+
+    .archives-list a {
+      color: rgba(246, 246, 246, 0.9);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+      padding-bottom: 2px;
+    }
+
+    .archives-list a:hover,
+    .archives-list a:focus-visible {
+      border-bottom-color: var(--accent);
+      outline: none;
+    }
+
+    @keyframes sweep {
+      from { transform: translate3d(-4%, -3%, 0) rotate(2deg); }
+      to { transform: translate3d(4%, 3%, 0) rotate(8deg); }
+    }
+
+    @keyframes gridpulse {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-42px, -42px, 0); }
+    }
+
+    @media (max-width: 640px) {
+      .hud { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+      .detail { letter-spacing: 0.22em; }
+      .pillars { margin: 0 1rem 2rem; }
+      .ascii-panel { margin: 2rem 1rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero::before,
+      .hero::after,
+      .grid-panel::before { animation: none; }
+    }
+  </style>
+</head>
+<body data-manifest="../manifest.json" data-archives-base="..">
+  <header class="hud">
+    <a class="brand-link" href="../../">NEWAIYORK</a>
+    <span>LEVEL <span id="level">01</span></span>
+    <span id="clock">10:03:13 A.M.</span>
+  </header>
+
+  <main class="hero" aria-label="Digital Games narrative">
+    <h1>DIGITAL GAMES</h1>
+    <p class="subline" id="subline" aria-live="polite">
+      Neon pigeons cross the plaza like couriers, trailing coordinates and cheat codes.
+    </p>
+    <p class="detail" id="detail">Insert coin to keep the signal awake.</p>
+    <div class="grid-panel">
+      <strong id="callout">// LOOP 01</strong>
+      <p id="microcopy">Grid-surf reports syncing +04 new pulses.</p>
+    </div>
+  </main>
+
+  <section class="ascii-panel" aria-label="Console output">
+    <span id="asciiPanel">>>> \__/ calibrating neon mesh ...</span>
+  </section>
+
+  <section class="pillars" aria-label="Scene telemetry">
+    <article class="pillar">
+      <span class="label">Vector</span>
+      <div id="vector">X:41.386 / Y:-73.972</div>
+    </article>
+    <article class="pillar">
+      <span class="label">Mood</span>
+      <div id="mood">Private cabinet of glitch art and half-built consoles.</div>
+    </article>
+    <article class="pillar">
+      <span class="label">Audio</span>
+      <div id="audio">Soft fan noise + menu hover clicks.</div>
+    </article>
+  </section>
+
+  <footer class="archives">
+    <span>Filed archives</span>
+    <ul class="archives-list" id="archiveList">
+      <li><span style="opacity:0.5">Loading...</span></li>
+    </ul>
+  </footer>
+
+  <script>
+    const root = document.documentElement;
+    const subline = document.getElementById('subline');
+    const detail = document.getElementById('detail');
+    const callout = document.getElementById('callout');
+    const microcopy = document.getElementById('microcopy');
+    const asciiPanel = document.getElementById('asciiPanel');
+    const vector = document.getElementById('vector');
+    const mood = document.getElementById('mood');
+    const audio = document.getElementById('audio');
+    const level = document.getElementById('level');
+    const clock = document.getElementById('clock');
+    const archiveList = document.getElementById('archiveList');
+
+    const manifestPath = document.body.dataset.manifest || '../manifest.json';
+    const archivesBase = document.body.dataset.archivesBase || '..';
+
+    const cycles = [
+      {
+        level: '01',
+        timestamp: '10:03:13 A.M.',
+        accent: '#f3ff20',
+        subline: 'Wireframe continents bloom over the blacktop like secret bosses waiting for the debug whistle.',
+        detail: 'Press any key to continue the relay.',
+        callout: '// LOOP 01',
+        micro: 'Mesh rewrite completed in 0042 frames.',
+        ascii: `\\=\\=\\_ _ _-_-\\==\\=\\-\\//\\--__\n/\\\\///////\\\\////\\\\///////\\\\////\\\\\\\\\n<1> 0 0 0 0 <2>    <3> 0 0 0 0 <4>`,
+        vector: 'X:35.663 / Y:139.698',
+        mood: 'Golden wireframe gull wings hovering over Shinjuku rain.',
+        audio: 'CRT hiss + subway door chime.'
+      },
+      {
+        level: '02',
+        timestamp: '02:54:44 P.M.',
+        accent: '#2dff80',
+        subline: 'Text rivers scroll faster than whispers, leaving little anchor lights in your periphery.',
+        detail: 'Hold for manual override.',
+        callout: '// LOOP 02',
+        micro: 'Telemetry packets returned intact.',
+        ascii: `[01]|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n>>>>> :::::: ::::: :::::;:;:;:;:;:;:;\n[CTRL] 00000000 11110000 00001111`,
+        vector: 'X:51.507 / Y:-0.127',
+        mood: 'Matrix green script meets London sodium fog.',
+        audio: 'Menu hover clicks stacked into drumline.'
+      },
+      {
+        level: '03',
+        timestamp: '11:11:07 P.M.',
+        accent: '#ff3d48',
+        subline: 'A grayscale pigeon charges across the sensor grid, scattering waypoint orbs for luck.',
+        detail: 'Auto-save engaged.',
+        callout: '// LOOP 03',
+        micro: 'Twenty-three markers follow the flight path.',
+        ascii: `10:03:13 A.M. [REC]\n...o..o.o....o...o....o\n--==*==--==*==--==*==--`,
+        vector: 'X:40.712 / Y:-73.989',
+        mood: 'Documentary glitch with timestamp stickers.',
+        audio: 'Footsteps across wet marble + UI beeps.'
+      },
+      {
+        level: '04',
+        timestamp: '05:42:29 A.M.',
+        accent: '#00a2ff',
+        subline: 'Blue grids float like silent arenas, waiting for someone to redraw the rules.',
+        detail: 'Player two, tap to spawn.',
+        callout: '// LOOP 04',
+        micro: 'Two arenas active · latency clean.',
+        ascii: `+---------+   +---------+\n|\\\\\\\\\\|   |////////|\nF·K·C·Z ·  Lateral shift ready.`,
+        vector: 'X:34.693 / Y:135.502',
+        mood: 'Osaka after-midnight dev club energy.',
+        audio: 'Projector fan + synth heartbeat.'
+      }
+    ];
+
+    let pointer = 0;
+
+    function renderScene(scene) {
+      subline.textContent = scene.subline;
+      detail.textContent = scene.detail;
+      callout.textContent = scene.callout;
+      microcopy.textContent = scene.micro;
+      asciiPanel.textContent = scene.ascii;
+      vector.textContent = scene.vector;
+      mood.textContent = scene.mood;
+      audio.textContent = scene.audio;
+      level.textContent = scene.level;
+      clock.textContent = scene.timestamp;
+      root.style.setProperty('--accent', scene.accent);
+      root.style.setProperty('--grid', scene.accent + '55');
+    }
+
+    renderScene(cycles[pointer]);
+
+    setInterval(() => {
+      pointer = (pointer + 1) % cycles.length;
+      renderScene(cycles[pointer]);
+    }, 5200);
+
+    async function hydrateArchives() {
+      try {
+        const response = await fetch(manifestPath, { cache: 'no-store' });
+        if (!response.ok) { renderArchiveList([]); return; }
+        const entries = await response.json();
+        renderArchiveList(entries);
+      } catch (err) {
+        renderArchiveList([]);
+      }
+    }
+
+    function renderArchiveList(entries) {
+      archiveList.innerHTML = '';
+      if (!Array.isArray(entries) || !entries.length) {
+        const li = document.createElement('li');
+        li.style.opacity = '0.5';
+        li.textContent = 'No archives yet';
+        archiveList.appendChild(li);
+        return;
+      }
+
+      entries.forEach((entry) => {
+        const li = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = `${archivesBase}/${entry.slug}/`;
+        link.textContent = entry.label || entry.slug;
+        link.title = entry.blurb || 'Open archived edition';
+        li.appendChild(link);
+        archiveList.appendChild(li);
+      });
+    }
+
+    hydrateArchives();
+  </script>
+</body>
+</html>

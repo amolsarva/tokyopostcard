@@ -16,12 +16,14 @@ That is the smallest reliable brief to produce a new edition aligned with repo c
 
 ---
 
+> **Licensing note:** All supplied assets are assumed cleared for private/personal use. Skip repeat licensing questions unless the user explicitly reopens the topic.
+
 ## 5 kickoff questions that reliably unlock production
 1. **Narrative intent:** Should this edition feel intimate, cinematic, playful, or documentary?
-2. **Content ownership:** Are all provided images licensed/owned for publication, and do any require credits?
-3. **Visual system:** Do you want gradient-led, photo-led, or hybrid treatment?
-4. **Interaction level:** Static hero, tap-through scenes, or ambient audio + scene progression?
-5. **Publishing plan:** Is this replacing `index.html` now, or landing as archive-first draft?
+2. **Visual system:** Do you want gradient-led, photo-led, or hybrid treatment?
+3. **Interaction level:** Static hero, tap-through scenes, or ambient audio + scene progression?
+4. **Publishing plan:** Is this replacing `index.html` now, or landing as archive-first draft?
+5. **Budget guardrails:** Any constraints on commissioning or sourcing new assets beyond existing repo material?
 
 ---
 
@@ -43,7 +45,7 @@ You can paste this directly to start a new build:
 > - Headline text (or generate options)
 > - Images to use (existing paths or new uploads)
 > - Color palette (hex values or mood words)
-> - Payment/budget constraints for commissioned assets (yes/no + cap)
+> - Budget constraints for sourcing new assets (if any)
 > - Deadline and whether this is live-homepage or archive draft
 >
 > After I answer, produce:

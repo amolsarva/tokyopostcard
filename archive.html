@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Internet Archive · a new AI York</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --bg: #030303;
+      --bg-2: #080808;
+      --ink: #f5fbff;
+      --ink-muted: rgba(245, 251, 255, 0.78);
+      --grid-line: rgba(255, 255, 255, 0.14);
+      --accent: #31b5ff;
+      --card: rgba(5, 5, 10, 0.7);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.65);
+      --radius: 18px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: radial-gradient(circle at top, rgba(41, 86, 125, 0.18), transparent 55%), var(--bg);
+      color: var(--ink);
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .site-header {
+      padding: clamp(1.5rem, 6vw, 4rem) clamp(1.5rem, 8vw, 5rem) 1.5rem;
+      text-align: center;
+    }
+
+    .site-hero {
+      display: grid;
+      gap: 1rem;
+      place-items: center;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      font-size: 0.85rem;
+    }
+
+    .home-link {
+      text-decoration: none;
+      color: var(--ink-muted);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.26);
+      padding-bottom: 3px;
+    }
+
+    .site-hero h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 6vw, 4rem);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .site-hero p {
+      margin: 0;
+      max-width: 720px;
+      text-transform: none;
+      letter-spacing: 0.04em;
+      line-height: 1.7;
+      font-size: 1rem;
+      color: var(--ink-muted);
+    }
+
+    main {
+      flex: 1;
+      width: 100%;
+      padding: 0 clamp(1rem, 7vw, 4rem) clamp(3rem, 6vw, 5rem);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: clamp(1.5rem, 2vw, 2.5rem);
+      width: 100%;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .edition-card {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      padding-bottom: 0.4rem;
+    }
+
+    .edition-card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 6px;
+    }
+
+    .edition-thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border: 1px solid var(--grid-line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg-2);
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.6s ease, border-color 0.3s ease;
+    }
+
+    .edition-card:hover .edition-thumb,
+    .edition-card:focus-visible .edition-thumb {
+      transform: translateY(-5px) scale(1.01);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .edition-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .edition-thumb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.55));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .edition-card:hover .edition-thumb::after,
+    .edition-card:focus-visible .edition-thumb::after {
+      opacity: 1;
+    }
+
+    .edition-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      letter-spacing: 0.08em;
+    }
+
+    .edition-date {
+      margin: 0;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      color: rgba(245, 251, 255, 0.65);
+    }
+
+    .edition-title {
+      margin: 0;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    .edition-blurb {
+      margin: 0;
+      font-size: 0.9rem;
+      color: rgba(245, 251, 255, 0.72);
+      line-height: 1.5;
+      text-transform: none;
+      letter-spacing: 0.04em;
+    }
+
+    .badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.65);
+      color: white;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      pointer-events: none;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .loading-state,
+    .error-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3rem 1rem;
+      font-size: 1rem;
+      color: rgba(245, 251, 255, 0.7);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 720px) {
+      .site-hero {
+        letter-spacing: 0.18em;
+        font-size: 0.75rem;
+      }
+      .site-hero h1 {
+        letter-spacing: 0.12em;
+      }
+      .edition-title {
+        font-size: 1rem;
+        letter-spacing: 0.16em;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .edition-thumb,
+      .edition-card:hover .edition-thumb,
+      .edition-card:focus-visible .edition-thumb {
+        transition: none;
+        transform: none;
+      }
+      .edition-thumb::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-hero">
+      <a class="home-link" href="./">a new AI York</a>
+      <h1>Internet Archive</h1>
+      <p>Uniform thumbnails for every filed postcard, inspired by New Rafael's grid. Tap a square to reopen that edition and restore the feeling you saved there.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="gallery" id="gallery" aria-live="polite">
+      <div class="loading-state" id="galleryStatus">Loading editions...</div>
+    </section>
+  </main>
+
+  <template id="edition-card-template">
+    <a class="edition-card">
+      <div class="edition-thumb" data-thumb></div>
+      <div class="edition-meta">
+        <p class="edition-date" data-date></p>
+        <p class="edition-title" data-title></p>
+        <p class="edition-blurb" data-blurb></p>
+      </div>
+    </a>
+  </template>
+
+  <script>
+    const manifestURL = './archives/manifest.json';
+    const gallery = document.getElementById('gallery');
+    const galleryStatus = document.getElementById('galleryStatus');
+    const cardTemplate = document.getElementById('edition-card-template');
+
+    const thumbnailHints = {
+      '2026-02-14-tokyo': {
+        type: 'image',
+        src: 'assets/tokyo/04426376c0a6f30176e1498d29f0a442.jpg',
+        alt: 'Tokyo blue hour intersection with neon glow'
+      },
+      '2026-02-14-london-relay-v1': {
+        type: 'gradient',
+        background: 'linear-gradient(120deg, #04102c 0%, #0b3d91 45%, #98d5ff 100%)',
+        label: 'Gradient postcard preview'
+      },
+      '2026-02-14-london-relay-v2': {
+        type: 'image',
+        src: 'assets/london/3036.avif',
+        alt: 'Portrait from the London Relay photo set'
+      },
+      '2026-02-15-shoreditch-relay': {
+        type: 'image',
+        src: 'archives/2026-02-15-shoreditch-relay/assets/hanbury-crane.avif',
+        alt: 'Shoreditch relay mural with crane and cobalt portrait'
+      },
+      '2026-03-03-shoreditch-walk-draft': {
+        type: 'image',
+        src: 'assets/shoreditch/shoreditch-04.avif',
+        alt: 'Angel Alley bikes during the Shoreditch walk draft'
+      }
+    };
+
+    const fallbackThumbnail = {
+      type: 'gradient',
+      background: 'linear-gradient(120deg, #050505 0%, #202020 50%, #050505 100%)',
+      label: 'Archived postcard placeholder'
+    };
+
+    async function loadManifest() {
+      try {
+        const response = await fetch(manifestURL, { cache: 'no-store' });
+        if (!response.ok) throw new Error('Network error');
+        const entries = await response.json();
+        renderGallery(entries);
+      } catch (error) {
+        galleryStatus.textContent = 'Could not load archives right now';
+        galleryStatus.className = 'error-state';
+      }
+    }
+
+    function renderGallery(entries) {
+      if (!Array.isArray(entries) || entries.length === 0) {
+        galleryStatus.textContent = 'No editions filed yet';
+        galleryStatus.className = 'loading-state';
+        return;
+      }
+
+      gallery.innerHTML = '';
+      const normalized = entries.map((entry) => ({
+        ...entry,
+        dateValue: parseEditionDate(entry.slug)
+      })).sort((a, b) => b.dateValue - a.dateValue);
+
+      normalized.forEach((entry) => {
+        const instance = cardTemplate.content.cloneNode(true);
+        const anchor = instance.querySelector('.edition-card');
+        const thumb = instance.querySelector('[data-thumb]');
+        const dateEl = instance.querySelector('[data-date]');
+        const titleEl = instance.querySelector('[data-title]');
+        const blurbEl = instance.querySelector('[data-blurb]');
+
+        anchor.href = `./archives/${entry.slug}/`;
+        anchor.setAttribute('aria-label', `Open ${entry.label || entry.slug}`);
+
+        const { dateText, titleText } = splitLabel(entry.label);
+        dateEl.textContent = dateText || formatDate(entry.dateValue) || '—';
+        titleEl.textContent = titleText || entry.slug.replace(/-/g, ' ');
+        blurbEl.textContent = entry.blurb || '';
+
+        applyThumbnail(thumb, entry.slug, titleEl.textContent);
+        gallery.appendChild(instance);
+      });
+    }
+
+    function splitLabel(label = '') {
+      const parts = label.split('·');
+      if (parts.length === 1) {
+        return { dateText: '', titleText: label.trim() };
+      }
+      const [datePart, ...rest] = parts;
+      return {
+        dateText: datePart.trim(),
+        titleText: rest.join('·').trim()
+      };
+    }
+
+    function parseEditionDate(slug = '') {
+      const maybeDate = slug.slice(0, 10);
+      const parsed = Date.parse(maybeDate);
+      return Number.isNaN(parsed) ? Date.now() : parsed;
+    }
+
+    function formatDate(timestamp) {
+      if (!timestamp) return '';
+      try {
+        return new Intl.DateTimeFormat('en-US', {
+          month: 'short',
+          day: '2-digit',
+          year: 'numeric'
+        }).format(new Date(timestamp));
+      } catch {
+        return '';
+      }
+    }
+
+    function applyThumbnail(target, slug, titleText) {
+      const hint = thumbnailHints[slug] || fallbackThumbnail;
+      target.textContent = '';
+
+      if (hint.type === 'image') {
+        target.style.backgroundImage = 'none';
+        const img = document.createElement('img');
+        img.src = hint.src;
+        img.alt = hint.alt || `${titleText} preview thumbnail`;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        target.appendChild(img);
+      } else {
+        target.style.backgroundImage = hint.background;
+        const sr = document.createElement('span');
+        sr.className = 'sr-only';
+        sr.textContent = hint.label || `${titleText} gradient preview`;
+        target.appendChild(sr);
+      }
+
+      const badge = document.createElement('span');
+      badge.className = 'badge';
+      badge.textContent = 'open';
+      target.appendChild(badge);
+    }
+
+    loadManifest();
+  </script>
+</body>
+</html>

@@ -187,12 +187,12 @@
     }
   </style>
 </head>
-<body>
+<body data-manifest="../manifest.json" data-archives-base="..">
   <div class="backdrop" id="backdrop"></div>
   <div class="vignette"></div>
 
   <div class="hud">
-    <a class="brand-link" href="../../">a new AI York</a>
+    <a class="brand-link" href="../../">NEWAIYORK</a>
     <div class="counter" id="counter">00 / 10</div>
     <button id="soundToggle" aria-pressed="false">Sound</button>
   </div>
@@ -296,6 +296,8 @@
     }
 
     const archiveList = document.getElementById('archiveList');
+    const manifestPath = document.body.dataset.manifest || '../manifest.json';
+    const archivesBase = document.body.dataset.archivesBase || '..';
 
     let pointer = -1;
     let locked = false;
@@ -376,7 +378,7 @@
 
     async function hydrateArchives() {
       try {
-        const response = await fetch('./archives/manifest.json', { cache: 'no-store' });
+        const response = await fetch(manifestPath, { cache: 'no-store' });
         if (!response.ok) { renderArchiveList([]); return; }
         const entries = await response.json();
         renderArchiveList(entries);
@@ -397,7 +399,7 @@
       entries.forEach(entry => {
         const li = document.createElement('li');
         const link = document.createElement('a');
-        link.href = `./archives/${entry.slug}/`;
+        link.href = `${archivesBase}/${entry.slug}/`;
         link.textContent = entry.label || entry.slug;
         link.setAttribute('title', entry.blurb || 'Open archived postcard');
         li.appendChild(link);
