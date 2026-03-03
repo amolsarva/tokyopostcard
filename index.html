@@ -16,7 +16,7 @@
       --top-blue-3: #0a1d3a;
     }
 
-    * { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; }
 
     html,
     body {
@@ -29,7 +29,39 @@
     body {
       min-height: 100vh;
       display: grid;
-      grid-template-rows: 1fr auto;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    .hud {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem clamp(1.2rem, 4vw, 3rem);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-link {
+      color: rgba(243, 248, 255, 0.85);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(243, 248, 255, 0.35);
+      padding-bottom: 2px;
+    }
+
+    .brand-link:hover,
+    .brand-link:focus-visible {
+      border-bottom-color: rgba(243, 248, 255, 0.8);
+      color: #f6fbff;
+      outline: none;
+    }
+
+    .edition-tag {
+      letter-spacing: 0.3em;
+      font-size: 0.6rem;
+      opacity: 0.7;
     }
 
     .hero {
@@ -39,6 +71,8 @@
       overflow: hidden;
       text-align: center;
       isolation: isolate;
+      padding: 4vh clamp(1.2rem, 6vw, 4rem);
+      min-height: 60vh;
       background:
         radial-gradient(130% 90% at 50% 0%, rgba(106, 178, 255, 0.16), rgba(7, 16, 31, 0) 64%),
         linear-gradient(180deg, var(--top-blue-1) 0%, var(--top-blue-2) 48%, var(--top-blue-3) 100%);
@@ -86,6 +120,8 @@
     h1 {
       margin: 0;
       padding: 1.2rem 1.5rem;
+      position: relative;
+      z-index: 1;
       font-size: clamp(2.2rem, 10.5vw, 6.7rem);
       letter-spacing: 0.09em;
       text-transform: uppercase;
@@ -97,50 +133,68 @@
       backdrop-filter: blur(2px);
     }
 
-    .hero-audio-link {
+    .hero-audio-toggle {
+      position: absolute;
+      top: clamp(1rem, 5vw, 2.6rem);
+      right: clamp(1rem, 6vw, 3rem);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(231, 242, 255, 0.78);
+      background: rgba(6, 19, 37, 0.68);
       color: #f4fbff;
       text-decoration: none;
-      border: 1px solid rgba(231, 242, 255, 0.78);
-      border-radius: 999px;
-      padding: 0.6rem 1.15rem;
-      font-size: 0.74rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
       text-transform: uppercase;
-      background: rgba(6, 19, 37, 0.64);
+      letter-spacing: 0.16em;
+      font-size: 0.6rem;
+      font-weight: 600;
+      cursor: pointer;
       box-shadow: 0 0 0 1px rgba(120, 177, 238, 0.2) inset;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .hero-audio-toggle::before {
+      content: '';
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.45);
+    }
+
+    .hero-audio-toggle[data-state="playing"] {
+      border-color: rgba(137, 221, 255, 0.95);
+      box-shadow: 0 0 18px rgba(120, 200, 255, 0.4), inset 0 0 0 1px rgba(120, 200, 255, 0.4);
+      background: rgba(8, 27, 49, 0.78);
+    }
+
+    .hero-audio-toggle[data-state="playing"]::before {
+      background: #a2ffd3;
+      box-shadow: 0 0 12px rgba(162, 255, 211, 0.9);
+    }
+
+    .hero-audio-toggle:focus-visible {
+      outline: 2px solid rgba(231, 242, 255, 0.9);
+      outline-offset: 3px;
     }
 
     .archives {
       width: 100%;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.48rem;
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      font-size: 0.66rem;
-      padding: 1.2rem 1.6rem 1.6rem;
+      justify-content: center;
+      padding: 1.4rem 1.6rem 1.8rem;
       background: #07101f;
       border-top: 1px solid rgba(126, 175, 232, 0.25);
     }
 
-    .audio-link {
-      color: #d5e9ff;
-      text-decoration: none;
-      border: 1px solid rgba(212, 232, 255, 0.34);
-      border-radius: 999px;
-      padding: 0.35rem 0.7rem;
-      letter-spacing: 0.14em;
-      font-size: 0.58rem;
-      margin-top: 0.2rem;
-    }
-
     .archives-link {
+      margin-top: 0.3rem;
       display: inline-block;
       color: rgba(225, 240, 255, 0.9);
       text-decoration: none;
+      text-transform: uppercase;
       letter-spacing: 0.18em;
       font-size: 0.65rem;
       border-bottom: 1px solid rgba(212, 232, 255, 0.34);
@@ -164,6 +218,15 @@
       to { opacity: 0.62; }
     }
 
+    @media (max-width: 640px) {
+      .hud { flex-direction: column; align-items: flex-start; }
+      .hero-audio-toggle {
+        position: static;
+        margin-top: 1rem;
+        align-self: center;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .hero::before,
       .hero::after { animation: none; }
@@ -171,16 +234,182 @@
   </style>
 </head>
 <body>
+  <header class="hud">
+    <a class="brand-link" href="./">NEWAIYORK</a>
+    <span class="edition-tag">Hard Days Edition</span>
+  </header>
+
   <main class="hero" aria-label="Hard Days Edition hero">
+    <button type="button" class="hero-audio-toggle" data-audio-toggle aria-pressed="false" data-state="idle">Audio</button>
     <div class="hero-content">
       <h1>Good Morning Laura</h1>
-      <a class="hero-audio-link" href="./archives/2026-03-03-shoreditch-walk-draft/" title="Open the edition with sound controls" aria-label="Open the edition with sound controls">Audio</a>
     </div>
   </main>
 
   <footer class="archives">
-    <a class="audio-link" href="./archives/2026-03-03-shoreditch-walk-draft/" title="Open the edition with sound controls">Audio link</a>
     <a class="archives-link" href="./archive.html">LAURARCHIVE</a>
   </footer>
+
+  <audio id="ambience" loop preload="auto" data-src="./archives/2026-03-03-shoreditch-walk-draft/ambient-rain.mp3" hidden></audio>
+
+  <script>
+    (() => {
+      const audioToggle = document.querySelector('[data-audio-toggle]');
+      const audioElement = document.getElementById('ambience');
+      if (!audioToggle) {
+        return;
+      }
+
+      const state = {
+        playing: false,
+        mode: audioElement ? 'element' : 'fallback',
+        fallbackCtx: null,
+        fallbackGain: null,
+      };
+
+      function updateToggle() {
+        audioToggle.dataset.state = state.playing ? 'playing' : 'idle';
+        audioToggle.setAttribute('aria-pressed', state.playing ? 'true' : 'false');
+      }
+
+      function ensureElementSource() {
+        if (!audioElement) return false;
+        if (!audioElement.src) {
+          const src = audioElement.dataset.src;
+          if (src) {
+            audioElement.src = src;
+          } else {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      async function startElement() {
+        if (!audioElement) throw new Error('missing audio element');
+        if (!ensureElementSource()) throw new Error('missing audio source');
+        await audioElement.play();
+      }
+
+      function stopElement() {
+        if (!audioElement) return;
+        audioElement.pause();
+        audioElement.currentTime = 0;
+      }
+
+      function ensureFallbackNodes() {
+        if (state.fallbackCtx) return;
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) throw new Error('AudioContext not supported');
+        const ctx = state.fallbackCtx = new AudioCtx();
+        const bufferSize = 2 * ctx.sampleRate;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const output = buffer.getChannelData(0);
+        let lastOut = 0;
+        for (let i = 0; i < bufferSize; i += 1) {
+          const white = Math.random() * 2 - 1;
+          lastOut = (lastOut + (0.02 * white)) / 1.02;
+          output[i] = lastOut * 0.5;
+        }
+        const source = ctx.createBufferSource();
+        source.buffer = buffer;
+        source.loop = true;
+        const gain = state.fallbackGain = ctx.createGain();
+        gain.gain.value = 0;
+        source.connect(gain).connect(ctx.destination);
+        source.start();
+      }
+
+      async function startFallback() {
+        ensureFallbackNodes();
+        if (state.fallbackCtx.state === 'suspended') {
+          await state.fallbackCtx.resume();
+        }
+        const now = state.fallbackCtx.currentTime;
+        state.fallbackGain.gain.cancelScheduledValues(now);
+        state.fallbackGain.gain.linearRampToValueAtTime(0.35, now + 0.4);
+      }
+
+      function stopFallback() {
+        if (!state.fallbackCtx || !state.fallbackGain) return;
+        const now = state.fallbackCtx.currentTime;
+        state.fallbackGain.gain.cancelScheduledValues(now);
+        state.fallbackGain.gain.linearRampToValueAtTime(0, now + 0.3);
+      }
+
+      async function handleToggle() {
+        if (state.playing) {
+          if (state.mode === 'element') {
+            stopElement();
+          } else {
+            stopFallback();
+          }
+          state.playing = false;
+          updateToggle();
+          return;
+        }
+
+        if (state.mode === 'element') {
+          try {
+            await startElement();
+            state.playing = true;
+            updateToggle();
+            return;
+          } catch (error) {
+            console.warn('Falling back to generated ambience.', error);
+            state.mode = 'fallback';
+          }
+        }
+
+        try {
+          await startFallback();
+          state.playing = true;
+        } catch (error) {
+          console.error('Unable to initialize fallback audio', error);
+        }
+        updateToggle();
+      }
+
+      audioToggle.addEventListener('click', () => {
+        handleToggle();
+      });
+
+      audioElement?.addEventListener('pause', () => {
+        if (state.mode === 'element' && state.playing && audioElement.paused) {
+          state.playing = false;
+          updateToggle();
+        }
+      });
+
+      audioElement?.addEventListener('ended', () => {
+        state.playing = false;
+        updateToggle();
+      });
+
+      audioElement?.addEventListener('error', () => {
+        if (state.mode === 'element') {
+          state.mode = 'fallback';
+          if (state.playing) {
+            state.playing = false;
+            updateToggle();
+          }
+        }
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden && state.playing) {
+          if (state.mode === 'element') {
+            stopElement();
+          } else {
+            stopFallback();
+          }
+          state.playing = false;
+          updateToggle();
+        }
+      });
+
+      updateToggle();
+    })();
+  </script>
 </body>
 </html>
