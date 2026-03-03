@@ -31,3 +31,9 @@ This repository is a postcard-style static site with a rotating current homepage
 - Broken relative paths after moving assets.
 - Archive links failing when directory depth assumptions change.
 - Regressions from broad find/replace in narrative text blocks.
+
+## Repository workflow preference
+- Default workflow is to commit directly to `main` for routine changes in this repo.
+- Use a feature branch only when explicitly requested or when isolating high-risk/experimental work.
+- If tool defaults conflict with this preference, treat this guide as the repo-local source of truth.
+
