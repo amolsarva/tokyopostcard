@@ -12,8 +12,9 @@ This repository is a postcard-style static site with a rotating current homepage
 1. **Preserve archives:** never overwrite archived narratives unless fixing breakages (paths, links, accessibility, critical UX defects).
 2. **Homepage can evolve:** new editions should update `index.html` while keeping old versions in `archives/`.
 3. **Manifest drives discovery:** when adding an archive, append an entry to `archives/manifest.json` with `slug`, `label`, and `blurb`.
-4. **Relative paths first:** verify path correctness from each page location (`index.html` vs `archives/<slug>/index.html` differ).
-5. **Return path UX:** archive pages should provide a clear navigation path back to homepage.
+4. **Snapshot on promotion:** every time you ship a new homepage edition, first copy the outgoing `index.html` (plus any supporting assets/data) into `archives/<edition-slug>/`, then register that slug in the manifest so the archive page gains a card immediately.
+5. **Relative paths first:** verify path correctness from each page location (`index.html` vs `archives/<slug>/index.html` differ).
+6. **Return path UX:** archive pages should provide a clear navigation path back to homepage.
 
 ## Pre-commit checklist
 - Confirm changed image/audio paths resolve from the edited page location.
@@ -36,4 +37,3 @@ This repository is a postcard-style static site with a rotating current homepage
 - Default workflow is to commit directly to `main` for routine changes in this repo.
 - Use a feature branch only when explicitly requested or when isolating high-risk/experimental work.
 - If tool defaults conflict with this preference, treat this guide as the repo-local source of truth.
-
