@@ -591,7 +591,7 @@
 
     const buildAssetPath = (fileName) => {
       if (!fileName) return '';
-      return `${imageRoot}/${fileName}`.replace(/(?<!:)\\/\\//g, '/');
+      return `${imageRoot}/${fileName}`;
     };
 
     function renderScenes() {
