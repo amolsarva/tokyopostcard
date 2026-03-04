@@ -3,19 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NEWAIYORK · DREAMS</title>
+  <title>NEWAIYORK - Six Nights in Flash</title>
   <style>
     :root {
       color-scheme: dark;
-      font-family: "SF Pro Display", "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      --bg: #120318;
-      --ink: #fff8f5;
-      --accent: #ff7ab7;
-      --panel: rgba(0, 0, 0, 0.42);
-      --hero-background: radial-gradient(circle at 20% -10%, rgba(255, 198, 235, 0.4), transparent 50%), linear-gradient(155deg, #2a1233 0%, #632960 45%, #14122f 100%);
+      font-family: "Space Grotesk", "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --bg: #050308;
+      --bg-top: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.06), transparent 55%);
+      --bg-bottom: linear-gradient(135deg, #050308 0%, #0b0720 45%, #020204 100%);
+      --ink: #f7f3ef;
+      --ink-soft: rgba(247, 243, 239, 0.68);
+      --panel: rgba(4, 4, 12, 0.76);
+      --panel-border: rgba(255, 255, 255, 0.18);
+      --flash: rgba(255, 255, 255, 0.16);
+      --spotify: #1db954;
     }
 
-    * { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; }
 
     html, body {
       margin: 0;
@@ -25,212 +29,655 @@
     }
 
     body {
+      min-height: 100vh;
+      background-image:
+        radial-gradient(circle at 20% -10%, rgba(255, 255, 255, 0.08), transparent 55%),
+        radial-gradient(circle at 80% 0%, rgba(255, 0, 102, 0.12), transparent 50%),
+        linear-gradient(120deg, rgba(255, 0, 153, 0.1), transparent 40%),
+        var(--bg-bottom);
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
+      letter-spacing: 0.01em;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(120deg, rgba(255, 255, 255, 0.04) 0 2px, transparent 2px 12px);
+      mix-blend-mode: screen;
+      opacity: 0.3;
+      pointer-events: none;
+      animation: sweep 14s linear infinite;
     }
 
     .hud {
-      position: fixed;
-      top: 1.2rem;
-      left: clamp(1rem, 5vw, 3rem);
-      right: clamp(1rem, 5vw, 3rem);
-      z-index: 3;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.75rem;
-      letter-spacing: 0.16em;
+      gap: 1rem;
+      padding: 1.5rem clamp(1.2rem, 4vw, 4rem);
       text-transform: uppercase;
+      letter-spacing: 0.3em;
+      font-size: 0.65rem;
     }
 
-    .brand-link,
-    .archives-link {
-      color: var(--ink);
+    .brand-link {
+      color: inherit;
       text-decoration: none;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.35);
       padding-bottom: 2px;
     }
 
-    main {
-      flex: 1;
-      display: grid;
-      place-items: center;
-      padding: 14vh clamp(1rem, 5vw, 4rem) 4rem;
-      background: var(--hero-background);
+    .brand-link:focus-visible,
+    .brand-link:hover {
+      border-bottom-color: rgba(255, 255, 255, 0.7);
+      outline: none;
     }
 
-    .stage {
-      width: min(980px, 100%);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      border-radius: 24px;
+    .hud span { opacity: 0.7; }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(1.2rem, 5vh, 3rem);
+      padding: 0 clamp(1.2rem, 5vw, 5rem) 4rem;
+    }
+
+    .hero {
+      margin-top: clamp(1rem, 6vh, 3rem);
+      padding: clamp(1.2rem, 4vw, 3.5rem);
       background: var(--panel);
-      backdrop-filter: blur(5px);
-      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
-      padding: clamp(1.4rem, 3.5vw, 3rem);
-      display: grid;
-      gap: 1.2rem;
+      border: 1px solid var(--panel-border);
+      border-radius: 1rem;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -20% -10% auto;
+      height: 40%;
+      background:
+        radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%),
+        linear-gradient(120deg, rgba(255, 0, 166, 0.3), rgba(0, 255, 208, 0.2));
+      mix-blend-mode: screen;
+      opacity: 0.6;
+      pointer-events: none;
+      animation: flash 6s ease-in-out infinite;
+    }
+
+    .eyebrow {
+      margin: 0 0 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.4em;
+      font-size: 0.7rem;
+      color: var(--ink-soft);
     }
 
     h1 {
+      margin: 0 0 0.6rem;
+      font-size: clamp(2rem, 8vw, 4.5rem);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero p {
+      margin: 0 0 0.9rem;
+      max-width: 70ch;
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+
+    .hero strong { color: var(--ink); }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.9rem;
+      margin-top: 1.5rem;
+    }
+
+    .timeline-card {
+      padding: 0.95rem 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 0.85rem;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .timeline-card span {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      opacity: 0.65;
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline-card strong { font-size: 1.05rem; }
+
+    .scenes {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(1.2rem, 3vh, 2.5rem);
+    }
+
+    .scene {
+      display: grid;
+      grid-template-columns: minmax(240px, 0.8fr) minmax(240px, 1fr);
+      gap: clamp(1rem, 4vw, 3rem);
+      padding: clamp(1rem, 4vw, 3rem);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 1.2rem;
+      background: rgba(7, 7, 16, 0.78);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .scene::before {
+      content: attr(data-scene-id);
+      position: absolute;
+      top: 1.2rem;
+      right: clamp(1rem, 4vw, 2rem);
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      opacity: 0.4;
+    }
+
+    .scene-media {
+      position: relative;
+      min-height: 360px;
+      border-radius: 0.8rem;
+      background:
+        linear-gradient(120deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)),
+        radial-gradient(circle at 20% 20%, rgba(255, 0, 166, 0.24), transparent 65%),
+        rgba(10, 10, 18, 0.8);
+      background-image:
+        var(--photo, linear-gradient(180deg, rgba(8, 8, 16, 0.85), rgba(8, 8, 16, 0.85))),
+        linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.3) 90%);
+      background-size: cover, cover;
+      background-position: center;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      overflow: hidden;
+    }
+
+    .scene-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 35% 20%, rgba(255, 255, 255, 0.25), transparent 50%);
+      mix-blend-mode: screen;
+      opacity: 0.5;
+      animation: burst 5s ease-in-out infinite;
+    }
+
+    .scene-media.is-placeholder {
+      border-style: dashed;
+      background-image:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0)),
+        linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.3) 90%);
+    }
+
+    .scene-media.is-placeholder::after {
+      opacity: 0.25;
+      animation: none;
+    }
+
+    .scene-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .scene-meta {
       margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.35em;
+      font-size: 0.7rem;
+      color: var(--ink-soft);
+    }
+
+    .scene-title {
+      margin: 0;
+      font-size: clamp(1.5rem, 4vw, 2.3rem);
+      letter-spacing: 0.03em;
+    }
+
+    .scene-body {
+      margin: 0;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+
+    .scene-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .scene-tags li {
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .spotify-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(29, 185, 84, 0.7);
+      color: #dfffe9;
+      text-decoration: none;
       text-transform: uppercase;
       letter-spacing: 0.2em;
-      font-size: clamp(1.7rem, 7vw, 4.2rem);
-      color: var(--accent);
+      font-size: 0.65rem;
+      align-self: flex-start;
+      transition: border-color 0.2s ease, transform 0.2s ease;
     }
 
-    .line {
-      margin: 0;
-      min-height: 5.4rem;
-      font-size: clamp(1.25rem, 4vw, 2.3rem);
-      line-height: 1.35;
-      max-width: 28ch;
+    .spotify-badge svg {
+      width: 1rem;
+      height: 1rem;
+      fill: currentColor;
     }
 
-    .emoji-band {
-      margin: 0;
-      font-size: clamp(2rem, 7vw, 4rem);
-      letter-spacing: 0.18em;
-      filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.3));
-      user-select: none;
+    .spotify-badge:hover,
+    .spotify-badge:focus-visible {
+      border-color: #4df79c;
+      transform: translateY(-2px);
+      outline: none;
     }
 
-    .meta {
-      margin: 0;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      font-size: 0.72rem;
-      opacity: 0.8;
-    }
-
-    .controls {
+    .contact-section {
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 1.2rem;
+      padding: clamp(1.2rem, 4vw, 3rem);
+      background: rgba(6, 6, 14, 0.82);
       display: flex;
-      gap: 0.7rem;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 1.5rem;
     }
 
-    .controls button {
-      border: 1px solid rgba(255, 255, 255, 0.36);
-      background: rgba(0, 0, 0, 0.35);
-      color: inherit;
-      border-radius: 999px;
-      padding: 0.6rem 1.1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 0.68rem;
-      cursor: pointer;
+    .contact-head h2 {
+      margin: 0.4rem 0;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      letter-spacing: 0.04em;
     }
 
-    footer {
-      padding: 1rem;
-      text-align: center;
-      background: #060308;
-      letter-spacing: 0.18em;
+    .contact-head p {
+      margin: 0;
+      color: var(--ink-soft);
+      max-width: 70ch;
+      line-height: 1.5;
+    }
+
+    .contact-sheet {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .contact-card {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 0.9rem;
+      padding: 0.75rem;
+      background: rgba(8, 8, 16, 0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      min-height: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), transparent 60%);
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    .contact-photo {
+      flex: 1;
+      border-radius: 0.5rem;
+      background-size: cover;
+      background-position: center;
+      min-height: 140px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .contact-caption {
+      margin: 0;
+      font-size: 0.78rem;
+      line-height: 1.3;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      font-size: 0.68rem;
+    }
+
+    .archives {
+      padding: 2rem 0 3rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .archives-link {
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      padding-bottom: 2px;
+    }
+
+    @media (max-width: 960px) {
+      .scene {
+        grid-template-columns: 1fr;
+      }
+      .scene-media {
+        min-height: 280px;
+      }
+      .scene::before {
+        right: 1.2rem;
+        opacity: 0.2;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body::after,
+      .hero::before,
+      .scene-media::after {
+        animation: none;
+      }
+    }
+
+    @keyframes sweep {
+      0% { transform: translateX(-10%); }
+      100% { transform: translateX(10%); }
+    }
+
+    @keyframes flash {
+      0%, 60% { opacity: 0.2; }
+      80% { opacity: 0.7; }
+      100% { opacity: 0.2; }
+    }
+
+    @keyframes burst {
+      0% { opacity: 0.35; }
+      50% { opacity: 0.65; }
+      100% { opacity: 0.35; }
     }
   </style>
 </head>
-<body data-cycles="./assets/data/dreams.json">
+<body data-manifest="../manifest.json" data-archives-base=".." data-assets-base="../..">
   <header class="hud">
-    <a class="brand-link" href="./">NEWAIYORK</a>
-    <span><span id="counter">01</span> / <span id="total">00</span></span>
-    <span id="tone">DREAM MAP</span>
+    <a class="brand-link" href="../../index.html">NEWAIYORK</a>
+    <span>19-24 FEB 2026 // NYC</span>
   </header>
 
   <main>
-    <section class="stage" aria-live="polite">
-      <h1 id="title">DREAMS</h1>
-      <p class="line" id="line">Loading...</p>
-      <p class="emoji-band" id="emoji">✨</p>
-      <p class="meta" id="meta">Tap anywhere for next line</p>
-      <div class="controls" aria-label="Page controls">
-        <button type="button" data-cycle="-1">Prev</button>
-        <button type="button" data-cycle="1">Next</button>
+    <section class="hero">
+      <p class="eyebrow">Flash Diary</p>
+      <h1>Six Nights In The Glow</h1>
+      <p>Meatpacking neon, UES velvet, Bushwick lofts, Rockaway snowdrifts. We shot this like a 1990s fashion contact sheet: <strong>Feb 19-24, 2026</strong>, six days of being inseparable, first long stretch of sleepovers that never really involved sleep. Every frame leans into nostalgia on purpose.</p>
+      <p>Highlights we keep repeating: the weird sacred quiet inside the church at 16th &amp; 6th, the Standard High Line window looking south, the private tour through Hauser &amp; Wirth, Kaya mixing us a scent in Bushwick, the Tesla fishtailing through snow toward Belle Harbor, losing power and still laughing. We pin each spread to a track so she can click the badge and drop right back in.</p>
+      <div class="timeline" aria-label="Neighborhood run sheet">
+        <article class="timeline-card">
+          <span>Day 01</span>
+          <strong>Meatpacking<br />&amp; The Standard</strong>
+        </article>
+        <article class="timeline-card">
+          <span>Day 02</span>
+          <strong>16th &amp; 6th<br />private prayers</strong>
+        </article>
+        <article class="timeline-card">
+          <span>Day 03</span>
+          <strong>UES 70s<br />to Maxime's</strong>
+        </article>
+        <article class="timeline-card">
+          <span>Day 04</span>
+          <strong>Bushwick<br />studio runs</strong>
+        </article>
+        <article class="timeline-card">
+          <span>Day 05</span>
+          <strong>Paul's Casablanca<br />dancing</strong>
+        </article>
+        <article class="timeline-card">
+          <span>Day 06</span>
+          <strong>Rockaway<br />snow blackout</strong>
+        </article>
       </div>
+    </section>
+
+    <section class="scenes" id="sceneMount" aria-live="polite"></section>
+
+    <section class="contact-section" aria-label="Contact sheet outtakes">
+      <div class="contact-head">
+        <p class="eyebrow">Contact Proof</p>
+        <h2>Flashes We Cannot Stop Replaying</h2>
+        <p>Vespa sightings, Kaya's scent altar, pixel hearts, and Belle Harbor snowbanks. These frames sit between the big spreads—snapshots we will probably keep texting each other whenever nostalgia hits.</p>
+      </div>
+      <div class="contact-sheet" id="contactSheetMount"></div>
     </section>
   </main>
 
-  <footer>
-    <a class="archives-link" href="./archive.html">LAURARCHIVE</a>
+  <footer class="archives">
+    <a class="archives-link" href="../../archive.html">LAURARCHIVE</a>
   </footer>
 
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <symbol id="spotifyMark" viewBox="0 0 24 24">
+      <path d="M12 1.5C6.21 1.5 1.5 6.21 1.5 12S6.21 22.5 12 22.5 22.5 17.79 22.5 12 17.79 1.5 12 1.5Zm5.11 14.7a.88.88 0 0 1-1.21.29c-3.32-2.03-7.5-2.5-12.43-1.4a.88.88 0 0 1-.38-1.73c5.35-1.19 9.96-.63 13.64 1.63.41.25.55.79.3 1.21Zm1.73-3.41a1.1 1.1 0 0 1-1.51.36c-3.8-2.33-9.58-3.01-14.06-1.68a1.1 1.1 0 0 1-.62-2.11c5.08-1.49 11.49-.73 15.87 1.93.51.31.67.98.32 1.5Zm.14-3.7c-4.34-2.58-11.53-2.82-15.65-1.58a1.32 1.32 0 0 1-.74-2.53c4.79-1.4 12.82-1.1 17.87 1.88a1.32 1.32 0 0 1-1.48 2.23Z" />
+    </symbol>
+  </svg>
+
+  <template id="sceneTemplate">
+    <article class="scene" data-scene-id="SH-00">
+      <div class="scene-media" role="img" aria-label="Flash still"></div>
+      <div class="scene-copy">
+        <p class="scene-meta">Scene Meta</p>
+        <h2 class="scene-title">Title</h2>
+        <p class="scene-body">Body copy</p>
+        <ul class="scene-tags"></ul>
+        <a class="spotify-badge" data-spotify href="#" target="_blank" rel="noopener">
+          <svg aria-hidden="true"><use href="#spotifyMark"></use></svg>
+          <span>Open track</span>
+        </a>
+      </div>
+    </article>
+  </template>
+
+  <template id="contactSheetTemplate">
+    <article class="contact-card">
+      <div class="contact-photo" role="img" aria-label=""></div>
+      <p class="contact-caption"></p>
+    </article>
+  </template>
+
   <script>
-    const root = document.documentElement;
-    const counterEl = document.getElementById('counter');
-    const totalEl = document.getElementById('total');
-    const toneEl = document.getElementById('tone');
-    const lineEl = document.getElementById('line');
-    const emojiEl = document.getElementById('emoji');
-    const metaEl = document.getElementById('meta');
-    const controls = document.querySelectorAll('[data-cycle]');
+    const bodyEl = document.body;
+    const assetsBase = (bodyEl.dataset.assetsBase || '.').replace(/\/$/, '');
+    const imageRoot = `${assetsBase}/assets/new-york`;
 
-    let scenes = [];
-    let index = 0;
+    const sceneData = [
+      {
+        id: "SHOT-01",
+        meta: "High Line Suite // Feb 19",
+        title: "Window Strobes",
+        copy: "We walked UES 70s to Meatpacking, hauled our bags into The Standard High Line, and let SHOUSE pulse through the windows while the Empire State blinked like a metronome. The church at 16th & 6th felt equal parts backstage prayer and inside joke.",
+        tags: ["The Standard", "Empire view", "First long stay"],
+        image: "scene-09-standard-view.jpg",
+        imageAlt: "View toward Midtown from The Standard High Line window",
+        accent: "#f53e9f",
+        song: {
+          title: "Love Tonight",
+          artist: "SHOUSE",
+          url: "https://open.spotify.com/track/1u73tmG4xQschbK8cXxSD9"
+        }
+      },
+      {
+        id: "SHOT-02",
+        meta: "UES to Bushwick // Feb 21",
+        title: "Private Rooms Only",
+        copy: "Maxime's velvet tables, a Hauser & Wirth private walk, Kaya mixing storm-scent in Bushwick, SAA Club passwords, and Paul’s Casablanca turning us into silhouettes. Robyn in our heads, zero hours apart.",
+        tags: ["Maxime's UES", "Hauser & Wirth", "Kaya's lab", "Paul's Casablanca"],
+        image: "scene-08-kaya.jpg",
+        imageAlt: "Kaya leading a fragrance session in Bushwick",
+        accent: "#9e5bff",
+        song: {
+          title: "Dancing On My Own",
+          artist: "Robyn",
+          url: "https://open.spotify.com/track/3Rc2ajBMInxeNGVkMPC92Y"
+        }
+      },
+      {
+        id: "SHOT-03",
+        meta: "Bushwick to Belle Harbor // Feb 23-24",
+        title: "Wrong Exit, Right Story",
+        copy: "Tesla in crazy snow, taking the wrong exit on purpose, Rockaway lights popping off, and us whispering over the hum of the battery. Icona Pop on repeat until the power returned.",
+        tags: ["Tesla skid", "Wrong exit lore", "Belle Harbor blackout"],
+        image: "scene-15-snow-walk.jpg",
+        imageAlt: "Freshly shoveled sidewalk in Belle Harbor snow",
+        accent: "#00ffd0",
+        song: {
+          title: "I Love It",
+          artist: "Icona Pop",
+          url: "https://open.spotify.com/track/1rhXXcrYp9RRObN5gsmqCU"
+        }
+      }
+    ];
 
-    function pad(value) {
-      return String(value).padStart(2, '0');
-    }
+    const contactSheetData = [
+      { image: "scene-01-vespa.jpg", caption: "Vespa plus bulldog outside The Standard", alt: "Woman on Vespa with bulldog in carrier" },
+      { image: "scene-02-fragrance-lab.jpg", caption: "Neue Luxury vials before Kaya mixed ours" },
+      { image: "scene-03-steaks.jpg", caption: "Maxime's steaks pre-sizzle in our borrowed kitchen" },
+      { image: "scene-04-cathedral.jpg", caption: "The church at 16th & 6th that felt holy and ridiculous" },
+      { image: "scene-05-respect-women.jpg", caption: "Respect Women posters screaming from a Bushwick wall" },
+      { image: "scene-06-apartment-grid.jpg", caption: "The curtain grid we kept staring at from the cab" },
+      { image: "scene-07-snoopy-snow.jpg", caption: "Snoopy neon and Bushwick snow squalls" },
+      { image: "scene-08-kaya.jpg", caption: "Kaya mid-lecture, champagne and scent strips everywhere" },
+      { image: "scene-09-standard-view.jpg", caption: "Empire State blinking from our Standard window" },
+      { image: "scene-10-hauser-painting.jpg", caption: "Hauser & Wirth painting we tried to memorize" },
+      { image: "scene-11-dried-plant.jpg", caption: "Belle Harbor plant that gave up before we did" },
+      { image: "scene-12-qr-statue.jpg", caption: "Statue of Liberty mermaid holding a QR code" },
+      { image: "scene-13-pixel-heart.jpg", caption: "Pixel heart invasion in Bushwick" },
+      { image: "scene-14-paris-sweatshirt.jpg", caption: "Paris sweatshirt tossed on the green carpet" },
+      { image: "scene-15-snow-walk.jpg", caption: "Shoveling a path just to laugh about it", alt: "Snowy sidewalk in Belle Harbor" },
+      { image: "scene-16-peel-wall.jpg", caption: "Poster peel texture we collected for later" }
+    ];
 
-    function renderScene(scene) {
-      if (!scene) return;
-      lineEl.textContent = scene.line || '';
-      emojiEl.textContent = scene.emoji || '✨';
-      metaEl.textContent = scene.meta || 'Tap anywhere for next line';
-      toneEl.textContent = scene.tone || 'DREAM MAP';
-      counterEl.textContent = pad(index + 1);
-      totalEl.textContent = pad(scenes.length);
-      root.style.setProperty('--accent', scene.accent || '#ff7ab7');
-      root.style.setProperty('--hero-background', scene.background || 'linear-gradient(135deg, #291734 0%, #12122f 100%)');
-    }
+    const mount = document.getElementById('sceneMount');
+    const template = document.getElementById('sceneTemplate');
+    const contactMount = document.getElementById('contactSheetMount');
+    const contactTemplate = document.getElementById('contactSheetTemplate');
 
-    function move(direction = 1) {
-      if (!scenes.length) return;
-      index = (index + direction + scenes.length) % scenes.length;
-      renderScene(scenes[index]);
-    }
+    const buildAssetPath = (fileName) => {
+      if (!fileName) return '';
+      return `${imageRoot}/${fileName}`;
+    };
 
-    controls.forEach((button) => {
-      const direction = Number(button.dataset.cycle) || 1;
-      button.addEventListener('click', (event) => {
-        event.preventDefault();
-        move(direction);
+    function renderScenes() {
+      if (!mount || !template) return;
+
+      sceneData.forEach((scene) => {
+        const fragment = template.content.cloneNode(true);
+        const article = fragment.querySelector('.scene');
+        const media = fragment.querySelector('.scene-media');
+        const meta = fragment.querySelector('.scene-meta');
+        const title = fragment.querySelector('.scene-title');
+        const body = fragment.querySelector('.scene-body');
+        const tagList = fragment.querySelector('.scene-tags');
+        const badge = fragment.querySelector('.spotify-badge');
+        const badgeLabel = badge?.querySelector('span');
+
+        article.dataset.sceneId = scene.id || '';
+        article.style.setProperty('--scene-accent', scene.accent || '#ffffff');
+
+        if (media) {
+          if (scene.image) {
+            media.style.setProperty('--photo', `url('${buildAssetPath(scene.image)}')`);
+            media.setAttribute('aria-label', scene.imageAlt || scene.title || 'New York still');
+          } else {
+            media.classList.add('is-placeholder');
+          }
+        }
+
+        if (meta) meta.textContent = scene.meta || '';
+        if (title) title.textContent = scene.title || '';
+        if (body) body.textContent = scene.copy || '';
+
+        if (Array.isArray(scene.tags) && tagList) {
+          tagList.innerHTML = '';
+          scene.tags.forEach((tag) => {
+            const li = document.createElement('li');
+            li.textContent = tag;
+            tagList.appendChild(li);
+          });
+        }
+
+        if (scene.song && scene.song.url && badge) {
+          badge.href = scene.song.url;
+          const titlePart = scene.song.title || "Spotify Track";
+          const artistPart = scene.song.artist ? ` // ${scene.song.artist}` : "";
+          const labelText = `${titlePart}${artistPart}`;
+          if (badgeLabel) badgeLabel.textContent = labelText;
+          badge.setAttribute("aria-label", `Open ${labelText} on Spotify`);
+        } else if (badge) {
+          badge.remove();
+        }
+
+        mount.appendChild(fragment);
       });
-    });
-
-    document.body.addEventListener('click', (event) => {
-      if (event.target.closest('button, a')) return;
-      move(1);
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (['ArrowRight', 'ArrowDown', ' ', 'Enter'].includes(event.key)) {
-        event.preventDefault();
-        move(1);
-      }
-      if (['ArrowLeft', 'ArrowUp'].includes(event.key)) {
-        event.preventDefault();
-        move(-1);
-      }
-    });
-
-    async function loadScenes() {
-      try {
-        const path = document.body.dataset.cycles;
-        const response = await fetch(path, { cache: 'no-store' });
-        if (!response.ok) throw new Error('could not load dreams data');
-        scenes = await response.json();
-        totalEl.textContent = pad(scenes.length);
-        renderScene(scenes[index]);
-      } catch (error) {
-        lineEl.textContent = 'Could not load this edition right now.';
-        metaEl.textContent = 'Refresh to retry';
-        console.error(error);
-      }
     }
 
-    loadScenes();
+    function renderContactSheet() {
+      if (!contactMount || !contactTemplate) return;
+
+      contactSheetData.forEach((entry, index) => {
+        const fragment = contactTemplate.content.cloneNode(true);
+        const card = fragment.querySelector('.contact-card');
+        const photo = fragment.querySelector('.contact-photo');
+        const caption = fragment.querySelector('.contact-caption');
+
+        if (card) {
+          card.setAttribute('data-contact-id', `CT-${String(index + 1).padStart(2, '0')}`);
+        }
+
+        if (photo && entry.image) {
+          const path = buildAssetPath(entry.image);
+          photo.style.backgroundImage = `url('${path}')`;
+          photo.setAttribute('aria-label', entry.alt || entry.caption || 'Contact sheet still');
+        }
+
+        if (caption) {
+          caption.textContent = entry.caption || '';
+        }
+
+        contactMount.appendChild(fragment);
+      });
+    }
+
+    renderScenes();
+    renderContactSheet();
   </script>
 </body>
 </html>
