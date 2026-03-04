@@ -514,15 +514,19 @@
   </template>
 
   <script>
+    const bodyEl = document.body;
+    const assetsBase = (bodyEl.dataset.assetsBase || '.').replace(/\/$/, '');
+    const imageRoot = `${assetsBase}/assets/new-york`;
+
     const sceneData = [
       {
         id: "SHOT-01",
-        meta: "Meatpacking // Feb 19",
+        meta: "High Line Suite // Feb 19",
         title: "Window Strobes",
-        copy: "We walked from the UES 70s down to The Standard High Line, let SHOUSE pulse in our heads, and watched the Empire State glow while the snow prepped its entrance. The church at 16th & 6th felt like a backstage prayer, half holy, half ridiculous, fully ours.",
-        tags: ["Standard view", "16th & 6th church", "First shared suite"],
-        image: "../../assets/new-york/scene-01.jpg",
-        imageAlt: "Night view from The Standard High Line window",
+        copy: "We walked UES 70s to Meatpacking, hauled our bags into The Standard High Line, and let SHOUSE pulse through the windows while the Empire State blinked like a metronome. The church at 16th & 6th felt equal parts backstage prayer and inside joke.",
+        tags: ["The Standard", "Empire view", "First long stay"],
+        image: "scene-09-standard-view.jpg",
+        imageAlt: "View toward Midtown from The Standard High Line window",
         accent: "#f53e9f",
         song: {
           title: "Love Tonight",
@@ -532,12 +536,12 @@
       },
       {
         id: "SHOT-02",
-        meta: "UES & Bushwick // Feb 21",
+        meta: "UES to Bushwick // Feb 21",
         title: "Private Rooms Only",
-        copy: "Maxime's candlelit seating, a Hauser & Wirth private walkthrough, Kaya building us a custom fragrance in Bushwick, and SAA Club passwords opening in the same breath. Paul's Casablanca hit like strobe-lit confetti--Robyn on loop while we refused to leave the floor.",
-        tags: ["Maxime's UES", "Hauser & Wirth tour", "Kaya's fragrance lab", "Paul's Casablanca"],
-        image: "../../assets/new-york/scene-02.jpg",
-        imageAlt: "Tabletop flash of Maxime's meet-up",
+        copy: "Maxime's velvet tables, a Hauser & Wirth private walk, Kaya mixing storm-scent in Bushwick, SAA Club passwords, and Paul’s Casablanca turning us into silhouettes. Robyn in our heads, zero hours apart.",
+        tags: ["Maxime's UES", "Hauser & Wirth", "Kaya's lab", "Paul's Casablanca"],
+        image: "scene-08-kaya.jpg",
+        imageAlt: "Kaya leading a fragrance session in Bushwick",
         accent: "#9e5bff",
         song: {
           title: "Dancing On My Own",
@@ -549,10 +553,10 @@
         id: "SHOT-03",
         meta: "Bushwick to Belle Harbor // Feb 23-24",
         title: "Wrong Exit, Right Story",
-        copy: "Tesla skids, wrong exits, crazy snow that kept us laughing, and Rockaway's lights popping off just as we tucked in. Belle Harbor felt like a soundstage blackout, so we made the hum of the battery our fireplace and promised to come back anyway.",
-        tags: ["Tesla in snow", "Wrong exit lore", "Rockaway blackout"],
-        image: "../../assets/new-york/scene-03.jpg",
-        imageAlt: "Snowstorm haze over Rockaway streets",
+        copy: "Tesla in crazy snow, taking the wrong exit on purpose, Rockaway lights popping off, and us whispering over the hum of the battery. Icona Pop on repeat until the power returned.",
+        tags: ["Tesla skid", "Wrong exit lore", "Belle Harbor blackout"],
+        image: "scene-15-snow-walk.jpg",
+        imageAlt: "Freshly shoveled sidewalk in Belle Harbor snow",
         accent: "#00ffd0",
         song: {
           title: "I Love It",
@@ -562,8 +566,33 @@
       }
     ];
 
+    const contactSheetData = [
+      { image: "scene-01-vespa.jpg", caption: "Vespa plus bulldog outside The Standard", alt: "Woman on Vespa with bulldog in carrier" },
+      { image: "scene-02-fragrance-lab.jpg", caption: "Neue Luxury vials before Kaya mixed ours" },
+      { image: "scene-03-steaks.jpg", caption: "Maxime's steaks pre-sizzle in our borrowed kitchen" },
+      { image: "scene-04-cathedral.jpg", caption: "The church at 16th & 6th that felt holy and ridiculous" },
+      { image: "scene-05-respect-women.jpg", caption: "Respect Women posters screaming from a Bushwick wall" },
+      { image: "scene-06-apartment-grid.jpg", caption: "The curtain grid we kept staring at from the cab" },
+      { image: "scene-07-snoopy-snow.jpg", caption: "Snoopy neon and Bushwick snow squalls" },
+      { image: "scene-08-kaya.jpg", caption: "Kaya mid-lecture, champagne and scent strips everywhere" },
+      { image: "scene-10-hauser-painting.jpg", caption: "Hauser & Wirth painting we tried to memorize" },
+      { image: "scene-11-dried-plant.jpg", caption: "Belle Harbor plant that gave up before we did" },
+      { image: "scene-12-qr-statue.jpg", caption: "Statue of Liberty mermaid holding a QR code" },
+      { image: "scene-13-pixel-heart.jpg", caption: "Pixel heart invasion in Bushwick" },
+      { image: "scene-14-paris-sweatshirt.jpg", caption: "Paris sweatshirt tossed on the green carpet" },
+      { image: "scene-15-snow-walk.jpg", caption: "Shoveling a path just to laugh about it", alt: "Snowy sidewalk in Belle Harbor" },
+      { image: "scene-16-peel-wall.jpg", caption: "Poster peel texture we collected for later" }
+    ];
+
     const mount = document.getElementById('sceneMount');
     const template = document.getElementById('sceneTemplate');
+    const contactMount = document.getElementById('contactSheetMount');
+    const contactTemplate = document.getElementById('contactSheetTemplate');
+
+    const buildAssetPath = (fileName) => {
+      if (!fileName) return '';
+      return `${imageRoot}/${fileName}`.replace(/(?<!:)\\/\\//g, '/');
+    };
 
     function renderScenes() {
       if (!mount || !template) return;
@@ -584,7 +613,7 @@
 
         if (media) {
           if (scene.image) {
-            media.style.setProperty('--photo', `url('${scene.image}')`);
+            media.style.setProperty('--photo', `url('${buildAssetPath(scene.image)}')`);
             media.setAttribute('aria-label', scene.imageAlt || scene.title || 'New York still');
           } else {
             media.classList.add('is-placeholder');
@@ -619,7 +648,35 @@
       });
     }
 
+    function renderContactSheet() {
+      if (!contactMount || !contactTemplate) return;
+
+      contactSheetData.forEach((entry, index) => {
+        const fragment = contactTemplate.content.cloneNode(true);
+        const card = fragment.querySelector('.contact-card');
+        const photo = fragment.querySelector('.contact-photo');
+        const caption = fragment.querySelector('.contact-caption');
+
+        if (card) {
+          card.setAttribute('data-contact-id', `CT-${String(index + 1).padStart(2, '0')}`);
+        }
+
+        if (photo && entry.image) {
+          const path = buildAssetPath(entry.image);
+          photo.style.backgroundImage = `url('${path}')`;
+          photo.setAttribute('aria-label', entry.alt || entry.caption || 'Contact sheet still');
+        }
+
+        if (caption) {
+          caption.textContent = entry.caption || '';
+        }
+
+        contactMount.appendChild(fragment);
+      });
+    }
+
     renderScenes();
+    renderContactSheet();
   </script>
 </body>
 </html>
