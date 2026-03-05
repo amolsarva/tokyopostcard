@@ -74,6 +74,48 @@
       font-size: 0.85rem;
       color: rgba(244,243,255,0.58);
     }
+    .mailbox {
+      margin-top: 1.8rem;
+      padding-top: 1.2rem;
+      border-top: 1px dashed rgba(255,255,255,0.22);
+    }
+    .mailbox h3 {
+      margin: 0 0 0.45rem;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .mailbox p {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.55;
+      font-size: 0.95rem;
+    }
+    .mailbox-actions {
+      margin-top: 0.9rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+    .pill {
+      display: inline-block;
+      border-radius: 999px;
+      border: 1px solid rgba(138, 215, 255, 0.55);
+      background: rgba(138, 215, 255, 0.11);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.85rem;
+    }
+    .mailbox code {
+      font-family: "SF Mono", "JetBrains Mono", monospace;
+      background: rgba(255,255,255,0.08);
+      border-radius: 0.35rem;
+      padding: 0.05rem 0.3rem;
+      color: var(--ink);
+    }
   </style>
   <script src="/assets/js/password-gate.js"></script>
 </head>
@@ -92,6 +134,22 @@
         <h2>Hello Laura</h2>
         <p>Hello Laura</p>
       </article>
+
+      <section class="mailbox" aria-label="Email workflow">
+        <h3>Email to Werkwelt</h3>
+        <p>
+          This page is static, so inbound email cannot auto-publish yet.
+          Fast path: send ideas to <code>werkwelt@tokyopostcard.com</code>, then copy the email body into a new
+          <code>&lt;article&gt;</code> block here.
+        </p>
+        <div class="mailbox-actions">
+          <a
+            class="pill"
+            href="mailto:werkwelt@tokyopostcard.com?subject=WERKWELT%20post%20idea%20-%20%5Btitle%5D&body=Title%3A%20%5Btitle%5D%0ADate%3A%20%5BYYYY-MM-DD%5D%0A%0ABody%3A%0A%5BWrite%20your%20post%20here%5D"
+          >Compose Werkwelt email</a>
+          <a class="pill" href="mailto:werkwelt@tokyopostcard.com">Copy address</a>
+        </div>
+      </section>
 
       <p class="hint">Tip: duplicate the &lt;article&gt; block to add more entries.</p>
     </section>

@@ -24,9 +24,15 @@ This repository is a postcard-style static site with a rotating current homepage
 
 ## Known structure
 - Live page: `index.html`
+- Werkwelt page: `blog.html`
 - Archives index data: `archives/manifest.json`
 - Archive pages: `archives/*/index.html`
 - Asset roots: `assets/`, plus some edition-local `archives/<slug>/assets/`
+
+## Werkwelt email capture workflow
+- `blog.html` includes a `mailto:` quick-action for drafting Werkwelt posts.
+- To make `werkwelt@tokyopostcard.com` usable, configure mailbox forwarding at your DNS/email host (Cloudflare Email Routing, Fastmail alias, or Google Workspace alias all work).
+- Incoming email is an editorial inbox only. Publishing still requires manual copy/edit into `blog.html`.
 
 ## Risk areas
 - Broken relative paths after moving assets.
