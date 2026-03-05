@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Werkwelt</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07070b;
+      --card: #11111a;
+      --ink: #f4f3ff;
+      --ink-soft: rgba(244, 243, 255, 0.75);
+      --accent: #8ad7ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", "SF Pro Display", system-ui, sans-serif;
+      background: radial-gradient(circle at top, rgba(138, 215, 255, 0.12), transparent 40%), var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 2rem clamp(1rem, 4vw, 3rem) 4rem;
+    }
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      font-size: 0.72rem;
+    }
+    a { color: inherit; }
+    .link {
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.45);
+      padding-bottom: 2px;
+    }
+    .blog-card {
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 16px;
+      padding: clamp(1.2rem, 4vw, 2.2rem);
+      background: linear-gradient(170deg, rgba(255,255,255,0.05), transparent 55%), var(--card);
+    }
+    h1 {
+      margin: 0 0 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+    }
+    .subtitle {
+      margin: 0 0 2rem;
+      color: var(--ink-soft);
+    }
+    article h2 {
+      margin: 0 0 0.8rem;
+      font-size: 1.3rem;
+      letter-spacing: 0.04em;
+    }
+    article p {
+      margin: 0;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      white-space: pre-wrap;
+    }
+    .hint {
+      margin-top: 1.2rem;
+      font-size: 0.85rem;
+      color: rgba(244,243,255,0.58);
+    }
+  </style>
+  <script src="/assets/js/password-gate.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <a class="link" href="./">NewAIYork</a>
+      <a class="link" href="./archive.html">Laurarchive</a>
+    </header>
+
+    <section class="blog-card">
+      <h1>Werkwelt</h1>
+      <p class="subtitle">Static blog section. Add/update posts by editing this HTML file.</p>
+
+      <article>
+        <h2>Hello Laura</h2>
+        <p>Hello Laura</p>
+      </article>
+
+      <p class="hint">Tip: duplicate the &lt;article&gt; block to add more entries.</p>
+    </section>
+  </div>
+</body>
+</html>
