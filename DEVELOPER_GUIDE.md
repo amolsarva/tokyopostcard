@@ -24,9 +24,15 @@ This repository is a postcard-style static site with a rotating current homepage
 
 ## Known structure
 - Live page: `index.html`
+- Werkwelt page: `blog.html`
 - Archives index data: `archives/manifest.json`
 - Archive pages: `archives/*/index.html`
 - Asset roots: `assets/`, plus some edition-local `archives/<slug>/assets/`
+
+## Werkwelt email capture workflow
+- `blog.html` includes a popup-driven quick-send button that builds a `mailto:` draft.
+- Default recipient is `a@sarva.co`; update the `recipient` variable in `blog.html` if this changes.
+- This remains inbox-only capture. Publishing still requires manual copy/edit into `blog.html`.
 
 ## Risk areas
 - Broken relative paths after moving assets.

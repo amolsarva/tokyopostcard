@@ -74,6 +74,54 @@
       font-size: 0.85rem;
       color: rgba(244,243,255,0.58);
     }
+    .mailbox {
+      margin-top: 1.8rem;
+      padding-top: 1.2rem;
+      border-top: 1px dashed rgba(255,255,255,0.22);
+    }
+    .mailbox h3 {
+      margin: 0 0 0.45rem;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .mailbox p {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.55;
+      font-size: 0.95rem;
+    }
+    .mailbox-actions {
+      margin-top: 0.9rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+    .mailbox-note {
+      margin-top: 0.8rem;
+      font-size: 0.82rem;
+      color: rgba(244,243,255,0.58);
+    }
+    .pill {
+      display: inline-block;
+      cursor: pointer;
+      border-radius: 999px;
+      border: 1px solid rgba(138, 215, 255, 0.55);
+      background: rgba(138, 215, 255, 0.11);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.85rem;
+    }
+    .mailbox code {
+      font-family: "SF Mono", "JetBrains Mono", monospace;
+      background: rgba(255,255,255,0.08);
+      border-radius: 0.35rem;
+      padding: 0.05rem 0.3rem;
+      color: var(--ink);
+    }
   </style>
   <script src="/assets/js/password-gate.js"></script>
 </head>
@@ -93,8 +141,56 @@
         <p>Hello Laura</p>
       </article>
 
+      <section class="mailbox" aria-label="Email workflow">
+        <h3>Email to Werkwelt</h3>
+        <p>
+          No backend needed: click the button, fill in two pop-ups, and your mail app opens a draft
+          to <code>a@sarva.co</code>.
+        </p>
+        <div class="mailbox-actions">
+          <button class="pill" type="button" id="email-idea-btn">Quick-send idea (popup)</button>
+          <a class="pill" href="mailto:a@sarva.co">Open plain email</a>
+        </div>
+        <p class="mailbox-note">If popups are blocked, use “Open plain email.”</p>
+      </section>
+
       <p class="hint">Tip: duplicate the &lt;article&gt; block to add more entries.</p>
     </section>
   </div>
+  <script>
+    (function quickWerkweltEmail() {
+      var recipient = 'a@sarva.co';
+      var trigger = document.getElementById('email-idea-btn');
+      if (!trigger) return;
+
+      function sanitizeLine(value) {
+        return (value || '').replace(/[\r\n]+/g, ' ').trim();
+      }
+
+      trigger.addEventListener('click', function () {
+        var title = sanitizeLine(window.prompt('Title for this idea:'));
+        if (!title) return;
+
+        var body = window.prompt('Write the idea (can be short):') || '';
+        body = body.trim();
+        if (!body) return;
+
+        var now = new Date();
+        var yyyy = now.getFullYear();
+        var mm = String(now.getMonth() + 1).padStart(2, '0');
+        var dd = String(now.getDate()).padStart(2, '0');
+        var dateTag = yyyy + '-' + mm + '-' + dd;
+
+        var subject = 'WERKWELT idea - ' + title;
+        var content = 'Title: ' + title + '\nDate: ' + dateTag + '\n\nBody:\n' + body;
+        var mailto = 'mailto:' + recipient +
+          '?subject=' + encodeURIComponent(subject) +
+          '&body=' + encodeURIComponent(content);
+
+        window.location.href = mailto;
+      });
+    })();
+  </script>
+
 </body>
 </html>
