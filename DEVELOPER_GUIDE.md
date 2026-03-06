@@ -31,7 +31,7 @@ This repository is a postcard-style static site with a rotating current homepage
 
 ## Werkwelt email capture workflow
 - `blog.html` includes a `mailto:` quick-action for drafting Werkwelt posts.
-- To make `werkwelt@tokyopostcard.com` usable, configure mailbox forwarding at your DNS/email host (Cloudflare Email Routing, Fastmail alias, or Google Workspace alias all work).
+- To make `werkwelt@newaiyork.com` usable, configure mailbox forwarding at your DNS/email host (Cloudflare Email Routing, Fastmail alias, or Google Workspace alias all work).
 - Incoming email is an editorial inbox only. Publishing still requires manual copy/edit into `blog.html`.
 
 ## Risk areas
