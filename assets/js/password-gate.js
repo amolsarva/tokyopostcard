@@ -44,6 +44,10 @@
       if (!record) {
         return false;
       }
+      if (record.expiresAt <= record.grantedAt) {
+        window.localStorage.removeItem(DEVICE_KEY);
+        return false;
+      }
       if (record.expiresAt < now()) {
         window.localStorage.removeItem(DEVICE_KEY);
         return false;
@@ -62,11 +66,12 @@
     }
 
     try {
+      var grantedAt = now();
       window.localStorage.setItem(
         DEVICE_KEY,
         JSON.stringify({
-          grantedAt: now(),
-          expiresAt: now() + DEVICE_TTL_MS
+          grantedAt: grantedAt,
+          expiresAt: grantedAt + DEVICE_TTL_MS
         })
       );
     } catch (error) {
