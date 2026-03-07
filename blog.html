@@ -72,6 +72,12 @@
     article p + p {
       margin-top: 0.9rem;
     }
+    article ul {
+      margin: 0.45rem 0 0;
+      padding-left: 1.2rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
     .hint {
       margin-top: 1.2rem;
       font-size: 0.85rem;
@@ -134,66 +140,42 @@
       <p class="subtitle">Static blog section. Add/update posts by editing this HTML file.</p>
 
       <article>
-        <h2>London notes — who’s been pinged + Annabel’s plan</h2>
-        <p>
-          <strong>Re: Annabel’s</strong><br>
-          Julio Bruno — out of town (member)<br>
-          Vlad Guber — out of town (member)
-        </p>
-        <p>
-          <strong>Re: Hauser &amp; Wirth</strong><br>
-          Caitlin set this up: “My colleague Cajame will be at the gallery on Saturday the 14th and would love to show you around. 23 Savile Row!”
-        </p>
-        <p>
-          <strong>Folks pinged / invited</strong><br>
-          Rowan Finnegan — pinged<br>
-          Meljo from Conduit — pinged<br>
-          Vijay Prabhakar (high-frequency hedge fund) — coming with his two kids (2 and 5) + nanny — we will party<br>
-          Tom Dugarin (ex-Knotel, property developer) — invited<br>
-          Christian Hernandez (VC) — invited
-        </p>
-        <p>
-          <strong>Plan for Annabel’s site</strong><br>
-          Start at the new sushi spot where they are hosting a chef, then continue the evening nearby.
-        <h2>London agenda — galleries, salons, and late spots</h2>
-        <p>
-          <strong>Art + culture</strong><br>
-          Hauser &amp; Wirth (Savile Row) — Mayfair —
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=Hauser+%26+Wirth+Savile+Row+London">Google Maps</a><br>
-          Serpentine Galleries — Kensington Gardens —
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=Serpentine+Galleries+London">Google Maps</a><br>
-          Wallace Collection — Marylebone —
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=Wallace+Collection+London">Google Maps</a>
-        </p>
-        <p>
-          <strong>Walks + neighborhoods</strong><br>
-          Regent’s Canal (Little Venice access point) — Little Venice —
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=Little+Venice+Regent%27s+Canal+London">Google Maps</a><br>
-          Chelsea (King’s Road anchor) — Chelsea —
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=King%27s+Road+Chelsea+London">Google Maps</a><br>
-          Battersea Power Station — Battersea —
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=Battersea+Power+Station+London">Google Maps</a>
-        </p>
-        <p>
-          <strong>Salon guests</strong><br>
-          Suneil (the hedge fund guy)<br>
-          Ieva<br>
-          Debu P (ex Google head of M&amp;A)<br>
-          Rowan Finnegan / The Conduit cofounder
-        </p>
-        <p>
-          <strong>Evening options</strong><br>
-          The Arts Club — Mayfair —
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=The+Arts+Club+Dover+Street+London">Google Maps</a><br>
-          Annabel’s — Mayfair —
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=Annabel%27s+Berkeley+Square+London">Google Maps</a><br>
-          The Groucho Club — Soho —
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=The+Groucho+Club+Soho+London">Google Maps</a><br>
-          Chiltern Firehouse — Marylebone —
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=Chiltern+Firehouse+London">Google Maps</a><br>
-          Tramp — Mayfair —
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=Tramp+41+Jermyn+Street+London">Google Maps</a>
-        </p>
+        <h2>Draft itinerary — next week in London (conflict-resolved)</h2>
+        <p>Working draft that combines schedule timing with outreach notes in one place.</p>
+
+        <p><strong>Thursday</strong></p>
+        <ul>
+          <li>Amol lands at Gatwick around 8:00pm.</li>
+          <li>Keep plans light: arrival, check-in, and reset.</li>
+        </ul>
+
+        <p><strong>Friday (from 5:00pm onward)</strong></p>
+        <ul>
+          <li>Dinner-first plan, then one late stop.</li>
+          <li>Annabel’s context: Julio Bruno and Vlad Guber are both out of town.</li>
+        </ul>
+
+        <p><strong>Saturday (all day)</strong></p>
+        <ul>
+          <li>Ilka + 1 for most of the day.</li>
+          <li>Amol joins after ~2:00pm.</li>
+          <li>Hauser &amp; Wirth note: Caitlin confirmed Cajame can host a walkthrough at 23 Savile Row.</li>
+        </ul>
+
+        <p><strong>Sunday (all day)</strong></p>
+        <ul>
+          <li>Flex day for anything we could not fit earlier.</li>
+          <li>Tentative plan: start at the new sushi spot hosting a chef, then continue nearby.</li>
+        </ul>
+
+        <p><strong>Outreach tracker</strong></p>
+        <ul>
+          <li>Rowan Finnegan — pinged.</li>
+          <li>Meljo (Conduit) — pinged.</li>
+          <li>Vijay Prabhakar — likely coming with his two kids + nanny.</li>
+          <li>Tom Dugarin — invited.</li>
+          <li>Christian Hernandez — invited.</li>
+        </ul>
       </article>
 
       <section class="mailbox" aria-label="Post submission workflow">
@@ -207,7 +189,7 @@
           <a
             class="pill"
             href="mailto:werkwelt@newaiyork.com?subject=WERKWELT%20post%20idea%20-%20%5Btitle%5D&body=Title%3A%20%5Btitle%5D%0ADate%3A%20%5BYYYY-MM-DD%5D%0A%0ABody%3A%0A%5BWrite%20your%20post%20here%5D"
-          >Compose Werkwelt email</a>
+          >Send post idea</a>
           <a class="pill" href="mailto:werkwelt@newaiyork.com">Copy address</a>
         </div>
       </section>
