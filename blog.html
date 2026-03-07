@@ -69,6 +69,15 @@
       color: var(--ink-soft);
       white-space: pre-wrap;
     }
+    article p + p {
+      margin-top: 0.9rem;
+    }
+    article ul {
+      margin: 0.45rem 0 0;
+      padding-left: 1.2rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
     .hint {
       margin-top: 1.2rem;
       font-size: 0.85rem;
@@ -131,27 +140,60 @@
       <p class="subtitle">Static blog section. Add/update posts by editing this HTML file.</p>
 
       <article>
-        <h2>Hello Laura</h2>
-        <p>Hello Laura</p>
+        <h2>Draft itinerary — next week in London</h2>
+        <p>Structured draft for timing and who joins when.</p>
+
+        <p>
+          <strong>Thursday</strong>
+        </p>
+        <ul>
+          <li>Amol lands at Gatwick around 8:00pm.</li>
+          <li>Keep plans light: arrival, check-in, and reset.</li>
+        </ul>
+
+        <p>
+          <strong>Friday</strong>
+        </p>
+        <ul>
+          <li>Program starts from 5:00pm onward.</li>
+          <li>Good window for a dinner-first plan and one late stop.</li>
+        </ul>
+
+        <p>
+          <strong>Saturday</strong>
+        </p>
+        <ul>
+          <li>All day.</li>
+          <li>Includes friends: Ilka + 1 for most of the day.</li>
+          <li>Amol joins after ~2:00pm.</li>
+        </ul>
+
+        <p>
+          <strong>Sunday</strong>
+        </p>
+        <ul>
+          <li>All day.</li>
+          <li>Use as flex day for anything we couldn’t fit Saturday.</li>
+        </ul>
       </article>
 
-      <section class="mailbox" aria-label="Email workflow">
-        <h3>Email to Werkwelt</h3>
+      <section class="mailbox" aria-label="Post submission workflow">
+        <h3>Post to Werkwelt</h3>
         <p>
-          This page is static, so inbound email cannot auto-publish yet.
-          Fast path: send ideas to <code>werkwelt@tokyopostcard.com</code>, then copy the email body into a new
-          <code>&lt;article&gt;</code> block here.
+          Hi! If you want to post here, click the button below.
+          Your post won’t appear right away. We review submissions and ask our creator for approval before anything is published.
+          You can also email us directly at <code>werkwelt@newaiyork.com</code>.
         </p>
         <div class="mailbox-actions">
           <a
             class="pill"
-            href="mailto:werkwelt@tokyopostcard.com?subject=WERKWELT%20post%20idea%20-%20%5Btitle%5D&body=Title%3A%20%5Btitle%5D%0ADate%3A%20%5BYYYY-MM-DD%5D%0A%0ABody%3A%0A%5BWrite%20your%20post%20here%5D"
-          >Compose Werkwelt email</a>
-          <a class="pill" href="mailto:werkwelt@tokyopostcard.com">Copy address</a>
+            href="mailto:werkwelt@newaiyork.com?subject=WERKWELT%20post%20idea%20-%20%5Btitle%5D&body=Title%3A%20%5Btitle%5D%0ADate%3A%20%5BYYYY-MM-DD%5D%0A%0ABody%3A%0A%5BWrite%20your%20post%20here%5D"
+          >Send post idea</a>
+          <a class="pill" href="mailto:werkwelt@newaiyork.com">Copy address</a>
         </div>
       </section>
 
-      <p class="hint">Tip: duplicate the &lt;article&gt; block to add more entries.</p>
+      <p class="hint">Thanks for sharing ideas with Werkwelt.</p>
     </section>
   </div>
 </body>
