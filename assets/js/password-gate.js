@@ -1,31 +1,108 @@
 (function passwordGate() {
-  var SESSION_KEY = 'tp_access_granted_v1';
-  var REQUIRED_PASSWORD = 'Morrissey';
+  var PASSWORD = 'Morrissey';
+  var SESSION_KEY = 'tp_access_session_v2';
+  var DEVICE_KEY = 'tp_access_device_v2';
+  var DEVICE_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 
-  try {
-    if (window.sessionStorage.getItem(SESSION_KEY) === 'true') {
-      return;
-    }
-  } catch (error) {
-    // Continue to prompt if sessionStorage is unavailable.
+  function now() {
+    return Date.now();
   }
 
-  var attempts = 0;
-  while (true) {
-    var entry = window.prompt('Enter password to view this site:');
-    if (entry === REQUIRED_PASSWORD) {
+  function parseRecord(raw) {
+    if (!raw) {
+      return null;
+    }
+
+    try {
+      var parsed = JSON.parse(raw);
+      if (!parsed || typeof parsed !== 'object') {
+        return null;
+      }
+      if (typeof parsed.grantedAt !== 'number') {
+        return null;
+      }
+      if (typeof parsed.expiresAt !== 'number') {
+        return null;
+      }
+      return parsed;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function hasSessionAccess() {
+    try {
+      return window.sessionStorage.getItem(SESSION_KEY) === 'true';
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function hasDeviceAccess() {
+    try {
+      var record = parseRecord(window.localStorage.getItem(DEVICE_KEY));
+      if (!record) {
+        return false;
+      }
+      if (record.expiresAt < now()) {
+        window.localStorage.removeItem(DEVICE_KEY);
+        return false;
+      }
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function grantAccess() {
+    try {
+      window.sessionStorage.setItem(SESSION_KEY, 'true');
+    } catch (error) {
+      // Session storage unavailable.
+    }
+
+    try {
+      window.localStorage.setItem(
+        DEVICE_KEY,
+        JSON.stringify({
+          grantedAt: now(),
+          expiresAt: now() + DEVICE_TTL_MS
+        })
+      );
+    } catch (error) {
+      // Local storage unavailable.
+    }
+  }
+
+  function denyAccess() {
+    document.documentElement.innerHTML = '<body style="margin:0;display:grid;place-items:center;min-height:100vh;font-family:system-ui,sans-serif;background:#000;color:#fff;">Access cancelled.</body>';
+    throw new Error('Access cancelled by user');
+  }
+
+  var sessionAccess = hasSessionAccess();
+  var deviceAccess = hasDeviceAccess();
+
+  if (sessionAccess || deviceAccess) {
+    if (deviceAccess) {
       try {
         window.sessionStorage.setItem(SESSION_KEY, 'true');
       } catch (error) {
-        // Ignore storage failures; access remains for this page lifetime.
+        // Ignore session storage failure.
       }
-      return;
+    }
+    return;
+  }
+
+  while (true) {
+    var entry = window.prompt('Enter password to view this site:');
+
+    if (entry === null) {
+      denyAccess();
     }
 
-    attempts += 1;
-    if (entry === null && attempts >= 1) {
-      document.documentElement.innerHTML = '<body style="margin:0;display:grid;place-items:center;min-height:100vh;font-family:system-ui,sans-serif;background:#000;color:#fff;">Access cancelled.</body>';
-      throw new Error('Access cancelled by user');
+    if (entry === PASSWORD) {
+      grantAccess();
+      return;
     }
 
     window.alert('Incorrect password. Try again.');
