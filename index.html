@@ -140,7 +140,11 @@
   <div class="hud">
     <div class="topline">
       <a href="./">NEWAIYORK</a>
+<<<<<<< ours
       <span><span id="index">01</span> / <span id="total">16</span></span>
+=======
+      <span><span id="index">01</span> / <span id="total">26</span></span>
+>>>>>>> theirs
     </div>
 
     <div class="copy" aria-live="polite">
@@ -161,6 +165,7 @@
   </div>
 
   <script>
+<<<<<<< ours
     const scenes = [
       { image: 'assets/new-york/scene-01-vespa.jpg', line: 'Zip. Fold. Run.', meta: 'Keys by the door' },
       { image: 'assets/new-york/scene-02-fragrance-lab.jpg', line: 'Suits catch the sun.', meta: 'Hanger rail, quiet room' },
@@ -180,6 +185,9 @@
       { image: 'assets/new-york/scene-16-peel-wall.jpg', line: 'Prepared. Then running.', meta: 'Morning locked in frame' }
     ];
 
+=======
+    const dataPath = 'assets/data/morning-prep-today.json';
+>>>>>>> theirs
     const root = document.documentElement;
     const stage = document.getElementById('stage');
     const line = document.getElementById('line');
@@ -188,6 +196,10 @@
     const totalEl = document.getElementById('total');
     const controls = document.querySelectorAll('[data-step]');
 
+<<<<<<< ours
+=======
+    let scenes = [];
+>>>>>>> theirs
     let index = 0;
 
     function pad(value) {
@@ -205,6 +217,7 @@
       const accent = ['#6f8fa3', '#ca6f8c', '#c2b080', '#93a48f'][index % 4];
       root.style.setProperty('--accent', accent);
     }
+<<<<<<< ours
 
     function move(delta) {
       index = (index + delta + scenes.length) % scenes.length;
@@ -235,6 +248,72 @@
     });
 
     render();
+=======
+
+    function move(delta) {
+      if (!scenes.length) return;
+      index = (index + delta + scenes.length) % scenes.length;
+      render();
+    }
+
+    controls.forEach((button) => {
+      button.addEventListener('click', (event) => {
+        event.stopPropagation();
+        move(Number(button.dataset.step) || 1);
+      });
+    });
+
+    document.body.addEventListener('click', (event) => {
+      if (event.target.closest('a, button')) return;
+      move(1);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (['ArrowRight', 'ArrowDown', ' ', 'Enter'].includes(event.key)) {
+        event.preventDefault();
+        move(1);
+      }
+      if (['ArrowLeft', 'ArrowUp'].includes(event.key)) {
+        event.preventDefault();
+        move(-1);
+      }
+    });
+
+    async function imageExists(path) {
+      try {
+        const res = await fetch(path, { method: 'HEAD', cache: 'no-store' });
+        return res.ok;
+      } catch {
+        return false;
+      }
+    }
+
+    async function loadScenes() {
+      try {
+        const response = await fetch(dataPath, { cache: 'no-store' });
+        if (!response.ok) throw new Error('Could not load today image manifest');
+        const declared = await response.json();
+        const checks = await Promise.all(declared.map((scene) => imageExists(scene.image)));
+        scenes = declared.filter((_, idx) => checks[idx]);
+
+        if (!scenes.length) {
+          line.textContent = 'Waiting for today\'s upload set.';
+          meta.textContent = 'Add 01.jpg … 26.jpg in assets/morning-prep-today/';
+          totalEl.textContent = '00';
+          return;
+        }
+
+        render();
+      } catch (error) {
+        line.textContent = 'Could not load today\'s image set.';
+        meta.textContent = 'Check assets/data/morning-prep-today.json';
+        totalEl.textContent = '00';
+        console.error(error);
+      }
+    }
+
+    loadScenes();
+>>>>>>> theirs
   </script>
 </body>
 </html>
