@@ -140,7 +140,7 @@
   <div class="hud">
     <div class="topline">
       <a href="./">NEWAIYORK</a>
-      <span><span id="index">01</span> / <span id="total">16</span></span>
+      <span><span id="index">01</span> / <span id="total">26</span></span>
     </div>
 
     <div class="copy" aria-live="polite">
@@ -161,25 +161,7 @@
   </div>
 
   <script>
-    const scenes = [
-      { image: 'assets/new-york/scene-01-vespa.jpg', line: 'Zip. Fold. Run.', meta: 'Keys by the door' },
-      { image: 'assets/new-york/scene-02-fragrance-lab.jpg', line: 'Suits catch the sun.', meta: 'Hanger rail, quiet room' },
-      { image: 'assets/new-york/scene-03-steaks.jpg', line: 'Color picks the pace.', meta: 'Fabric strips in motion' },
-      { image: 'assets/new-york/scene-04-cathedral.jpg', line: 'Stairs say: move.', meta: 'Stone and early glare' },
-      { image: 'assets/new-york/scene-05-respect-women.jpg', line: 'Street turns electric.', meta: 'Blue sky, hard shadow' },
-      { image: 'assets/new-york/scene-06-apartment-grid.jpg', line: 'Carts, cables, coffee.', meta: 'Crew setup starts' },
-      { image: 'assets/new-york/scene-07-snoopy-snow.jpg', line: 'Everyone in position.', meta: 'Coats, checks, cues' },
-      { image: 'assets/new-york/scene-08-kaya.jpg', line: 'Mic up. Walk fast.', meta: 'Sidewalk run-through' },
-      { image: 'assets/new-york/scene-09-standard-view.jpg', line: 'Poles, grids, timing.', meta: 'Gear line, minute nine' },
-      { image: 'assets/new-york/scene-10-hauser-painting.jpg', line: 'No pause, just roll.', meta: 'Lights, reflectors, marks' },
-      { image: 'assets/new-york/scene-11-dried-plant.jpg', line: 'Blocks under every stand.', meta: 'Grip dance, low angle' },
-      { image: 'assets/new-york/scene-12-qr-statue.jpg', line: 'Lion print, red pulse.', meta: 'Wardrobe detail hit' },
-      { image: 'assets/new-york/scene-13-pixel-heart.jpg', line: 'Courthouse breathes in.', meta: 'Columns and glass' },
-      { image: 'assets/new-york/scene-14-paris-sweatshirt.jpg', line: 'Snowline at curb edge.', meta: 'Boom passes by' },
-      { image: 'assets/new-york/scene-15-snow-walk.jpg', line: 'Back to the rack.', meta: 'Sweatshirt and floor stripes' },
-      { image: 'assets/new-york/scene-16-peel-wall.jpg', line: 'Prepared. Then running.', meta: 'Morning locked in frame' }
-    ];
-
+    const dataPath = 'assets/data/morning-prep-today.json';
     const root = document.documentElement;
     const stage = document.getElementById('stage');
     const line = document.getElementById('line');
@@ -188,6 +170,7 @@
     const totalEl = document.getElementById('total');
     const controls = document.querySelectorAll('[data-step]');
 
+    let scenes = [];
     let index = 0;
 
     function pad(value) {
@@ -207,6 +190,7 @@
     }
 
     function move(delta) {
+      if (!scenes.length) return;
       index = (index + delta + scenes.length) % scenes.length;
       render();
     }
@@ -234,7 +218,40 @@
       }
     });
 
-    render();
+    async function imageExists(path) {
+      try {
+        const res = await fetch(path, { method: 'HEAD', cache: 'no-store' });
+        return res.ok;
+      } catch {
+        return false;
+      }
+    }
+
+    async function loadScenes() {
+      try {
+        const response = await fetch(dataPath, { cache: 'no-store' });
+        if (!response.ok) throw new Error('Could not load today image manifest');
+        const declared = await response.json();
+        const checks = await Promise.all(declared.map((scene) => imageExists(scene.image)));
+        scenes = declared.filter((_, idx) => checks[idx]);
+
+        if (!scenes.length) {
+          line.textContent = 'Waiting for today\'s upload set.';
+          meta.textContent = 'Add 01.jpg … 26.jpg in assets/morning-prep-today/';
+          totalEl.textContent = '00';
+          return;
+        }
+
+        render();
+      } catch (error) {
+        line.textContent = 'Could not load today\'s image set.';
+        meta.textContent = 'Check assets/data/morning-prep-today.json';
+        totalEl.textContent = '00';
+        console.error(error);
+      }
+    }
+
+    loadScenes();
   </script>
 </body>
 </html>
