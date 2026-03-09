@@ -1,23 +1,43 @@
 [
   {
-    "image": "assets/morning-prep-today/IMG_9999.jpg",
-    "line": "Zip. Fold. Run.",
-    "meta": "Rack, first light"
-  },
-  {
-    "image": "assets/morning-prep-today/IMG_9994.jpg",
-    "line": "Black wool. Wooden hanger.",
-    "meta": "Suit prep"
-  },
-  {
-    "image": "assets/morning-prep-today/IMG_9993.jpg",
-    "line": "Ribbon colors pick the day.",
-    "meta": "Fabric pass"
-  },
-  {
     "image": "assets/morning-prep-today/IMG_0001.jpg",
     "line": "Stone face, winter glare.",
     "meta": "Courthouse exterior"
+  },
+  {
+    "image": "assets/morning-prep-today/IMG_0003.jpg",
+    "line": "Trench in the lane.",
+    "meta": "On-set movement"
+  },
+  {
+    "image": "assets/morning-prep-today/IMG_0005.jpg",
+    "line": "Stands waiting for call.",
+    "meta": "Grip prep"
+  },
+  {
+    "image": "assets/morning-prep-today/IMG_9983.jpg",
+    "line": "Grey coat, pocket square.",
+    "meta": "Second look"
+  },
+  {
+    "image": "assets/morning-prep-today/IMG_9984.jpg",
+    "line": "Sweatshirt on stripe floor.",
+    "meta": "Interior return"
+  },
+  {
+    "image": "assets/morning-prep-today/IMG_9985.jpg",
+    "line": "Prints loud, pace louder.",
+    "meta": "Lion pattern"
+  },
+  {
+    "image": "assets/morning-prep-today/IMG_9986.jpg",
+    "line": "Boots by meltwater.",
+    "meta": "Curb edge"
+  },
+  {
+    "image": "assets/morning-prep-today/IMG_9987.jpg",
+    "line": "Court steps hold the line.",
+    "meta": "Entrance frame"
   },
   {
     "image": "assets/morning-prep-today/IMG_9988.jpg",
@@ -40,9 +60,14 @@
     "meta": "Sidewalk staging"
   },
   {
-    "image": "assets/morning-prep-today/IMG_0003.jpg",
-    "line": "Trench in the lane.",
-    "meta": "On-set movement"
+    "image": "assets/morning-prep-today/IMG_9993.jpg",
+    "line": "Ribbon colors pick the day.",
+    "meta": "Fabric pass"
+  },
+  {
+    "image": "assets/morning-prep-today/IMG_9994.jpg",
+    "line": "Black wool. Wooden hanger.",
+    "meta": "Suit prep"
   },
   {
     "image": "assets/morning-prep-today/IMG_9997.jpg",
@@ -55,33 +80,8 @@
     "meta": "Wardrobe detail"
   },
   {
-    "image": "assets/morning-prep-today/IMG_0005.jpg",
-    "line": "Stands waiting for call.",
-    "meta": "Grip prep"
-  },
-  {
-    "image": "assets/morning-prep-today/IMG_9983.jpg",
-    "line": "Grey coat, pocket square.",
-    "meta": "Second look"
-  },
-  {
-    "image": "assets/morning-prep-today/IMG_9985.jpg",
-    "line": "Prints loud, pace louder.",
-    "meta": "Lion pattern"
-  },
-  {
-    "image": "assets/morning-prep-today/IMG_9987.jpg",
-    "line": "Court steps hold the line.",
-    "meta": "Entrance frame"
-  },
-  {
-    "image": "assets/morning-prep-today/IMG_9986.jpg",
-    "line": "Boots by meltwater.",
-    "meta": "Curb edge"
-  },
-  {
-    "image": "assets/morning-prep-today/IMG_9984.jpg",
-    "line": "Sweatshirt on stripe floor.",
-    "meta": "Interior return"
+    "image": "assets/morning-prep-today/IMG_9999.jpg",
+    "line": "Zip. Fold. Run.",
+    "meta": "Rack, first light"
   }
 ]
