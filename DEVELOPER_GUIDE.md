@@ -20,6 +20,7 @@ This repository is a postcard-style static site with a rotating current homepage
 - Confirm changed image/audio paths resolve from the edited page location.
 - Validate archive navigation links (`../../` from `archives/<slug>/index.html`).
 - Run a local static server and load both homepage and at least one archive page.
+- From the homepage, confirm both `archive.html` (Laurarchive) and `blog.html` (Werkwelt) links are visible and clickable.
 - Ensure no accidental content drift in archived copy beyond intended fixes.
 
 ## Known structure
