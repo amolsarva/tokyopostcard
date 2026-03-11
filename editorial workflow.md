@@ -2,6 +2,8 @@
 
 Use this prompt whenever you want a brand-new homepage edition built quickly from the existing Tokyo Postcard style.
 
+> **Live-only policy:** every new edition replaces `index.html` immediately; we never stage draft-only builds.
+
 ---
 
 ## What I need from you (minimal input)
