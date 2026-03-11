@@ -163,13 +163,13 @@
     </div>
 
     <div class="copy" aria-live="polite">
-      <p class="kicker" id="kicker">Morning preparations in NYC</p>
-      <h1 id="line">Zip. Fold. Run.</h1>
-      <p class="hint">Tap anywhere for next frame</p>
+      <p class="kicker" id="kicker">New London Home</p>
+      <h1 id="line">Suitcases claim the center of the room.</h1>
+      <p class="hint">Tap anywhere to walk the rooms</p>
     </div>
 
     <div class="bottomline">
-      <span id="meta">Wardrobe floor, first light</span>
+      <span id="meta">Amber daylight, warehouse flat</span>
       <div class="nav-links" aria-label="Site navigation">
         <a href="archive.html">Laurarchive</a>
         <a href="blog.html">Werkwelt</a>
@@ -183,7 +183,7 @@
   </div>
 
   <script>
-    const dataPath = 'assets/data/morning-prep-today.json';
+    const dataPath = '/assets/data/new-london-home.json';
     const root = document.documentElement;
     const stage = document.getElementById('stage');
     const line = document.getElementById('line');
@@ -207,7 +207,7 @@
       meta.textContent = scene.meta;
       indexEl.textContent = pad(index + 1);
       totalEl.textContent = pad(scenes.length);
-      const accent = ['#6f8fa3', '#ca6f8c', '#c2b080', '#93a48f'][index % 4];
+      const accent = ['#c47a3a', '#6c5a4a', '#8fb0a3', '#d6c8ad'][index % 4];
       root.style.setProperty('--accent', accent);
     }
 
