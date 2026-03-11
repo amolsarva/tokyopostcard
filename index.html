@@ -49,6 +49,7 @@
       flex-direction: column;
       justify-content: space-between;
       padding: clamp(1rem, 3.5vw, 2.4rem);
+      padding-bottom: clamp(3rem, 8vw, 5rem);
       z-index: 3;
     }
 
@@ -58,6 +59,7 @@
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
+      flex-wrap: wrap;
       text-transform: uppercase;
       letter-spacing: 0.18em;
       font-size: 0.68rem;
@@ -77,6 +79,17 @@
     .nav-links {
       display: flex;
       gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 700px) {
+      .bottomline {
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+      }
     }
 
     .copy {
