@@ -3,17 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NEWAIYORK · New London Home</title>
+  <title>NEWAIYORK · Art Party</title>
+  <meta name="description" content="Art Party slideshow edition built from the complete art_party archive." />
   <style>
     :root {
       color-scheme: dark;
-      font-family: "Inter", "Space Grotesk", -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
-      --ink: #f9f1e6;
-      --ink-soft: rgba(249, 241, 230, 0.7);
-      --shadow: rgba(10, 7, 5, 0.85);
-      --accent: #c47a3a;
-      --bg: #140c07;
-      --grain: rgba(13, 9, 6, 0.6);
+      font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+      --ink: #f8f1ec;
+      --ink-soft: rgba(248, 241, 236, 0.65);
+      --bg: radial-gradient(circle at 30% 20%, rgba(211, 97, 255, 0.2), transparent 55%), #050208;
+      --badge: #1db954;
     }
 
     * { box-sizing: border-box; }
@@ -21,259 +20,317 @@
     html, body {
       margin: 0;
       min-height: 100%;
-      background: var(--bg);
+      background: #030105;
       color: var(--ink);
     }
 
     body {
       min-height: 100vh;
       overflow: hidden;
-      position: relative;
+      background: var(--bg);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.04), transparent 45%), radial-gradient(circle at 80% 60%, rgba(255, 255, 255, 0.03), transparent 50%), repeating-linear-gradient(125deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 10px);
+      opacity: 0.15;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      filter: contrast(140%);
     }
 
     .stage {
       position: fixed;
       inset: 0;
+      overflow: hidden;
+    }
+
+    .slide-canvas {
+      position: absolute;
+      inset: 0;
       background-image:
-        linear-gradient(140deg, rgba(14, 9, 5, 0.88) 0%, rgba(14, 9, 5, 0.62) 48%, rgba(20, 12, 7, 0.82) 100%),
-        var(--photo, radial-gradient(circle at 35% 25%, #c47a3a, #1b1008 65%));
+        linear-gradient(140deg, rgba(5, 2, 12, 0.9), rgba(3, 1, 7, 0.4)),
+        var(--photo, radial-gradient(circle at 35% 25%, rgba(212, 115, 255, 0.5), rgba(9, 2, 25, 0.6)));
       background-size: cover;
       background-position: center;
-      transition: background-image 220ms ease-out;
+      filter: saturate(1.05) contrast(1.08);
+      transition: background-image 1200ms ease, transform 12s ease;
+      will-change: background-image, transform;
+    }
+
+    body[data-mode="auto"] .slide-canvas {
+      animation: slow-pan 26s ease-in-out infinite alternate;
+    }
+
+    @keyframes slow-pan {
+      from { transform: scale(1.02) translate3d(-1%, -1%, 0); }
+      to { transform: scale(1.08) translate3d(1%, 1%, 0); }
+    }
+
+    .titlemark {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-transform: uppercase;
+      letter-spacing: 0.6em;
+      font-size: clamp(2.5rem, 8vw, 9rem);
+      pointer-events: none;
+      mix-blend-mode: screen;
+      text-shadow: 0 10px 50px rgba(5, 0, 15, 0.85);
+    }
+
+    .titlemark span {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      background: rgba(3, 0, 12, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      backdrop-filter: blur(4px);
     }
 
     .hud {
       position: fixed;
-      inset: 0;
-      pointer-events: none;
+      top: 0;
+      left: 0;
+      right: 0;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: clamp(1rem, 3.5vw, 2.4rem);
-      padding-bottom: clamp(3rem, 8vw, 5rem);
-      z-index: 3;
-    }
-
-    .topline,
-    .bottomline {
-      display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: clamp(1rem, 3vw, 2rem) clamp(1.2rem, 4vw, 3rem);
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-      font-size: 0.68rem;
-      color: var(--ink-soft);
-      text-shadow: 0 2px 20px var(--shadow);
-    }
-
-    .topline a,
-    .bottomline a {
-      pointer-events: auto;
-      color: inherit;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(244, 239, 233, 0.5);
-      padding-bottom: 2px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-    }
-
-    @media (max-width: 700px) {
-      .bottomline {
-        align-items: flex-start;
-      }
-
-      .nav-links {
-        justify-content: flex-start;
-      }
-    }
-
-    .copy {
-      max-width: min(78ch, 92vw);
-      margin: auto 0;
+      letter-spacing: 0.32em;
+      font-size: 0.7rem;
+      z-index: 10;
       pointer-events: none;
-      text-shadow: 0 12px 34px var(--shadow);
     }
 
-    .kicker {
-      margin: 0 0 0.7rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
+    .hud a {
       color: var(--ink-soft);
+      text-decoration: none;
+      pointer-events: auto;
     }
 
-    h1 {
-      margin: 0;
-      font-size: clamp(2rem, 7vw, 5.8rem);
-      line-height: 0.98;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      max-width: 13ch;
+    .brand {
+      border-bottom: 1px solid rgba(248, 241, 236, 0.35);
+      padding-bottom: 0.25rem;
     }
 
-    .hint {
-      margin-top: 0.75rem;
-      font-size: 0.75rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      opacity: 0.86;
+    .spotify-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(29, 185, 84, 0.55);
+      color: var(--ink);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      background: rgba(29, 185, 84, 0.18);
+      box-shadow: 0 0 20px rgba(29, 185, 84, 0.35);
+      animation: badgePulse 6.5s ease-in-out infinite;
+    }
+
+    .spotify-badge svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    @keyframes badgePulse {
+      0% { box-shadow: 0 0 18px rgba(29, 185, 84, 0.35); opacity: 0.8; }
+      40% { box-shadow: 0 0 28px rgba(29, 185, 84, 0.65); opacity: 1; }
+      100% { box-shadow: 0 0 18px rgba(29, 185, 84, 0.35); opacity: 0.8; }
     }
 
     .controls {
       position: fixed;
-      right: clamp(1rem, 3vw, 2rem);
       bottom: clamp(1rem, 3vw, 2rem);
-      z-index: 4;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
-      gap: 0.5rem;
+      gap: 0.8rem;
+      z-index: 10;
+      pointer-events: auto;
     }
 
     .controls button {
-      pointer-events: auto;
-      border: 1px solid rgba(244, 239, 233, 0.5);
-      background: rgba(12, 16, 23, 0.45);
-      color: var(--ink);
+      width: 54px;
+      height: 54px;
       border-radius: 999px;
-      padding: 0.52rem 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      font-size: 0.66rem;
+      border: 1px solid rgba(248, 241, 236, 0.4);
+      background: rgba(3, 2, 10, 0.55);
+      color: var(--ink);
+      font-size: 1.3rem;
       cursor: pointer;
+      backdrop-filter: blur(6px);
+      transition: transform 140ms ease, border-color 140ms ease;
+    }
+
+    .controls button:hover,
+    .controls button:focus-visible {
+      transform: translateY(-3px);
+      border-color: rgba(248, 241, 236, 0.85);
+      outline: none;
+    }
+
+    .status {
+      position: fixed;
+      bottom: clamp(1rem, 3vw, 2rem);
+      right: clamp(1rem, 4vw, 3rem);
+      font-size: 0.72rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .status[data-error="true"] { color: #f86f6f; }
+
+    @media (max-width: 640px) {
+      .hud { flex-direction: column; gap: 0.8rem; letter-spacing: 0.24em; }
+      .titlemark { letter-spacing: 0.28em; }
+      .controls { bottom: 5.5rem; }
+      .status { right: 50%; transform: translateX(50%); bottom: 1.5rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .stage { transition: none; }
+      .slide-canvas { transition-duration: 0.01ms; animation: none !important; }
+      body::after { animation: none; }
+      .spotify-badge { animation-duration: 12s; }
     }
   </style>
   <script src="/assets/js/password-gate.js"></script>
 </head>
-<body>
-  <div class="stage" id="stage" aria-hidden="true"></div>
+<body data-mode="manual">
+  <header class="hud">
+    <a class="brand" href="/" aria-label="Back to NEWAIYORK homepage">NEWAIYORK</a>
+    <div aria-hidden="true">Art Party</div>
+    <a class="spotify-badge" href="https://open.spotify.com/album/44Wa9N8w6M2VFRddtbnbX3" target="_blank" rel="noopener noreferrer" aria-label="Play Jens Lekman · Your Arms Around Me on Spotify">
+      <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M12 1.5a10.5 10.5 0 1 0 0 21 10.5 10.5 0 0 0 0-21zm4.86 15.36a.66.66 0 0 1-.9.22c-2.45-1.5-5.53-1.84-9.16-1.02a.66.66 0 0 1-.28-1.29c3.98-.92 7.43-.54 10.15 1.19a.66.66 0 0 1 .19.9zm1.29-2.86a.82.82 0 0 1-1.12.27c-2.79-1.72-7.05-2.22-10.35-1.23a.82.82 0 0 1-.46-1.57c3.77-1.12 8.47-.56 11.67 1.4.38.24.5.74.26 1.13zm.1-3.03c-3.3-1.95-8.77-2.13-11.93-1.17a.99.99 0 0 1-.57-1.89c3.66-1.1 9.7-.9 13.5 1.34a.99.99 0 0 1-1 1.72z"/></svg>
+      <span>Spotify · Your Arms Around Me</span>
+    </a>
+  </header>
 
-  <div class="hud">
-    <div class="topline">
-      <a href="./">NEWAIYORK</a>
-      <span><span id="index">01</span> / <span id="total">--</span></span>
+  <main class="stage" aria-live="polite">
+    <div id="slideCanvas" class="slide-canvas">
+      <div class="titlemark"><span>Art Party</span></div>
     </div>
-
-    <div class="copy" aria-live="polite">
-      <p class="kicker" id="kicker">New London Home</p>
-      <h1 id="line">Suitcases claim the center of the room.</h1>
-      <p class="hint">Tap anywhere to walk the rooms</p>
+    <div class="controls" role="group" aria-label="Slideshow controls">
+      <button id="prevBtn" type="button" aria-label="Previous image" title="Previous image">&#x276E;</button>
+      <button id="toggleBtn" type="button" aria-label="Toggle slideshow" title="Toggle slideshow">&#x25B6;</button>
+      <button id="nextBtn" type="button" aria-label="Next image" title="Next image">&#x276F;</button>
     </div>
-
-    <div class="bottomline">
-      <span id="meta">Amber daylight, warehouse flat</span>
-      <div class="nav-links" aria-label="Site navigation">
-        <a href="archive.html">Laurarchive</a>
-        <a href="blog.html">Werkwelt</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="controls" aria-label="Page controls">
-    <button type="button" data-step="-1">Prev</button>
-    <button type="button" data-step="1">Next</button>
-  </div>
+    <div class="status" id="status" aria-live="polite">-- / --</div>
+  </main>
 
   <script>
-    const dataPath = '/assets/data/new-london-home.json';
-    const root = document.documentElement;
-    const stage = document.getElementById('stage');
-    const line = document.getElementById('line');
-    const meta = document.getElementById('meta');
-    const indexEl = document.getElementById('index');
-    const totalEl = document.getElementById('total');
-    const controls = document.querySelectorAll('[data-step]');
+    (function () {
+      const endpoint = '/assets/art_party_artists_v2/image-list.json';
+      const slideCanvas = document.getElementById('slideCanvas');
+      const statusEl = document.getElementById('status');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const toggleBtn = document.getElementById('toggleBtn');
+      const state = {
+        slides: [],
+        index: 0,
+        timer: null,
+        interval: 9000,
+        mode: 'manual'
+      };
 
-    let scenes = [];
-    let index = 0;
-
-    function pad(value) {
-      return String(value).padStart(2, '0');
-    }
-
-    function render() {
-      const scene = scenes[index];
-      if (!scene) return;
-      stage.style.setProperty('--photo', `url("${scene.image}")`);
-      line.textContent = scene.line;
-      meta.textContent = scene.meta;
-      indexEl.textContent = pad(index + 1);
-      totalEl.textContent = pad(scenes.length);
-      const accent = ['#c47a3a', '#6c5a4a', '#8fb0a3', '#d6c8ad'][index % 4];
-      root.style.setProperty('--accent', accent);
-    }
-
-    function move(delta) {
-      if (!scenes.length) return;
-      index = (index + delta + scenes.length) % scenes.length;
-      render();
-    }
-
-    controls.forEach((button) => {
-      button.addEventListener('click', (event) => {
-        event.stopPropagation();
-        move(Number(button.dataset.step) || 1);
-      });
-    });
-
-    document.body.addEventListener('click', (event) => {
-      if (event.target.closest('a, button')) return;
-      move(1);
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (['ArrowRight', 'ArrowDown', ' ', 'Enter'].includes(event.key)) {
-        event.preventDefault();
-        move(1);
+      function pad(num, total) {
+        return String(num).padStart(String(total).length, '0');
       }
-      if (['ArrowLeft', 'ArrowUp'].includes(event.key)) {
-        event.preventDefault();
-        move(-1);
-      }
-    });
 
-    async function imageExists(path) {
-      try {
-        const res = await fetch(path, { method: 'HEAD', cache: 'no-store' });
-        return res.ok;
-      } catch {
-        return false;
-      }
-    }
-
-    async function loadScenes() {
-      try {
-        const response = await fetch(dataPath, { cache: 'no-store' });
-        if (!response.ok) throw new Error('Could not load today image manifest');
-        const declared = await response.json();
-        const checks = await Promise.all(declared.map((scene) => imageExists(scene.image)));
-        scenes = declared.filter((_, idx) => checks[idx]);
-
-        if (!scenes.length) {
-          line.textContent = 'Waiting for today\'s upload set.';
-          meta.textContent = 'Drop JPGs into assets/morning-prep-today/';
-          totalEl.textContent = '00';
+      function updateStatus() {
+        if (!state.slides.length) {
+          statusEl.textContent = '-- / --';
           return;
         }
-
-        render();
-      } catch (error) {
-        line.textContent = 'Could not load today\'s image set.';
-        meta.textContent = 'Check assets/data/morning-prep-today.json';
-        totalEl.textContent = '00';
-        console.error(error);
+        statusEl.textContent = pad(state.index + 1, state.slides.length) + ' / ' + state.slides.length;
       }
-    }
 
-    loadScenes();
+      function preload(nextIndex) {
+        if (!state.slides.length) return;
+        const img = new Image();
+        img.referrerPolicy = 'no-referrer';
+        img.decoding = 'async';
+        const len = state.slides.length;
+        const target = ((nextIndex % len) + len) % len;
+        img.src = state.slides[target];
+      }
+
+      function showSlide(nextIndex) {
+        if (!state.slides.length) return;
+        state.index = (nextIndex + state.slides.length) % state.slides.length;
+        const src = state.slides[state.index];
+        slideCanvas.style.setProperty('--photo', `url('${src}')`);
+        updateStatus();
+        preload(state.index + 1);
+      }
+
+      function startAuto() {
+        if (state.timer) return;
+        state.mode = 'auto';
+        document.body.dataset.mode = 'auto';
+        toggleBtn.innerHTML = '&#10074;&#10074;';
+        state.timer = window.setInterval(() => showSlide(state.index + 1), state.interval);
+      }
+
+      function stopAuto() {
+        state.mode = 'manual';
+        document.body.dataset.mode = 'manual';
+        toggleBtn.innerHTML = '&#x25B6;';
+        if (state.timer) {
+          window.clearInterval(state.timer);
+          state.timer = null;
+        }
+      }
+
+      function toggleAuto() {
+        if (state.mode === 'auto') {
+          stopAuto();
+        } else {
+          stopAuto();
+          startAuto();
+        }
+      }
+
+      prevBtn.addEventListener('click', () => {
+        stopAuto();
+        showSlide(state.index - 1);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        stopAuto();
+        showSlide(state.index + 1);
+      });
+
+      toggleBtn.addEventListener('click', toggleAuto);
+
+      fetch(endpoint, { cache: 'no-store' })
+        .then((response) => {
+          if (!response.ok) throw new Error('Network error');
+          return response.json();
+        })
+        .then((list) => {
+          const cleaned = Array.isArray(list) ? list.filter(Boolean) : [];
+          if (!cleaned.length) throw new Error('Empty list');
+          state.slides = cleaned;
+          statusEl.dataset.error = 'false';
+          showSlide(0);
+        })
+        .catch(() => {
+          statusEl.dataset.error = 'true';
+          statusEl.textContent = 'slides offline';
+          document.body.dataset.mode = 'manual';
+          slideCanvas.style.backgroundImage = 'radial-gradient(circle at 40% 40%, rgba(255,255,255,0.08), rgba(7,5,12,0.95))';
+        });
+    })();
   </script>
 </body>
 </html>
