@@ -17,6 +17,7 @@ This repository is a postcard-style static site with a rotating current homepage
 6. **Return path UX:** archive pages should provide a clear navigation path back to homepage.
 
 ## Pre-commit checklist
+- Run the cleanup protocol before staging a commit: confirm the homepage (and any promoted edition) exposes the Laurarchive and Werkwelt links, that they are unobstructed, and that they click through to the correct destinations.
 - Confirm changed image/audio paths resolve from the edited page location.
 - Validate archive navigation links (`../../` from `archives/<slug>/index.html`).
 - Run a local static server and load both homepage and at least one archive page.
