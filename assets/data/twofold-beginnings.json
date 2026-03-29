@@ -3,80 +3,150 @@
     "title": "Second Sunrise",
     "line": "The day begins twice: once in the sky, once in the heart that decides to try again.",
     "theme": "new starts",
-    "keywords": ["dawn", "threshold", "renewal", "fresh light"],
+    "keywords": [
+      "dawn",
+      "threshold",
+      "renewal",
+      "fresh light"
+    ],
     "color": "#ffb347",
-    "background": "radial-gradient(circle at 20% 0%, rgba(255, 179, 71, 0.45), transparent 48%), linear-gradient(140deg, #2a0f0b 0%, #5a220f 52%, #12090a 100%)"
+    "background": "radial-gradient(circle at 20% 0%, rgba(255, 179, 71, 0.45), transparent 48%), linear-gradient(140deg, #2a0f0b 0%, #5a220f 52%, #12090a 100%)",
+    "image": "assets/new-york/scene-15-snow-walk.jpg",
+    "alt": "Snowy New York street walk suggesting renewal after a storm"
   },
   {
     "title": "Silver Medal Fire",
     "line": "Second place is where hunger survives; almost is the engine that builds the next impossible.",
     "theme": "second place",
-    "keywords": ["ambition", "discipline", "edge", "comeback"],
+    "keywords": [
+      "ambition",
+      "discipline",
+      "edge",
+      "comeback"
+    ],
     "color": "#b5c4d8",
-    "background": "radial-gradient(circle at 80% 10%, rgba(181, 196, 216, 0.38), transparent 45%), linear-gradient(145deg, #121722 0%, #24364f 48%, #11131a 100%)"
+    "background": "radial-gradient(circle at 80% 10%, rgba(181, 196, 216, 0.38), transparent 45%), linear-gradient(145deg, #121722 0%, #24364f 48%, #11131a 100%)",
+    "image": "assets/new-york/scene-13-pixel-heart.jpg",
+    "alt": "Pixel heart motif evoking near-win energy and persistence"
   },
   {
     "title": "Two Hands Unclasped, Rejoined",
     "line": "A second chance is not repetition; it is the same road with wiser shoes.",
     "theme": "second chances",
-    "keywords": ["repair", "forgiveness", "trust", "return"],
+    "keywords": [
+      "repair",
+      "forgiveness",
+      "trust",
+      "return"
+    ],
     "color": "#ff8fa3",
-    "background": "radial-gradient(circle at 15% 15%, rgba(255, 143, 163, 0.42), transparent 48%), linear-gradient(150deg, #2a0f1d 0%, #55203a 50%, #1b0d16 100%)"
+    "background": "radial-gradient(circle at 15% 15%, rgba(255, 143, 163, 0.42), transparent 48%), linear-gradient(150deg, #2a0f1d 0%, #55203a 50%, #1b0d16 100%)",
+    "image": "assets/new-york/scene-16-peel-wall.jpg",
+    "alt": "Layered torn posters symbolizing repair and second chances"
   },
   {
     "title": "Molting Season",
     "line": "Regeneration is a quiet duet: what falls away and what grows back singing.",
     "theme": "regeneration",
-    "keywords": ["seed", "cell", "skin", "season"],
+    "keywords": [
+      "seed",
+      "cell",
+      "skin",
+      "season"
+    ],
     "color": "#8ee89e",
-    "background": "radial-gradient(circle at 50% -5%, rgba(142, 232, 158, 0.38), transparent 50%), linear-gradient(150deg, #0f2215 0%, #1d5b31 45%, #0a1710 100%)"
+    "background": "radial-gradient(circle at 50% -5%, rgba(142, 232, 158, 0.38), transparent 50%), linear-gradient(150deg, #0f2215 0%, #1d5b31 45%, #0a1710 100%)",
+    "image": "assets/new-york/scene-12-qr-statue.jpg",
+    "alt": "Weathered city texture and digital marks for regeneration themes"
   },
   {
     "title": "After the Stone Rolled",
     "line": "Resurrection begins in the pause between grief and astonishment.",
     "theme": "easter / resurrection",
-    "keywords": ["empty tomb", "light", "mercy", "rebirth"],
+    "keywords": [
+      "empty tomb",
+      "light",
+      "mercy",
+      "rebirth"
+    ],
     "color": "#ffe7a1",
-    "background": "radial-gradient(circle at 70% 0%, rgba(255, 231, 161, 0.42), transparent 45%), linear-gradient(150deg, #261f0f 0%, #5a4c1f 44%, #191308 100%)"
+    "background": "radial-gradient(circle at 70% 0%, rgba(255, 231, 161, 0.42), transparent 45%), linear-gradient(150deg, #261f0f 0%, #5a4c1f 44%, #191308 100%)",
+    "image": "assets/new-york/scene-04-cathedral.jpg",
+    "alt": "Cathedral interior framing resurrection and Easter light"
   },
   {
     "title": "Two Worlds, One Door",
     "line": "Two is the first bridge: self and other, fear and faith, ending and opening.",
     "theme": "duality",
-    "keywords": ["mirror", "pair", "dialogue", "threshold"],
+    "keywords": [
+      "mirror",
+      "pair",
+      "dialogue",
+      "threshold"
+    ],
     "color": "#98d7ff",
-    "background": "radial-gradient(circle at 18% 20%, rgba(152, 215, 255, 0.4), transparent 48%), linear-gradient(145deg, #0c1a2a 0%, #193a66 45%, #0b1220 100%)"
+    "background": "radial-gradient(circle at 18% 20%, rgba(152, 215, 255, 0.4), transparent 48%), linear-gradient(145deg, #0c1a2a 0%, #193a66 45%, #0b1220 100%)",
+    "image": "assets/new-york/scene-06-apartment-grid.jpg",
+    "alt": "Window grid showing dual worlds and threshold imagery"
   },
   {
     "title": "The Sequel Principle",
     "line": "The second act is where a life stops introducing itself and starts transforming.",
     "theme": "next chapter",
-    "keywords": ["rewrite", "pivot", "continuation", "becoming"],
+    "keywords": [
+      "rewrite",
+      "pivot",
+      "continuation",
+      "becoming"
+    ],
     "color": "#d1b6ff",
-    "background": "radial-gradient(circle at 76% 8%, rgba(209, 182, 255, 0.38), transparent 46%), linear-gradient(145deg, #1a1230 0%, #3a2563 45%, #120d25 100%)"
+    "background": "radial-gradient(circle at 76% 8%, rgba(209, 182, 255, 0.38), transparent 46%), linear-gradient(145deg, #1a1230 0%, #3a2563 45%, #120d25 100%)",
+    "image": "assets/new-york/scene-10-hauser-painting.jpg",
+    "alt": "Gallery painting for second-act transformation motif"
   },
   {
     "title": "Breath Two",
     "line": "When panic shouts, the second breath is the one that lets courage answer.",
     "theme": "recovery",
-    "keywords": ["nervous system", "calm", "return", "reset"],
+    "keywords": [
+      "nervous system",
+      "calm",
+      "return",
+      "reset"
+    ],
     "color": "#82f1e8",
-    "background": "radial-gradient(circle at 24% 2%, rgba(130, 241, 232, 0.4), transparent 48%), linear-gradient(150deg, #102826 0%, #1f5e61 48%, #0c1819 100%)"
+    "background": "radial-gradient(circle at 24% 2%, rgba(130, 241, 232, 0.4), transparent 48%), linear-gradient(150deg, #102826 0%, #1f5e61 48%, #0c1819 100%)",
+    "image": "assets/new-york/scene-14-paris-sweatshirt.jpg",
+    "alt": "Street portrait for breath and reset narrative"
   },
   {
     "title": "Pair of Wings",
     "line": "Nothing rises on one wing; two makes flight possible: effort and grace.",
     "theme": "balance",
-    "keywords": ["symmetry", "lift", "cooperation", "motion"],
+    "keywords": [
+      "symmetry",
+      "lift",
+      "cooperation",
+      "motion"
+    ],
     "color": "#ffd8c2",
-    "background": "radial-gradient(circle at 65% 3%, rgba(255, 216, 194, 0.43), transparent 44%), linear-gradient(145deg, #2b1610 0%, #5a2c1e 47%, #170d0b 100%)"
+    "background": "radial-gradient(circle at 65% 3%, rgba(255, 216, 194, 0.43), transparent 44%), linear-gradient(145deg, #2b1610 0%, #5a2c1e 47%, #170d0b 100%)",
+    "image": "assets/new-york/scene-08-kaya.jpg",
+    "alt": "Companion portrait reflecting balance and paired wings"
   },
   {
     "title": "Version 2 of the Soul",
     "line": "The truest upgrades are human: same name, new compass.",
     "theme": "evolution",
-    "keywords": ["iteration", "identity", "wisdom", "future self"],
+    "keywords": [
+      "iteration",
+      "identity",
+      "wisdom",
+      "future self"
+    ],
     "color": "#f8a8ff",
-    "background": "radial-gradient(circle at 12% 6%, rgba(248, 168, 255, 0.4), transparent 46%), linear-gradient(145deg, #2b1029 0%, #60285a 45%, #1a0c1b 100%)"
+    "background": "radial-gradient(circle at 12% 6%, rgba(248, 168, 255, 0.4), transparent 46%), linear-gradient(145deg, #2b1029 0%, #60285a 45%, #1a0c1b 100%)",
+    "image": "assets/new-york/scene-01-vespa.jpg",
+    "alt": "Vespa city start for version-two momentum and evolution"
   }
 ]

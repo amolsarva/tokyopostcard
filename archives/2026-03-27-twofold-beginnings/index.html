@@ -100,6 +100,29 @@
       max-width: 30ch;
     }
 
+    .media-frame {
+      margin: 0;
+      width: 100%;
+      max-width: 860px;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    .media-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.05) contrast(1.03);
+    }
+
+    .media-frame[hidden] {
+      display: none;
+    }
+
     .keywords {
       margin: 0;
       display: flex;
@@ -167,6 +190,9 @@
       <h1 id="title">Twofold Beginnings</h1>
       <p class="theme" id="theme">Loading...</p>
       <p class="line" id="line">Loading concepts...</p>
+      <figure class="media-frame" id="mediaFrame" hidden>
+        <img id="mediaImage" alt="" loading="lazy" decoding="async" />
+      </figure>
       <ul class="keywords" id="keywords"></ul>
       <div class="controls">
         <button type="button" data-step="-1">Prev</button>
@@ -182,6 +208,8 @@
     const themeEl = document.getElementById('theme');
     const lineEl = document.getElementById('line');
     const keywordsEl = document.getElementById('keywords');
+    const mediaFrameEl = document.getElementById('mediaFrame');
+    const mediaImageEl = document.getElementById('mediaImage');
     const indexEl = document.getElementById('index');
     const totalEl = document.getElementById('total');
     const controls = document.querySelectorAll('[data-step]');
@@ -204,12 +232,28 @@
       });
     }
 
+
+    function renderImage(concept) {
+      const src = typeof concept.image === 'string' ? concept.image.trim() : '';
+      if (!src) {
+        mediaFrameEl.hidden = true;
+        mediaImageEl.removeAttribute('src');
+        mediaImageEl.alt = '';
+        return;
+      }
+
+      mediaFrameEl.hidden = false;
+      mediaImageEl.src = `../../${src.replace(/^\/+/, '')}`;
+      mediaImageEl.alt = concept.alt || `${concept.title || 'Twofold concept'} image`;
+    }
+
     function renderConcept(concept) {
       if (!concept) return;
       titleEl.textContent = concept.title || 'Twofold Beginnings';
       themeEl.textContent = concept.theme ? `Theme · ${concept.theme}` : 'Theme · duality';
       lineEl.textContent = concept.line || '';
       renderKeywords(Array.isArray(concept.keywords) ? concept.keywords : []);
+      renderImage(concept);
 
       indexEl.textContent = pad(current + 1);
       totalEl.textContent = pad(concepts.length);
@@ -255,6 +299,10 @@
         console.error(error);
       }
     }
+
+    mediaImageEl.addEventListener('error', () => {
+      mediaFrameEl.hidden = true;
+    });
 
     controls.forEach((button) => {
       const step = Number(button.dataset.step) || 1;
