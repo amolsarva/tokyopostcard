@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NEWAIYORK · Twofold Beginnings</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --bg: #070910;
+      --ink: #f8fbff;
+      --ink-soft: rgba(248, 251, 255, 0.78);
+      --accent: #98d7ff;
+      --hero-background: linear-gradient(145deg, #1a2238 0%, #101522 55%, #0b0d14 100%);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--hero-background);
+    }
+
+    .hud {
+      position: fixed;
+      top: 1rem;
+      left: clamp(1rem, 4vw, 2.5rem);
+      right: clamp(1rem, 4vw, 2.5rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      z-index: 4;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.72rem;
+    }
+
+    .hud a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+      padding-bottom: 2px;
+    }
+
+    .hud-metric {
+      color: var(--ink-soft);
+      font-size: 0.68rem;
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      padding: 16vh clamp(1rem, 5vw, 4rem) 3rem;
+    }
+
+    .card {
+      width: min(980px, 100%);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(6, 9, 16, 0.9);
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.5);
+      padding: clamp(1.2rem, 4vw, 2.8rem);
+      display: grid;
+      gap: 1rem;
+    }
+
+    h1 {
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: clamp(1.5rem, 5vw, 3.2rem);
+      color: var(--accent);
+    }
+
+    .theme {
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.72rem;
+      color: var(--ink-soft);
+    }
+
+    .line {
+      margin: 0;
+      font-size: clamp(1.2rem, 3vw, 2.2rem);
+      line-height: 1.35;
+      max-width: 32ch;
+    }
+
+    .media-frame {
+      margin: 0;
+      width: 100%;
+      max-width: 900px;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      overflow: hidden;
+      background: #090c16;
+    }
+
+    .media-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .media-frame[hidden] { display: none; }
+
+    .thumb-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: 0.45rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .thumb-strip button {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 10px;
+      overflow: hidden;
+      padding: 0;
+      background: #0c101d;
+      cursor: pointer;
+      aspect-ratio: 4 / 3;
+    }
+
+    .thumb-strip img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0.72;
+      transition: opacity 120ms ease, transform 120ms ease;
+    }
+
+    .thumb-strip button[aria-current="true"] {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(152, 215, 255, 0.3) inset;
+    }
+
+    .thumb-strip button[aria-current="true"] img,
+    .thumb-strip button:hover img {
+      opacity: 1;
+      transform: scale(1.03);
+    }
+
+    .keywords {
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0;
+      list-style: none;
+    }
+
+    .keywords li {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.35rem 0.75rem;
+      font-size: 0.74rem;
+      letter-spacing: 0.05em;
+      color: var(--ink-soft);
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 0.3rem;
+    }
+
+    .controls button {
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 0.56rem 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.68rem;
+      cursor: pointer;
+    }
+
+    .hint {
+      margin: 0;
+      font-size: 0.76rem;
+      color: rgba(248, 251, 255, 0.62);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+  <script src="/assets/js/password-gate.js"></script>
+</head>
+<body data-edition="../../assets/data/twofold-beginnings.json">
+  <header class="hud">
+    <a href="../../">NewAIYork</a>
+    <span class="hud-metric"><span id="index">01</span> / <span id="total">00</span></span>
+    <a href="../../archive.html">Laurarchive</a>
+  </header>
+
+  <main>
+    <section class="card" aria-live="polite">
+      <h1 id="title">Twofold Beginnings</h1>
+      <p class="theme" id="theme">Loading...</p>
+      <p class="line" id="line">Loading concepts...</p>
+
+      <figure class="media-frame" id="mediaFrame" hidden>
+        <img id="mediaImage" alt="" loading="lazy" decoding="async" />
+      </figure>
+      <ul class="thumb-strip" id="thumbStrip" aria-label="Concept photo thumbnails"></ul>
+
+      <ul class="keywords" id="keywords"></ul>
+      <div class="controls">
+        <button type="button" data-step="-1">Prev</button>
+        <button type="button" data-step="1">Next</button>
+        <button type="button" id="shuffle">Shuffle</button>
+      </div>
+      <p class="hint">Tap background or use arrow keys to move through concepts.</p>
+    </section>
+  </main>
+
+  <script>
+    const titleEl = document.getElementById('title');
+    const themeEl = document.getElementById('theme');
+    const lineEl = document.getElementById('line');
+    const keywordsEl = document.getElementById('keywords');
+    const mediaFrameEl = document.getElementById('mediaFrame');
+    const mediaImageEl = document.getElementById('mediaImage');
+    const thumbStripEl = document.getElementById('thumbStrip');
+    const indexEl = document.getElementById('index');
+    const totalEl = document.getElementById('total');
+    const controls = document.querySelectorAll('[data-step]');
+    const shuffleButton = document.getElementById('shuffle');
+    const root = document.documentElement;
+
+    let concepts = [];
+    let current = 0;
+    let photoIndex = 0;
+
+    function pad(value) {
+      return String(value).padStart(2, '0');
+    }
+
+    function normalizePath(path) {
+      return `../../${String(path || '').replace(/^\/+/, '')}`;
+    }
+
+    function conceptPhotos(concept) {
+      if (Array.isArray(concept.images) && concept.images.length) {
+        return concept.images.filter((item) => typeof item === 'string' && item.trim().length);
+      }
+      if (typeof concept.image === 'string' && concept.image.trim().length) {
+        return [concept.image.trim()];
+      }
+      return [];
+    }
+
+    function renderKeywords(values = []) {
+      keywordsEl.innerHTML = '';
+      values.forEach((value) => {
+        const chip = document.createElement('li');
+        chip.textContent = value;
+        keywordsEl.appendChild(chip);
+      });
+    }
+
+    function renderPhoto(concept) {
+      const photos = conceptPhotos(concept);
+      if (!photos.length) {
+        mediaFrameEl.hidden = true;
+        thumbStripEl.innerHTML = '';
+        mediaImageEl.removeAttribute('src');
+        mediaImageEl.alt = '';
+        return;
+      }
+
+      if (photoIndex >= photos.length) photoIndex = 0;
+      const selected = photos[photoIndex];
+
+      mediaFrameEl.hidden = false;
+      mediaImageEl.src = normalizePath(selected);
+      mediaImageEl.alt = concept.alt || `${concept.title || 'Twofold concept'} image`;
+
+      thumbStripEl.innerHTML = '';
+      photos.forEach((path, idx) => {
+        const item = document.createElement('li');
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.setAttribute('aria-label', `Show photo ${idx + 1}`);
+        button.setAttribute('aria-current', idx === photoIndex ? 'true' : 'false');
+
+        const img = document.createElement('img');
+        img.src = normalizePath(path);
+        img.alt = '';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+
+        button.addEventListener('click', (event) => {
+          event.stopPropagation();
+          photoIndex = idx;
+          renderPhoto(concept);
+        });
+
+        button.appendChild(img);
+        item.appendChild(button);
+        thumbStripEl.appendChild(item);
+      });
+    }
+
+    function renderConcept(concept) {
+      if (!concept) return;
+      titleEl.textContent = concept.title || 'Twofold Beginnings';
+      themeEl.textContent = concept.theme ? `Theme · ${concept.theme}` : 'Theme · duality';
+      lineEl.textContent = concept.line || '';
+      renderKeywords(Array.isArray(concept.keywords) ? concept.keywords : []);
+      renderPhoto(concept);
+
+      indexEl.textContent = pad(current + 1);
+      totalEl.textContent = pad(concepts.length);
+
+      root.style.setProperty('--accent', concept.color || '#98d7ff');
+      root.style.setProperty('--hero-background', concept.background || 'linear-gradient(145deg, #1a2238 0%, #101522 55%, #0b0d14 100%)');
+    }
+
+    function move(step) {
+      if (!concepts.length) return;
+      current = (current + step + concepts.length) % concepts.length;
+      photoIndex = 0;
+      renderConcept(concepts[current]);
+    }
+
+    function shuffle() {
+      if (concepts.length < 2) return;
+      let next = current;
+      while (next === current) {
+        next = Math.floor(Math.random() * concepts.length);
+      }
+      current = next;
+      photoIndex = 0;
+      renderConcept(concepts[current]);
+    }
+
+    async function loadConcepts() {
+      const path = document.body.dataset.edition;
+      try {
+        const response = await fetch(path, { cache: 'no-store' });
+        if (!response.ok) throw new Error('failed to load twofold edition data');
+        const payload = await response.json();
+        concepts = Array.isArray(payload) ? payload : [];
+
+        if (!concepts.length) {
+          lineEl.textContent = 'No concepts available yet.';
+          themeEl.textContent = 'Theme · pending';
+          return;
+        }
+
+        renderConcept(concepts[current]);
+      } catch (error) {
+        lineEl.textContent = 'Could not load concept cards right now.';
+        themeEl.textContent = 'Theme · retry';
+        console.error(error);
+      }
+    }
+
+    mediaImageEl.addEventListener('error', () => {
+      mediaFrameEl.hidden = true;
+    });
+
+    controls.forEach((button) => {
+      const step = Number(button.dataset.step) || 1;
+      button.addEventListener('click', (event) => {
+        event.stopPropagation();
+        move(step);
+      });
+    });
+
+    shuffleButton.addEventListener('click', (event) => {
+      event.stopPropagation();
+      shuffle();
+    });
+
+    document.body.addEventListener('click', (event) => {
+      if (event.target.closest('button, a')) return;
+      move(1);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (['ArrowRight', 'ArrowDown', ' ', 'Enter'].includes(event.key)) {
+        event.preventDefault();
+        move(1);
+      }
+      if (['ArrowLeft', 'ArrowUp'].includes(event.key)) {
+        event.preventDefault();
+        move(-1);
+      }
+    });
+
+    loadConcepts();
+  </script>
+</body>
+</html>
