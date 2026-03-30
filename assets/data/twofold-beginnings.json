@@ -1,0 +1,120 @@
+[
+  {
+    "title": "Second Sunrise",
+    "line": "The day begins twice: once in the sky, once in the heart that decides to try again.",
+    "theme": "new starts",
+    "keywords": ["dawn", "threshold", "renewal", "fresh light"],
+    "color": "#ffb347",
+    "background": "linear-gradient(140deg, #2a0f0b 0%, #5a220f 52%, #12090a 100%)",
+    "images": [
+      "assets/new-york/scene-15-snow-walk.jpg",
+      "assets/new-york/scene-02-fragrance-lab.jpg"
+    ],
+    "alt": "Fresh-start moments across New York"
+  },
+  {
+    "title": "Silver Medal Fire",
+    "line": "Second place is where hunger survives; almost is the engine that builds the next impossible.",
+    "theme": "second place",
+    "keywords": ["ambition", "discipline", "edge", "comeback"],
+    "color": "#b5c4d8",
+    "background": "linear-gradient(145deg, #121722 0%, #24364f 48%, #11131a 100%)",
+    "images": [
+      "assets/new-york/scene-13-pixel-heart.jpg",
+      "assets/new-york/scene-03-steaks.jpg"
+    ],
+    "alt": "Competitive and near-win city textures"
+  },
+  {
+    "title": "Two Hands Unclasped, Rejoined",
+    "line": "A second chance is not repetition; it is the same road with wiser shoes.",
+    "theme": "second chances",
+    "keywords": ["repair", "forgiveness", "trust", "return"],
+    "color": "#ff8fa3",
+    "background": "linear-gradient(150deg, #2a0f1d 0%, #55203a 50%, #1b0d16 100%)",
+    "images": [
+      "assets/new-york/scene-16-peel-wall.jpg",
+      "assets/new-york/scene-11-dried-plant.jpg"
+    ],
+    "alt": "Textures of rupture and repair"
+  },
+  {
+    "title": "Molting Season",
+    "line": "Regeneration is a quiet duet: what falls away and what grows back singing.",
+    "theme": "regeneration",
+    "keywords": ["seed", "cell", "skin", "season"],
+    "color": "#8ee89e",
+    "background": "linear-gradient(150deg, #0f2215 0%, #1d5b31 45%, #0a1710 100%)",
+    "images": [
+      "assets/new-york/scene-12-qr-statue.jpg",
+      "assets/new-york/scene-05-respect-women.jpg"
+    ],
+    "alt": "Regrowth motifs from streets and signs"
+  },
+  {
+    "title": "After the Stone Rolled",
+    "line": "Resurrection begins in the pause between grief and astonishment.",
+    "theme": "easter / resurrection",
+    "keywords": ["empty tomb", "light", "mercy", "rebirth"],
+    "color": "#ffe7a1",
+    "background": "linear-gradient(150deg, #261f0f 0%, #5a4c1f 44%, #191308 100%)",
+    "images": [
+      "assets/new-york/scene-04-cathedral.jpg",
+      "assets/new-york/scene-09-standard-view.jpg"
+    ],
+    "alt": "Sacred and luminous architectural moments"
+  },
+  {
+    "title": "Two Worlds, One Door",
+    "line": "Two is the first bridge: self and other, fear and faith, ending and opening.",
+    "theme": "duality",
+    "keywords": ["mirror", "pair", "dialogue", "threshold"],
+    "color": "#98d7ff",
+    "background": "linear-gradient(145deg, #0c1a2a 0%, #193a66 45%, #0b1220 100%)",
+    "images": [
+      "assets/new-york/scene-06-apartment-grid.jpg",
+      "assets/new-york/scene-07-snoopy-snow.jpg"
+    ],
+    "alt": "Paired city worlds and transitional spaces"
+  },
+  {
+    "title": "The Sequel Principle",
+    "line": "The second act is where a life stops introducing itself and starts transforming.",
+    "theme": "next chapter",
+    "keywords": ["rewrite", "pivot", "continuation", "becoming"],
+    "color": "#d1b6ff",
+    "background": "linear-gradient(145deg, #1a1230 0%, #3a2563 45%, #120d25 100%)",
+    "images": ["assets/new-york/scene-10-hauser-painting.jpg"],
+    "alt": "Art-led transition into a second act"
+  },
+  {
+    "title": "Breath Two",
+    "line": "When panic shouts, the second breath is the one that lets courage answer.",
+    "theme": "recovery",
+    "keywords": ["nervous system", "calm", "return", "reset"],
+    "color": "#82f1e8",
+    "background": "linear-gradient(150deg, #102826 0%, #1f5e61 48%, #0c1819 100%)",
+    "images": ["assets/new-york/scene-14-paris-sweatshirt.jpg"],
+    "alt": "Calm-in-motion portrait"
+  },
+  {
+    "title": "Pair of Wings",
+    "line": "Nothing rises on one wing; two makes flight possible: effort and grace.",
+    "theme": "balance",
+    "keywords": ["symmetry", "lift", "cooperation", "motion"],
+    "color": "#ffd8c2",
+    "background": "linear-gradient(145deg, #2b1610 0%, #5a2c1e 47%, #170d0b 100%)",
+    "images": ["assets/new-york/scene-08-kaya.jpg"],
+    "alt": "Balanced companion energy"
+  },
+  {
+    "title": "Version 2 of the Soul",
+    "line": "The truest upgrades are human: same name, new compass.",
+    "theme": "evolution",
+    "keywords": ["iteration", "identity", "wisdom", "future self"],
+    "color": "#f8a8ff",
+    "background": "linear-gradient(145deg, #2b1029 0%, #60285a 45%, #1a0c1b 100%)",
+    "images": ["assets/new-york/scene-01-vespa.jpg"],
+    "alt": "Momentum and evolved direction"
+  }
+]
