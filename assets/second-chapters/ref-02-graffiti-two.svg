@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="GRAFFITI TWO MOTIF">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f4c14f"/>
+      <stop offset="100%" stop-color="#00000022"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g)"/>
+  <polygon points="0,0 860,0 0,460" fill="#ffffff22"/>
+  <rect x="0" y="620" width="1200" height="180" fill="#00000022"/>
+  <text x="600" y="430" text-anchor="middle" fill="#111111" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="360">2</text>
+  <text x="48" y="742" fill="#111111" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="58" letter-spacing="3">GRAFFITI TWO MOTIF</text>
+</svg>
