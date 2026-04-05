@@ -1,0 +1,287 @@
+[
+  {
+    "title": "River, Twice",
+    "quote": "No man ever steps in the same river twice, for it's not the same river and he's not the same man.",
+    "attribution": "Heraclitus",
+    "source": "Fragment (as preserved by Plutarch)",
+    "domain": "philosophy",
+    "theme": "identity through change",
+    "keywords": [
+      "two",
+      "becoming",
+      "renewal",
+      "flow"
+    ],
+    "imageSlot": 1,
+    "image": "assets/second-chapters/ref-01-plus-two.svg",
+    "alt": "Graphic interpretation of a +2 thumbs-up motif",
+    "color": "#9fd5ff",
+    "background": "radial-gradient(circle at 22% 0%, rgba(159, 213, 255, 0.40), transparent 50%), linear-gradient(150deg, #0b1728 0%, #163a5f 48%, #090d16 100%)"
+  },
+  {
+    "title": "Second Draft of the Self",
+    "quote": "I am no bird; and no net ensnares me: I am a free human being with an independent will.",
+    "attribution": "Charlotte Brontë",
+    "source": "Jane Eyre",
+    "domain": "literature",
+    "theme": "self-authorship",
+    "keywords": [
+      "second chapter",
+      "freedom",
+      "choice",
+      "voice"
+    ],
+    "imageSlot": 2,
+    "image": "assets/second-chapters/ref-02-graffiti-two.svg",
+    "alt": "Graphic interpretation of colorful graffiti with number two",
+    "color": "#ffcab8",
+    "background": "radial-gradient(circle at 78% 5%, rgba(255, 202, 184, 0.38), transparent 48%), linear-gradient(145deg, #28110d 0%, #5a2a1f 46%, #170b08 100%)"
+  },
+  {
+    "title": "Morning Practice",
+    "quote": "You do not have to be good.",
+    "attribution": "Mary Oliver",
+    "source": "Wild Geese",
+    "domain": "poetry",
+    "theme": "compassionate restart",
+    "keywords": [
+      "spring",
+      "release",
+      "beginning again",
+      "mercy"
+    ],
+    "imageSlot": 3,
+    "image": "assets/second-chapters/ref-03-spray-two.svg",
+    "alt": "Graphic interpretation of a sprayed red number 2 on a dark column",
+    "color": "#c1f3b0",
+    "background": "radial-gradient(circle at 34% 0%, rgba(193, 243, 176, 0.36), transparent 48%), linear-gradient(150deg, #102112 0%, #234e2a 46%, #0b140d 100%)"
+  },
+  {
+    "title": "Second Wind",
+    "quote": "Ever tried. Ever failed. No matter. Try again. Fail again. Fail better.",
+    "attribution": "Samuel Beckett",
+    "source": "Worstward Ho",
+    "domain": "literature",
+    "theme": "iterative courage",
+    "keywords": [
+      "iteration",
+      "resilience",
+      "v2",
+      "discipline"
+    ],
+    "imageSlot": 4,
+    "image": "assets/second-chapters/ref-04-card-two-sigma.svg",
+    "alt": "Graphic interpretation of a Two Sigma business card motif",
+    "color": "#e5c7ff",
+    "background": "radial-gradient(circle at 18% 10%, rgba(229, 199, 255, 0.40), transparent 50%), linear-gradient(140deg, #1b1231 0%, #3f2866 45%, #120c23 100%)"
+  },
+  {
+    "title": "Threshold Ethics",
+    "quote": "The sun is new each day.",
+    "attribution": "Heraclitus",
+    "source": "Fragment",
+    "domain": "philosophy",
+    "theme": "daily renewal",
+    "keywords": [
+      "sunrise",
+      "new day",
+      "light",
+      "rhythm"
+    ],
+    "imageSlot": 5,
+    "image": "assets/second-chapters/ref-05-ticket-222.svg",
+    "alt": "Graphic interpretation of handheld ticket with 222",
+    "color": "#ffd58f",
+    "background": "radial-gradient(circle at 62% 0%, rgba(255, 213, 143, 0.42), transparent 48%), linear-gradient(145deg, #2b1708 0%, #6f3d12 46%, #1b0f08 100%)"
+  },
+  {
+    "title": "Re-entering Life",
+    "quote": "No, this trick won't work... How on earth are you ever going to explain in terms of chemistry and physics so important a biological phenomenon as first love?",
+    "attribution": "Albert Einstein",
+    "source": "Interview remarks",
+    "domain": "science",
+    "theme": "mystery beyond formulas",
+    "keywords": [
+      "love",
+      "chapter two",
+      "wonder",
+      "humanity"
+    ],
+    "imageSlot": 6,
+    "image": "assets/second-chapters/ref-06-neon-two-green.svg",
+    "alt": "Graphic interpretation of neon-green sign with circled 2",
+    "color": "#a7d8ff",
+    "background": "radial-gradient(circle at 12% 8%, rgba(167, 216, 255, 0.36), transparent 50%), linear-gradient(150deg, #0b1a2e 0%, #20456e 46%, #0c111c 100%)"
+  },
+  {
+    "title": "How to Begin Again",
+    "quote": "What matters in life is not what happens to you but what you remember and how you remember it.",
+    "attribution": "Gabriel García Márquez",
+    "source": "Living to Tell the Tale",
+    "domain": "literature",
+    "theme": "rewriting memory",
+    "keywords": [
+      "narrative",
+      "second chapter",
+      "memory",
+      "agency"
+    ],
+    "imageSlot": 7,
+    "image": "assets/second-chapters/ref-07-hand-222.svg",
+    "alt": "Graphic interpretation of hand-held slip marked 222",
+    "color": "#ffb8cf",
+    "background": "radial-gradient(circle at 80% 6%, rgba(255, 184, 207, 0.38), transparent 48%), linear-gradient(140deg, #2c0f1e 0%, #5b2140 45%, #170b13 100%)"
+  },
+  {
+    "title": "Beginner's Soil",
+    "quote": "And now let us welcome the new year, full of things that never were.",
+    "attribution": "Rainer Maria Rilke",
+    "source": "Letter (often anthologized)",
+    "domain": "poetry",
+    "theme": "inventive hope",
+    "keywords": [
+      "new beginnings",
+      "future",
+      "imagination",
+      "spring"
+    ],
+    "imageSlot": 8,
+    "image": "assets/second-chapters/ref-08-red-two.svg",
+    "alt": "Graphic interpretation of large white number 2 on red panel",
+    "color": "#c8ffc9",
+    "background": "radial-gradient(circle at 28% 2%, rgba(200, 255, 201, 0.36), transparent 48%), linear-gradient(150deg, #0f2411 0%, #275a2a 46%, #0a150c 100%)"
+  },
+  {
+    "title": "The Turn",
+    "quote": "In my beginning is my end.",
+    "attribution": "T. S. Eliot",
+    "source": "Four Quartets: East Coker",
+    "domain": "poetry",
+    "theme": "cyclical chapters",
+    "keywords": [
+      "cycle",
+      "beginning",
+      "ending",
+      "time"
+    ],
+    "imageSlot": 9,
+    "image": "assets/second-chapters/ref-09-black-two.svg",
+    "alt": "Graphic interpretation of large white number 2 on black panel",
+    "color": "#e4dcc9",
+    "background": "radial-gradient(circle at 65% 0%, rgba(228, 220, 201, 0.34), transparent 50%), linear-gradient(145deg, #261f16 0%, #4e4334 45%, #16110c 100%)"
+  },
+  {
+    "title": "Pair and World",
+    "quote": "Love consists in this, that two solitudes protect and touch and greet each other.",
+    "attribution": "Rainer Maria Rilke",
+    "source": "Letters to a Young Poet",
+    "domain": "literature",
+    "theme": "the ethics of two",
+    "keywords": [
+      "duality",
+      "companionship",
+      "care",
+      "respect"
+    ],
+    "imageSlot": 10,
+    "image": "",
+    "alt": "Image slot 10 for relational second chapters",
+    "color": "#b8e8ff",
+    "background": "radial-gradient(circle at 18% 3%, rgba(184, 232, 255, 0.38), transparent 48%), linear-gradient(150deg, #0e1e2b 0%, #1f4d68 48%, #0a121a 100%)"
+  },
+  {
+    "title": "Second Consciousness",
+    "quote": "The function of freedom is to free someone else.",
+    "attribution": "Toni Morrison",
+    "source": "Barnard College Commencement Address (1979)",
+    "domain": "speech",
+    "theme": "renewal through responsibility",
+    "keywords": [
+      "freedom",
+      "collective dawn",
+      "ethics",
+      "action"
+    ],
+    "imageSlot": 11,
+    "image": "",
+    "alt": "Image slot 11 for social renewal and shared futures",
+    "color": "#ffd0a6",
+    "background": "radial-gradient(circle at 76% 0%, rgba(255, 208, 166, 0.4), transparent 48%), linear-gradient(145deg, #2a1408 0%, #5f3117 47%, #160b06 100%)"
+  },
+  {
+    "title": "After Winter",
+    "quote": "Is the spring coming? he said. What is it like? ... It is the sun shining on the rain and the rain falling on the sunshine...",
+    "attribution": "Frances Hodgson Burnett",
+    "source": "The Secret Garden",
+    "domain": "literature",
+    "theme": "seasonal rebirth",
+    "keywords": [
+      "spring",
+      "childhood",
+      "light",
+      "recovery"
+    ],
+    "imageSlot": 12,
+    "image": "",
+    "alt": "Image slot 12 for spring rebirth",
+    "color": "#ffe58c",
+    "background": "radial-gradient(circle at 40% 0%, rgba(255, 229, 140, 0.38), transparent 48%), linear-gradient(145deg, #2c250f 0%, #6a5a22 48%, #191307 100%)"
+  },
+  {
+    "title": "Second Sight",
+    "quote": "We can only see a short distance ahead, but we can see plenty there that needs to be done.",
+    "attribution": "Alan Turing",
+    "source": "Computing Machinery and Intelligence",
+    "domain": "science",
+    "theme": "practical beginnings",
+    "keywords": [
+      "next step",
+      "future",
+      "clarity",
+      "build"
+    ],
+    "imageSlot": 13,
+    "image": "",
+    "alt": "Image slot 13 for practical second-step momentum",
+    "color": "#9ee5d4",
+    "background": "radial-gradient(circle at 60% 0%, rgba(158, 229, 212, 0.36), transparent 48%), linear-gradient(145deg, #0f2522 0%, #236057 48%, #0b1514 100%)"
+  },
+  {
+    "title": "Version Two, Human",
+    "quote": "I can't go back to yesterday because I was a different person then.",
+    "attribution": "Lewis Carroll",
+    "source": "Alice's Adventures in Wonderland",
+    "domain": "literature",
+    "theme": "identity update",
+    "keywords": [
+      "selfhood",
+      "transformation",
+      "time",
+      "new chapter"
+    ],
+    "imageSlot": 14,
+    "image": "",
+    "alt": "Image slot 14 for personal transformation",
+    "color": "#d9c2ff",
+    "background": "radial-gradient(circle at 22% 0%, rgba(217, 194, 255, 0.40), transparent 48%), linear-gradient(145deg, #1a1330 0%, #3d2a67 47%, #0f0b22 100%)"
+  },
+  {
+    "title": "Dawn as Decision",
+    "quote": "Not all those who wander are lost.",
+    "attribution": "J. R. R. Tolkien",
+    "source": "The Fellowship of the Ring",
+    "domain": "literature",
+    "theme": "uncertain but forward",
+    "keywords": [
+      "journey",
+      "second chapter",
+      "faith",
+      "movement"
+    ],
+    "imageSlot": 15,
+    "image": "",
+    "alt": "Image slot 15 for final transition into a new chapter",
+    "color": "#bcd5ff",
+    "background": "radial-gradient(circle at 70% 2%, rgba(188, 213, 255, 0.36), transparent 48%), linear-gradient(145deg, #111b2f 0%, #27426f 48%, #0a101d 100%)"
+  }
+]
