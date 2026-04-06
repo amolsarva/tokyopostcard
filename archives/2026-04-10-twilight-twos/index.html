@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NEWAIYORK · Two Sunrises</title>
+  <meta name="description" content="Two Sunrises is a fullscreen study of number twos, dual quotes, and morning energy." />
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --bg: #09090d;
+      --ink: #f8fbff;
+      --ink-soft: rgba(248, 251, 255, 0.78);
+      --accent: #98d7ff;
+      --hero-background: radial-gradient(circle at 22% -5%, rgba(152, 215, 255, 0.42), transparent 52%), linear-gradient(140deg, #161924 0%, #1f3152 48%, #0e1018 100%);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #030105;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .backdrop,
+    .veil {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .backdrop {
+      background-image: var(--photo, radial-gradient(circle at 22% -5%, rgba(152, 215, 255, 0.42), transparent 52%), linear-gradient(140deg, #161924 0%, #1f3152 48%, #0e1018 100%));
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.08) contrast(1.1);
+    }
+
+    .veil {
+      background: radial-gradient(circle at 30% 18%, rgba(1, 2, 10, 0.3), transparent 46%), linear-gradient(150deg, rgba(5, 6, 14, 0.85), rgba(4, 3, 9, 0.55));
+      mix-blend-mode: soft-light;
+    }
+
+    .hud {
+      position: fixed;
+      top: 1rem;
+      left: clamp(1rem, 4vw, 2.5rem);
+      right: clamp(1rem, 4vw, 2.5rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      z-index: 2;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.72rem;
+    }
+
+    .hud a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+      padding-bottom: 2px;
+    }
+
+    .hud-link {
+      margin-left: auto;
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      padding: 14vh clamp(1rem, 5vw, 4rem) 3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      position: relative;
+      width: min(860px, 100%);
+      border-radius: 48px;
+      border: none;
+      background: transparent;
+      padding: clamp(1.8rem, 6vw, 3.6rem);
+      display: grid;
+      gap: 1rem;
+      color: var(--ink);
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: rgba(3, 5, 14, 0.52);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 35px 90px rgba(2, 0, 8, 0.5);
+      backdrop-filter: blur(18px);
+      z-index: 0;
+    }
+
+    .card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      margin: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .counter {
+      margin: 0;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(248, 251, 255, 0.72);
+    }
+
+    h1 {
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: clamp(1.35rem, 4.4vw, 2.8rem);
+      color: var(--accent);
+    }
+
+    .theme {
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      font-size: 0.72rem;
+      color: var(--ink-soft);
+    }
+
+    .line {
+      margin: 0;
+      font-size: clamp(1.15rem, 2.8vw, 2rem);
+      line-height: 1.42;
+      max-width: 34ch;
+      quotes: "“" "”";
+    }
+
+    .line::before { content: open-quote; }
+    .line::after { content: close-quote; }
+
+    .attribution {
+      margin: 0;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      color: rgba(248, 251, 255, 0.86);
+      text-transform: uppercase;
+    }
+
+    .source {
+      margin: 0;
+      font-size: 0.8rem;
+      color: rgba(248, 251, 255, 0.64);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .image-alt {
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.78rem;
+      color: rgba(248, 251, 255, 0.68);
+    }
+
+    .image-alt[hidden] {
+      display: none;
+    }
+
+    .keywords {
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0;
+      list-style: none;
+    }
+
+    .keywords li {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      background: rgba(0, 0, 0, 0.25);
+      padding: 0.35rem 0.75rem;
+      font-size: 0.74rem;
+      letter-spacing: 0.05em;
+      color: var(--ink-soft);
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 0.3rem;
+    }
+
+    .controls button {
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(0, 0, 0, 0.25);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 0.56rem 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.68rem;
+      cursor: pointer;
+    }
+
+    #autoButton[aria-pressed="true"],
+    body[data-mode="auto"] #autoButton {
+      background: rgba(255, 255, 255, 0.18);
+      color: var(--ink);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .hint {
+      margin: 0;
+      font-size: 0.72rem;
+      color: rgba(248, 251, 255, 0.62);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+  </style>
+  <script src="/assets/js/password-gate.js"></script>
+</head>
+<body data-edition="./two-sunrises.json" data-media-base="./assets" data-mode="manual">
+  <div class="backdrop" aria-hidden="true"></div>
+  <div class="veil" aria-hidden="true"></div>
+  <header class="hud">
+    <a href="../../">NewAIYork</a>
+    <a class="hud-link" href="../../archive.html">Laurarchive</a>
+  </header>
+
+  <main>
+    <section class="card" aria-live="polite">
+      <div class="eyebrow">
+        <p class="theme" id="theme">Loading...</p>
+        <p class="counter"><span id="index">01</span> / <span id="total">00</span></p>
+      </div>
+      <h1 id="title">Two Sunrises</h1>
+      <p class="line" id="line">Loading number meditations...</p>
+      <p class="attribution" id="attribution"></p>
+      <p class="source" id="source"></p>
+      <p class="image-alt" id="imageAlt" hidden>Awaiting image slot</p>
+      <ul class="keywords" id="keywords"></ul>
+      <div class="controls">
+        <button type="button" data-step="-1">Prev</button>
+        <button type="button" data-step="1">Next</button>
+        <button type="button" id="shuffle">Shuffle</button>
+        <button type="button" id="autoButton" aria-pressed="false">Auto</button>
+      </div>
+      <p class="hint">Tap the background or use the arrows to flow through the numbered sunrises.</p>
+    </section>
+  </main>
+
+  <script>
+    const titleEl = document.getElementById('title');
+    const themeEl = document.getElementById('theme');
+    const lineEl = document.getElementById('line');
+    const attributionEl = document.getElementById('attribution');
+    const sourceEl = document.getElementById('source');
+    const keywordsEl = document.getElementById('keywords');
+    const imageAltEl = document.getElementById('imageAlt');
+    const indexEl = document.getElementById('index');
+    const totalEl = document.getElementById('total');
+    const controls = document.querySelectorAll('[data-step]');
+    const shuffleButton = document.getElementById('shuffle');
+    const autoButton = document.getElementById('autoButton');
+    const root = document.documentElement;
+    const mediaBase = (document.body.dataset.mediaBase || './assets').replace(/\/$/, '');
+
+    let concepts = [];
+    let current = 0;
+    let autoTimer = null;
+    const AUTO_INTERVAL = 9000;
+
+    function setMode(value) {
+      document.body.dataset.mode = value;
+    }
+
+    function startAuto() {
+      stopAuto();
+      autoTimer = setInterval(() => step(1), AUTO_INTERVAL);
+      if (autoButton) {
+        autoButton.textContent = 'Pause';
+        autoButton.setAttribute('aria-pressed', 'true');
+      }
+      setMode('auto');
+    }
+
+    function stopAuto() {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
+      if (autoButton) {
+        autoButton.textContent = 'Auto';
+        autoButton.setAttribute('aria-pressed', 'false');
+      }
+      setMode('manual');
+    }
+
+    function nudgeAuto() {
+      if (autoTimer) startAuto();
+    }
+
+    const fmt = (value, fallback) => (typeof value === 'string' && value.trim() ? value.trim() : fallback);
+
+    const render = () => {
+      if (!concepts.length) return;
+      const concept = concepts[current];
+      titleEl.textContent = fmt(concept.title, 'Untitled');
+      themeEl.textContent = `${fmt(concept.theme, 'concept')} · ${fmt(concept.domain, 'source')}`;
+      lineEl.textContent = fmt(concept.quote || concept.line, '');
+      attributionEl.textContent = `— ${fmt(concept.attribution, 'Unknown')}`;
+      sourceEl.textContent = fmt(concept.source, 'Source TBD');
+
+      root.style.setProperty('--accent', concept.color || '#98d7ff');
+      root.style.setProperty('--hero-background', concept.background || 'radial-gradient(circle at 20% 0%, rgba(152, 215, 255, 0.42), transparent 52%), linear-gradient(140deg, #161924 0%, #1f3152 48%, #0e1018 100%)');
+
+      const ref = typeof concept.image === 'string' ? concept.image.trim() : '';
+      if (ref) {
+        const src = ref.startsWith('/') ? ref : `${mediaBase}/${ref}`;
+        root.style.setProperty('--photo', `url('${src}')`);
+      } else {
+        root.style.setProperty('--photo', 'radial-gradient(circle at 20% 0%, rgba(152, 215, 255, 0.42), transparent 52%), linear-gradient(140deg, #161924 0%, #1f3152 48%, #0e1018 100%)');
+      }
+
+      if (keywordsEl) {
+        keywordsEl.innerHTML = '';
+        (concept.keywords || []).forEach((keyword) => {
+          const li = document.createElement('li');
+          li.textContent = keyword;
+          keywordsEl.appendChild(li);
+        });
+      }
+
+      if (imageAltEl) {
+        const note = concept.alt || concept.imageAlt || '';
+        imageAltEl.textContent = note ? note.toUpperCase() : '';
+        imageAltEl.hidden = !note;
+      }
+
+      indexEl.textContent = String(current + 1).padStart(2, '0');
+      totalEl.textContent = String(concepts.length).padStart(2, '0');
+    };
+
+    const step = (delta) => {
+      if (!concepts.length) return;
+      current = (current + delta + concepts.length) % concepts.length;
+      render();
+      nudgeAuto();
+    };
+
+    const shuffle = () => {
+      if (!concepts.length) return;
+      current = Math.floor(Math.random() * concepts.length);
+      render();
+      nudgeAuto();
+    };
+
+    controls.forEach((button) => {
+      button.addEventListener('click', () => step(Number(button.dataset.step)));
+    });
+
+    shuffleButton.addEventListener('click', shuffle);
+
+    document.body.addEventListener('click', (event) => {
+      if (event.target.closest('button, a')) return;
+      step(1);
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+        event.preventDefault();
+        step(1);
+      }
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+        event.preventDefault();
+        step(-1);
+      }
+    });
+
+    if (autoButton) {
+      autoButton.addEventListener('click', () => {
+        if (autoTimer) {
+          stopAuto();
+        } else {
+          startAuto();
+        }
+      });
+    }
+
+    const load = async () => {
+      const path = document.body.dataset.edition;
+      try {
+        const response = await fetch(path, { cache: 'no-store' });
+        if (!response.ok) throw new Error('Failed to load edition data');
+        const payload = await response.json();
+        if (!Array.isArray(payload) || !payload.length) throw new Error('Edition payload is empty');
+        concepts = payload;
+        render();
+        startAuto();
+      } catch (error) {
+        titleEl.textContent = 'Second Chapters at Sunrise';
+        themeEl.textContent = 'Edition unavailable';
+        lineEl.textContent = 'Could not load framework data.';
+        attributionEl.textContent = '';
+        sourceEl.textContent = '';
+        stopAuto();
+        console.error(error);
+      }
+    };
+
+    load();
+  </script>
+</body>
+</html>
