@@ -317,6 +317,7 @@
     const cardTemplate = document.getElementById('edition-card-template');
     const editionCount = document.getElementById('editionCount');
     const filterInput = document.getElementById('editionFilter');
+    if (filterInput) filterInput.disabled = true;
     let manifestEntries = [];
 
     const thumbnailHints = {
@@ -397,8 +398,14 @@
       try {
         const response = await fetch(manifestURL, { cache: 'no-store' });
         if (!response.ok) throw new Error('Network error');
-        const entries = await response.json();
-        renderGallery(entries);
+        manifestEntries = await response.json();
+        renderGallery(manifestEntries);
+        if (filterInput) {
+          filterInput.disabled = false;
+          filterInput.addEventListener('input', (event) => {
+            renderGallery(manifestEntries, event.target.value || '');
+          });
+        }
       } catch (error) {
         galleryStatus.textContent = 'Could not load archives right now';
         galleryStatus.className = 'error-state';
@@ -408,32 +415,57 @@
       }
     }
 
-    function renderGallery(entries) {
+    function renderGallery(entries, query = '') {
       if (!Array.isArray(entries) || entries.length === 0) {
         galleryStatus.textContent = 'No editions filed yet';
         galleryStatus.className = 'loading-state';
         if (editionCount) {
           editionCount.textContent = '0 editions filed';
         }
+        gallery.innerHTML = '';
+        gallery.appendChild(galleryStatus);
         return;
       }
 
-      gallery.innerHTML = '';
       const normalized = entries.map((entry) => {
         const iso = entry.publishedAt || entry.slug?.slice(0, 10);
         const timestamp = Date.parse(iso ?? '') || parseEditionDate(entry.slug);
         return {
           ...entry,
           publishedAt: iso,
-          dateValue: timestamp
+          dateValue: timestamp,
+          searchText: [
+            entry.slug || '',
+            entry.label || '',
+            entry.blurb || '',
+            entry.publishedAt || ''
+          ].join(' ').toLowerCase()
         };
       }).sort((a, b) => b.dateValue - a.dateValue);
 
+      const queryText = String(query || '').trim().toLowerCase();
+      const filtered = queryText
+        ? normalized.filter((entry) => entry.searchText.includes(queryText))
+        : normalized;
+
       if (editionCount) {
-        editionCount.textContent = `${normalized.length} editions filed`;
+        editionCount.textContent = queryText
+          ? `${filtered.length} of ${normalized.length} editions`
+          : `${normalized.length} editions filed`;
       }
 
-      normalized.forEach((entry) => {
+      gallery.innerHTML = '';
+
+      if (!filtered.length) {
+        galleryStatus.textContent = queryText
+          ? `No editions match “${query.trim()}”`
+          : 'No editions filed yet';
+        galleryStatus.className = 'loading-state';
+        gallery.appendChild(galleryStatus);
+        return;
+      }
+
+      filtered.forEach((entry) => {
         const instance = cardTemplate.content.cloneNode(true);
         const anchor = instance.querySelector('.edition-card');
         const thumb = instance.querySelector('[data-thumb]');
