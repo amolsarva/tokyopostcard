@@ -1,152 +1,182 @@
 [
   {
-    "title": "Second Sunrise",
-    "line": "The day begins twice: once in the sky, once in the heart that decides to try again.",
-    "theme": "new starts",
+    "title": "Single Soul, Two Bodies",
+    "quote": "Love is composed of a single soul inhabiting two bodies.",
+    "attribution": "Aristotle",
+    "source": "Fragments",
+    "domain": "philosophy",
+    "theme": "union",
+    "line": "Aristotle's geometry of devotion says twoness can house one spirit without losing edges.",
     "keywords": [
-      "dawn",
-      "threshold",
-      "renewal",
-      "fresh light"
-    ],
-    "color": "#ffb347",
-    "background": "radial-gradient(circle at 20% 0%, rgba(255, 179, 71, 0.45), transparent 48%), linear-gradient(140deg, #2a0f0b 0%, #5a220f 52%, #12090a 100%)",
-    "image": "assets/new-york/scene-15-snow-walk.jpg",
-    "alt": "Snowy New York street walk suggesting renewal after a storm"
-  },
-  {
-    "title": "Silver Medal Fire",
-    "line": "Second place is where hunger survives; almost is the engine that builds the next impossible.",
-    "theme": "second place",
-    "keywords": [
-      "ambition",
-      "discipline",
-      "edge",
-      "comeback"
-    ],
-    "color": "#b5c4d8",
-    "background": "radial-gradient(circle at 80% 10%, rgba(181, 196, 216, 0.38), transparent 45%), linear-gradient(145deg, #121722 0%, #24364f 48%, #11131a 100%)",
-    "image": "assets/new-york/scene-13-pixel-heart.jpg",
-    "alt": "Pixel heart motif evoking near-win energy and persistence"
-  },
-  {
-    "title": "Two Hands Unclasped, Rejoined",
-    "line": "A second chance is not repetition; it is the same road with wiser shoes.",
-    "theme": "second chances",
-    "keywords": [
-      "repair",
-      "forgiveness",
-      "trust",
-      "return"
-    ],
-    "color": "#ff8fa3",
-    "background": "radial-gradient(circle at 15% 15%, rgba(255, 143, 163, 0.42), transparent 48%), linear-gradient(150deg, #2a0f1d 0%, #55203a 50%, #1b0d16 100%)",
-    "image": "assets/new-york/scene-16-peel-wall.jpg",
-    "alt": "Layered torn posters symbolizing repair and second chances"
-  },
-  {
-    "title": "Molting Season",
-    "line": "Regeneration is a quiet duet: what falls away and what grows back singing.",
-    "theme": "regeneration",
-    "keywords": [
-      "seed",
-      "cell",
-      "skin",
-      "season"
-    ],
-    "color": "#8ee89e",
-    "background": "radial-gradient(circle at 50% -5%, rgba(142, 232, 158, 0.38), transparent 50%), linear-gradient(150deg, #0f2215 0%, #1d5b31 45%, #0a1710 100%)",
-    "image": "assets/new-york/scene-12-qr-statue.jpg",
-    "alt": "Weathered city texture and digital marks for regeneration themes"
-  },
-  {
-    "title": "After the Stone Rolled",
-    "line": "Resurrection begins in the pause between grief and astonishment.",
-    "theme": "easter / resurrection",
-    "keywords": [
-      "empty tomb",
-      "light",
-      "mercy",
-      "rebirth"
-    ],
-    "color": "#ffe7a1",
-    "background": "radial-gradient(circle at 70% 0%, rgba(255, 231, 161, 0.42), transparent 45%), linear-gradient(150deg, #261f0f 0%, #5a4c1f 44%, #191308 100%)",
-    "image": "assets/new-york/scene-04-cathedral.jpg",
-    "alt": "Cathedral interior framing resurrection and Easter light"
-  },
-  {
-    "title": "Two Worlds, One Door",
-    "line": "Two is the first bridge: self and other, fear and faith, ending and opening.",
-    "theme": "duality",
-    "keywords": [
-      "mirror",
+      "love",
       "pair",
-      "dialogue",
-      "threshold"
+      "ancient"
     ],
-    "color": "#98d7ff",
-    "background": "radial-gradient(circle at 18% 20%, rgba(152, 215, 255, 0.4), transparent 48%), linear-gradient(145deg, #0c1a2a 0%, #193a66 45%, #0b1220 100%)",
-    "image": "assets/new-york/scene-06-apartment-grid.jpg",
-    "alt": "Window grid showing dual worlds and threshold imagery"
+    "image": "numerals/number-red-2.svg",
+    "alt": "Red enamel plate with the number 2",
+    "color": "#ffb7c2",
+    "background": "radial-gradient(circle at 20% 0%, rgba(255, 183, 194, 0.38), transparent 48%), linear-gradient(145deg, #2d0f12 0%, #5a1f27 48%, #120809 100%)"
   },
   {
-    "title": "The Sequel Principle",
-    "line": "The second act is where a life stops introducing itself and starts transforming.",
-    "theme": "next chapter",
+    "title": "Yielding Victories",
+    "quote": "When two great forces oppose each other, the victory will go to the one that knows how to yield.",
+    "attribution": "Lao Tzu",
+    "source": "Tao Te Ching",
+    "domain": "philosophy",
+    "theme": "soft power",
+    "line": "Taoist math: the softer two wins over the rigid two.",
     "keywords": [
-      "rewrite",
-      "pivot",
-      "continuation",
-      "becoming"
+      "tao",
+      "balance",
+      "opposites"
     ],
-    "color": "#d1b6ff",
-    "background": "radial-gradient(circle at 76% 8%, rgba(209, 182, 255, 0.38), transparent 46%), linear-gradient(145deg, #1a1230 0%, #3a2563 45%, #120d25 100%)",
-    "image": "assets/new-york/scene-10-hauser-painting.jpg",
-    "alt": "Gallery painting for second-act transformation motif"
+    "image": "numerals/license-plate-2.svg",
+    "alt": "Yellow plate stamped with the digit 2",
+    "color": "#ffe28f",
+    "background": "radial-gradient(circle at 70% 0%, rgba(255, 226, 143, 0.45), transparent 52%), linear-gradient(150deg, #2a1d05 0%, #6d4b0f 48%, #1a1007 100%)"
   },
   {
-    "title": "Breath Two",
-    "line": "When panic shouts, the second breath is the one that lets courage answer.",
-    "theme": "recovery",
+    "title": "Timekeepers",
+    "quote": "The two most powerful warriors are patience and time.",
+    "attribution": "Leo Tolstoy",
+    "source": "War and Peace",
+    "domain": "literature",
+    "theme": "second chances",
+    "line": "Tolstoy crowns the two forces that make every second chapter possible.",
     "keywords": [
-      "nervous system",
-      "calm",
-      "return",
-      "reset"
+      "patience",
+      "clock",
+      "discipline"
     ],
-    "color": "#82f1e8",
-    "background": "radial-gradient(circle at 24% 2%, rgba(130, 241, 232, 0.4), transparent 48%), linear-gradient(150deg, #102826 0%, #1f5e61 48%, #0c1819 100%)",
-    "image": "assets/new-york/scene-14-paris-sweatshirt.jpg",
-    "alt": "Street portrait for breath and reset narrative"
+    "image": "numerals/number-black-24-metal.svg",
+    "alt": "A distressed metal 24 indicating timekeeping",
+    "color": "#ffd8a0",
+    "background": "radial-gradient(circle at 60% -5%, rgba(255, 216, 160, 0.42), transparent 52%), linear-gradient(145deg, #2b1908 0%, #5f3d18 48%, #140b05 100%)"
   },
   {
-    "title": "Pair of Wings",
-    "line": "Nothing rises on one wing; two makes flight possible: effort and grace.",
-    "theme": "balance",
+    "title": "Reactive Hearts",
+    "quote": "The meeting of two personalities is like the contact of two chemical substances: if there is any reaction, both are transformed.",
+    "attribution": "Carl Jung",
+    "source": "Modern Man in Search of a Soul",
+    "domain": "psychology",
+    "theme": "transformation",
+    "line": "Jung's lab note for why twos create third things: change.",
     "keywords": [
-      "symmetry",
-      "lift",
-      "cooperation",
-      "motion"
+      "alchemy",
+      "relationship",
+      "reaction"
     ],
-    "color": "#ffd8c2",
-    "background": "radial-gradient(circle at 65% 3%, rgba(255, 216, 194, 0.43), transparent 44%), linear-gradient(145deg, #2b1610 0%, #5a2c1e 47%, #170d0b 100%)",
-    "image": "assets/new-york/scene-08-kaya.jpg",
-    "alt": "Companion portrait reflecting balance and paired wings"
+    "image": "numerals/number-black-2.svg",
+    "alt": "Minimal black placard with the numeral 2",
+    "color": "#cce0ff",
+    "background": "radial-gradient(circle at 25% 5%, rgba(204, 224, 255, 0.4), transparent 50%), linear-gradient(145deg, #0e1722 0%, #1f3a59 48%, #0a1018 100%)"
   },
   {
-    "title": "Version 2 of the Soul",
-    "line": "The truest upgrades are human: same name, new compass.",
-    "theme": "evolution",
+    "title": "Forked Paths",
+    "quote": "Two roads diverged in a wood, and I\u2014 I took the one less traveled by, and that has made all the difference.",
+    "attribution": "Robert Frost",
+    "source": "The Road Not Taken",
+    "domain": "poetry",
+    "theme": "choice",
+    "line": "If there are always two routes, Frost selects the rebel seam.",
     "keywords": [
-      "iteration",
-      "identity",
-      "wisdom",
-      "future self"
+      "decision",
+      "wander",
+      "risk"
     ],
-    "color": "#f8a8ff",
-    "background": "radial-gradient(circle at 12% 6%, rgba(248, 168, 255, 0.4), transparent 46%), linear-gradient(145deg, #2b1029 0%, #60285a 45%, #1a0c1b 100%)",
-    "image": "assets/new-york/scene-01-vespa.jpg",
-    "alt": "Vespa city start for version-two momentum and evolution"
+    "image": "numerals/number-blue-23-window.svg",
+    "alt": "Blue glass pane showing the number 23",
+    "color": "#b5d7ff",
+    "background": "radial-gradient(circle at 18% 12%, rgba(181, 215, 255, 0.42), transparent 50%), linear-gradient(150deg, #0f1b2d 0%, #24436a 48%, #0b111c 100%)"
+  },
+  {
+    "title": "Candle & Mirror",
+    "quote": "There are two ways to spread light: to be the candle or the mirror that reflects it.",
+    "attribution": "Edith Wharton",
+    "source": "Vesalius in Zante",
+    "domain": "literature",
+    "theme": "illumination",
+    "line": "Wharton hands us a binary for service: emit or reflect.",
+    "keywords": [
+      "light",
+      "service",
+      "mirror"
+    ],
+    "image": "numerals/neon-circle-2.svg",
+    "alt": "Neon ring encasing the digit 2",
+    "color": "#8ff5ff",
+    "background": "radial-gradient(circle at 70% 0%, rgba(143, 245, 255, 0.42), transparent 48%), linear-gradient(150deg, #041720 0%, #0f3844 46%, #050c13 100%)"
+  },
+  {
+    "title": "Starry Law",
+    "quote": "Two things fill the mind with ever new and increasing admiration and awe, the starry heavens above me and the moral law within me.",
+    "attribution": "Immanuel Kant",
+    "source": "Critique of Practical Reason",
+    "domain": "philosophy",
+    "theme": "awe",
+    "line": "Kant's paired infinities keep us looking up and inward simultaneously.",
+    "keywords": [
+      "ethics",
+      "cosmos",
+      "wonder"
+    ],
+    "image": "numerals/number-blue-25.svg",
+    "alt": "Weathered street number 25",
+    "color": "#9cd0ff",
+    "background": "radial-gradient(circle at 22% 0%, rgba(156, 208, 255, 0.4), transparent 52%), linear-gradient(145deg, #0b1727 0%, #1c3b5a 46%, #0a1017 100%)"
+  },
+  {
+    "title": "Twin Hearts",
+    "quote": "Two souls dwell, alas, in my breast, and each one wants to separate from the other.",
+    "attribution": "Johann Wolfgang von Goethe",
+    "source": "Faust",
+    "domain": "literature",
+    "theme": "inner split",
+    "line": "Goethe names the tug-of-war inside every body built for two impulses.",
+    "keywords": [
+      "duality",
+      "desire",
+      "tension"
+    ],
+    "image": "numerals/green-220-crop.svg",
+    "alt": "Green enamel digits hinting at twin forces",
+    "color": "#b5f7c1",
+    "background": "radial-gradient(circle at 30% -6%, rgba(181, 247, 193, 0.4), transparent 52%), linear-gradient(150deg, #0d1f13 0%, #1f5130 45%, #07110b 100%)"
+  },
+  {
+    "title": "Miracle Modes",
+    "quote": "There are only two ways to live your life. One is as though nothing is a miracle. The other is as though everything is a miracle.",
+    "attribution": "Albert Einstein",
+    "source": "Lecture notes",
+    "domain": "science",
+    "theme": "perspective",
+    "line": "Einstein's slider for awe is binary: mute it or saturate it.",
+    "keywords": [
+      "perception",
+      "optimism",
+      "choice"
+    ],
+    "image": "numerals/speed-sign-20.svg",
+    "alt": "Circular road sign showing the number 20",
+    "color": "#ffdede",
+    "background": "radial-gradient(circle at 75% -10%, rgba(255, 222, 222, 0.38), transparent 50%), linear-gradient(145deg, #2a1110 0%, #5b2a24 46%, #150908 100%)"
+  },
+  {
+    "title": "Mud or Stars",
+    "quote": "Two men look out through the same bars: one sees the mud, and one the stars.",
+    "attribution": "Frederick Langbridge",
+    "source": "A Cluster of Quiet Thoughts",
+    "domain": "poetry",
+    "theme": "outlook",
+    "line": "Langbridge reminds us that twoness also means perspective splits.",
+    "keywords": [
+      "vision",
+      "choice",
+      "hope"
+    ],
+    "image": "numerals/number-black-2.svg",
+    "alt": "Monochrome numeral 2 for dual visions",
+    "color": "#dcdcdc",
+    "background": "radial-gradient(circle at 18% 10%, rgba(220, 220, 220, 0.35), transparent 50%), linear-gradient(145deg, #101010 0%, #2a2a2a 48%, #070707 100%)"
   }
 ]
