@@ -259,7 +259,7 @@
 
         if (!scenes.length) {
           line.textContent = 'Waiting for today\'s upload set.';
-          meta.textContent = 'Drop JPGs into assets/morning-prep-today/';
+          meta.textContent = 'Drop JPGs into archives/2026-03-15-new-london-home/assets/photos/';
           totalEl.textContent = '00';
           return;
         }
@@ -267,7 +267,7 @@
         render();
       } catch (error) {
         line.textContent = 'Could not load today\'s image set.';
-        meta.textContent = 'Check assets/data/morning-prep-today.json';
+        meta.textContent = 'Check archives/2026-03-15-new-london-home/new-london-home.json';
         totalEl.textContent = '00';
         console.error(error);
       }

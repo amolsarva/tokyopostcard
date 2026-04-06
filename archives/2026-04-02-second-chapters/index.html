@@ -200,7 +200,7 @@
   </style>
   <script src="/assets/js/password-gate.js"></script>
 </head>
-<body data-edition="./second-chapters-framework.json">
+<body data-edition="./second-chapters-framework.json" data-media-base="./assets">
   <header class="hud">
     <a href="../../">NewAIYork</a>
     <span class="hud-metric"><span id="index">01</span> / <span id="total">00</span></span>
@@ -242,6 +242,7 @@
     const controls = document.querySelectorAll('[data-step]');
     const shuffleButton = document.getElementById('shuffle');
     const root = document.documentElement;
+    const mediaBase = (document.body.dataset.mediaBase || './assets').replace(/\/$/, '');
 
     let concepts = [];
     let current = 0;
@@ -265,8 +266,7 @@
       slotPillEl.hidden = hasImage;
 
       if (hasImage) {
-        const base = './assets';
-        const src = concept.image.startsWith('/') ? concept.image : `${base}/${concept.image}`;
+        const src = concept.image.startsWith('/') ? concept.image : `${mediaBase}/${concept.image}`;
         mediaImageEl.src = src;
         mediaImageEl.alt = concept.alt || `${concept.title} image`;
       } else {
