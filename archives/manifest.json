@@ -1,82 +1,98 @@
 [
   {
     "slug": "2026-02-14-tokyo",
-    "label": "10 Feb 2026 \u00b7 Tokyo Edition I",
-    "blurb": "Original Tokyo night postcard (archived first edition)"
+    "label": "2026-02-14 \u00b7 Tokyo Edition I",
+    "blurb": "Original Tokyo night postcard (archived first edition)",
+    "publishedAt": "2026-02-14"
   },
   {
     "slug": "2026-02-14-london-relay-v1",
-    "label": "14 Feb 2026 \u00b7 London Relay v1",
-    "blurb": "Gradient-based London relay postcard"
+    "label": "2026-02-14 \u00b7 London Relay v1",
+    "blurb": "Gradient-based London relay postcard",
+    "publishedAt": "2026-02-14"
   },
   {
     "slug": "2026-02-14-london-relay-v2",
-    "label": "14 Feb 2026 \u00b7 London Relay v2",
-    "blurb": "Photo-led London runway relay archived ahead of the Shoreditch bikes edition"
+    "label": "2026-02-14 \u00b7 London Relay v2",
+    "blurb": "Photo-led London runway relay archived ahead of the Shoreditch bikes edition",
+    "publishedAt": "2026-02-14"
   },
   {
     "slug": "2026-02-15-shoreditch-relay",
-    "label": "15 Feb 2026 \u00b7 Shoreditch Relay",
-    "blurb": "Bike relay postcard promoted before the Sunday walk edition"
+    "label": "2026-02-15 \u00b7 Shoreditch Relay",
+    "blurb": "Bike relay postcard promoted before the Sunday walk edition",
+    "publishedAt": "2026-02-15"
   },
   {
     "slug": "2026-02-15-shoreditch-walk",
-    "label": "15 Feb 2026 \u00b7 Shoreditch Walk",
-    "blurb": "Sixteen-scene wet-morning walk postcard through Shoreditch backstreets."
+    "label": "2026-02-15 \u00b7 Shoreditch Walk",
+    "blurb": "Sixteen-scene wet-morning walk postcard through Shoreditch backstreets.",
+    "publishedAt": "2026-02-15"
   },
   {
     "slug": "2026-02-24-new-york-flash",
-    "label": "24 Feb 2026 \u00b7 New York Flash Diary",
-    "blurb": "1990s flash-led New York spread with Spotify-linked scenes from the six-day stay."
+    "label": "2026-02-24 \u00b7 New York Flash Diary",
+    "blurb": "1990s flash-led New York spread with Spotify-linked scenes from the six-day stay.",
+    "publishedAt": "2026-02-24"
   },
   {
     "slug": "2026-03-03-hard-days",
-    "label": "03 Mar 2026 \u00b7 Hard Days Edition",
-    "blurb": "Good Morning Laura hero preserved from the Hard Days homepage."
+    "label": "2026-03-03 \u00b7 Hard Days Edition",
+    "blurb": "Good Morning Laura hero preserved from the Hard Days homepage.",
+    "publishedAt": "2026-03-03"
   },
   {
     "slug": "2026-03-03-shoreditch-walk-draft",
-    "label": "03 Mar 2026 \u00b7 Shoreditch Walk Draft",
-    "blurb": "Archived interactive Shoreditch walk draft before the Hello Laura homepage."
+    "label": "2026-03-03 \u00b7 Shoreditch Walk Draft",
+    "blurb": "Archived interactive Shoreditch walk draft before the Hello Laura homepage.",
+    "publishedAt": "2026-03-03"
   },
   {
     "slug": "2026-03-03-digital-games",
-    "label": "03 Mar 2026 \u00b7 Digital Games Edition",
-    "blurb": "Twenty-scene postcard built entirely from the warmest Laura & Amol transcript quotes."
+    "label": "2026-03-03 \u00b7 Digital Games Edition",
+    "blurb": "Twenty-scene postcard built entirely from the warmest Laura & Amol transcript quotes.",
+    "publishedAt": "2026-03-03"
   },
   {
     "slug": "2026-03-04-dreams",
-    "label": "04 Mar 2026 \u00b7 DREAMS Edition",
-    "blurb": "Fifty-three-screen emoji-led edition mapping ambition, family, love, intensity, and future-building dreams."
+    "label": "2026-03-04 \u00b7 DREAMS Edition",
+    "blurb": "Fifty-three-screen emoji-led edition mapping ambition, family, love, intensity, and future-building dreams.",
+    "publishedAt": "2026-03-04"
   },
   {
     "slug": "2026-03-09-six-nights-flash",
-    "label": "09 Mar 2026 \u00b7 Six Nights in Flash",
-    "blurb": "Flash-heavy city-grid homepage archived before the NYC morning preparations tap-through."
+    "label": "2026-03-09 \u00b7 Six Nights in Flash",
+    "blurb": "Flash-heavy city-grid homepage archived before the NYC morning preparations tap-through.",
+    "publishedAt": "2026-03-09"
   },
   {
     "slug": "2026-03-11-morning-prep",
-    "label": "11 Mar 2026 \u00b7 Morning Preparations",
-    "blurb": "Wardrobe-floor NYC prep postcard preserved before the New London Home homepage."
+    "label": "2026-03-11 \u00b7 Morning Preparations",
+    "blurb": "Wardrobe-floor NYC prep postcard preserved before the New London Home homepage.",
+    "publishedAt": "2026-03-11"
   },
   {
     "slug": "2026-03-15-new-london-home",
-    "label": "15 Mar 2026 \u00b7 New London Home",
-    "blurb": "Warehouse-floor New London home walkthrough archived before the Art Party slideshow."
+    "label": "2026-03-15 \u00b7 New London Home",
+    "blurb": "Warehouse-floor New London home walkthrough archived before the Art Party slideshow.",
+    "publishedAt": "2026-03-15"
   },
   {
     "slug": "2026-03-16-art-party",
-    "label": "16 Mar 2026 \u00b7 Art Party",
-    "blurb": "Art Party slideshow edition cycling every art_party_artists_v2 image with a Jens Lekman glow link."
+    "label": "2026-03-16 \u00b7 Art Party",
+    "blurb": "Art Party slideshow edition cycling every art_party_artists_v2 image with a Jens Lekman glow link.",
+    "publishedAt": "2026-03-16"
   },
   {
     "slug": "2026-03-27-twofold-beginnings",
-    "label": "27 Mar 2026 \u00b7 Twofold Beginnings",
-    "blurb": "Poetic concept deck orbiting the number two: second starts, second chances, regeneration, and Easter resurrection motifs."
+    "label": "2026-03-27 \u00b7 Twofold Beginnings",
+    "blurb": "Poetic concept deck orbiting the number two: second starts, second chances, regeneration, and Easter resurrection motifs.",
+    "publishedAt": "2026-03-27"
   },
   {
     "slug": "2026-04-02-second-chapters",
-    "label": "02 Apr 2026 \u00b7 Second Chapters at Sunrise",
-    "blurb": "Fifteen-slot quote framework on twoness, spring dawns, and second chapters across philosophy, literature, poetry, science, and speech."
+    "label": "2026-04-02 \u00b7 Second Chapters at Sunrise",
+    "blurb": "Fifteen-slot quote framework on twoness, spring dawns, and second chapters across philosophy, literature, poetry, science, and speech.",
+    "publishedAt": "2026-04-02"
   }
 ]
