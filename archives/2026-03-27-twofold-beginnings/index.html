@@ -29,6 +29,28 @@
       display: flex;
       flex-direction: column;
       background: var(--hero-background);
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body::before {
+      background-image: var(--photo, radial-gradient(circle at 22% -5%, rgba(152, 215, 255, 0.42), transparent 52%), linear-gradient(140deg, #161924 0%, #1f3152 48%, #0e1018 100%));
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.05) contrast(1.05);
+    }
+
+    body::after {
+      background: radial-gradient(circle at 25% 18%, rgba(0, 0, 0, 0.45), transparent 45%), linear-gradient(145deg, rgba(3, 5, 12, 0.85), rgba(3, 2, 8, 0.55));
     }
 
     .hud {
@@ -44,6 +66,7 @@
       text-transform: uppercase;
       letter-spacing: 0.2em;
       font-size: 0.72rem;
+      z-index: 1;
     }
 
     .hud a {
@@ -63,6 +86,8 @@
       display: grid;
       place-items: center;
       padding: 16vh clamp(1rem, 5vw, 4rem) 3rem;
+      position: relative;
+      z-index: 1;
     }
 
     .card {
@@ -93,6 +118,16 @@
       color: var(--ink-soft);
     }
 
+    .quote {
+      margin: 0;
+      font-size: clamp(1.35rem, 3.4vw, 2.4rem);
+      line-height: 1.35;
+      quotes: "“" "”";
+    }
+
+    .quote::before { content: open-quote; }
+    .quote::after { content: close-quote; }
+
     .line {
       margin: 0;
       font-size: clamp(1.2rem, 3vw, 2.2rem);
@@ -100,27 +135,12 @@
       max-width: 30ch;
     }
 
-    .media-frame {
+    .attribution {
       margin: 0;
-      width: 100%;
-      max-width: 860px;
-      aspect-ratio: 16 / 9;
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      overflow: hidden;
-      background: rgba(0, 0, 0, 0.35);
-    }
-
-    .media-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: saturate(1.05) contrast(1.03);
-    }
-
-    .media-frame[hidden] {
-      display: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(248, 251, 255, 0.8);
     }
 
     .keywords {
@@ -189,10 +209,9 @@
     <section class="card" aria-live="polite">
       <h1 id="title">Twofold Beginnings</h1>
       <p class="theme" id="theme">Loading...</p>
+      <p class="quote" id="quote">Loading quotes...</p>
       <p class="line" id="line">Loading concepts...</p>
-      <figure class="media-frame" id="mediaFrame" hidden>
-        <img id="mediaImage" alt="" loading="lazy" decoding="async" />
-      </figure>
+      <p class="attribution" id="attribution"></p>
       <ul class="keywords" id="keywords"></ul>
       <div class="controls">
         <button type="button" data-step="-1">Prev</button>
@@ -206,15 +225,16 @@
   <script>
     const titleEl = document.getElementById('title');
     const themeEl = document.getElementById('theme');
+    const quoteEl = document.getElementById('quote');
     const lineEl = document.getElementById('line');
+    const attributionEl = document.getElementById('attribution');
     const keywordsEl = document.getElementById('keywords');
-    const mediaFrameEl = document.getElementById('mediaFrame');
-    const mediaImageEl = document.getElementById('mediaImage');
     const indexEl = document.getElementById('index');
     const totalEl = document.getElementById('total');
     const controls = document.querySelectorAll('[data-step]');
     const shuffleButton = document.getElementById('shuffle');
     const root = document.documentElement;
+    const mediaBase = (document.body.dataset.mediaBase || './assets').replace(/\/$/, '');
 
     let concepts = [];
     let current = 0;
@@ -232,29 +252,30 @@
       });
     }
 
-
-    function renderImage(concept) {
-      const src = typeof concept.image === 'string' ? concept.image.trim() : '';
-      if (!src) {
-        mediaFrameEl.hidden = true;
-        mediaImageEl.removeAttribute('src');
-        mediaImageEl.alt = '';
-        return;
+    function applyBackdrop(concept) {
+      const raw = typeof concept.image === 'string' ? concept.image.trim() : '';
+      if (raw) {
+        const cleaned = raw.startsWith('/') ? raw : `${mediaBase}/${raw.replace(/^\/+/, '')}`;
+        root.style.setProperty('--photo', `url('${cleaned}')`);
+      } else {
+        root.style.setProperty('--photo', 'radial-gradient(circle at 20% -5%, rgba(152, 215, 255, 0.42), transparent 52%), linear-gradient(140deg, #161924 0%, #1f3152 48%, #0e1018 100%)');
       }
-
-      mediaFrameEl.hidden = false;
-      const base = document.body.dataset.mediaBase || './assets';
-      mediaImageEl.src = `${base.replace(/\/$/, '')}/${src.replace(/^\/+/, '')}`;
-      mediaImageEl.alt = concept.alt || `${concept.title || 'Twofold concept'} image`;
     }
 
     function renderConcept(concept) {
       if (!concept) return;
       titleEl.textContent = concept.title || 'Twofold Beginnings';
-      themeEl.textContent = concept.theme ? `Theme · ${concept.theme}` : 'Theme · duality';
-      lineEl.textContent = concept.line || '';
+      const domainLabel = concept.domain ? concept.domain.toUpperCase() : 'CONCEPT';
+      const themeLabel = concept.theme ? concept.theme : 'duality';
+      themeEl.textContent = `${domainLabel} · ${themeLabel}`;
+      quoteEl.textContent = concept.quote || concept.line || '';
+      lineEl.textContent = concept.line || concept.quote || '';
+      const attributionBits = [];
+      if (concept.attribution) attributionBits.push(`— ${concept.attribution}`);
+      if (concept.source) attributionBits.push(concept.source);
+      attributionEl.textContent = attributionBits.join(' · ');
       renderKeywords(Array.isArray(concept.keywords) ? concept.keywords : []);
-      renderImage(concept);
+      applyBackdrop(concept);
 
       indexEl.textContent = pad(current + 1);
       totalEl.textContent = pad(concepts.length);
