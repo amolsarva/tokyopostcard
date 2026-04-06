@@ -75,9 +75,8 @@
       padding-bottom: 2px;
     }
 
-    .hud-metric {
-      color: var(--ink-soft);
-      font-size: 0.68rem;
+    .hud-link {
+      margin-left: auto;
     }
 
     main {
@@ -90,15 +89,48 @@
     }
 
     .card {
-      width: min(840px, 100%);
-      border-radius: 32px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      background: rgba(3, 4, 12, 0.38);
-      box-shadow: 0 35px 90px rgba(2, 0, 8, 0.45);
-      padding: clamp(1.5rem, 5vw, 3.2rem);
+      position: relative;
+      width: min(860px, 100%);
+      border-radius: 48px;
+      border: none;
+      background: transparent;
+      padding: clamp(1.8rem, 6vw, 3.6rem);
       display: grid;
-      gap: 0.85rem;
-      backdrop-filter: blur(14px);
+      gap: 1rem;
+      color: var(--ink);
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: rgba(3, 5, 14, 0.52);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 35px 90px rgba(2, 0, 8, 0.5);
+      backdrop-filter: blur(18px);
+      z-index: 0;
+    }
+
+    .card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      margin: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .counter {
+      margin: 0;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(248, 251, 255, 0.72);
     }
 
     h1 {
@@ -112,8 +144,8 @@
     .theme {
       margin: 0;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-      font-size: 0.7rem;
+      letter-spacing: 0.24em;
+      font-size: 0.72rem;
       color: var(--ink-soft);
     }
 
@@ -142,6 +174,18 @@
       color: rgba(248, 251, 255, 0.64);
       letter-spacing: 0.12em;
       text-transform: uppercase;
+    }
+
+    .image-alt {
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.78rem;
+      color: rgba(248, 251, 255, 0.68);
+    }
+
+    .image-alt[hidden] {
+      display: none;
     }
 
     .keywords {
@@ -182,6 +226,13 @@
       cursor: pointer;
     }
 
+    #autoButton[aria-pressed="true"],
+    body[data-mode="auto"] #autoButton {
+      background: rgba(255, 255, 255, 0.18);
+      color: var(--ink);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+
     .hint {
       margin: 0;
       font-size: 0.72rem;
@@ -192,7 +243,7 @@
   </style>
   <script src="/assets/js/password-gate.js"></script>
 </head>
-<body data-edition="./second-chapters-framework.json" data-media-base="./assets">
+<body data-edition="./second-chapters-framework.json" data-media-base="./assets" data-mode="manual">
   <div class="backdrop" aria-hidden="true"></div>
   <div class="veil" aria-hidden="true"></div>
   <header class="hud">
@@ -210,7 +261,7 @@
       <p class="line" id="line">Loading quote framework...</p>
       <p class="attribution" id="attribution"></p>
       <p class="source" id="source"></p>
-      <p class="image-alt" id="imageAlt">Awaiting image slot</p>
+      <p class="image-alt" id="imageAlt" hidden>Awaiting image slot</p>
       <ul class="keywords" id="keywords"></ul>
       <div class="controls">
         <button type="button" data-step="-1">Prev</button>
@@ -229,15 +280,49 @@
     const attributionEl = document.getElementById('attribution');
     const sourceEl = document.getElementById('source');
     const keywordsEl = document.getElementById('keywords');
+    const imageAltEl = document.getElementById('imageAlt');
     const indexEl = document.getElementById('index');
     const totalEl = document.getElementById('total');
     const controls = document.querySelectorAll('[data-step]');
     const shuffleButton = document.getElementById('shuffle');
+    const autoButton = document.getElementById('autoButton');
     const root = document.documentElement;
     const mediaBase = (document.body.dataset.mediaBase || './assets').replace(/\/$/, '');
 
     let concepts = [];
     let current = 0;
+    let autoTimer = null;
+    const AUTO_INTERVAL = 9000;
+
+    function setMode(value) {
+      document.body.dataset.mode = value;
+    }
+
+    function startAuto() {
+      stopAuto();
+      autoTimer = setInterval(() => step(1), AUTO_INTERVAL);
+      if (autoButton) {
+        autoButton.textContent = 'Pause';
+        autoButton.setAttribute('aria-pressed', 'true');
+      }
+      setMode('auto');
+    }
+
+    function stopAuto() {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
+      if (autoButton) {
+        autoButton.textContent = 'Auto';
+        autoButton.setAttribute('aria-pressed', 'false');
+      }
+      setMode('manual');
+    }
+
+    function nudgeAuto() {
+      if (autoTimer) startAuto();
+    }
 
     const fmt = (value, fallback) => (typeof value === 'string' && value.trim() ? value.trim() : fallback);
 
@@ -261,12 +346,20 @@
         root.style.setProperty('--photo', 'radial-gradient(circle at 20% 0%, rgba(152, 215, 255, 0.42), transparent 52%), linear-gradient(140deg, #161924 0%, #1f3152 48%, #0e1018 100%)');
       }
 
-      keywordsEl.innerHTML = '';
-      (concept.keywords || []).forEach((keyword) => {
-        const li = document.createElement('li');
-        li.textContent = keyword;
-        keywordsEl.appendChild(li);
-      });
+      if (keywordsEl) {
+        keywordsEl.innerHTML = '';
+        (concept.keywords || []).forEach((keyword) => {
+          const li = document.createElement('li');
+          li.textContent = keyword;
+          keywordsEl.appendChild(li);
+        });
+      }
+
+      if (imageAltEl) {
+        const note = concept.alt || concept.imageAlt || '';
+        imageAltEl.textContent = note ? note.toUpperCase() : '';
+        imageAltEl.hidden = !note;
+      }
 
       indexEl.textContent = String(current + 1).padStart(2, '0');
       totalEl.textContent = String(concepts.length).padStart(2, '0');
@@ -276,12 +369,14 @@
       if (!concepts.length) return;
       current = (current + delta + concepts.length) % concepts.length;
       render();
+      nudgeAuto();
     };
 
     const shuffle = () => {
       if (!concepts.length) return;
       current = Math.floor(Math.random() * concepts.length);
       render();
+      nudgeAuto();
     };
 
     controls.forEach((button) => {
@@ -306,6 +401,16 @@
       }
     });
 
+    if (autoButton) {
+      autoButton.addEventListener('click', () => {
+        if (autoTimer) {
+          stopAuto();
+        } else {
+          startAuto();
+        }
+      });
+    }
+
     const load = async () => {
       const path = document.body.dataset.edition;
       try {
@@ -315,12 +420,14 @@
         if (!Array.isArray(payload) || !payload.length) throw new Error('Edition payload is empty');
         concepts = payload;
         render();
+        startAuto();
       } catch (error) {
         titleEl.textContent = 'Second Chapters at Sunrise';
         themeEl.textContent = 'Edition unavailable';
         lineEl.textContent = 'Could not load framework data.';
         attributionEl.textContent = '';
         sourceEl.textContent = '';
+        stopAuto();
         console.error(error);
       }
     };
