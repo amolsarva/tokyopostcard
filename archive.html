@@ -86,6 +86,37 @@
       padding: 0 clamp(1rem, 7vw, 4rem) clamp(3rem, 6vw, 5rem);
     }
 
+    .archive-controls {
+      width: 100%;
+      max-width: 1300px;
+      margin: 0 auto clamp(1.5rem, 4vw, 2.5rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .archive-controls label {
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      color: var(--ink-muted);
+    }
+
+    .archive-controls input {
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: var(--radius);
+      background: rgba(0, 0, 0, 0.35);
+      color: var(--ink);
+      padding: 0.9rem 1.1rem;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .archive-controls input:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -259,6 +290,10 @@
   </header>
 
   <main>
+    <div class="archive-controls">
+      <label for="editionFilter">Filter editions</label>
+      <input type="search" id="editionFilter" name="editionFilter" placeholder="Search by date, city, or theme" autocomplete="off" spellcheck="false" />
+    </div>
     <section class="gallery" id="gallery" aria-live="polite">
       <div class="loading-state" id="galleryStatus">Loading editions...</div>
     </section>
@@ -281,6 +316,8 @@
     const galleryStatus = document.getElementById('galleryStatus');
     const cardTemplate = document.getElementById('edition-card-template');
     const editionCount = document.getElementById('editionCount');
+    const filterInput = document.getElementById('editionFilter');
+    let manifestEntries = [];
 
     const thumbnailHints = {
       '2026-02-14-tokyo': {
