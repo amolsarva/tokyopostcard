@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1600" role="img" aria-label="Molten ember number 2">
+  <defs>
+    <radialGradient id="emberCore" cx="0.3" cy="0.2" r="1.2">
+      <stop offset="0%" stop-color="#ffefd0" />
+      <stop offset="40%" stop-color="#ff8933" />
+      <stop offset="100%" stop-color="#2a0500" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="1600" fill="#050003" />
+  <circle cx="600" cy="800" r="700" fill="url(#emberCore)" />
+  <text x="600" y="1080" text-anchor="middle" font-family="'Space Grotesk','Inter','Arial Black',sans-serif" font-size="920" font-weight="700" fill="#ffe7c6" filter="url(#glow)">2</text>
+  <filter id="glow">
+    <feGaussianBlur stdDeviation="15" result="coloredBlur" />
+    <feMerge>
+      <feMergeNode in="coloredBlur" />
+      <feMergeNode in="SourceGraphic" />
+    </feMerge>
+  </filter>
+</svg>
