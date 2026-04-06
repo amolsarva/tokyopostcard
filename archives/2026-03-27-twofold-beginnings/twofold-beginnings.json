@@ -178,5 +178,95 @@
     "alt": "Monochrome numeral 2 for dual visions",
     "color": "#dcdcdc",
     "background": "radial-gradient(circle at 18% 10%, rgba(220, 220, 220, 0.35), transparent 50%), linear-gradient(145deg, #101010 0%, #2a2a2a 48%, #070707 100%)"
+  },
+  {
+    "title": "Flint Sparks",
+    "quote": "It takes two flints to make a fire.",
+    "attribution": "Louisa May Alcott",
+    "source": "Little Women",
+    "domain": "literature",
+    "theme": "ignition",
+    "line": "Alcott's rule says progress needs the strike of two willing edges.",
+    "keywords": [
+      "catalyst",
+      "partnership",
+      "heat"
+    ],
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/number-ember-2.svg",
+    "alt": "Molten orange marquee panel painted with a 2",
+    "color": "#ffb187",
+    "background": "radial-gradient(circle at 68% -4%, rgba(255, 190, 150, 0.4), transparent 52%), linear-gradient(150deg, #2d0d03 0%, #66210d 48%, #160703 100%)"
+  },
+  {
+    "title": "Twin Hearts Doctrine",
+    "quote": "Two souls with but a single thought, two hearts that beat as one.",
+    "attribution": "Friedrich Halm",
+    "source": "Ingomar the Barbarian",
+    "domain": "poetry",
+    "theme": "synchrony",
+    "line": "Halm gives the romantic proof that twoness can hum in one rhythm.",
+    "keywords": [
+      "devotion",
+      "heartbeat",
+      "unity"
+    ],
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/number-aurora-2.svg",
+    "alt": "Aurora green signboards stacked into a glowing 2",
+    "color": "#b0ffea",
+    "background": "radial-gradient(circle at 26% -4%, rgba(176, 255, 234, 0.4), transparent 48%), linear-gradient(145deg, #031912 0%, #1f503b 46%, #050b09 100%)"
+  },
+  {
+    "title": "Two Tragedies",
+    "quote": "There are two tragedies in life. One is to lose your heart's desire. The other is to gain it.",
+    "attribution": "George Bernard Shaw",
+    "source": "Man and Superman",
+    "domain": "theatre",
+    "theme": "desire calculus",
+    "line": "Shaw's skepticism keeps every wish equipped with mirrored consequences.",
+    "keywords": [
+      "desire",
+      "risk",
+      "mirror"
+    ],
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/number-marquee-2.svg",
+    "alt": "Retro marquee outline of the number 2",
+    "color": "#ffcdb4",
+    "background": "radial-gradient(circle at 70% 0%, rgba(255, 205, 180, 0.36), transparent 52%), linear-gradient(150deg, #2d140a 0%, #663726 48%, #1b0b05 100%)"
+  },
+  {
+    "title": "Better Than One",
+    "quote": "Two are better than one; because they have a good reward for their labour.",
+    "attribution": "Ecclesiastes 4:9",
+    "source": "Hebrew Bible",
+    "domain": "wisdom",
+    "theme": "mutual aid",
+    "line": "Ancient ledger math writes twos into every field report on resilience.",
+    "keywords": [
+      "work",
+      "support",
+      "reward"
+    ],
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/number-paper-2.svg",
+    "alt": "Cream paper placard stenciled with the numeral 2",
+    "color": "#f6e9d1",
+    "background": "radial-gradient(circle at 25% 2%, rgba(246, 233, 209, 0.42), transparent 52%), linear-gradient(150deg, #2a1c10 0%, #61462f 48%, #150c05 100%)"
+  },
+  {
+    "title": "Calm Arithmetic",
+    "quote": "There are two things a person should never be angry at, what they can help, and what they cannot.",
+    "attribution": "Plato",
+    "source": "Collected Dialogues (apocryphal)",
+    "domain": "philosophy",
+    "theme": "equanimity",
+    "line": "Plato's binary keeps emotional energy aimed at real change, not noise.",
+    "keywords": [
+      "stoic",
+      "choice",
+      "focus"
+    ],
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/number-cobalt-2.svg",
+    "alt": "Cobalt enamel plate carrying a bold white 2",
+    "color": "#9ad0ff",
+    "background": "radial-gradient(circle at 32% -4%, rgba(154, 208, 255, 0.4), transparent 50%), linear-gradient(150deg, #05152d 0%, #1a4472 48%, #03070c 100%)"
   }
 ]
