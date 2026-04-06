@@ -272,7 +272,7 @@
 
   <script>
     (function () {
-      const endpoint = '/assets/art_party_artists_v2/image-list.json';
+      const endpoint = './archives/2026-03-16-art-party/assets/art_party_artists_v2/image-list.json';
       const slideCanvas = document.getElementById('slideCanvas');
       const statusEl = document.getElementById('status');
       const prevBtn = document.getElementById('prevBtn');
@@ -364,7 +364,14 @@
         .then((list) => {
           const cleaned = Array.isArray(list) ? list.filter(Boolean) : [];
           if (!cleaned.length) throw new Error('Empty list');
-          state.slides = cleaned;
+          const remotePrefix = '/assets/art_party_artists_v2/';
+          const localPrefix = './archives/2026-03-16-art-party/assets/art_party_artists_v2/';
+          state.slides = cleaned.map((entry) => {
+            if (typeof entry === 'string' && entry.startsWith(remotePrefix)) {
+              return `${localPrefix}${entry.slice(remotePrefix.length)}`;
+            }
+            return entry;
+          });
           statusEl.dataset.error = 'false';
           showSlide(0);
         })
