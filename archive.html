@@ -651,9 +651,7 @@
         option.textContent = year;
         yearFilter.appendChild(option);
       });
-      if (currentValue && years.includes(currentValue)) {
-        yearFilter.value = currentValue;
-      }
+      yearFilter.value = currentValue;
     }
 
     function applyThumbnail(target, slug, titleText) {
