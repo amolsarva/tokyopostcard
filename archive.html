@@ -382,10 +382,15 @@
       }
 
       gallery.innerHTML = '';
-      const normalized = entries.map((entry) => ({
-        ...entry,
-        dateValue: parseEditionDate(entry.slug)
-      })).sort((a, b) => b.dateValue - a.dateValue);
+      const normalized = entries.map((entry) => {
+        const iso = entry.publishedAt || entry.slug?.slice(0, 10);
+        const timestamp = Date.parse(iso ?? '') || parseEditionDate(entry.slug);
+        return {
+          ...entry,
+          publishedAt: iso,
+          dateValue: timestamp
+        };
+      }).sort((a, b) => b.dateValue - a.dateValue);
 
       if (editionCount) {
         editionCount.textContent = `${normalized.length} editions filed`;
@@ -403,7 +408,7 @@
         anchor.setAttribute('aria-label', `Open ${entry.label || entry.slug}`);
 
         const { dateText, titleText } = splitLabel(entry.label);
-        dateEl.textContent = dateText || formatDate(entry.dateValue) || '—';
+        dateEl.textContent = formatLabelDate(entry.publishedAt, dateText) || formatDate(entry.dateValue) || '—';
         titleEl.textContent = titleText || entry.slug.replace(/-/g, ' ');
         blurbEl.textContent = entry.blurb || '';
 
@@ -441,6 +446,22 @@
       } catch {
         return '';
       }
+    }
+
+    function formatLabelDate(isoDate, fallback) {
+      if (isoDate) {
+        const timestamp = Date.parse(isoDate);
+        if (!Number.isNaN(timestamp)) {
+          return formatDate(timestamp);
+        }
+      }
+      if (fallback) {
+        const timestamp = Date.parse(fallback);
+        if (!Number.isNaN(timestamp)) {
+          return formatDate(timestamp);
+        }
+      }
+      return fallback || '';
     }
 
     function applyThumbnail(target, slug, titleText) {
