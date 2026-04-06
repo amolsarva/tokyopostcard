@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1600" role="img" aria-label="Letterpress number 2">
+  <rect width="1200" height="1600" rx="60" fill="#f5f0e6"/>
+  <rect x="80" y="80" width="1040" height="1440" rx="40" fill="#fff" stroke="#d8cfbe" stroke-width="6" stroke-dasharray="14 18"/>
+  <text x="600" y="1100" text-anchor="middle" font-family="'Space Grotesk','Inter','Arial Black',sans-serif" font-size="880" font-weight="700" fill="#1e232b">2</text>
+</svg>
