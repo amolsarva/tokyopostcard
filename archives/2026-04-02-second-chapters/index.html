@@ -197,22 +197,26 @@
   <div class="veil" aria-hidden="true"></div>
   <header class="hud">
     <a href="../../">NewAIYork</a>
-    <span class="hud-metric"><span id="index">01</span> / <span id="total">00</span></span>
-    <a href="../../archive.html">Laurarchive</a>
+    <a class="hud-link" href="../../archive.html">Laurarchive</a>
   </header>
 
   <main>
     <section class="card" aria-live="polite">
+      <div class="eyebrow">
+        <p class="theme" id="theme">Loading...</p>
+        <p class="counter"><span id="index">01</span> / <span id="total">00</span></p>
+      </div>
       <h1 id="title">Second Chapters at Sunrise</h1>
-      <p class="theme" id="theme">Loading...</p>
       <p class="line" id="line">Loading quote framework...</p>
       <p class="attribution" id="attribution"></p>
       <p class="source" id="source"></p>
+      <p class="image-alt" id="imageAlt">Awaiting image slot</p>
       <ul class="keywords" id="keywords"></ul>
       <div class="controls">
         <button type="button" data-step="-1">Prev</button>
         <button type="button" data-step="1">Next</button>
         <button type="button" id="shuffle">Shuffle</button>
+        <button type="button" id="autoButton" aria-pressed="false">Auto</button>
       </div>
       <p class="hint">Tap the background or use the arrows to flow through the framework.</p>
     </section>
