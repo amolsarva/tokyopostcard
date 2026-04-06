@@ -117,6 +117,43 @@
       outline-offset: 3px;
     }
 
+    .control-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .control-row input {
+      flex: 1 1 280px;
+    }
+
+    .control-row select {
+      flex: 0 0 160px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      background: rgba(0, 0, 0, 0.35);
+      color: var(--ink);
+      padding: 0.65rem 0.9rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .control-row select:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 720px) {
+      .control-row {
+        flex-direction: column;
+      }
+
+      .control-row select {
+        width: 100%;
+      }
+    }
+
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -292,7 +329,12 @@
   <main>
     <div class="archive-controls">
       <label for="editionFilter">Filter editions</label>
-      <input type="search" id="editionFilter" name="editionFilter" placeholder="Search by date, city, or theme" autocomplete="off" spellcheck="false" />
+      <div class="control-row">
+        <input type="search" id="editionFilter" name="editionFilter" placeholder="Search by date, city, or theme" autocomplete="off" spellcheck="false" />
+        <select id="yearFilter" name="yearFilter" disabled>
+          <option value="">All years</option>
+        </select>
+      </div>
     </div>
     <section class="gallery" id="gallery" aria-live="polite">
       <div class="loading-state" id="galleryStatus">Loading editions...</div>
@@ -318,6 +360,8 @@
     const editionCount = document.getElementById('editionCount');
     const filterInput = document.getElementById('editionFilter');
     if (filterInput) filterInput.disabled = true;
+    const yearFilter = document.getElementById('yearFilter');
+    if (yearFilter) yearFilter.disabled = true;
     let manifestEntries = [];
 
     const thumbnailHints = {
@@ -399,11 +443,22 @@
         const response = await fetch(manifestURL, { cache: 'no-store' });
         if (!response.ok) throw new Error('Network error');
         manifestEntries = await response.json();
-        renderGallery(manifestEntries);
+        buildYearOptions(manifestEntries);
+        renderGallery(manifestEntries, filterInput?.value || '', yearFilter?.value || '');
         if (filterInput) {
           filterInput.disabled = false;
           filterInput.addEventListener('input', (event) => {
-            renderGallery(manifestEntries, event.target.value || '');
+            renderGallery(manifestEntries, event.target.value || '', yearFilter?.value || '');
+          });
+        }
+        if (yearFilter) {
+          yearFilter.disabled = false;
+          yearFilter.addEventListener('change', (event) => {
+            renderGallery(
+              manifestEntries,
+              filterInput?.value || '',
+              event.target.value || ''
+            );
           });
         }
       } catch (error) {
@@ -415,7 +470,7 @@
       }
     }
 
-    function renderGallery(entries, query = '') {
+    function renderGallery(entries, query = '', year = '') {
       if (!Array.isArray(entries) || entries.length === 0) {
         galleryStatus.textContent = 'No editions filed yet';
         galleryStatus.className = 'loading-state';
@@ -444,12 +499,17 @@
       }).sort((a, b) => b.dateValue - a.dateValue);
 
       const queryText = String(query || '').trim().toLowerCase();
-      const filtered = queryText
-        ? normalized.filter((entry) => entry.searchText.includes(queryText))
-        : normalized;
+      const yearText = String(year || '').trim();
+      const filtered = normalized.filter((entry) => {
+        const matchesQuery = queryText ? entry.searchText.includes(queryText) : true;
+        const matchesYear = yearText
+          ? (entry.publishedAt || '').startsWith(yearText)
+          : true;
+        return matchesQuery && matchesYear;
+      });
 
       if (editionCount) {
-        editionCount.textContent = queryText
+        editionCount.textContent = (queryText || yearText)
           ? `${filtered.length} of ${normalized.length} editions`
           : `${normalized.length} editions filed`;
       }
@@ -457,8 +517,8 @@
       gallery.innerHTML = '';
 
       if (!filtered.length) {
-        galleryStatus.textContent = queryText
-          ? `No editions match “${query.trim()}”`
+        galleryStatus.textContent = (queryText || yearText)
+          ? `No editions match “${[query.trim(), yearText].filter(Boolean).join(' · ')}”`
           : 'No editions filed yet';
         galleryStatus.className = 'loading-state';
         gallery.appendChild(galleryStatus);
@@ -531,6 +591,26 @@
         }
       }
       return fallback || '';
+    }
+
+    function buildYearOptions(entries = []) {
+      if (!yearFilter) return;
+      const years = Array.from(new Set(entries.map((entry) => {
+        const iso = entry.publishedAt || entry.slug?.slice(0, 10) || '';
+        return iso.slice(0, 4);
+      }).filter(Boolean))).sort((a, b) => b.localeCompare(a));
+
+      const currentValue = yearFilter.value || '';
+      yearFilter.innerHTML = '<option value=\"\">All years</option>';
+      years.forEach((year) => {
+        const option = document.createElement('option');
+        option.value = year;
+        option.textContent = year;
+        yearFilter.appendChild(option);
+      });
+      if (currentValue && years.includes(currentValue)) {
+        yearFilter.value = currentValue;
+      }
     }
 
     function applyThumbnail(target, slug, titleText) {
