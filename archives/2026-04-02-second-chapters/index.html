@@ -200,7 +200,7 @@
   </style>
   <script src="/assets/js/password-gate.js"></script>
 </head>
-<body data-edition="../../assets/data/second-chapters-framework.json">
+<body data-edition="./second-chapters-framework.json">
   <header class="hud">
     <a href="../../">NewAIYork</a>
     <span class="hud-metric"><span id="index">01</span> / <span id="total">00</span></span>
@@ -265,7 +265,9 @@
       slotPillEl.hidden = hasImage;
 
       if (hasImage) {
-        mediaImageEl.src = concept.image;
+        const base = './assets';
+        const src = concept.image.startsWith('/') ? concept.image : `${base}/${concept.image}`;
+        mediaImageEl.src = src;
         mediaImageEl.alt = concept.alt || `${concept.title} image`;
       } else {
         mediaImageEl.removeAttribute('src');

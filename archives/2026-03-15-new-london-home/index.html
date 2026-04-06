@@ -153,7 +153,7 @@
   </style>
   <script src="/assets/js/password-gate.js"></script>
 </head>
-<body>
+<body data-scenes="./new-london-home.json">
   <div class="stage" id="stage" aria-hidden="true"></div>
 
   <div class="hud">
@@ -183,7 +183,7 @@
   </div>
 
   <script>
-    const dataPath = '/assets/data/new-london-home.json';
+    const dataPath = document.body.dataset.scenes || './new-london-home.json';
     const root = document.documentElement;
     const stage = document.getElementById('stage');
     const line = document.getElementById('line');

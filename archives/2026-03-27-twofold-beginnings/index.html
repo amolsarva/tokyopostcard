@@ -178,7 +178,7 @@
   </style>
   <script src="/assets/js/password-gate.js"></script>
 </head>
-<body data-edition="../../assets/data/twofold-beginnings.json">
+<body data-edition="./twofold-beginnings.json" data-media-base="./assets">
   <header class="hud">
     <a href="../../">NewAIYork</a>
     <span class="hud-metric"><span id="index">01</span> / <span id="total">00</span></span>
@@ -243,7 +243,8 @@
       }
 
       mediaFrameEl.hidden = false;
-      mediaImageEl.src = `../../${src.replace(/^\/+/, '')}`;
+      const base = document.body.dataset.mediaBase || './assets';
+      mediaImageEl.src = `${base.replace(/\/$/, '')}/${src.replace(/^\/+/, '')}`;
       mediaImageEl.alt = concept.alt || `${concept.title || 'Twofold concept'} image`;
     }
 
