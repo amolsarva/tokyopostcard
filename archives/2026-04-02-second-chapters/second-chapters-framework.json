@@ -283,5 +283,59 @@
     "alt": "Hand-painted marquee outline of the number 2",
     "color": "#bcd5ff",
     "background": "radial-gradient(circle at 70% 2%, rgba(188, 213, 255, 0.36), transparent 48%), linear-gradient(145deg, #111b2f 0%, #27426f 48%, #0a101d 100%)"
+  },
+  {
+    "title": "Infinite Seconds",
+    "quote": "Every second is of infinite value.",
+    "attribution": "Johann Wolfgang von Goethe",
+    "source": "Maxims and Reflections",
+    "domain": "philosophy",
+    "theme": "sacred time",
+    "keywords": [
+      "urgency",
+      "present tense",
+      "focus"
+    ],
+    "imageSlot": 16,
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/number-nebula-2.svg",
+    "alt": "Deep blue nebula plaque carrying the number 2",
+    "color": "#d0dcff",
+    "background": "radial-gradient(circle at 40% 0%, rgba(208, 220, 255, 0.34), transparent 48%), linear-gradient(150deg, #0c1424 0%, #1d2850 48%, #06060d 100%)"
+  },
+  {
+    "title": "Two Halves",
+    "quote": "Two halves have little choice but to join; and yes, they do make a whole. But two wholes when they coincide... that is beauty.",
+    "attribution": "Peter Shaffer",
+    "source": "Equus",
+    "domain": "theatre",
+    "theme": "cohesion",
+    "keywords": [
+      "partnership",
+      "wholeness",
+      "beauty"
+    ],
+    "imageSlot": 17,
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/number-aurora-2.svg",
+    "alt": "Aurora green enamel sign glowing with a number 2",
+    "color": "#b9ffdd",
+    "background": "radial-gradient(circle at 28% -5%, rgba(185, 255, 221, 0.38), transparent 50%), linear-gradient(145deg, #031913 0%, #1f513a 48%, #040907 100%)"
+  },
+  {
+    "title": "Between Two Evils",
+    "quote": "Between two evils, I always pick the one I never tried before.",
+    "attribution": "Mae West",
+    "source": "I'm No Angel",
+    "domain": "film",
+    "theme": "experimental courage",
+    "keywords": [
+      "risk",
+      "choice",
+      "wit"
+    ],
+    "imageSlot": 18,
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/number-ember-2.svg",
+    "alt": "Molten-orange enamel disc stamped with a 2",
+    "color": "#ffaf94",
+    "background": "radial-gradient(circle at 68% -5%, rgba(255, 175, 148, 0.36), transparent 52%), linear-gradient(150deg, #2d0f07 0%, #642716 48%, #150703 100%)"
   }
 ]
