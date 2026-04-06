@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Two Sunrises thumbnail">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#041325" />
+      <stop offset="55%" stop-color="#143c64" />
+      <stop offset="100%" stop-color="#ffb86b" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="800" rx="90" fill="url(#sky)" />
+  <circle cx="250" cy="260" r="120" fill="rgba(255,213,147,0.85)" />
+  <circle cx="560" cy="540" r="110" fill="rgba(255,169,141,0.8)" />
+  <text x="260" y="320" font-family="'Space Grotesk','Inter','Arial Black',sans-serif" font-size="220" font-weight="700" fill="#051225" opacity="0.25">2</text>
+  <text x="540" y="600" font-family="'Space Grotesk','Inter','Arial Black',sans-serif" font-size="220" font-weight="700" fill="#051225" opacity="0.25">2</text>
+  <text x="400" y="690" text-anchor="middle" font-family="'Space Grotesk','Inter',sans-serif" font-size="46" letter-spacing="0.45em" fill="#fef8f2">TWO SUNRISES</text>
+</svg>
