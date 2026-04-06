@@ -225,13 +225,11 @@
     const attributionEl = document.getElementById('attribution');
     const sourceEl = document.getElementById('source');
     const keywordsEl = document.getElementById('keywords');
-    const slotPillEl = document.getElementById('slotPill');
     const indexEl = document.getElementById('index');
     const totalEl = document.getElementById('total');
     const controls = document.querySelectorAll('[data-step]');
     const shuffleButton = document.getElementById('shuffle');
     const root = document.documentElement;
-    const mediaBase = (document.body.dataset.mediaBase || './assets').replace(/\/$/, '');
     const mediaBase = (document.body.dataset.mediaBase || './assets').replace(/\/$/, '');
 
     let concepts = [];
@@ -255,11 +253,8 @@
       if (ref) {
         const src = ref.startsWith('/') ? ref : `${mediaBase}/${ref}`;
         root.style.setProperty('--photo', `url('${src}')`);
-        slotPillEl.hidden = true;
       } else {
         root.style.setProperty('--photo', 'radial-gradient(circle at 20% 0%, rgba(152, 215, 255, 0.42), transparent 52%), linear-gradient(140deg, #161924 0%, #1f3152 48%, #0e1018 100%)');
-        slotPillEl.hidden = false;
-        slotPillEl.textContent = `Image Slot ${String(concept.imageSlot || current + 1).padStart(2, '0')}`;
       }
 
       keywordsEl.innerHTML = '';
@@ -322,7 +317,6 @@
         lineEl.textContent = 'Could not load framework data.';
         attributionEl.textContent = '';
         sourceEl.textContent = '';
-        slotPillEl.textContent = 'Data load error';
         console.error(error);
       }
     };
