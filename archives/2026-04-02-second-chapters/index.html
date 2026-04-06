@@ -28,29 +28,29 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      background: var(--hero-background);
+      background: #030105;
       position: relative;
       overflow: hidden;
     }
 
-    body::before,
-    body::after {
-      content: "";
+    .backdrop,
+    .veil {
       position: fixed;
       inset: 0;
-      z-index: 0;
       pointer-events: none;
+      z-index: 0;
     }
 
-    body::before {
+    .backdrop {
       background-image: var(--photo, radial-gradient(circle at 22% -5%, rgba(152, 215, 255, 0.42), transparent 52%), linear-gradient(140deg, #161924 0%, #1f3152 48%, #0e1018 100%));
       background-size: cover;
       background-position: center;
-      filter: saturate(1.05) contrast(1.05);
+      filter: saturate(1.08) contrast(1.1);
     }
 
-    body::after {
-      background: radial-gradient(circle at 25% 20%, rgba(0, 0, 0, 0.45), transparent 45%), linear-gradient(145deg, rgba(5, 6, 12, 0.8), rgba(3, 2, 8, 0.55));
+    .veil {
+      background: radial-gradient(circle at 30% 18%, rgba(1, 2, 10, 0.3), transparent 46%), linear-gradient(150deg, rgba(5, 6, 14, 0.85), rgba(4, 3, 9, 0.55));
+      mix-blend-mode: soft-light;
     }
 
     .hud {
@@ -62,11 +62,10 @@
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
-      z-index: 4;
+      z-index: 2;
       text-transform: uppercase;
       letter-spacing: 0.2em;
       font-size: 0.72rem;
-      z-index: 1;
     }
 
     .hud a {
@@ -91,15 +90,15 @@
     }
 
     .card {
-      width: min(980px, 100%);
-      border-radius: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      background: rgba(5, 6, 12, 0.52);
-      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.52);
-      padding: clamp(1.2rem, 4vw, 2.8rem);
+      width: min(840px, 100%);
+      border-radius: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(3, 4, 12, 0.38);
+      box-shadow: 0 35px 90px rgba(2, 0, 8, 0.45);
+      padding: clamp(1.5rem, 5vw, 3.2rem);
       display: grid;
       gap: 0.85rem;
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(14px);
     }
 
     h1 {
@@ -143,28 +142,6 @@
       color: rgba(248, 251, 255, 0.64);
       letter-spacing: 0.12em;
       text-transform: uppercase;
-    }
-
-    .media-frame {
-      margin: 0;
-      padding: 0.4rem 0;
-      display: flex;
-    }
-
-    .slot-pill {
-      padding: 0.5rem 1rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      letter-spacing: 0.18em;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      color: rgba(248, 251, 255, 0.8);
-      background: rgba(0, 0, 0, 0.35);
-      margin: 0 auto;
-    }
-
-    .slot-pill[hidden] {
-      display: none;
     }
 
     .keywords {
@@ -216,6 +193,8 @@
   <script src="/assets/js/password-gate.js"></script>
 </head>
 <body data-edition="./second-chapters-framework.json" data-media-base="./assets">
+  <div class="backdrop" aria-hidden="true"></div>
+  <div class="veil" aria-hidden="true"></div>
   <header class="hud">
     <a href="../../">NewAIYork</a>
     <span class="hud-metric"><span id="index">01</span> / <span id="total">00</span></span>
@@ -229,9 +208,6 @@
       <p class="line" id="line">Loading quote framework...</p>
       <p class="attribution" id="attribution"></p>
       <p class="source" id="source"></p>
-      <figure class="media-frame">
-        <figcaption class="slot-pill" id="slotPill">Awaiting image slot</figcaption>
-      </figure>
       <ul class="keywords" id="keywords"></ul>
       <div class="controls">
         <button type="button" data-step="-1">Prev</button>
