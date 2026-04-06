@@ -268,6 +268,7 @@
         <button type="button" data-step="-1">Prev</button>
         <button type="button" data-step="1">Next</button>
         <button type="button" id="shuffle">Shuffle</button>
+        <button type="button" id="copyButton">Copy Quote</button>
         <button type="button" id="autoButton" aria-pressed="false">Auto</button>
       </div>
       <p class="hint">Tap the background or use the arrows to drift through dusk-lit numerals.</p>
@@ -286,6 +287,7 @@
     const totalEl = document.getElementById('total');
     const controls = document.querySelectorAll('[data-step]');
     const shuffleButton = document.getElementById('shuffle');
+    const copyButton = document.getElementById('copyButton');
     const autoButton = document.getElementById('autoButton');
     const root = document.documentElement;
     const mediaBase = (document.body.dataset.mediaBase || './assets').replace(/\/$/, '');
@@ -323,6 +325,24 @@
 
     function nudgeAuto() {
       if (autoTimer) startAuto();
+    }
+
+    async function copyCurrentQuote() {
+      if (!copyButton) return;
+      const quote = lineEl.textContent?.trim();
+      const attribution = attributionEl.textContent?.trim();
+      const payload = [quote, attribution].filter(Boolean).join(' ');
+      if (!payload) return;
+      try {
+        await navigator.clipboard.writeText(payload);
+        copyButton.textContent = 'Copied';
+      } catch (error) {
+        console.error(error);
+        copyButton.textContent = 'Copy failed';
+      }
+      setTimeout(() => {
+        if (copyButton) copyButton.textContent = 'Copy Quote';
+      }, 1600);
     }
 
     const fmt = (value, fallback) => (typeof value === 'string' && value.trim() ? value.trim() : fallback);
@@ -409,6 +429,12 @@
         } else {
           startAuto();
         }
+      });
+    }
+
+    if (copyButton && navigator.clipboard) {
+      copyButton.addEventListener('click', () => {
+        copyCurrentQuote();
       });
     }
 
