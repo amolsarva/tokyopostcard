@@ -334,6 +334,10 @@
         <select id="yearFilter" name="yearFilter" disabled>
           <option value="">All years</option>
         </select>
+        <select id="sortOrder" name="sortOrder" disabled>
+          <option value="desc">Newest first</option>
+          <option value="asc">Oldest first</option>
+        </select>
       </div>
     </div>
     <section class="gallery" id="gallery" aria-live="polite">
@@ -362,6 +366,8 @@
     if (filterInput) filterInput.disabled = true;
     const yearFilter = document.getElementById('yearFilter');
     if (yearFilter) yearFilter.disabled = true;
+    const sortOrder = document.getElementById('sortOrder');
+    if (sortOrder) sortOrder.disabled = true;
     let manifestEntries = [];
 
     const thumbnailHints = {
@@ -454,11 +460,21 @@
         if (!response.ok) throw new Error('Network error');
         manifestEntries = await response.json();
         buildYearOptions(manifestEntries);
-        renderGallery(manifestEntries, filterInput?.value || '', yearFilter?.value || '');
+        renderGallery(
+          manifestEntries,
+          filterInput?.value || '',
+          yearFilter?.value || '',
+          sortOrder?.value || 'desc'
+        );
         if (filterInput) {
           filterInput.disabled = false;
           filterInput.addEventListener('input', (event) => {
-            renderGallery(manifestEntries, event.target.value || '', yearFilter?.value || '');
+            renderGallery(
+              manifestEntries,
+              event.target.value || '',
+              yearFilter?.value || '',
+              sortOrder?.value || 'desc'
+            );
           });
         }
         if (yearFilter) {
@@ -467,7 +483,19 @@
             renderGallery(
               manifestEntries,
               filterInput?.value || '',
-              event.target.value || ''
+              event.target.value || '',
+              sortOrder?.value || 'desc'
+            );
+          });
+        }
+        if (sortOrder) {
+          sortOrder.disabled = false;
+          sortOrder.addEventListener('change', (event) => {
+            renderGallery(
+              manifestEntries,
+              filterInput?.value || '',
+              yearFilter?.value || '',
+              event.target.value || 'desc'
             );
           });
         }
@@ -480,7 +508,7 @@
       }
     }
 
-    function renderGallery(entries, query = '', year = '') {
+    function renderGallery(entries, query = '', year = '', order = 'desc') {
       if (!Array.isArray(entries) || entries.length === 0) {
         galleryStatus.textContent = 'No editions filed yet';
         galleryStatus.className = 'loading-state';
@@ -506,7 +534,12 @@
             entry.publishedAt || ''
           ].join(' ').toLowerCase()
         };
-      }).sort((a, b) => b.dateValue - a.dateValue);
+      }).sort((a, b) => {
+        if (order === 'asc') {
+          return a.dateValue - b.dateValue;
+        }
+        return b.dateValue - a.dateValue;
+      });
 
       const queryText = String(query || '').trim().toLowerCase();
       const yearText = String(year || '').trim();
