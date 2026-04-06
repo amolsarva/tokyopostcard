@@ -13,7 +13,7 @@
       "flow"
     ],
     "imageSlot": 1,
-    "image": "numerals/number-blue-25.svg",
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/number-blue-25.svg",
     "alt": "Blue sign with white number 25 photographed at an angle",
     "color": "#9fd5ff",
     "background": "radial-gradient(circle at 22% 0%, rgba(159, 213, 255, 0.40), transparent 50%), linear-gradient(150deg, #0b1728 0%, #163a5f 48%, #090d16 100%)"
@@ -32,7 +32,7 @@
       "voice"
     ],
     "imageSlot": 2,
-    "image": "numerals/number-red-2.svg",
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/number-red-2.svg",
     "alt": "Red panel with oversized white number 2",
     "color": "#ffcab8",
     "background": "radial-gradient(circle at 78% 5%, rgba(255, 202, 184, 0.38), transparent 48%), linear-gradient(145deg, #28110d 0%, #5a2a1f 46%, #170b08 100%)"
@@ -51,7 +51,7 @@
       "mercy"
     ],
     "imageSlot": 3,
-    "image": "numerals/number-black-2.svg",
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/number-black-2.svg",
     "alt": "Black panel with bold white number 2",
     "color": "#c1f3b0",
     "background": "radial-gradient(circle at 34% 0%, rgba(193, 243, 176, 0.36), transparent 48%), linear-gradient(150deg, #102112 0%, #234e2a 46%, #0b140d 100%)"
@@ -70,7 +70,7 @@
       "discipline"
     ],
     "imageSlot": 4,
-    "image": "numerals/number-blue-23-window.svg",
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/number-blue-23-window.svg",
     "alt": "Blue-tinted window reflection showing number 23",
     "color": "#e5c7ff",
     "background": "radial-gradient(circle at 18% 10%, rgba(229, 199, 255, 0.40), transparent 50%), linear-gradient(140deg, #1b1231 0%, #3f2866 45%, #120c23 100%)"
@@ -89,7 +89,7 @@
       "rhythm"
     ],
     "imageSlot": 5,
-    "image": "numerals/number-black-24-metal.svg",
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/number-black-24-metal.svg",
     "alt": "Worn metallic surface with black number 24",
     "color": "#ffd58f",
     "background": "radial-gradient(circle at 62% 0%, rgba(255, 213, 143, 0.42), transparent 48%), linear-gradient(145deg, #2b1708 0%, #6f3d12 46%, #1b0f08 100%)"
@@ -108,7 +108,7 @@
       "humanity"
     ],
     "imageSlot": 6,
-    "image": "numerals/speed-sign-20.svg",
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/speed-sign-20.svg",
     "alt": "Street speed-limit sign showing number 20 in a red ring",
     "color": "#a7d8ff",
     "background": "radial-gradient(circle at 12% 8%, rgba(167, 216, 255, 0.36), transparent 50%), linear-gradient(150deg, #0b1a2e 0%, #20456e 46%, #0c111c 100%)"
@@ -127,7 +127,7 @@
       "agency"
     ],
     "imageSlot": 7,
-    "image": "numerals/neon-circle-2.svg",
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/neon-circle-2.svg",
     "alt": "Neon green sign with circled number 2",
     "color": "#ffb8cf",
     "background": "radial-gradient(circle at 80% 6%, rgba(255, 184, 207, 0.38), transparent 48%), linear-gradient(140deg, #2c0f1e 0%, #5b2140 45%, #170b13 100%)"
@@ -146,7 +146,7 @@
       "spring"
     ],
     "imageSlot": 8,
-    "image": "numerals/license-plate-2.svg",
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/license-plate-2.svg",
     "alt": "Yellow plate with black number 2",
     "color": "#c8ffc9",
     "background": "radial-gradient(circle at 28% 2%, rgba(200, 255, 201, 0.36), transparent 48%), linear-gradient(150deg, #0f2411 0%, #275a2a 46%, #0a150c 100%)"
@@ -165,7 +165,7 @@
       "time"
     ],
     "imageSlot": 9,
-    "image": "numerals/green-220-crop.svg",
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/green-220-crop.svg",
     "alt": "Green surface with red 220 numerals",
     "color": "#e4dcc9",
     "background": "radial-gradient(circle at 65% 0%, rgba(228, 220, 201, 0.34), transparent 50%), linear-gradient(145deg, #261f16 0%, #4e4334 45%, #16110c 100%)"
@@ -184,8 +184,8 @@
       "respect"
     ],
     "imageSlot": 10,
-    "image": "numerals/",
-    "alt": "Image slot 10 for relational second chapters",
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/number-aurora-2.svg",
+    "alt": "Aurora-green enamel number 2 glowing in the dark",
     "color": "#b8e8ff",
     "background": "radial-gradient(circle at 18% 3%, rgba(184, 232, 255, 0.38), transparent 48%), linear-gradient(150deg, #0e1e2b 0%, #1f4d68 48%, #0a121a 100%)"
   },
@@ -203,8 +203,8 @@
       "action"
     ],
     "imageSlot": 11,
-    "image": "numerals/",
-    "alt": "Image slot 11 for social renewal and shared futures",
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/number-nebula-2.svg",
+    "alt": "Nebula violet signage with the digit 2",
     "color": "#ffd0a6",
     "background": "radial-gradient(circle at 76% 0%, rgba(255, 208, 166, 0.4), transparent 48%), linear-gradient(145deg, #2a1408 0%, #5f3117 47%, #160b06 100%)"
   },
@@ -222,8 +222,8 @@
       "recovery"
     ],
     "imageSlot": 12,
-    "image": "numerals/",
-    "alt": "Image slot 12 for spring rebirth",
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/number-ember-2.svg",
+    "alt": "Molten ember panel stamped with a 2",
     "color": "#ffe58c",
     "background": "radial-gradient(circle at 40% 0%, rgba(255, 229, 140, 0.38), transparent 48%), linear-gradient(145deg, #2c250f 0%, #6a5a22 48%, #191307 100%)"
   },
@@ -241,8 +241,8 @@
       "build"
     ],
     "imageSlot": 13,
-    "image": "numerals/",
-    "alt": "Image slot 13 for practical second-step momentum",
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/number-paper-2.svg",
+    "alt": "Letterpress cream card showing the number 2",
     "color": "#9ee5d4",
     "background": "radial-gradient(circle at 60% 0%, rgba(158, 229, 212, 0.36), transparent 48%), linear-gradient(145deg, #0f2522 0%, #236057 48%, #0b1514 100%)"
   },
@@ -260,8 +260,8 @@
       "new chapter"
     ],
     "imageSlot": 14,
-    "image": "numerals/",
-    "alt": "Image slot 14 for personal transformation",
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/number-cobalt-2.svg",
+    "alt": "Cobalt-blue enamel plaque with a bold 2",
     "color": "#d9c2ff",
     "background": "radial-gradient(circle at 22% 0%, rgba(217, 194, 255, 0.40), transparent 48%), linear-gradient(145deg, #1a1330 0%, #3d2a67 47%, #0f0b22 100%)"
   },
@@ -279,8 +279,8 @@
       "movement"
     ],
     "imageSlot": 15,
-    "image": "numerals/",
-    "alt": "Image slot 15 for final transition into a new chapter",
+    "image": "/assets/editions/2026-03-27-twofold-beginnings/number-marquee-2.svg",
+    "alt": "Hand-painted marquee outline of the number 2",
     "color": "#bcd5ff",
     "background": "radial-gradient(circle at 70% 2%, rgba(188, 213, 255, 0.36), transparent 48%), linear-gradient(145deg, #111b2f 0%, #27426f 48%, #0a101d 100%)"
   }
