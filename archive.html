@@ -370,7 +370,7 @@
     if (sortOrder) sortOrder.disabled = true;
     let manifestEntries = [];
 
-    const thumbnailHints = {
+    const thumbnailOverrides = {
       '2026-02-14-tokyo': {
         type: 'image',
         src: 'archives/2026-02-14-tokyo/assets/04426376c0a6f30176e1498d29f0a442.jpg',
@@ -675,7 +675,7 @@
     }
 
     function applyThumbnail(target, slug, titleText) {
-      const hint = thumbnailHints[slug] || fallbackThumbnail;
+      const hint = getThumbnailHint(slug, titleText);
       target.textContent = '';
 
       if (hint.type === 'image') {
@@ -698,6 +698,16 @@
       badge.className = 'badge';
       badge.textContent = 'open';
       target.appendChild(badge);
+    }
+
+    function getThumbnailHint(slug, titleText = '') {
+      if (thumbnailOverrides[slug]) return thumbnailOverrides[slug];
+      const readableTitle = titleText || slug.replace(/-/g, ' ');
+      return {
+        type: 'image',
+        src: `assets/archive-thumbs/${slug}.jpg`,
+        alt: `${readableTitle} preview thumbnail`
+      };
     }
 
     function renderGradientThumbnail(target, hint, titleText) {
