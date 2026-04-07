@@ -30,6 +30,7 @@
       flex-direction: column;
 <<<<<<< ours
 <<<<<<< ours
+<<<<<<< ours
       background: #030105;
       position: relative;
       overflow: hidden;
@@ -59,6 +60,9 @@
 =======
       background: var(--hero-background);
 >>>>>>> theirs
+=======
+      background: var(--hero-background);
+>>>>>>> theirs
     }
 
     .hud {
@@ -72,7 +76,11 @@
       gap: 1rem;
 <<<<<<< ours
 <<<<<<< ours
+<<<<<<< ours
       z-index: 2;
+=======
+      z-index: 4;
+>>>>>>> theirs
 =======
       z-index: 4;
 >>>>>>> theirs
@@ -93,8 +101,14 @@
 
 <<<<<<< ours
 <<<<<<< ours
+<<<<<<< ours
     .hud-link {
       margin-left: auto;
+=======
+    .hud-metric {
+      color: var(--ink-soft);
+      font-size: 0.68rem;
+>>>>>>> theirs
 =======
     .hud-metric {
       color: var(--ink-soft);
@@ -112,6 +126,7 @@
       display: grid;
       place-items: center;
       padding: 14vh clamp(1rem, 5vw, 4rem) 3rem;
+<<<<<<< ours
 <<<<<<< ours
 <<<<<<< ours
       position: relative;
@@ -164,6 +179,8 @@
 =======
 =======
 >>>>>>> theirs
+=======
+>>>>>>> theirs
     }
 
     .card {
@@ -177,6 +194,9 @@
       gap: 0.85rem;
       backdrop-filter: blur(6px);
 <<<<<<< ours
+<<<<<<< ours
+>>>>>>> theirs
+=======
 >>>>>>> theirs
 =======
 >>>>>>> theirs
@@ -195,8 +215,13 @@
       text-transform: uppercase;
 <<<<<<< ours
 <<<<<<< ours
+<<<<<<< ours
       letter-spacing: 0.24em;
       font-size: 0.72rem;
+=======
+      letter-spacing: 0.18em;
+      font-size: 0.7rem;
+>>>>>>> theirs
 =======
       letter-spacing: 0.18em;
       font-size: 0.7rem;
@@ -237,6 +262,7 @@
 
 <<<<<<< ours
 <<<<<<< ours
+<<<<<<< ours
     .image-alt {
       margin: 0;
       text-transform: uppercase;
@@ -248,6 +274,8 @@
     .image-alt[hidden] {
       display: none;
 =======
+=======
+>>>>>>> theirs
 =======
 >>>>>>> theirs
     .media-frame {
@@ -281,6 +309,9 @@
       color: rgba(248, 251, 255, 0.72);
       background: rgba(0, 0, 0, 0.25);
 <<<<<<< ours
+<<<<<<< ours
+>>>>>>> theirs
+=======
 >>>>>>> theirs
 =======
 >>>>>>> theirs
@@ -326,6 +357,7 @@
 
 <<<<<<< ours
 <<<<<<< ours
+<<<<<<< ours
     #autoButton[aria-pressed="true"],
     body[data-mode="auto"] #autoButton {
       background: rgba(255, 255, 255, 0.18);
@@ -333,6 +365,8 @@
       border-color: rgba(255, 255, 255, 0.6);
     }
 
+=======
+>>>>>>> theirs
 =======
 >>>>>>> theirs
 =======
@@ -349,6 +383,7 @@
 </head>
 <<<<<<< ours
 <<<<<<< ours
+<<<<<<< ours
 <body data-edition="./second-chapters-framework.json" data-media-base="./assets" data-mode="manual">
   <div class="backdrop" aria-hidden="true"></div>
   <div class="veil" aria-hidden="true"></div>
@@ -358,12 +393,17 @@
 =======
 =======
 >>>>>>> theirs
+=======
+>>>>>>> theirs
 <body data-edition="../../assets/data/second-chapters-framework.json">
   <header class="hud">
     <a href="../../">NewAIYork</a>
     <span class="hud-metric"><span id="index">01</span> / <span id="total">00</span></span>
     <a href="../../archive.html">Laurarchive</a>
 <<<<<<< ours
+<<<<<<< ours
+>>>>>>> theirs
+=======
 >>>>>>> theirs
 =======
 >>>>>>> theirs
@@ -371,6 +411,7 @@
 
   <main>
     <section class="card" aria-live="polite">
+<<<<<<< ours
 <<<<<<< ours
 <<<<<<< ours
       <div class="eyebrow">
@@ -385,6 +426,8 @@
 =======
 =======
 >>>>>>> theirs
+=======
+>>>>>>> theirs
       <h1 id="title">Second Chapters at Sunrise</h1>
       <p class="theme" id="theme">Loading...</p>
       <p class="line" id="line">Loading quote framework...</p>
@@ -395,6 +438,9 @@
         <figcaption class="slot-pill" id="slotPill">Awaiting image slot</figcaption>
       </figure>
 <<<<<<< ours
+<<<<<<< ours
+>>>>>>> theirs
+=======
 >>>>>>> theirs
 =======
 >>>>>>> theirs
@@ -405,11 +451,16 @@
         <button type="button" id="shuffle">Shuffle</button>
 <<<<<<< ours
 <<<<<<< ours
+<<<<<<< ours
         <button type="button" id="copyButton">Copy Quote</button>
         <button type="button" id="autoButton" aria-pressed="false">Auto</button>
       </div>
       <span id="copyStatus" class="sr-only" aria-live="polite"></span>
       <p class="hint">Tap the background or use the arrows to flow through the framework.</p>
+=======
+      </div>
+      <p class="hint">Framework mode: slots auto-show until your 15 images are added.</p>
+>>>>>>> theirs
 =======
       </div>
       <p class="hint">Framework mode: slots auto-show until your 15 images are added.</p>
@@ -430,7 +481,12 @@
     const keywordsEl = document.getElementById('keywords');
 <<<<<<< ours
 <<<<<<< ours
+<<<<<<< ours
     const imageAltEl = document.getElementById('imageAlt');
+=======
+    const mediaImageEl = document.getElementById('mediaImage');
+    const slotPillEl = document.getElementById('slotPill');
+>>>>>>> theirs
 =======
     const mediaImageEl = document.getElementById('mediaImage');
     const slotPillEl = document.getElementById('slotPill');
@@ -443,6 +499,7 @@
     const totalEl = document.getElementById('total');
     const controls = document.querySelectorAll('[data-step]');
     const shuffleButton = document.getElementById('shuffle');
+<<<<<<< ours
 <<<<<<< ours
 <<<<<<< ours
     const copyButton = document.getElementById('copyButton');
@@ -514,6 +571,12 @@
     let concepts = [];
     let current = 0;
 >>>>>>> theirs
+=======
+    const root = document.documentElement;
+
+    let concepts = [];
+    let current = 0;
+>>>>>>> theirs
 
     const fmt = (value, fallback) => (typeof value === 'string' && value.trim() ? value.trim() : fallback);
 
@@ -529,6 +592,7 @@
       root.style.setProperty('--accent', concept.color || '#98d7ff');
       root.style.setProperty('--hero-background', concept.background || 'radial-gradient(circle at 20% 0%, rgba(152, 215, 255, 0.42), transparent 52%), linear-gradient(140deg, #161924 0%, #1f3152 48%, #0e1018 100%)');
 
+<<<<<<< ours
 <<<<<<< ours
 <<<<<<< ours
       const ref = typeof concept.image === 'string' ? concept.image.trim() : '';
@@ -556,6 +620,8 @@
 =======
 =======
 >>>>>>> theirs
+=======
+>>>>>>> theirs
       const hasImage = Boolean(concept.image);
       mediaImageEl.hidden = !hasImage;
       slotPillEl.hidden = hasImage;
@@ -576,6 +642,9 @@
         keywordsEl.appendChild(li);
       });
 <<<<<<< ours
+<<<<<<< ours
+>>>>>>> theirs
+=======
 >>>>>>> theirs
 =======
 >>>>>>> theirs
@@ -590,7 +659,10 @@
       render();
 <<<<<<< ours
 <<<<<<< ours
+<<<<<<< ours
       nudgeAuto();
+=======
+>>>>>>> theirs
 =======
 >>>>>>> theirs
 =======
@@ -603,7 +675,10 @@
       render();
 <<<<<<< ours
 <<<<<<< ours
+<<<<<<< ours
       nudgeAuto();
+=======
+>>>>>>> theirs
 =======
 >>>>>>> theirs
 =======
@@ -634,6 +709,7 @@
 
 <<<<<<< ours
 <<<<<<< ours
+<<<<<<< ours
     if (autoButton) {
       autoButton.addEventListener('click', () => {
         if (autoTimer) {
@@ -654,6 +730,8 @@
 >>>>>>> theirs
 =======
 >>>>>>> theirs
+=======
+>>>>>>> theirs
     const load = async () => {
       const path = document.body.dataset.edition;
       try {
@@ -665,7 +743,10 @@
         render();
 <<<<<<< ours
 <<<<<<< ours
+<<<<<<< ours
         startAuto();
+=======
+>>>>>>> theirs
 =======
 >>>>>>> theirs
 =======
@@ -678,7 +759,11 @@
         sourceEl.textContent = '';
 <<<<<<< ours
 <<<<<<< ours
+<<<<<<< ours
         stopAuto();
+=======
+        slotPillEl.textContent = 'Data load error';
+>>>>>>> theirs
 =======
         slotPillEl.textContent = 'Data load error';
 >>>>>>> theirs
