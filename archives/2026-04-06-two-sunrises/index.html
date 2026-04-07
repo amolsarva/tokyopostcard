@@ -14,6 +14,7 @@
       --ink-soft: rgba(248, 251, 255, 0.78);
       --accent: #98d7ff;
       --hero-background: radial-gradient(circle at 22% -5%, rgba(152, 215, 255, 0.42), transparent 52%), linear-gradient(140deg, #161924 0%, #1f3152 48%, #0e1018 100%);
+      --photo: none;
     }
 
     * { box-sizing: border-box; }
@@ -79,39 +80,30 @@
 
     .photo-stage,
     .veil {
-      position: absolute;
+      position: fixed;
       inset: 0;
-      border-radius: min(5vw, 48px);
       pointer-events: none;
     }
 
     .photo-stage {
-      overflow: hidden;
-      transform: scale(1.02);
-      background-image: var(--hero-background);
+      background-image: var(--photo), var(--hero-background);
       background-size: cover;
       background-position: center;
+      filter: saturate(1.08) contrast(1.06);
+      transform: scale(1.02);
     }
 
-    .photo-stage img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: saturate(1.05) contrast(1.05);
-      transition: transform 20s ease;
-    }
-
-    body[data-mode="auto"] .photo-stage img {
+    body[data-mode="auto"] .photo-stage {
       animation: slow-pan 26s ease-in-out infinite alternate;
     }
 
     @keyframes slow-pan {
-      from { transform: scale(1.04) translate3d(-0.8%, -0.8%, 0); }
-      to { transform: scale(1.1) translate3d(0.8%, 0.8%, 0); }
+      from { transform: scale(1.02) translate3d(-0.8%, -0.8%, 0); }
+      to { transform: scale(1.08) translate3d(0.8%, 0.8%, 0); }
     }
 
     .veil {
-      background: linear-gradient(180deg, rgba(0, 3, 8, 0.05), rgba(3, 5, 12, 0.6) 55%, rgba(3, 5, 12, 0.85));
+      background: linear-gradient(180deg, rgba(0, 3, 8, 0.25), rgba(3, 5, 12, 0.7) 55%, rgba(3, 5, 12, 0.9));
       mix-blend-mode: multiply;
     }
 
@@ -273,9 +265,7 @@
 
   <main>
     <section class="canvas" aria-live="polite">
-      <figure class="photo-stage" aria-hidden="true">
-        <img id="photo" alt="" />
-      </figure>
+      <div class="photo-stage" aria-hidden="true"></div>
       <div class="veil" aria-hidden="true"></div>
       <div class="eyebrow">
         <p class="theme" id="theme">Loading...</p>
@@ -316,7 +306,7 @@
     const shuffleButton = document.getElementById('shuffle');
     const copyButton = document.getElementById('copyButton');
     const autoButton = document.getElementById('autoButton');
-    const photoEl = document.getElementById('photo');
+    const photoStage = document.querySelector('.photo-stage');
     const root = document.documentElement;
     const mediaBase = (document.body.dataset.mediaBase || './assets').replace(/\/$/, '');
 
@@ -388,14 +378,12 @@
       root.style.setProperty('--hero-background', concept.background || 'radial-gradient(circle at 20% 0%, rgba(152, 215, 255, 0.42), transparent 52%), linear-gradient(140deg, #161924 0%, #1f3152 48%, #0e1018 100%)');
 
       const ref = typeof concept.image === 'string' ? concept.image.trim() : '';
-      if (photoEl) {
+      if (photoStage) {
         if (ref) {
           const src = ref.startsWith('/') ? ref : `${mediaBase}/${ref}`;
-          photoEl.src = src;
-          photoEl.hidden = false;
+          photoStage.style.setProperty('--photo', `url("${src}")`);
         } else {
-          photoEl.src = '';
-          photoEl.hidden = true;
+          photoStage.style.setProperty('--photo', 'none');
         }
       }
 
