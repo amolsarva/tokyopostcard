@@ -12,7 +12,7 @@
       font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
       --ink: #f8f4ef;
       --ink-soft: rgba(248, 244, 239, 0.74);
-      --panel-bg: rgba(5, 3, 12, 0.54);
+      --panel-bg: rgba(5, 3, 12, 0.7);
       --border: rgba(255, 255, 255, 0.25);
       --glow: rgba(255, 255, 255, 0.08);
       --accent: #f2c0ff;
@@ -379,8 +379,9 @@
         const jewelL = clampValue(l - 35, 8, 30);
         const borderL = clampValue(jewelL + 18, 25, 60);
         const shadowL = clampValue(jewelL - 6, 4, 22);
+        const cardAlpha = 0.7;
         return {
-          bg: `hsl(${h} ${jewelS}% ${jewelL}%)`,
+          bg: `hsla(${h}, ${jewelS}%, ${jewelL}%, ${cardAlpha})`,
           border: `hsla(${h}, ${jewelS}%, ${borderL}%, 0.9)`,
           shadow: `hsla(${h}, ${clampValue(jewelS - 15, 40, 90)}%, ${shadowL}%, 0.85)`
         };
