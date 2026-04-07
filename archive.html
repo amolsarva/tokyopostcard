@@ -685,19 +685,27 @@
         img.alt = hint.alt || `${titleText} preview thumbnail`;
         img.loading = 'lazy';
         img.decoding = 'async';
+        img.addEventListener('error', () => {
+          target.textContent = '';
+          renderGradientThumbnail(target, fallbackThumbnail, titleText);
+        }, { once: true });
         target.appendChild(img);
       } else {
-        target.style.backgroundImage = hint.background;
-        const sr = document.createElement('span');
-        sr.className = 'sr-only';
-        sr.textContent = hint.label || `${titleText} gradient preview`;
-        target.appendChild(sr);
+        renderGradientThumbnail(target, hint, titleText);
       }
 
       const badge = document.createElement('span');
       badge.className = 'badge';
       badge.textContent = 'open';
       target.appendChild(badge);
+    }
+
+    function renderGradientThumbnail(target, hint, titleText) {
+      target.style.backgroundImage = hint.background || fallbackThumbnail.background;
+      const sr = document.createElement('span');
+      sr.className = 'sr-only';
+      sr.textContent = hint.label || `${titleText} gradient preview`;
+      target.appendChild(sr);
     }
 
     loadManifest();
