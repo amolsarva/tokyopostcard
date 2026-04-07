@@ -327,6 +327,65 @@
       let totalSlides = 0;
       let activeIndex = 1;
 
+      const clampValue = (value, min, max) => Math.min(max, Math.max(min, value));
+
+      function hexToRgb(hex) {
+        if (typeof hex !== 'string') return null;
+        const normalized = hex.trim().replace('#', '');
+        const chunk = normalized.length === 3
+          ? normalized.split('').map((char) => char + char).join('')
+          : normalized;
+        const int = Number.parseInt(chunk, 16);
+        if (Number.isNaN(int)) return null;
+        return {
+          r: (int >> 16) & 255,
+          g: (int >> 8) & 255,
+          b: int & 255,
+        };
+      }
+
+      function rgbToHsl(r, g, b) {
+        r /= 255;
+        g /= 255;
+        b /= 255;
+        const max = Math.max(r, g, b);
+        const min = Math.min(r, g, b);
+        let h = 0;
+        let s = 0;
+        const l = (max + min) / 2;
+        if (max !== min) {
+          const d = max - min;
+          s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+          switch (max) {
+            case r:
+              h = (g - b) / d + (g < b ? 6 : 0);
+              break;
+            case g:
+              h = (b - r) / d + 2;
+              break;
+            default:
+              h = (r - g) / d + 4;
+          }
+          h /= 6;
+        }
+        return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
+      }
+
+      function buildJewelPalette(hex) {
+        const rgb = hexToRgb(hex || '#120b15');
+        if (!rgb) return null;
+        const { h, s, l } = rgbToHsl(rgb.r, rgb.g, rgb.b);
+        const jewelS = clampValue(s + 40, 65, 98);
+        const jewelL = clampValue(l - 35, 8, 30);
+        const borderL = clampValue(jewelL + 18, 25, 60);
+        const shadowL = clampValue(jewelL - 6, 4, 22);
+        return {
+          bg: `hsl(${h} ${jewelS}% ${jewelL}%)`,
+          border: `hsla(${h}, ${jewelS}%, ${borderL}%, 0.9)`,
+          shadow: `hsla(${h}, ${clampValue(jewelS - 15, 40, 90)}%, ${shadowL}%, 0.85)`
+        };
+      }
+
       function updateStatus(index) {
         activeIndex = index;
         if (!totalSlides) {
@@ -343,6 +402,12 @@
         const panel = fragment.querySelector('.panel');
         panel.dataset.index = index + 1;
         panel.style.setProperty('--photo', `url('${entry.image}')`);
+        const palette = buildJewelPalette(entry.color);
+        if (palette) {
+          panel.style.setProperty('--card-bg', palette.bg);
+          panel.style.setProperty('--card-border', palette.border);
+          panel.style.setProperty('--card-shadow', palette.shadow);
+        }
         const counter = fragment.querySelector('.counter');
         counter.textContent = pad(index + 1, total) + ' · TWO MODES';
         fragment.querySelector('.theme').textContent = entry.theme;
