@@ -28,6 +28,7 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+<<<<<<< ours
       background: #030105;
       position: relative;
       overflow: hidden;
@@ -51,6 +52,9 @@
     .veil {
       background: radial-gradient(circle at 30% 18%, rgba(1, 2, 10, 0.3), transparent 46%), linear-gradient(150deg, rgba(5, 6, 14, 0.85), rgba(4, 3, 9, 0.55));
       mix-blend-mode: soft-light;
+=======
+      background: var(--hero-background);
+>>>>>>> theirs
     }
 
     .hud {
@@ -62,7 +66,11 @@
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
+<<<<<<< ours
       z-index: 2;
+=======
+      z-index: 4;
+>>>>>>> theirs
       text-transform: uppercase;
       letter-spacing: 0.2em;
       font-size: 0.72rem;
@@ -75,8 +83,14 @@
       padding-bottom: 2px;
     }
 
+<<<<<<< ours
     .hud-link {
       margin-left: auto;
+=======
+    .hud-metric {
+      color: var(--ink-soft);
+      font-size: 0.68rem;
+>>>>>>> theirs
     }
 
     main {
@@ -84,6 +98,7 @@
       display: grid;
       place-items: center;
       padding: 14vh clamp(1rem, 5vw, 4rem) 3rem;
+<<<<<<< ours
       position: relative;
       z-index: 1;
     }
@@ -131,6 +146,20 @@
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: rgba(248, 251, 255, 0.72);
+=======
+    }
+
+    .card {
+      width: min(980px, 100%);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(5, 6, 12, 0.52);
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.52);
+      padding: clamp(1.2rem, 4vw, 2.8rem);
+      display: grid;
+      gap: 0.85rem;
+      backdrop-filter: blur(6px);
+>>>>>>> theirs
     }
 
     h1 {
@@ -144,8 +173,13 @@
     .theme {
       margin: 0;
       text-transform: uppercase;
+<<<<<<< ours
       letter-spacing: 0.24em;
       font-size: 0.72rem;
+=======
+      letter-spacing: 0.18em;
+      font-size: 0.7rem;
+>>>>>>> theirs
       color: var(--ink-soft);
     }
 
@@ -176,6 +210,7 @@
       text-transform: uppercase;
     }
 
+<<<<<<< ours
     .image-alt {
       margin: 0;
       text-transform: uppercase;
@@ -186,6 +221,38 @@
 
     .image-alt[hidden] {
       display: none;
+=======
+    .media-frame {
+      margin: 0.25rem 0 0;
+      width: 100%;
+      max-width: 860px;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.35);
+      display: grid;
+      place-items: center;
+    }
+
+    .media-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.05) contrast(1.03);
+    }
+
+    .slot-pill {
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      letter-spacing: 0.15em;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      color: rgba(248, 251, 255, 0.72);
+      background: rgba(0, 0, 0, 0.25);
+>>>>>>> theirs
     }
 
     .keywords {
@@ -226,6 +293,7 @@
       cursor: pointer;
     }
 
+<<<<<<< ours
     #autoButton[aria-pressed="true"],
     body[data-mode="auto"] #autoButton {
       background: rgba(255, 255, 255, 0.18);
@@ -233,6 +301,8 @@
       border-color: rgba(255, 255, 255, 0.6);
     }
 
+=======
+>>>>>>> theirs
     .hint {
       margin: 0;
       font-size: 0.72rem;
@@ -243,16 +313,25 @@
   </style>
   <script src="/assets/js/password-gate.js"></script>
 </head>
+<<<<<<< ours
 <body data-edition="./second-chapters-framework.json" data-media-base="./assets" data-mode="manual">
   <div class="backdrop" aria-hidden="true"></div>
   <div class="veil" aria-hidden="true"></div>
   <header class="hud">
     <a href="../../">NewAIYork</a>
     <a class="hud-link" href="../../archive.html">Laurarchive</a>
+=======
+<body data-edition="../../assets/data/second-chapters-framework.json">
+  <header class="hud">
+    <a href="../../">NewAIYork</a>
+    <span class="hud-metric"><span id="index">01</span> / <span id="total">00</span></span>
+    <a href="../../archive.html">Laurarchive</a>
+>>>>>>> theirs
   </header>
 
   <main>
     <section class="card" aria-live="polite">
+<<<<<<< ours
       <div class="eyebrow">
         <p class="theme" id="theme">Loading...</p>
         <p class="counter"><span id="index">01</span> / <span id="total">00</span></p>
@@ -262,16 +341,32 @@
       <p class="attribution" id="attribution"></p>
       <p class="source" id="source"></p>
       <p class="image-alt" id="imageAlt" hidden>Awaiting image slot</p>
+=======
+      <h1 id="title">Second Chapters at Sunrise</h1>
+      <p class="theme" id="theme">Loading...</p>
+      <p class="line" id="line">Loading quote framework...</p>
+      <p class="attribution" id="attribution"></p>
+      <p class="source" id="source"></p>
+      <figure class="media-frame" id="mediaFrame">
+        <img id="mediaImage" alt="" loading="lazy" decoding="async" hidden />
+        <figcaption class="slot-pill" id="slotPill">Awaiting image slot</figcaption>
+      </figure>
+>>>>>>> theirs
       <ul class="keywords" id="keywords"></ul>
       <div class="controls">
         <button type="button" data-step="-1">Prev</button>
         <button type="button" data-step="1">Next</button>
         <button type="button" id="shuffle">Shuffle</button>
+<<<<<<< ours
         <button type="button" id="copyButton">Copy Quote</button>
         <button type="button" id="autoButton" aria-pressed="false">Auto</button>
       </div>
       <span id="copyStatus" class="sr-only" aria-live="polite"></span>
       <p class="hint">Tap the background or use the arrows to flow through the framework.</p>
+=======
+      </div>
+      <p class="hint">Framework mode: slots auto-show until your 15 images are added.</p>
+>>>>>>> theirs
     </section>
   </main>
 
@@ -282,11 +377,17 @@
     const attributionEl = document.getElementById('attribution');
     const sourceEl = document.getElementById('source');
     const keywordsEl = document.getElementById('keywords');
+<<<<<<< ours
     const imageAltEl = document.getElementById('imageAlt');
+=======
+    const mediaImageEl = document.getElementById('mediaImage');
+    const slotPillEl = document.getElementById('slotPill');
+>>>>>>> theirs
     const indexEl = document.getElementById('index');
     const totalEl = document.getElementById('total');
     const controls = document.querySelectorAll('[data-step]');
     const shuffleButton = document.getElementById('shuffle');
+<<<<<<< ours
     const copyButton = document.getElementById('copyButton');
     const autoButton = document.getElementById('autoButton');
     const root = document.documentElement;
@@ -344,6 +445,12 @@
         if (copyButton) copyButton.textContent = 'Copy Quote';
       }, 1600);
     }
+=======
+    const root = document.documentElement;
+
+    let concepts = [];
+    let current = 0;
+>>>>>>> theirs
 
     const fmt = (value, fallback) => (typeof value === 'string' && value.trim() ? value.trim() : fallback);
 
@@ -359,6 +466,7 @@
       root.style.setProperty('--accent', concept.color || '#98d7ff');
       root.style.setProperty('--hero-background', concept.background || 'radial-gradient(circle at 20% 0%, rgba(152, 215, 255, 0.42), transparent 52%), linear-gradient(140deg, #161924 0%, #1f3152 48%, #0e1018 100%)');
 
+<<<<<<< ours
       const ref = typeof concept.image === 'string' ? concept.image.trim() : '';
       if (ref) {
         const src = ref.startsWith('/') ? ref : `${mediaBase}/${ref}`;
@@ -381,6 +489,27 @@
         imageAltEl.textContent = note ? note.toUpperCase() : '';
         imageAltEl.hidden = !note;
       }
+=======
+      const hasImage = Boolean(concept.image);
+      mediaImageEl.hidden = !hasImage;
+      slotPillEl.hidden = hasImage;
+
+      if (hasImage) {
+        mediaImageEl.src = concept.image;
+        mediaImageEl.alt = concept.alt || `${concept.title} image`;
+      } else {
+        mediaImageEl.removeAttribute('src');
+        mediaImageEl.alt = '';
+        slotPillEl.textContent = `Image Slot ${String(concept.imageSlot || current + 1).padStart(2, '0')}`;
+      }
+
+      keywordsEl.innerHTML = '';
+      (concept.keywords || []).forEach((keyword) => {
+        const li = document.createElement('li');
+        li.textContent = keyword;
+        keywordsEl.appendChild(li);
+      });
+>>>>>>> theirs
 
       indexEl.textContent = String(current + 1).padStart(2, '0');
       totalEl.textContent = String(concepts.length).padStart(2, '0');
@@ -390,14 +519,20 @@
       if (!concepts.length) return;
       current = (current + delta + concepts.length) % concepts.length;
       render();
+<<<<<<< ours
       nudgeAuto();
+=======
+>>>>>>> theirs
     };
 
     const shuffle = () => {
       if (!concepts.length) return;
       current = Math.floor(Math.random() * concepts.length);
       render();
+<<<<<<< ours
       nudgeAuto();
+=======
+>>>>>>> theirs
     };
 
     controls.forEach((button) => {
@@ -422,6 +557,7 @@
       }
     });
 
+<<<<<<< ours
     if (autoButton) {
       autoButton.addEventListener('click', () => {
         if (autoTimer) {
@@ -438,6 +574,8 @@
       });
     }
 
+=======
+>>>>>>> theirs
     const load = async () => {
       const path = document.body.dataset.edition;
       try {
@@ -447,14 +585,21 @@
         if (!Array.isArray(payload) || !payload.length) throw new Error('Edition payload is empty');
         concepts = payload;
         render();
+<<<<<<< ours
         startAuto();
+=======
+>>>>>>> theirs
       } catch (error) {
         titleEl.textContent = 'Second Chapters at Sunrise';
         themeEl.textContent = 'Edition unavailable';
         lineEl.textContent = 'Could not load framework data.';
         attributionEl.textContent = '';
         sourceEl.textContent = '';
+<<<<<<< ours
         stopAuto();
+=======
+        slotPillEl.textContent = 'Data load error';
+>>>>>>> theirs
         console.error(error);
       }
     };

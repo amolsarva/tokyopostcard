@@ -85,6 +85,7 @@
   },
   {
     "slug": "2026-03-27-twofold-beginnings",
+<<<<<<< ours
     "label": "2026-03-27 \u00b7 Twofold Beginnings",
     "blurb": "Poetic concept deck orbiting the number two: second starts, second chances, regeneration, and Easter resurrection motifs.",
     "publishedAt": "2026-03-27"
@@ -106,5 +107,14 @@
     "label": "2026-04-10 \u00b7 Twilight Twos",
     "blurb": "Dusk-mode numerals with quotes on dual choices, shared horizons, and evening resets.",
     "publishedAt": "2026-04-10"
+=======
+    "label": "27 Mar 2026 \u00b7 Twofold Beginnings",
+    "blurb": "Poetic concept deck orbiting the number two: second starts, second chances, regeneration, and Easter resurrection motifs."
+  },
+  {
+    "slug": "2026-04-02-second-chapters",
+    "label": "02 Apr 2026 \u00b7 Second Chapters at Sunrise",
+    "blurb": "Fifteen-slot quote framework on twoness, spring dawns, and second chapters across philosophy, literature, poetry, science, and speech."
+>>>>>>> theirs
   }
 ]
