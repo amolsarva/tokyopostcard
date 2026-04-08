@@ -58,6 +58,23 @@
       margin: 0 0 2rem;
       color: var(--ink-soft);
     }
+    article.post-float {
+      margin: 0 0 2rem;
+      padding: clamp(1.4rem, 4vw, 2rem);
+      border-radius: 20px;
+      background: rgba(7, 7, 11, 0.88);
+      border: 1px solid rgba(138, 215, 255, 0.35);
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+    article.post-float::after {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border-radius: 16px;
+      border: 1px dashed rgba(138, 215, 255, 0.2);
+      pointer-events: none;
+    }
     article h2 {
       margin: 0 0 0.8rem;
       font-size: 1.3rem;
