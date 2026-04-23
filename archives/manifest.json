@@ -1,116 +1,122 @@
 [
   {
     "slug": "2026-02-14-tokyo",
-    "label": "2026-02-14 \u00b7 Tokyo Edition I",
+    "label": "2026-02-14 · Tokyo Edition I",
     "blurb": "Original Tokyo night postcard (archived first edition)",
     "publishedAt": "2026-02-14"
   },
   {
     "slug": "2026-02-14-london-relay-v1",
-    "label": "2026-02-14 \u00b7 London Relay v1",
+    "label": "2026-02-14 · London Relay v1",
     "blurb": "Gradient-based London relay postcard",
     "publishedAt": "2026-02-14"
   },
   {
     "slug": "2026-02-14-london-relay-v2",
-    "label": "2026-02-14 \u00b7 London Relay v2",
+    "label": "2026-02-14 · London Relay v2",
     "blurb": "Photo-led London runway relay archived ahead of the Shoreditch bikes edition",
     "publishedAt": "2026-02-14"
   },
   {
     "slug": "2026-02-15-shoreditch-relay",
-    "label": "2026-02-15 \u00b7 Shoreditch Relay",
+    "label": "2026-02-15 · Shoreditch Relay",
     "blurb": "Bike relay postcard promoted before the Sunday walk edition",
     "publishedAt": "2026-02-15"
   },
   {
     "slug": "2026-02-15-shoreditch-walk",
-    "label": "2026-02-15 \u00b7 Shoreditch Walk",
+    "label": "2026-02-15 · Shoreditch Walk",
     "blurb": "Sixteen-scene wet-morning walk postcard through Shoreditch backstreets.",
     "publishedAt": "2026-02-15"
   },
   {
     "slug": "2026-02-24-new-york-flash",
-    "label": "2026-02-24 \u00b7 New York Flash Diary",
+    "label": "2026-02-24 · New York Flash Diary",
     "blurb": "1990s flash-led New York spread with Spotify-linked scenes from the six-day stay.",
     "publishedAt": "2026-02-24"
   },
   {
     "slug": "2026-03-03-hard-days",
-    "label": "2026-03-03 \u00b7 Hard Days Edition",
+    "label": "2026-03-03 · Hard Days Edition",
     "blurb": "Good Morning Laura hero preserved from the Hard Days homepage.",
     "publishedAt": "2026-03-03"
   },
   {
     "slug": "2026-03-03-shoreditch-walk-draft",
-    "label": "2026-03-03 \u00b7 Shoreditch Walk Draft",
+    "label": "2026-03-03 · Shoreditch Walk Draft",
     "blurb": "Archived interactive Shoreditch walk draft before the Hello Laura homepage.",
     "publishedAt": "2026-03-03"
   },
   {
     "slug": "2026-03-03-digital-games",
-    "label": "2026-03-03 \u00b7 Digital Games Edition",
+    "label": "2026-03-03 · Digital Games Edition",
     "blurb": "Twenty-scene postcard built entirely from the warmest Laura & Amol transcript quotes.",
     "publishedAt": "2026-03-03"
   },
   {
     "slug": "2026-03-04-dreams",
-    "label": "2026-03-04 \u00b7 DREAMS Edition",
+    "label": "2026-03-04 · DREAMS Edition",
     "blurb": "Fifty-three-screen emoji-led edition mapping ambition, family, love, intensity, and future-building dreams.",
     "publishedAt": "2026-03-04"
   },
   {
     "slug": "2026-03-09-six-nights-flash",
-    "label": "2026-03-09 \u00b7 Six Nights in Flash",
+    "label": "2026-03-09 · Six Nights in Flash",
     "blurb": "Flash-heavy city-grid homepage archived before the NYC morning preparations tap-through.",
     "publishedAt": "2026-03-09"
   },
   {
     "slug": "2026-03-11-morning-prep",
-    "label": "2026-03-11 \u00b7 Morning Preparations",
+    "label": "2026-03-11 · Morning Preparations",
     "blurb": "Wardrobe-floor NYC prep postcard preserved before the New London Home homepage.",
     "publishedAt": "2026-03-11"
   },
   {
     "slug": "2026-03-15-new-london-home",
-    "label": "2026-03-15 \u00b7 New London Home",
+    "label": "2026-03-15 · New London Home",
     "blurb": "Warehouse-floor New London home walkthrough archived before the Art Party slideshow.",
     "publishedAt": "2026-03-15"
   },
   {
     "slug": "2026-03-16-art-party",
-    "label": "2026-03-16 \u00b7 Art Party",
+    "label": "2026-03-16 · Art Party",
     "blurb": "Art Party slideshow edition cycling every art_party_artists_v2 image with a Jens Lekman glow link.",
     "publishedAt": "2026-03-16"
   },
   {
     "slug": "2026-03-27-twofold-beginnings",
-    "label": "2026-03-27 \u00b7 Twofold Beginnings",
+    "label": "2026-03-27 · Twofold Beginnings",
     "blurb": "Poetic concept deck orbiting the number two: second starts, second chances, regeneration, and Easter resurrection motifs.",
     "publishedAt": "2026-03-27"
   },
   {
     "slug": "2026-04-02-second-chapters",
-    "label": "2026-04-02 \u00b7 Second Chapters at Sunrise",
+    "label": "2026-04-02 · Second Chapters at Sunrise",
     "blurb": "Fifteen-slot quote framework on twoness, spring dawns, and second chapters across philosophy, literature, poetry, science, and speech.",
     "publishedAt": "2026-04-02"
   },
   {
     "slug": "2026-04-06-two-sunrises",
-    "label": "2026-04-06 \u00b7 Two Sunrises",
+    "label": "2026-04-06 · Two Sunrises",
     "blurb": "Fullscreen edition pairing number-two ephemera with quotes about duality, dawn, and second chances.",
     "publishedAt": "2026-04-06"
   },
   {
     "slug": "2026-04-10-twilight-twos",
-    "label": "2026-04-10 \u00b7 Twilight Twos",
+    "label": "2026-04-10 · Twilight Twos",
     "blurb": "Dusk-mode numerals with quotes on dual choices, shared horizons, and evening resets.",
     "publishedAt": "2026-04-10"
   },
   {
     "slug": "2026-04-12-full-bleed-counts",
-    "label": "2026-04-12 \u00b7 Full-Bleed Counts",
+    "label": "2026-04-12 · Full-Bleed Counts",
     "blurb": "Fullscreen street-number series pairing fourteen twoness quotes with the new photo batch for the homepage relaunch.",
     "publishedAt": "2026-04-12"
+  },
+  {
+    "slug": "2026-04-23-full-bleed-counts-snapshot",
+    "label": "2026-04-23 · Full-Bleed Counts Snapshot",
+    "blurb": "Snapshot of the outgoing Full-Bleed Counts homepage before promoting the Always / Everything live draft.",
+    "publishedAt": "2026-04-23"
   }
 ]

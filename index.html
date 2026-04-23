@@ -3,481 +3,309 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NEWAIYORK · Full-Bleed Counts</title>
-  <meta name="description" content="Fourteen-scene fullscreen edition pairing twoness quotes with fresh field photos shot across cities." />
-  <link rel="canonical" href="./archives/2026-04-12-full-bleed-counts/" />
+  <title>NEWAIYORK · Always / Everything · Draft Live</title>
+  <meta name="description" content="Live draft edition: a 20-chapter arc for Laura with brief attributed pulses and reserved image slots for incoming artwork." />
+  <link rel="canonical" href="./" />
   <style>
     :root {
       color-scheme: dark;
-      font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
-      --ink: #f8f4ef;
-      --ink-soft: rgba(248, 244, 239, 0.74);
-      --panel-bg: rgba(5, 3, 12, 0.4);
-      --border: rgba(255, 255, 255, 0.25);
-      --glow: rgba(255, 255, 255, 0.08);
-      --accent: #f2c0ff;
+      --bg: #07070b;
+      --panel: #11111a;
+      --ink: #f5f2eb;
+      --ink-soft: rgba(245, 242, 235, 0.78);
+      --line: rgba(245, 242, 235, 0.28);
+      --accent: #c7b5ff;
+      --accent-soft: rgba(199, 181, 255, 0.2);
+      font-family: "Inter", "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    *, *::before, *::after { box-sizing: border-box; }
+    * { box-sizing: border-box; }
 
     html, body {
       margin: 0;
       min-height: 100%;
-      background: #030106;
+      background: radial-gradient(circle at top, #121224 0%, var(--bg) 58%);
       color: var(--ink);
     }
 
-    body {
-      min-height: 100vh;
-      overflow: hidden;
-      background: #030106;
-    }
-
     .hud {
-      position: fixed;
+      position: sticky;
       top: 0;
-      left: 0;
-      right: 0;
-      z-index: 10;
+      z-index: 20;
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
+      gap: 0.9rem;
       justify-content: space-between;
-      gap: 1rem;
-      padding: clamp(1rem, 3vw, 2rem) clamp(1.2rem, 4vw, 3rem);
+      padding: 1rem clamp(1rem, 3vw, 2rem);
+      background: rgba(7, 7, 11, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
       text-transform: uppercase;
-      letter-spacing: 0.35em;
+      letter-spacing: 0.22em;
       font-size: 0.68rem;
-      mix-blend-mode: difference;
     }
 
     .hud a {
       color: var(--ink);
       text-decoration: none;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.35);
-      padding-bottom: 2px;
+      border-bottom: 1px solid rgba(245, 242, 235, 0.32);
+      padding-bottom: 0.12rem;
     }
 
-    .brand { letter-spacing: 0.4em; }
+    .brand { letter-spacing: 0.34em; }
 
-    .nav-links {
+    .nav {
       display: flex;
-      gap: 0.8rem;
       flex-wrap: wrap;
-      letter-spacing: 0.28em;
+      gap: 0.85rem;
     }
 
-    .status {
-      margin-left: auto;
-      font-size: 0.7rem;
-      letter-spacing: 0.5em;
+    .live-pill {
+      border: 1px solid rgba(66, 211, 146, 0.65);
+      background: rgba(66, 211, 146, 0.16);
+      color: #d7ffe8;
+      border-radius: 999px;
+      padding: 0.28rem 0.7rem;
+      letter-spacing: 0.24em;
+      font-size: 0.58rem;
     }
 
-    .slides {
-      position: relative;
-      height: 100vh;
-      overflow-y: auto;
-      scroll-snap-type: y mandatory;
-      scroll-behavior: smooth;
+    main {
+      width: min(1100px, 100% - 2rem);
+      margin: 1.2rem auto 4rem;
+      display: grid;
+      gap: 1.2rem;
     }
 
-    .panel {
-      position: relative;
-      min-height: 100vh;
-      scroll-snap-align: start;
-      display: flex;
-      align-items: flex-end;
-      padding: calc(5.5rem + env(safe-area-inset-top)) clamp(1.5rem, 6vw, 4rem) calc(3.5rem + env(safe-area-inset-bottom));
+    .hero {
+      padding: clamp(1.2rem, 4vw, 2.2rem);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: linear-gradient(150deg, rgba(199, 181, 255, 0.12), rgba(17, 17, 26, 0.86));
     }
 
-    .panel::before,
-    .panel::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 0;
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(1.5rem, 4vw, 2.6rem);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
     }
 
-    .panel::before {
-      background-image: var(--photo, radial-gradient(circle at 20% 20%, rgba(25, 30, 50, 0.8), rgba(5, 3, 12, 0.9)));
-      background-size: cover;
-      background-position: center;
-      filter: saturate(1.25) brightness(1.08) contrast(1.05);
+    .hero p {
+      margin: 0.75rem 0 0;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 75ch;
     }
 
-    .panel::after {
-      background: radial-gradient(circle at 18% 14%, rgba(4, 0, 10, 0.12), transparent 48%), linear-gradient(160deg, rgba(6, 4, 16, 0.65), rgba(8, 7, 20, 0.25));
-      mix-blend-mode: normal;
-    }
-
-    .card {
-      position: relative;
-      z-index: 1;
-      width: min(780px, 100%);
-      border-radius: 36px;
-      border: 1px solid var(--card-border, var(--border));
-      padding: clamp(1.5rem, 4vw, 3rem);
-      background: var(--card-bg, var(--panel-bg));
-      backdrop-filter: blur(22px);
-      box-shadow: 0 40px 120px var(--card-shadow, rgba(0, 0, 0, 0.65));
+    .chapter-grid {
       display: grid;
       gap: 1rem;
     }
 
-    .counter {
+    .chapter {
+      display: grid;
+      gap: 0.9rem;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1rem;
+      background: linear-gradient(160deg, rgba(17, 17, 26, 0.95), rgba(17, 17, 26, 0.8));
+    }
+
+    .chapter header {
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .kicker {
       margin: 0;
-      font-size: 0.75rem;
-      letter-spacing: 0.4em;
+      font-size: 0.68rem;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
       color: var(--ink-soft);
+    }
+
+    .chapter h2 {
+      margin: 0;
+      font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+      letter-spacing: 0.03em;
     }
 
     .theme {
       margin: 0;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      font-size: 0.65rem;
       color: var(--ink-soft);
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(1.6rem, 4vw, 3rem);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    blockquote {
-      margin: 0;
-      font-size: clamp(1.2rem, 2.6vw, 2.1rem);
       line-height: 1.5;
-      quotes: "\201C" "\201D";
+      font-size: 0.96rem;
     }
 
-    blockquote::before { content: open-quote; }
-    blockquote::after { content: close-quote; }
-
-    .line {
+    .pulse {
       margin: 0;
-      font-size: 1rem;
-      letter-spacing: 0.02em;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(199, 181, 255, 0.42);
+      background: var(--accent-soft);
+      line-height: 1.45;
+    }
+
+    .pulse em {
+      font-style: normal;
+      opacity: 0.84;
+      margin-left: 0.45rem;
+      font-size: 0.92em;
+    }
+
+    .image-slot {
+      margin: 0;
+      min-height: 132px;
+      border: 1.5px dashed rgba(245, 242, 235, 0.32);
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 1rem;
       color: var(--ink-soft);
+      background: rgba(245, 242, 235, 0.03);
     }
 
-    .meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      font-size: 0.85rem;
-      letter-spacing: 0.18em;
+    .image-slot strong {
+      display: block;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
+      font-size: 0.66rem;
+      margin-bottom: 0.4rem;
       color: var(--ink);
     }
 
-    .alt {
-      margin: 0;
-      font-size: 0.78rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(248, 244, 239, 0.7);
-    }
-
-    .keywords {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .keywords li {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      padding: 0.35rem 0.8rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      background: rgba(255, 255, 255, 0.04);
-    }
-
-    .controls {
-      position: fixed;
-      right: clamp(1rem, 3vw, 2.5rem);
-      bottom: clamp(1rem, 4vw, 2.5rem);
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .controls button {
-      width: 52px;
-      height: 52px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      background: rgba(3, 2, 9, 0.65);
-      color: var(--ink);
-      font-size: 1.2rem;
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-      transition: transform 150ms ease, border-color 150ms ease;
-    }
-
-    .controls button:hover,
-    .controls button:focus-visible {
-      transform: translateY(-3px);
-      border-color: rgba(255, 255, 255, 0.8);
-      outline: none;
-    }
-
-    .status-chip {
-      font-size: 0.65rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
+    .footer-note {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem;
       color: var(--ink-soft);
+      line-height: 1.6;
+      background: rgba(0, 0, 0, 0.2);
     }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.6rem;
-      letter-spacing: 0.28em;
-      border: 1px solid rgba(29, 185, 84, 0.55);
-      color: var(--ink);
-      padding: 0.35rem 0.9rem;
-      border-radius: 999px;
-      text-decoration: none;
-      background: rgba(29, 185, 84, 0.18);
-      box-shadow: 0 0 20px rgba(29, 185, 84, 0.4);
-    }
+    @media (min-width: 880px) {
+      .chapter {
+        grid-template-columns: 1.2fr 1fr;
+        align-items: stretch;
+      }
 
-    .badge svg { width: 16px; height: 16px; fill: currentColor; }
-
-    @media (max-width: 720px) {
-      .hud { flex-direction: column; align-items: flex-start; letter-spacing: 0.28em; }
-      .status { margin-left: 0; }
-      .panel { padding-top: calc(7.5rem + env(safe-area-inset-top)); }
-      .card { border-radius: 24px; }
-      .meta { flex-direction: column; gap: 0.4rem; }
-      .controls { right: 50%; transform: translateX(50%); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .slides { scroll-behavior: auto; }
-      .controls button { transition: none; }
+      .chapter .text {
+        display: grid;
+        gap: 0.9rem;
+      }
     }
   </style>
-  <script src="/assets/js/password-gate.js"></script>
 </head>
-<body data-data-url="./archives/2026-04-12-full-bleed-counts/full-bleed-counts.json">
-  <noscript>
-    <p style="position:fixed;top:1rem;left:1rem;z-index:999;background:#0b070e;padding:0.5rem 0.85rem;border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;">
-      JavaScript is off. Open <a href="./archives/2026-04-12-full-bleed-counts/" style="color:#9ad8ff;">Full-Bleed Counts</a>.
-    </p>
-  </noscript>
-  <header class="hud">
-    <a class="brand" href="/" aria-label="NEWAIYORK homepage">NEWAIYORK</a>
-    <div class="nav-links" aria-label="Site navigation">
-      <a href="/archive.html">Laurarchive</a>
-      <a href="/blog.html" title="Latest Werkwelt: Cure51 deck feedback synthesis — Laura + Amol">Werkwelt</a>
-      <a class="badge" href="https://open.spotify.com/album/44Wa9N8w6M2VFRddtbnbX3" target="_blank" rel="noopener noreferrer">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5a10.5 10.5 0 1 0 0 21 10.5 10.5 0 0 0 0-21zm4.86 15.36a.66.66 0 0 1-.9.22c-2.45-1.5-5.53-1.84-9.16-1.02a.66.66 0 0 1-.28-1.29c3.98-.92 7.43-.54 10.15 1.19a.66.66 0 0 1 .19.9zm1.29-2.86a.82.82 0 0 1-1.12.27c-2.79-1.72-7.05-2.22-10.35-1.23a.82.82 0 0 1-.46-1.57c3.77-1.12 8.47-.56 11.67 1.4.38.24.5.74.26 1.13zm.1-3.03c-3.3-1.95-8.77-2.13-11.93-1.17a.99.99 0 0 1-.57-1.89c3.66-1.1 9.7-.9 13.5 1.34a.99.99 0 0 1-1 1.72z"/></svg>
-        <span>Spotify</span>
-      </a>
+<body>
+  <nav class="hud" aria-label="Primary">
+    <div class="brand">NEWAIYORK</div>
+    <div class="nav">
+      <a href="./archive.html">Laurarchive</a>
+      <a href="./blog.html">Werkwelt</a>
+      <a href="./archives/2026-04-23-full-bleed-counts-snapshot/">Previous edition snapshot</a>
     </div>
-    <div class="status" id="status" aria-live="polite">-- / --</div>
-  </header>
+    <span class="live-pill">Draft is live</span>
+  </nav>
 
-  <main id="slides" class="slides" aria-live="polite"></main>
+  <main>
+    <section class="hero" aria-labelledby="edition-title">
+      <h1 id="edition-title">Always / Everything — Twenty Chapters for Laura</h1>
+      <p>
+        Governing line: “Always” is time transfigured into vow; “Everything” is the world transfigured into intimacy.
+        This live draft preserves your 20-chapter arc with concise quotable pulses and explicit placeholders for the
+        pictures you will supply next.
+      </p>
+    </section>
 
-  <div class="controls" role="group" aria-label="Slide controls">
-    <button type="button" data-dir="-1" aria-label="Previous story">&#x276E;</button>
-    <span class="status-chip" id="chip">scene --</span>
-    <button type="button" data-dir="1" aria-label="Next story">&#x276F;</button>
-  </div>
-
-  <template id="slideTemplate">
-    <section class="panel" data-index="0">
-      <article class="card">
-        <p class="counter"></p>
-        <p class="theme"></p>
-        <h1></h1>
-        <blockquote></blockquote>
-        <p class="line"></p>
-        <div class="meta">
-          <p class="attribution"></p>
-          <p class="source"></p>
-        </div>
-        <p class="alt"></p>
-        <ul class="keywords"></ul>
+    <section class="chapter-grid" aria-label="Chapters">
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 1</p><h2>Before language</h2></header><p class="theme">Theme: the whole universe hidden in the smallest thing.</p><p class="pulse">“a World in a Grain of Sand” <em>— William Blake, Auguries of Innocence</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>grain of sand macro; galaxy resemblance; black field; museum-lit minimalism.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 2</p><h2>The present is eternity’s doorway</h2></header><p class="theme">Theme: forever is not later; it is now, intensified.</p><p class="pulse">“Forever – is composed of Nows –” <em>— Emily Dickinson</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>clock face in fog; one lit window at dusk; suspended dust in sunlight.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 3</p><h2>The self opens into the other</h2></header><p class="theme">Theme: intimacy as ontological merger, not mere affection.</p><p class="pulse">“belongs to you” <em>— Walt Whitman, Song of Myself</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>two profiles in double exposure; skin and stars; atom diagram over body.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 4</p><h2>Nothing is foreign</h2></header><p class="theme">Theme: everything belongs to one woven whole.</p><p class="pulse">“All things are woven together” <em>— Marcus Aurelius, Meditations</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>tapestry threads; roots in soil; rivers from the air; neural branching.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 5</p><h2>Always begins as return</h2></header><p class="theme">Theme: repetition, ritual, recurrence.</p><p class="pulse">“eternity in an hour” <em>— William Blake</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>candle sequence; fire trail; a hand striking the same match again.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 6</p><h2>Love enlarges scale</h2></header><p class="theme">Theme: one person makes the world too large and too intimate at once.</p><p class="pulse">“your heart” <em>— e.e. cummings</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>hand over chest; folded letter in pocket; moonlit silhouette.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 7</p><h2>Infinity becomes frightening</h2></header><p class="theme">Theme: the cosmos as terror before it becomes shelter.</p><p class="pulse">“infinite spaces frightens me” <em>— Blaise Pascal, Pensées</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>tiny figure under enormous sky; observatory dome; black desert.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 8</p><h2>Love answers fear</h2></header><p class="theme">Theme: intimacy as the answer to cosmic exposure.</p><p class="pulse">“strong as death” <em>— Song of Songs 8:6</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>seal ring; hand on chest; dark water with one reflected flame.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 9</p><h2>The vow survives the flood</h2></header><p class="theme">Theme: “always” tested by force, distance, catastrophe.</p><p class="pulse">“Many waters cannot quench love” <em>— Song of Songs 8:7</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>river in flood; wave over rock; submerged letter; rain-black stone.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 10</p><h2>Love outlasts all other powers</h2></header><p class="theme">Theme: not sentiment, but endurance.</p><p class="pulse">“Love never ends” <em>— 1 Corinthians 13:8</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>room gone dark except one lamp; ring on altar stone; ember after ash.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 11</p><h2>The ordinary becomes luminous</h2></header><p class="theme">Theme: flowers, windows, rooms, gestures become total.</p><p class="pulse">“a Heaven in a Wild Flower” <em>— William Blake</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>Dutch-master flower close-up; dew macro; one stem in darkness.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 12</p><h2>Loss enters the architecture</h2></header><p class="theme">Theme: every “always” is shadowed by mortality.</p><p class="pulse">“’Tis better to have loved” <em>— Alfred Tennyson, In Memoriam</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>empty chair by a window; winter sea; coat on a hook.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 13</p><h2>Absence becomes a form of fidelity</h2></header><p class="theme">Theme: separation clarifies rather than annuls the vow.</p><p class="pulse">“the days that are no more” <em>— Alfred Tennyson</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>train platform; fogged glass; ribbon-tied letters.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 14</p><h2>Trust after anguish</h2></header><p class="theme">Theme: the turn from intensity to faith.</p><p class="pulse">“All shall be well” <em>— Julian of Norwich</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>candle in stone chapel; anchorhold window; worn medieval wall.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 15</p><h2>The universe is moved by love</h2></header><p class="theme">Theme: love as engine of the world.</p><p class="pulse">“moves the sun and the other stars” <em>— Dante, Paradiso</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>celestial sphere; orrery; sun corona; renaissance astronomy engraving.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 16</p><h2>The beloved becomes a world</h2></header><p class="theme">Theme: Laura as horizon, weather, and structure.</p><p class="pulse">“Infinity in the palm” <em>— William Blake</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>woman’s profile merged with sea horizon; constellation face; hand holding light.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 17</p><h2>Everything turns toward everything else</h2></header><p class="theme">Theme: reciprocity, orbit, mirror, exchange.</p><p class="pulse">“one ordered Universe” <em>— Marcus Aurelius</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>twin mirrors in landscape; moon in water; orbit diagrams; revolving door.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 18</p><h2>Home is not a place but a present tense</h2></header><p class="theme">Theme: the instant becomes dwelling.</p><p class="pulse">“Latitude of Home” <em>— Emily Dickinson</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>lit bedroom at night; threshold; staircase with amber light spill.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 19</p><h2>The whole world says the same thing</h2></header><p class="theme">Theme: everything echoes the beloved after transformation.</p><p class="pulse">“one Universe out of all” <em>— Marcus Aurelius</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>river delta; city lights from above; branching veins; tree canopies.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 20</p><h2>Coda: always / everything</h2></header><p class="theme">Theme: calm culmination, not melodrama.</p><p class="pulse">“all manner of thing shall be well” / “the other stars” <em>— Julian of Norwich & Dante</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>black sea and stars; final candle; dawn horizon after storm.</figcaption></figure>
       </article>
     </section>
-  </template>
 
-  <script>
-    (() => {
-      const dataUrl = document.body.dataset.dataUrl;
-      const slidesEl = document.getElementById('slides');
-      const tmpl = document.getElementById('slideTemplate');
-      const statusEl = document.getElementById('status');
-      const chipEl = document.getElementById('chip');
-      const controls = document.querySelectorAll('.controls button');
-      const pad = (value, total) => String(value).padStart(String(total).length, '0');
-      let totalSlides = 0;
-      let activeIndex = 1;
-
-      const clampValue = (value, min, max) => Math.min(max, Math.max(min, value));
-
-      function hexToRgb(hex) {
-        if (typeof hex !== 'string') return null;
-        const normalized = hex.trim().replace('#', '');
-        const chunk = normalized.length === 3
-          ? normalized.split('').map((char) => char + char).join('')
-          : normalized;
-        const int = Number.parseInt(chunk, 16);
-        if (Number.isNaN(int)) return null;
-        return {
-          r: (int >> 16) & 255,
-          g: (int >> 8) & 255,
-          b: int & 255,
-        };
-      }
-
-      function rgbToHsl(r, g, b) {
-        r /= 255;
-        g /= 255;
-        b /= 255;
-        const max = Math.max(r, g, b);
-        const min = Math.min(r, g, b);
-        let h = 0;
-        let s = 0;
-        const l = (max + min) / 2;
-        if (max !== min) {
-          const d = max - min;
-          s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-          switch (max) {
-            case r:
-              h = (g - b) / d + (g < b ? 6 : 0);
-              break;
-            case g:
-              h = (b - r) / d + 2;
-              break;
-            default:
-              h = (r - g) / d + 4;
-          }
-          h /= 6;
-        }
-        return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
-      }
-
-      function buildJewelPalette(hex) {
-        const rgb = hexToRgb(hex || '#120b15');
-        if (!rgb) return null;
-        const { h, s, l } = rgbToHsl(rgb.r, rgb.g, rgb.b);
-        const jewelS = clampValue(s + 40, 65, 98);
-        const jewelL = clampValue(l - 35, 8, 30);
-        const borderL = clampValue(jewelL + 18, 25, 60);
-        const shadowL = clampValue(jewelL - 6, 4, 22);
-        const cardAlpha = 0.4;
-        return {
-          bg: `hsla(${h}, ${jewelS}%, ${jewelL}%, ${cardAlpha})`,
-          border: `hsla(${h}, ${jewelS}%, ${borderL}%, 0.9)`,
-          shadow: `hsla(${h}, ${clampValue(jewelS - 15, 40, 90)}%, ${shadowL}%, 0.85)`
-        };
-      }
-
-      function updateStatus(index) {
-        activeIndex = index;
-        if (!totalSlides) {
-          statusEl.textContent = '-- / --';
-          chipEl.textContent = 'scene --';
-          return;
-        }
-        statusEl.textContent = pad(index, totalSlides) + ' / ' + pad(totalSlides, totalSlides);
-        chipEl.textContent = 'scene ' + pad(index, totalSlides);
-      }
-
-      function createSlide(entry, index, total) {
-        const fragment = tmpl.content.cloneNode(true);
-        const panel = fragment.querySelector('.panel');
-        panel.dataset.index = index + 1;
-        panel.style.setProperty('--photo', `url('${entry.image}')`);
-        const palette = buildJewelPalette(entry.color);
-        if (palette) {
-          panel.style.setProperty('--card-bg', palette.bg);
-          panel.style.setProperty('--card-border', palette.border);
-          panel.style.setProperty('--card-shadow', palette.shadow);
-        }
-        const counter = fragment.querySelector('.counter');
-        counter.textContent = pad(index + 1, total) + ' · TWO MODES';
-        fragment.querySelector('.theme').textContent = entry.theme;
-        fragment.querySelector('h1').textContent = entry.title;
-        fragment.querySelector('blockquote').textContent = entry.quote;
-        fragment.querySelector('.line').textContent = entry.line;
-        fragment.querySelector('.attribution').textContent = entry.attribution;
-        fragment.querySelector('.source').textContent = entry.source;
-        fragment.querySelector('.alt').textContent = entry.alt;
-        const list = fragment.querySelector('.keywords');
-        if (Array.isArray(entry.keywords)) {
-          entry.keywords.forEach((word) => {
-            const li = document.createElement('li');
-            li.textContent = word;
-            list.appendChild(li);
-          });
-        }
-        return fragment;
-      }
-
-      function bindObserver() {
-        const panels = slidesEl.querySelectorAll('.panel');
-        if (!panels.length) return;
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const idx = Number(entry.target.dataset.index) || 1;
-              updateStatus(idx);
-            }
-          });
-        }, { root: slidesEl, threshold: 0.55 });
-        panels.forEach((panel) => observer.observe(panel));
-      }
-
-      function scrollByDir(dir) {
-        const offset = dir * window.innerHeight * 0.92;
-        slidesEl.scrollBy({ top: offset, behavior: 'smooth' });
-      }
-
-      controls.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const dir = Number(btn.dataset.dir) || 0;
-          if (!dir) return;
-          scrollByDir(dir);
-        });
-      });
-
-      fetch(dataUrl, { cache: 'no-store' })
-        .then((response) => {
-          if (!response.ok) throw new Error('Failed to load data');
-          return response.json();
-        })
-        .then((entries) => {
-          const clean = Array.isArray(entries) ? entries : [];
-          if (!clean.length) throw new Error('No entries');
-          totalSlides = clean.length;
-          const frag = document.createDocumentFragment();
-          clean.forEach((entry, index) => frag.appendChild(createSlide(entry, index, clean.length)));
-          slidesEl.appendChild(frag);
-          updateStatus(1);
-          bindObserver();
-        })
-        .catch((error) => {
-          console.error(error);
-          statusEl.textContent = 'offline';
-          chipEl.textContent = 'scene --';
-          slidesEl.innerHTML = '<section class="panel"><article class="card"><h1>Edition offline</h1><p class="line">Refresh when you are back online, or open the archive entry.</p><a href="./archives/2026-04-12-full-bleed-counts/" style="color:#9ad8ff;text-transform:uppercase;letter-spacing:0.3em;">Open archive</a></article></section>';
-        });
-    })();
-  </script>
+    <section class="footer-note" aria-label="Production note">
+      Next ingest step: replace each placeholder block with supplied imagery while preserving chapter order, pulse quote, and one image per chapter spread.
+    </section>
+  </main>
 </body>
 </html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NEWAIYORK · Full-Bleed Counts</title>
+  <meta name="description" content="Fourteen-scene fullscreen edition pairing twoness quotes with fresh field photos shot across cities." />
+  <link rel="canonical" href="./archives/2026-04-12-full-bleed-counts/" />
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+      --ink: #f8f4ef;
+      --ink-soft: rgba(248, 244, 239, 0.74);
+      --panel-bg: rgba(5, 3, 12, 0.4);
+      --border: rgba(255, 255, 255, 0.25);
+      --glow: rgba(255, 255, 255, 0.08);
+      --accent: #f2c0ff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: #030106;
+      color: var(--ink);
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      background: #030106;
+    }
+
+    .hud {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: clamp(1rem, 3vw, 2rem) clamp(1.2rem, 4vw, 3rem);
+      text-transform: uppercase;
+      letter-spacing: 0.35em;
+      font-size: 0.68rem;
+      mix-blend-mode: difference;
+    }
+
+    .hud a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+      padding-bottom: 2px;
+    }
+
+    .brand { letter-spacing: 0.4em; }
+
+    .nav-links {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      letter-spacing: 0.28em;
+    }
+
+    .status {
+      margin-left: auto;
+      font-size: 0.7rem;
+      letter-spacing: 0.5em;
+    }
+
+    .slides {
+      position: relative;
+      height: 100vh;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+
+    .panel {
+      position: relative;
+      min-height: 100vh;
+      scroll-snap-align: start;
+      display: flex;
+      align-items: flex-end;
+      padding: calc(5.5rem + env(safe-area-inset-top)) clamp(1.5rem, 6vw, 4rem) calc(3.5rem + env(safe-area-inset-bottom));
+    }
+
+    .panel::before,
+    .panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .panel::before {
+      background-image: var(--photo, radial-gradient(circle at 20% 20%, rgba(25, 30, 50, 0.8), rgba(5, 3, 12, 0.9)));
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.25) brightness(1.08) contrast(1.05);
+    }
+
+    .panel::after {
+      background: radial-gradient(circle at 18% 14%, rgba(4, 0, 10, 0.12), transparent 48%), linear-gradient(160deg, rgba(6, 4, 16, 0.65), rgba(8, 7, 20, 0.25));
+      mix-blend-mode: normal;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      width: min(780px, 100%);
+      border-radius: 36px;
+      border: 1px solid var(--card-border, var(--border));
+      padding: clamp(1.5rem, 4vw, 3rem);
+      background: var(--card-bg, var(--panel-bg));
+      backdrop-filter: blur(22px);
+      box-shadow: 0 40px 120px var(--card-shadow, rgba(0, 0, 0, 0.65));
+      display: grid;
+      gap: 1rem;
+    }
+
+    .counter {
+      margin: 0;
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .theme {
+      margin: 0;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      font-size: 0.65rem;
+      color: var(--ink-soft);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.6rem, 4vw, 3rem);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    blockquote {
+      margin: 0;
+      font-size: clamp(1.2rem, 2.6vw, 2.1rem);
+      line-height: 1.5;
+      quotes: "\201C" "\201D";
+    }
+
+    blockquote::before { content: open-quote; }
+    blockquote::after { content: close-quote; }
+
+    .line {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      color: var(--ink-soft);
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .alt {
+      margin: 0;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(248, 244, 239, 0.7);
+    }
+
+    .keywords {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .keywords li {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .controls {
+      position: fixed;
+      right: clamp(1rem, 3vw, 2.5rem);
+      bottom: clamp(1rem, 4vw, 2.5rem);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .controls button {
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(3, 2, 9, 0.65);
+      color: var(--ink);
+      font-size: 1.2rem;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: transform 150ms ease, border-color 150ms ease;
+    }
+
+    .controls button:hover,
+    .controls button:focus-visible {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.8);
+      outline: none;
+    }
+
+    .status-chip {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
+      border: 1px solid rgba(29, 185, 84, 0.55);
+      color: var(--ink);
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      text-decoration: none;
+      background: rgba(29, 185, 84, 0.18);
+      box-shadow: 0 0 20px rgba(29, 185, 84, 0.4);
+    }
+
+    .badge svg { width: 16px; height: 16px; fill: currentColor; }
+
+    @media (max-width: 720px) {
+      .hud { flex-direction: column; align-items: flex-start; letter-spacing: 0.28em; }
+      .status { margin-left: 0; }
+      .panel { padding-top: calc(7.5rem + env(safe-area-inset-top)); }
+      .card { border-radius: 24px; }
+      .meta { flex-direction: column; gap: 0.4rem; }
+      .controls { right: 50%; transform: translateX(50%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slides { scroll-behavior: auto; }
+      .controls button { transition: none; }
+    }
+  </style>
+  <script src="/assets/js/password-gate.js"></script>
+</head>
+<body data-data-url="./archives/2026-04-12-full-bleed-counts/full-bleed-counts.json">
+  <noscript>
+    <p style="position:fixed;top:1rem;left:1rem;z-index:999;background:#0b070e;padding:0.5rem 0.85rem;border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;">
+      JavaScript is off. Open <a href="./archives/2026-04-12-full-bleed-counts/" style="color:#9ad8ff;">Full-Bleed Counts</a>.
+    </p>
+  </noscript>
+  <header class="hud">
+    <a class="brand" href="/" aria-label="NEWAIYORK homepage">NEWAIYORK</a>
+    <div class="nav-links" aria-label="Site navigation">
+      <a href="/archive.html">Laurarchive</a>
+      <a href="/blog.html" title="Latest Werkwelt: Cure51 deck feedback synthesis — Laura + Amol">Werkwelt</a>
+      <a class="badge" href="https://open.spotify.com/album/44Wa9N8w6M2VFRddtbnbX3" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5a10.5 10.5 0 1 0 0 21 10.5 10.5 0 0 0 0-21zm4.86 15.36a.66.66 0 0 1-.9.22c-2.45-1.5-5.53-1.84-9.16-1.02a.66.66 0 0 1-.28-1.29c3.98-.92 7.43-.54 10.15 1.19a.66.66 0 0 1 .19.9zm1.29-2.86a.82.82 0 0 1-1.12.27c-2.79-1.72-7.05-2.22-10.35-1.23a.82.82 0 0 1-.46-1.57c3.77-1.12 8.47-.56 11.67 1.4.38.24.5.74.26 1.13zm.1-3.03c-3.3-1.95-8.77-2.13-11.93-1.17a.99.99 0 0 1-.57-1.89c3.66-1.1 9.7-.9 13.5 1.34a.99.99 0 0 1-1 1.72z"/></svg>
+        <span>Spotify</span>
+      </a>
+    </div>
+    <div class="status" id="status" aria-live="polite">-- / --</div>
+  </header>
+
+  <main id="slides" class="slides" aria-live="polite"></main>
+
+  <div class="controls" role="group" aria-label="Slide controls">
+    <button type="button" data-dir="-1" aria-label="Previous story">&#x276E;</button>
+    <span class="status-chip" id="chip">scene --</span>
+    <button type="button" data-dir="1" aria-label="Next story">&#x276F;</button>
+  </div>
+
+  <template id="slideTemplate">
+    <section class="panel" data-index="0">
+      <article class="card">
+        <p class="counter"></p>
+        <p class="theme"></p>
+        <h1></h1>
+        <blockquote></blockquote>
+        <p class="line"></p>
+        <div class="meta">
+          <p class="attribution"></p>
+          <p class="source"></p>
+        </div>
+        <p class="alt"></p>
+        <ul class="keywords"></ul>
+      </article>
+    </section>
+  </template>
+
+  <script>
+    (() => {
+      const dataUrl = document.body.dataset.dataUrl;
+      const slidesEl = document.getElementById('slides');
+      const tmpl = document.getElementById('slideTemplate');
+      const statusEl = document.getElementById('status');
+      const chipEl = document.getElementById('chip');
+      const controls = document.querySelectorAll('.controls button');
+      const pad = (value, total) => String(value).padStart(String(total).length, '0');
+      let totalSlides = 0;
+      let activeIndex = 1;
+
+      const clampValue = (value, min, max) => Math.min(max, Math.max(min, value));
+
+      function hexToRgb(hex) {
+        if (typeof hex !== 'string') return null;
+        const normalized = hex.trim().replace('#', '');
+        const chunk = normalized.length === 3
+          ? normalized.split('').map((char) => char + char).join('')
+          : normalized;
+        const int = Number.parseInt(chunk, 16);
+        if (Number.isNaN(int)) return null;
+        return {
+          r: (int >> 16) & 255,
+          g: (int >> 8) & 255,
+          b: int & 255,
+        };
+      }
+
+      function rgbToHsl(r, g, b) {
+        r /= 255;
+        g /= 255;
+        b /= 255;
+        const max = Math.max(r, g, b);
+        const min = Math.min(r, g, b);
+        let h = 0;
+        let s = 0;
+        const l = (max + min) / 2;
+        if (max !== min) {
+          const d = max - min;
+          s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+          switch (max) {
+            case r:
+              h = (g - b) / d + (g < b ? 6 : 0);
+              break;
+            case g:
+              h = (b - r) / d + 2;
+              break;
+            default:
+              h = (r - g) / d + 4;
+          }
+          h /= 6;
+        }
+        return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
+      }
+
+      function buildJewelPalette(hex) {
+        const rgb = hexToRgb(hex || '#120b15');
+        if (!rgb) return null;
+        const { h, s, l } = rgbToHsl(rgb.r, rgb.g, rgb.b);
+        const jewelS = clampValue(s + 40, 65, 98);
+        const jewelL = clampValue(l - 35, 8, 30);
+        const borderL = clampValue(jewelL + 18, 25, 60);
+        const shadowL = clampValue(jewelL - 6, 4, 22);
+        const cardAlpha = 0.4;
+        return {
+          bg: `hsla(${h}, ${jewelS}%, ${jewelL}%, ${cardAlpha})`,
+          border: `hsla(${h}, ${jewelS}%, ${borderL}%, 0.9)`,
+          shadow: `hsla(${h}, ${clampValue(jewelS - 15, 40, 90)}%, ${shadowL}%, 0.85)`
+        };
+      }
+
+      function updateStatus(index) {
+        activeIndex = index;
+        if (!totalSlides) {
+          statusEl.textContent = '-- / --';
+          chipEl.textContent = 'scene --';
+          return;
+        }
+        statusEl.textContent = pad(index, totalSlides) + ' / ' + pad(totalSlides, totalSlides);
+        chipEl.textContent = 'scene ' + pad(index, totalSlides);
+      }
+
+      function createSlide(entry, index, total) {
+        const fragment = tmpl.content.cloneNode(true);
+        const panel = fragment.querySelector('.panel');
+        panel.dataset.index = index + 1;
+        panel.style.setProperty('--photo', `url('${entry.image}')`);
+        const palette = buildJewelPalette(entry.color);
+        if (palette) {
+          panel.style.setProperty('--card-bg', palette.bg);
+          panel.style.setProperty('--card-border', palette.border);
+          panel.style.setProperty('--card-shadow', palette.shadow);
+        }
+        const counter = fragment.querySelector('.counter');
+        counter.textContent = pad(index + 1, total) + ' · TWO MODES';
+        fragment.querySelector('.theme').textContent = entry.theme;
+        fragment.querySelector('h1').textContent = entry.title;
+        fragment.querySelector('blockquote').textContent = entry.quote;
+        fragment.querySelector('.line').textContent = entry.line;
+        fragment.querySelector('.attribution').textContent = entry.attribution;
+        fragment.querySelector('.source').textContent = entry.source;
+        fragment.querySelector('.alt').textContent = entry.alt;
+        const list = fragment.querySelector('.keywords');
+        if (Array.isArray(entry.keywords)) {
+          entry.keywords.forEach((word) => {
+            const li = document.createElement('li');
+            li.textContent = word;
+            list.appendChild(li);
+          });
+        }
+        return fragment;
+      }
+
+      function bindObserver() {
+        const panels = slidesEl.querySelectorAll('.panel');
+        if (!panels.length) return;
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const idx = Number(entry.target.dataset.index) || 1;
+              updateStatus(idx);
+            }
+          });
+        }, { root: slidesEl, threshold: 0.55 });
+        panels.forEach((panel) => observer.observe(panel));
+      }
+
+      function scrollByDir(dir) {
+        const offset = dir * window.innerHeight * 0.92;
+        slidesEl.scrollBy({ top: offset, behavior: 'smooth' });
+      }
+
+      controls.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const dir = Number(btn.dataset.dir) || 0;
+          if (!dir) return;
+          scrollByDir(dir);
+        });
+      });
+
+      fetch(dataUrl, { cache: 'no-store' })
+        .then((response) => {
+          if (!response.ok) throw new Error('Failed to load data');
+          return response.json();
+        })
+        .then((entries) => {
+          const clean = Array.isArray(entries) ? entries : [];
+          if (!clean.length) throw new Error('No entries');
+          totalSlides = clean.length;
+          const frag = document.createDocumentFragment();
+          clean.forEach((entry, index) => frag.appendChild(createSlide(entry, index, clean.length)));
+          slidesEl.appendChild(frag);
+          updateStatus(1);
+          bindObserver();
+        })
+        .catch((error) => {
+          console.error(error);
+          statusEl.textContent = 'offline';
+          chipEl.textContent = 'scene --';
+          slidesEl.innerHTML = '<section class="panel"><article class="card"><h1>Edition offline</h1><p class="line">Refresh when you are back online, or open the archive entry.</p><a href="./archives/2026-04-12-full-bleed-counts/" style="color:#9ad8ff;text-transform:uppercase;letter-spacing:0.3em;">Open archive</a></article></section>';
+        });
+    })();
+  </script>
+</body>
+</html>
