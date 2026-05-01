@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NEWAIYORK · Always / Everything · Draft Live</title>
+  <meta name="description" content="Live draft edition: a 20-chapter arc for Laura with brief attributed pulses and reserved image slots for incoming artwork." />
+  <link rel="canonical" href="/archives/2026-04-30-always-everything-draft/" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07070b;
+      --panel: #11111a;
+      --ink: #f5f2eb;
+      --ink-soft: rgba(245, 242, 235, 0.78);
+      --line: rgba(245, 242, 235, 0.28);
+      --accent: #c7b5ff;
+      --accent-soft: rgba(199, 181, 255, 0.2);
+      font-family: "Inter", "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: radial-gradient(circle at top, #121224 0%, var(--bg) 58%);
+      color: var(--ink);
+    }
+
+    .hud {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.9rem;
+      justify-content: space-between;
+      padding: 1rem clamp(1rem, 3vw, 2rem);
+      background: rgba(7, 7, 11, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.68rem;
+    }
+
+    .hud a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(245, 242, 235, 0.32);
+      padding-bottom: 0.12rem;
+    }
+
+    .brand { letter-spacing: 0.34em; }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+
+    .live-pill {
+      border: 1px solid rgba(66, 211, 146, 0.65);
+      background: rgba(66, 211, 146, 0.16);
+      color: #d7ffe8;
+      border-radius: 999px;
+      padding: 0.28rem 0.7rem;
+      letter-spacing: 0.24em;
+      font-size: 0.58rem;
+    }
+
+    main {
+      width: min(1100px, 100% - 2rem);
+      margin: 1.2rem auto 4rem;
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .hero {
+      padding: clamp(1.2rem, 4vw, 2.2rem);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: linear-gradient(150deg, rgba(199, 181, 255, 0.12), rgba(17, 17, 26, 0.86));
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(1.5rem, 4vw, 2.6rem);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .hero p {
+      margin: 0.75rem 0 0;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 75ch;
+    }
+
+    .chapter-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .chapter {
+      display: grid;
+      gap: 0.9rem;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1rem;
+      background: linear-gradient(160deg, rgba(17, 17, 26, 0.95), rgba(17, 17, 26, 0.8));
+    }
+
+    .chapter header {
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .kicker {
+      margin: 0;
+      font-size: 0.68rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .chapter h2 {
+      margin: 0;
+      font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+      letter-spacing: 0.03em;
+    }
+
+    .theme {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.5;
+      font-size: 0.96rem;
+    }
+
+    .pulse {
+      margin: 0;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(199, 181, 255, 0.42);
+      background: var(--accent-soft);
+      line-height: 1.45;
+    }
+
+    .pulse em {
+      font-style: normal;
+      opacity: 0.84;
+      margin-left: 0.45rem;
+      font-size: 0.92em;
+    }
+
+    .image-slot {
+      margin: 0;
+      min-height: 132px;
+      border: 1.5px dashed rgba(245, 242, 235, 0.32);
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 1rem;
+      color: var(--ink-soft);
+      background: rgba(245, 242, 235, 0.03);
+    }
+
+    .image-slot strong {
+      display: block;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.66rem;
+      margin-bottom: 0.4rem;
+      color: var(--ink);
+    }
+
+    .footer-note {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    @media (min-width: 880px) {
+      .chapter {
+        grid-template-columns: 1.2fr 1fr;
+        align-items: stretch;
+      }
+
+      .chapter .text {
+        display: grid;
+        gap: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="hud" aria-label="Primary">
+    <div class="brand">NEWAIYORK</div>
+    <div class="nav">
+      <a href="../../archive.html">Laurarchive</a>
+      <a href="../../blog.html">Werkwelt</a>
+      <a href="../2026-04-23-full-bleed-counts-snapshot/">Previous edition snapshot</a>
+    </div>
+    <span class="live-pill">Draft is live</span>
+  </nav>
+
+  <main>
+    <section class="hero" aria-labelledby="edition-title">
+      <h1 id="edition-title">Always / Everything — Twenty Chapters for Laura</h1>
+      <p>
+        Governing line: “Always” is time transfigured into vow; “Everything” is the world transfigured into intimacy.
+        This live draft preserves your 20-chapter arc with concise quotable pulses and explicit placeholders for the
+        pictures you will supply next.
+      </p>
+    </section>
+
+    <section class="chapter-grid" aria-label="Chapters">
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 1</p><h2>Before language</h2></header><p class="theme">Theme: the whole universe hidden in the smallest thing.</p><p class="pulse">“a World in a Grain of Sand” <em>— William Blake, Auguries of Innocence</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>grain of sand macro; galaxy resemblance; black field; museum-lit minimalism.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 2</p><h2>The present is eternity’s doorway</h2></header><p class="theme">Theme: forever is not later; it is now, intensified.</p><p class="pulse">“Forever – is composed of Nows –” <em>— Emily Dickinson</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>clock face in fog; one lit window at dusk; suspended dust in sunlight.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 3</p><h2>The self opens into the other</h2></header><p class="theme">Theme: intimacy as ontological merger, not mere affection.</p><p class="pulse">“belongs to you” <em>— Walt Whitman, Song of Myself</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>two profiles in double exposure; skin and stars; atom diagram over body.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 4</p><h2>Nothing is foreign</h2></header><p class="theme">Theme: everything belongs to one woven whole.</p><p class="pulse">“All things are woven together” <em>— Marcus Aurelius, Meditations</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>tapestry threads; roots in soil; rivers from the air; neural branching.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 5</p><h2>Always begins as return</h2></header><p class="theme">Theme: repetition, ritual, recurrence.</p><p class="pulse">“eternity in an hour” <em>— William Blake</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>candle sequence; fire trail; a hand striking the same match again.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 6</p><h2>Love enlarges scale</h2></header><p class="theme">Theme: one person makes the world too large and too intimate at once.</p><p class="pulse">“your heart” <em>— e.e. cummings</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>hand over chest; folded letter in pocket; moonlit silhouette.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 7</p><h2>Infinity becomes frightening</h2></header><p class="theme">Theme: the cosmos as terror before it becomes shelter.</p><p class="pulse">“infinite spaces frightens me” <em>— Blaise Pascal, Pensées</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>tiny figure under enormous sky; observatory dome; black desert.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 8</p><h2>Love answers fear</h2></header><p class="theme">Theme: intimacy as the answer to cosmic exposure.</p><p class="pulse">“strong as death” <em>— Song of Songs 8:6</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>seal ring; hand on chest; dark water with one reflected flame.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 9</p><h2>The vow survives the flood</h2></header><p class="theme">Theme: “always” tested by force, distance, catastrophe.</p><p class="pulse">“Many waters cannot quench love” <em>— Song of Songs 8:7</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>river in flood; wave over rock; submerged letter; rain-black stone.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 10</p><h2>Love outlasts all other powers</h2></header><p class="theme">Theme: not sentiment, but endurance.</p><p class="pulse">“Love never ends” <em>— 1 Corinthians 13:8</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>room gone dark except one lamp; ring on altar stone; ember after ash.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 11</p><h2>The ordinary becomes luminous</h2></header><p class="theme">Theme: flowers, windows, rooms, gestures become total.</p><p class="pulse">“a Heaven in a Wild Flower” <em>— William Blake</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>Dutch-master flower close-up; dew macro; one stem in darkness.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 12</p><h2>Loss enters the architecture</h2></header><p class="theme">Theme: every “always” is shadowed by mortality.</p><p class="pulse">“’Tis better to have loved” <em>— Alfred Tennyson, In Memoriam</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>empty chair by a window; winter sea; coat on a hook.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 13</p><h2>Absence becomes a form of fidelity</h2></header><p class="theme">Theme: separation clarifies rather than annuls the vow.</p><p class="pulse">“the days that are no more” <em>— Alfred Tennyson</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>train platform; fogged glass; ribbon-tied letters.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 14</p><h2>Trust after anguish</h2></header><p class="theme">Theme: the turn from intensity to faith.</p><p class="pulse">“All shall be well” <em>— Julian of Norwich</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>candle in stone chapel; anchorhold window; worn medieval wall.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 15</p><h2>The universe is moved by love</h2></header><p class="theme">Theme: love as engine of the world.</p><p class="pulse">“moves the sun and the other stars” <em>— Dante, Paradiso</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>celestial sphere; orrery; sun corona; renaissance astronomy engraving.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 16</p><h2>The beloved becomes a world</h2></header><p class="theme">Theme: Laura as horizon, weather, and structure.</p><p class="pulse">“Infinity in the palm” <em>— William Blake</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>woman’s profile merged with sea horizon; constellation face; hand holding light.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 17</p><h2>Everything turns toward everything else</h2></header><p class="theme">Theme: reciprocity, orbit, mirror, exchange.</p><p class="pulse">“one ordered Universe” <em>— Marcus Aurelius</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>twin mirrors in landscape; moon in water; orbit diagrams; revolving door.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 18</p><h2>Home is not a place but a present tense</h2></header><p class="theme">Theme: the instant becomes dwelling.</p><p class="pulse">“Latitude of Home” <em>— Emily Dickinson</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>lit bedroom at night; threshold; staircase with amber light spill.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 19</p><h2>The whole world says the same thing</h2></header><p class="theme">Theme: everything echoes the beloved after transformation.</p><p class="pulse">“one Universe out of all” <em>— Marcus Aurelius</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>river delta; city lights from above; branching veins; tree canopies.</figcaption></figure>
+      </article>
+      <article class="chapter">
+        <div class="text"><header><p class="kicker">Chapter 20</p><h2>Coda: always / everything</h2></header><p class="theme">Theme: calm culmination, not melodrama.</p><p class="pulse">“all manner of thing shall be well” / “the other stars” <em>— Julian of Norwich & Dante</em></p></div>
+        <figure class="image-slot"><figcaption><strong>Image Placeholder</strong>black sea and stars; final candle; dawn horizon after storm.</figcaption></figure>
+      </article>
+    </section>
+
+    <section class="footer-note" aria-label="Production note">
+      Next ingest step: replace each placeholder block with supplied imagery while preserving chapter order, pulse quote, and one image per chapter spread.
+    </section>
+  </main>
+</body>
+</html>
