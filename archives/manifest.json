@@ -118,5 +118,11 @@
     "label": "2026-04-23 · Full-Bleed Counts Snapshot",
     "blurb": "Snapshot of the outgoing Full-Bleed Counts homepage before promoting the Always / Everything live draft.",
     "publishedAt": "2026-04-23"
+  },
+  {
+    "slug": "2026-04-30-always-everything-draft",
+    "label": "2026-04-30 · Always / Everything Draft",
+    "blurb": "Twenty-chapter live draft preserved before the Laura in Sequence carousel edition.",
+    "publishedAt": "2026-04-30"
   }
 ]
