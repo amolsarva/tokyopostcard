@@ -2,22 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NEWAIYORK · Laura in Sequence</title>
-  <meta name="description" content="An 85-still ordered Laura sequence built from the April 30 image batch." />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>NEWAIYORK · Billie at the London O2</title>
+  <meta name="description" content="A Billie Eilish London O2 edition with two side-long streams, sleeve-derived track cues, and iPhone Safari-friendly playback." />
   <link rel="canonical" href="./" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23050506'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='Arial' font-size='24' fill='%23d6b56d'%3EL%3C/text%3E%3C/svg%3E" />
   <style>
     :root {
       color-scheme: dark;
-      --bg: #050506;
-      --ink: #f7f3ed;
-      --ink-soft: rgba(247, 243, 237, 0.72);
-      --line: rgba(247, 243, 237, 0.24);
-      --accent: #f04d4d;
-      --gold: #d6b56d;
-      --veil: rgba(5, 5, 6, 0.72);
-      font-family: "Inter", "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --bg: #080808;
+      --panel: rgba(17, 13, 14, 0.84);
+      --panel-strong: rgba(24, 16, 18, 0.94);
+      --line: rgba(255, 244, 236, 0.14);
+      --line-strong: rgba(255, 244, 236, 0.26);
+      --ink: #fff4ec;
+      --ink-soft: rgba(255, 244, 236, 0.74);
+      --accent: #57f59c;
+      --accent-soft: rgba(87, 245, 156, 0.18);
+      --rose: #ff8f8f;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+      font-family: Inter, "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     * { box-sizing: border-box; }
@@ -26,50 +29,43 @@
     body {
       margin: 0;
       min-height: 100%;
-      background: var(--bg);
+      background:
+        radial-gradient(circle at 14% 14%, rgba(87, 245, 156, 0.22), transparent 24%),
+        radial-gradient(circle at 82% 12%, rgba(255, 143, 143, 0.28), transparent 30%),
+        linear-gradient(180deg, #140d0d 0%, #090909 44%, #050505 100%);
       color: var(--ink);
     }
 
     body {
-      min-height: 100vh;
-      overflow: hidden;
+      padding: 0 0 calc(env(safe-area-inset-bottom) + 2rem);
     }
 
-    img { display: block; }
-
-    .shell {
-      position: relative;
-      height: 100vh;
-      height: 100svh;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      background:
-        radial-gradient(circle at 18% 14%, rgba(214, 181, 109, 0.16), transparent 32%),
-        linear-gradient(180deg, #11110f 0%, #050506 52%, #030303 100%);
+    a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 244, 236, 0.35);
     }
 
-    .hud,
-    .footer {
-      position: relative;
-      z-index: 5;
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    .hud {
+      position: sticky;
+      top: 0;
+      z-index: 20;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      padding: clamp(0.85rem, 2vw, 1.3rem) clamp(1rem, 3vw, 2rem);
-      background: linear-gradient(180deg, rgba(5, 5, 6, 0.88), rgba(5, 5, 6, 0.46));
+      padding: calc(env(safe-area-inset-top) + 0.95rem) clamp(1rem, 3vw, 2rem) 0.95rem;
+      background: rgba(8, 8, 8, 0.82);
       backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
       text-transform: uppercase;
       letter-spacing: 0.22em;
-      font-size: 0.66rem;
-    }
-
-    .footer {
-      position: relative;
-      min-height: 82px;
-      display: block;
-      background: linear-gradient(0deg, rgba(5, 5, 6, 0.94), rgba(5, 5, 6, 0.64));
-      border-top: 1px solid rgba(247, 243, 237, 0.14);
+      font-size: 0.68rem;
     }
 
     .brand {
@@ -79,526 +75,574 @@
 
     .nav {
       display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 0.9rem;
       flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.85rem;
     }
 
-    .hud a,
-    .footer a {
-      color: var(--ink);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(247, 243, 237, 0.34);
-      padding-bottom: 0.12rem;
+    main {
+      width: min(1180px, calc(100% - 1.5rem));
+      margin: 0 auto;
+      padding: 1rem 0 0;
     }
 
-    .stage {
-      position: relative;
-      min-height: 0;
+    .hero,
+    .side-card,
+    .note {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
       display: grid;
-      place-items: center;
-      cursor: pointer;
-      overflow: hidden;
-      background: #000;
+      gap: 1.25rem;
+      padding: clamp(1rem, 4vw, 1.6rem);
+      border-radius: 28px;
     }
 
-    .stage::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background:
-        linear-gradient(180deg, rgba(0, 0, 0, 0.48), transparent 22%, transparent 72%, rgba(0, 0, 0, 0.52)),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.36), transparent 28%, transparent 72%, rgba(0, 0, 0, 0.36));
-      pointer-events: none;
-    }
-
-    .frame-wrap {
-      position: relative;
-      z-index: 0;
-      width: min(80vw, calc(80vh * 640 / 416));
-      aspect-ratio: 640 / 416;
-      max-width: calc(100vw - 2rem);
-      max-height: calc(100vh - 11rem);
-      box-shadow: 0 34px 110px rgba(0, 0, 0, 0.76);
-    }
-
-    .frame {
-      position: relative;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      background: #000;
-      overflow: hidden;
-    }
-
-
-    .frame {
+    .hero-copy {
       display: grid;
-      place-items: center;
+      gap: 0.9rem;
+      align-content: start;
     }
 
-    .frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center;
-      background: #000;
-    }
-
-    .frame-label {
-      position: absolute;
-      right: 0.75rem;
-      top: 0.75rem;
-      display: inline-flex;
-      gap: 0.55rem;
-      align-items: center;
-      padding: 0.45rem 0.7rem;
-      background: rgba(0, 0, 0, 0.7);
-      border: 1px solid rgba(247, 243, 237, 0.24);
-      color: var(--ink);
+    .eyebrow,
+    .meta,
+    .label,
+    .track-meta,
+    .cue-note,
+    .footer-label {
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      font-size: 0.67rem;
+      color: var(--ink-soft);
     }
 
-    .frame-label strong {
-      color: var(--gold);
-      font-weight: 700;
-    }
-
-    .caption {
-      display: none;
-    }
-
-    .story-card {
-      position: absolute;
-      z-index: 3;
-      top: clamp(4.7rem, 8vw, 6.2rem);
-      left: clamp(1rem, 3vw, 2rem);
-      max-width: min(390px, calc(100vw - 2rem));
-      display: grid;
-      gap: 0.55rem;
-      padding: clamp(0.85rem, 2vw, 1.15rem);
-      background: var(--veil);
-      border: 1px solid rgba(247, 243, 237, 0.18);
-      backdrop-filter: blur(18px);
-      pointer-events: none;
-    }
-
-    .story-card p,
-    .story-card h1 {
+    h1,
+    h2,
+    h3,
+    p {
       margin: 0;
-      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.78);
-    }
-
-    .eyebrow {
-      text-transform: uppercase;
-      letter-spacing: 0.28em;
-      font-size: 0.65rem;
-      color: var(--gold);
     }
 
     h1 {
-      font-size: clamp(1.15rem, 2.8vw, 2rem);
-      line-height: 1.05;
-      letter-spacing: 0.02em;
+      font-size: clamp(1.8rem, 5vw, 3.8rem);
+      line-height: 0.96;
       text-transform: uppercase;
+      max-width: 11ch;
     }
 
-    .story-copy {
-      color: rgba(247, 243, 237, 0.78);
-      line-height: 1.5;
-      font-size: clamp(0.82rem, 1.2vw, 0.95rem);
+    .dek {
+      max-width: 54ch;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      font-size: clamp(0.96rem, 2vw, 1.06rem);
     }
 
-    .story-meta {
-      color: rgba(247, 243, 237, 0.66);
+    .hero-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .cover-frame {
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid var(--line-strong);
+      background: rgba(0, 0, 0, 0.28);
+      min-height: 280px;
+    }
+
+    .cover-frame img {
+      height: 100%;
+      object-fit: cover;
+      object-position: 58% center;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .meta-chip {
+      padding: 0.55rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 0.76rem;
+    }
+
+    .sides {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .side-card {
+      border-radius: 24px;
+      padding: clamp(1rem, 3vw, 1.3rem);
+      display: grid;
+      gap: 1rem;
+    }
+
+    .side-header {
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .side-title-row {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 0.9rem;
+    }
+
+    .side-title-row h2 {
+      font-size: clamp(1.25rem, 3vw, 1.8rem);
       text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .duration-pill {
+      white-space: nowrap;
+      padding: 0.48rem 0.68rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(87, 245, 156, 0.32);
+      color: #d7ffe8;
+      font-size: 0.78rem;
+    }
+
+    .side-subtitle {
+      max-width: 62ch;
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+
+    audio {
+      width: 100%;
+      height: 54px;
+      border-radius: 14px;
+    }
+
+    .cue-panel {
+      display: grid;
+      gap: 0.7rem;
+      padding: 0.95rem;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .cue-grid {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .cue-box {
+      display: grid;
+      gap: 0.28rem;
+      padding: 0.85rem;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 244, 236, 0.08);
+      min-height: 86px;
+    }
+
+    .cue-box strong {
+      font-size: 1.05rem;
+      line-height: 1.2;
+    }
+
+    .cue-box span {
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .tracklist {
+      display: grid;
+      gap: 0.55rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .track {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 0.75rem;
+      align-items: center;
+      padding: 0.85rem 0.9rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 244, 236, 0.08);
+      background: rgba(255, 255, 255, 0.025);
+      transition: border-color 140ms ease, background 140ms ease, transform 140ms ease;
+    }
+
+    .track::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: calc(var(--track-progress, 0) * 100%);
+      background: linear-gradient(90deg, rgba(87, 245, 156, 0.22), rgba(255, 143, 143, 0.16));
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .track > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .track-number {
+      font-variant-numeric: tabular-nums;
+      color: var(--ink-soft);
+      min-width: 2ch;
+    }
+
+    .track strong {
+      display: block;
+      font-size: 0.98rem;
+      line-height: 1.3;
+    }
+
+    .track-meta {
+      margin-top: 0.2rem;
       letter-spacing: 0.18em;
       font-size: 0.58rem;
     }
 
-    .controls {
-      position: absolute;
-      z-index: 4;
-      right: clamp(1rem, 3vw, 2rem);
-      top: 50%;
-      transform: translateY(-50%);
-      display: grid;
-      gap: 0.65rem;
+    .track-time {
+      font-variant-numeric: tabular-nums;
+      color: var(--ink-soft);
+      font-size: 0.92rem;
     }
 
-    button {
-      appearance: none;
-      border: 1px solid rgba(247, 243, 237, 0.3);
-      background: rgba(5, 5, 6, 0.68);
-      color: var(--ink);
-      cursor: pointer;
-      backdrop-filter: blur(16px);
-      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
-    }
-
-    button:hover,
-    button:focus-visible {
-      border-color: rgba(247, 243, 237, 0.78);
-      background: rgba(5, 5, 6, 0.86);
+    .track.is-active {
+      border-color: rgba(87, 245, 156, 0.44);
+      background: rgba(87, 245, 156, 0.08);
       transform: translateY(-1px);
-      outline: none;
     }
 
-    .icon-button {
-      width: 52px;
-      height: 52px;
-      border-radius: 999px;
-      display: grid;
-      place-items: center;
-      font-size: 1.35rem;
-      line-height: 1;
+    .track.is-complete {
+      border-color: rgba(255, 244, 236, 0.14);
+      background: rgba(255, 255, 255, 0.05);
     }
 
-    .thumb-strip {
-      position: absolute;
-      left: clamp(1rem, 3vw, 2rem);
-      right: clamp(1rem, 3vw, 2rem);
-      bottom: 2.65rem;
-      z-index: 5;
-      min-width: 0;
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      overflow-x: auto;
-      overscroll-behavior-x: contain;
-      scrollbar-width: thin;
-      padding: 0.2rem 0;
-    }
-
-    .thumb {
-      flex: 0 0 auto;
-      width: 72px;
-      aspect-ratio: 640 / 416;
-      border-radius: 4px;
-      border: 1px solid rgba(247, 243, 237, 0.18);
-      padding: 0;
-      overflow: hidden;
-      opacity: 0.5;
-      background: #000;
-    }
-
-    .thumb[aria-current="true"] {
-      opacity: 1;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(240, 77, 77, 0.45);
-    }
-
-    .thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
-
-    .progress {
-      position: absolute;
-      z-index: 5;
-      right: clamp(1rem, 3vw, 2rem);
-      bottom: 0.95rem;
-      width: min(360px, 34vw);
-      flex: 0 0 auto;
-      display: grid;
-      gap: 0.42rem;
+    .note {
+      margin-top: 1rem;
+      border-radius: 20px;
+      padding: 1rem 1.05rem;
+      line-height: 1.6;
       color: var(--ink-soft);
     }
 
-    .progress-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
+    .note strong {
+      color: var(--ink);
     }
 
-    .bar {
-      position: relative;
-      height: 2px;
-      background: rgba(247, 243, 237, 0.2);
-      overflow: hidden;
+    @media (min-width: 860px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1.05fr) minmax(320px, 440px);
+        align-items: stretch;
+      }
+
+      .sides {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+      }
     }
 
-    .bar span {
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: var(--progress, 1%);
-      background: var(--accent);
-    }
+    @media (max-width: 680px) {
+      .hud {
+        align-items: start;
+      }
 
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
+      .nav {
+        justify-content: flex-start;
+      }
 
-    @media (max-width: 760px) {
-      .hud,
-      .footer {
-        align-items: flex-start;
+      .side-title-row {
         flex-direction: column;
-        letter-spacing: 0.16em;
       }
 
-      .stage {
-        min-height: 0;
+      .duration-pill {
+        justify-self: start;
       }
 
-      .frame-wrap {
-        width: min(92vw, calc(62vh * 640 / 416));
-        max-height: 62vh;
+      .track {
+        grid-template-columns: auto 1fr;
       }
 
-      .story-card {
-        top: 5.7rem;
-        max-width: calc(100vw - 2rem);
-      }
-
-      .controls {
-        top: auto;
-        right: 1rem;
-        bottom: 1rem;
-        transform: none;
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .icon-button {
-        width: 46px;
-        height: 46px;
-      }
-
-      .progress {
-        position: absolute;
-        top: auto;
-        right: 1rem;
-        left: 1rem;
-        bottom: 0.8rem;
-        width: 100%;
-        max-width: calc(100% - 2rem);
-      }
-
-      .thumb {
-        width: 62px;
-      }
-
-      .thumb-strip {
-        left: 1rem;
-        right: 1rem;
-        bottom: 3.3rem;
-      }
-
-      .frame-label {
-        top: 0.5rem;
-        right: 0.5rem;
-      }
-
-      .caption {
-        bottom: 0.75rem;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        transition-duration: 0.001ms !important;
+      .track-time {
+        grid-column: 2;
       }
     }
   </style>
 </head>
 <body>
-  <div class="shell">
-    <nav class="hud" aria-label="Primary">
-      <div class="brand">NEWAIYORK</div>
-      <div class="nav">
-        <a href="./archive.html">Laurarchive</a>
-        <a href="./blog.html">Werkwelt</a>
-        <a href="./archives/2026-04-30-always-everything-draft/">Previous edition</a>
-      </div>
-    </nav>
+  <nav class="hud" aria-label="Primary">
+    <div class="brand">NEWAIYORK</div>
+    <div class="nav">
+      <a href="archive.html">Laurarchive</a>
+      <a href="blog.html">Werkwelt</a>
+      <a href="archives/2026-05-01-laura-in-sequence-snapshot/">Previous edition snapshot</a>
+    </div>
+  </nav>
 
-    <main class="stage" id="stage">
-      <section class="story-card" aria-labelledby="edition-title">
-        <p class="eyebrow" id="storyEyebrow">April 30 · Ordered Stills</p>
-        <h1 id="edition-title">Laura in Sequence</h1>
-        <p class="story-copy" id="storyCopy">A relationship story told through Laura's pauses, exits, negotiations, and final authorship.</p>
-        <p class="story-meta" id="storyMeta">Frame 01 · Prologue</p>
-      </section>
-
-      <div class="frame-wrap">
-        <figure class="frame">
-          <img id="activeImage" src="./assets/editions/2026-04-30-always-everything/images/scene-01.jpg" alt="Laura in Sequence still 1 of 85" />
-          <figcaption class="frame-label"><strong id="activeNumber">01</strong><span id="activeTotal">of 85</span></figcaption>
-        </figure>
-        <p class="caption" id="activeCaption">Opening distance</p>
-      </div>
-
-      <div class="controls" aria-label="Sequence controls">
-        <button class="icon-button" type="button" id="prevButton" aria-label="Previous still">‹</button>
-        <button class="icon-button" type="button" id="nextButton" aria-label="Next still">›</button>
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="progress" aria-label="Progress">
-        <div class="progress-row">
-          <span id="progressLabel">01 / 85</span>
-          <span>Laura cut</span>
+  <main>
+    <section class="hero" aria-labelledby="edition-title">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Billie Eilish · London O2 · 2022</p>
+          <h1 id="edition-title">Billie at the London O2</h1>
+          <p class="dek">
+            Two side-long live streams, one sleeve shot, and a running on-screen cue estimate based on the printed
+            track list from the cover art. Built for touch-first playback so it behaves cleanly in iPhone Safari.
+          </p>
+          <div class="meta-row" aria-label="Edition facts">
+            <span class="meta-chip">Side 1 stream · 24:42</span>
+            <span class="meta-chip">Side 2 stream · 21:50</span>
+            <span class="meta-chip">Cue timings scaled from sleeve durations</span>
+          </div>
         </div>
-        <div class="bar" aria-hidden="true"><span id="progressBar"></span></div>
+        <figure class="cover-frame">
+          <img src="assets/Billieeilish/album-cover-track-list.jpg" alt="Billie Eilish Live at the London O2 2022 cover showing the printed side one and side two track list." />
+        </figure>
       </div>
-      <div class="thumb-strip" id="thumbStrip" aria-label="Still thumbnails"></div>
-    </footer>
-  </div>
+    </section>
+
+    <section class="sides" aria-label="Billie streams">
+      <article class="side-card" id="side-1-card" data-side="side-1">
+        <header class="side-header">
+          <p class="label">Stream 1</p>
+          <div class="side-title-row">
+            <h2>Side 1</h2>
+            <span class="duration-pill">audio length: 24:42</span>
+          </div>
+          <p class="side-subtitle">Side one opens with the short “Bury A Friend” edit and runs through the acoustic “Your Power” close.</p>
+        </header>
+
+        <audio id="audio-side-1" controls preload="metadata" playsinline>
+          <source src="assets/Billieeilish/Billie%20Eilish%20live%20at%20the%20London%20O2%202022%20A.m4a" type="audio/mp4" />
+        </audio>
+
+        <section class="cue-panel" aria-live="polite">
+          <p class="cue-note">Estimated live cue display</p>
+          <div class="cue-grid">
+            <div class="cue-box">
+              <p class="label">Now playing</p>
+              <strong data-role="current-title">Press play</strong>
+              <span data-role="current-range">Estimated track window will appear here.</span>
+            </div>
+            <div class="cue-box">
+              <p class="label">Up next</p>
+              <strong data-role="next-title">—</strong>
+              <span data-role="next-start">Next cue appears after playback starts.</span>
+            </div>
+          </div>
+          <p class="cue-note" data-role="status">Sleeve timings are aligned to the actual file length automatically.</p>
+        </section>
+
+        <ol class="tracklist" data-role="tracklist"></ol>
+      </article>
+
+      <article class="side-card" id="side-2-card" data-side="side-2">
+        <header class="side-header">
+          <p class="label">Stream 2</p>
+          <div class="side-title-row">
+            <h2>Side 2</h2>
+            <span class="duration-pill">audio length: 21:50</span>
+          </div>
+          <p class="side-subtitle">Side two pivots from “Overheated” into the run through “Happier Than Ever” to close the set.</p>
+        </header>
+
+        <audio id="audio-side-2" controls preload="metadata" playsinline>
+          <source src="assets/Billieeilish/Billie%20Eilish%20live%20at%20the%20London%20O2%202022%20B.m4a" type="audio/mp4" />
+        </audio>
+
+        <section class="cue-panel" aria-live="polite">
+          <p class="cue-note">Estimated live cue display</p>
+          <div class="cue-grid">
+            <div class="cue-box">
+              <p class="label">Now playing</p>
+              <strong data-role="current-title">Press play</strong>
+              <span data-role="current-range">Estimated track window will appear here.</span>
+            </div>
+            <div class="cue-box">
+              <p class="label">Up next</p>
+              <strong data-role="next-title">—</strong>
+              <span data-role="next-start">Next cue appears after playback starts.</span>
+            </div>
+          </div>
+          <p class="cue-note" data-role="status">Sleeve timings are aligned to the actual file length automatically.</p>
+        </section>
+
+        <ol class="tracklist" data-role="tracklist"></ol>
+      </article>
+    </section>
+
+    <section class="note">
+      <p><strong>Timing note:</strong> the on-screen song changes are estimates derived from the text on the uploaded sleeve photo, then scaled to each uploaded audio file so the cueing lands on the real stream length. That keeps the visible markers practical even though the printed totals and file durations differ by a few seconds.</p>
+    </section>
+  </main>
 
   <script>
-    const totalFrames = 85;
-    const assetBase = './assets/editions/2026-04-30-always-everything/images/';
-    const stage = document.getElementById('stage');
-    const activeImage = document.getElementById('activeImage');
-    const activeNumber = document.getElementById('activeNumber');
-    const activeTotal = document.getElementById('activeTotal');
-    const activeCaption = document.getElementById('activeCaption');
-    const storyEyebrow = document.getElementById('storyEyebrow');
-    const storyCopy = document.getElementById('storyCopy');
-    const storyMeta = document.getElementById('storyMeta');
-    const progressLabel = document.getElementById('progressLabel');
-    const progressBar = document.getElementById('progressBar');
-    const thumbStrip = document.getElementById('thumbStrip');
-    const prevButton = document.getElementById('prevButton');
-    const nextButton = document.getElementById('nextButton');
-    const storyBeats = [
+    const sideData = [
       {
-        start: 1,
-        end: 10,
-        title: 'Opening Distance',
-        eyebrow: 'Act I · The room before the argument',
-        copy: 'Laura is introduced through hesitation: she stays, resists, and measures the emotional temperature before anyone names the break.',
-        caption: 'The story begins with withheld permission.'
+        id: "side-1",
+        audioId: "audio-side-1",
+        printedTotal: "24:54",
+        tracks: [
+          { number: 1, title: "Bury A Friend (Edit)", duration: "0:28" },
+          { number: 2, title: "Therefore I Am", duration: "2:56" },
+          { number: 3, title: "My Strange Addiction", duration: "2:23" },
+          { number: 4, title: "Idontwannabeyouanymore - Lovely", duration: "3:12" },
+          { number: 5, title: "Billie Bossa Nova", duration: "3:14" },
+          { number: 6, title: "Goldwing", duration: "3:13" },
+          { number: 7, title: "Halley's Comet", duration: "2:20" },
+          { number: 8, title: "Ilomilo", duration: "1:55" },
+          { number: 9, title: "Your Power (Acoustic)", duration: "5:00" }
+        ]
       },
       {
-        start: 11,
-        end: 22,
-        title: 'Terms of the Break',
-        eyebrow: 'Act I · Negotiation',
-        copy: 'The apartment scenes turn intimacy into logistics. Every line feels practical, but the real subject is whether either person can still be changed.',
-        caption: 'Love becomes a conversation about boundaries.'
-      },
-      {
-        start: 23,
-        end: 36,
-        title: 'The Other Version',
-        eyebrow: 'Act II · Projection',
-        copy: 'Rob keeps turning Laura into a story he can manage: taste, jobs, toughness, music, the fantasy of a version that would hurt less.',
-        caption: 'He edits her while she keeps becoming herself.'
-      },
-      {
-        start: 37,
-        end: 52,
-        title: 'Cross-Examination',
-        eyebrow: 'Act II · Reversal',
-        copy: 'The sequence becomes less about winning Laura back and more about revealing the self-absorption underneath the wanting.',
-        caption: 'The argument exposes the narrator.'
-      },
-      {
-        start: 53,
-        end: 69,
-        title: 'Laura Speaks Back',
-        eyebrow: 'Act III · Counterpoint',
-        copy: 'She stops functioning as an absence and becomes an answering intelligence: funny, tired, precise, and not reducible to his heartbreak.',
-        caption: 'The beloved becomes a person again.'
-      },
-      {
-        start: 70,
-        end: 85,
-        title: 'Authorship',
-        eyebrow: 'Coda · The name remains',
-        copy: 'The final movement turns from romance to authorship. Laura is not just the subject of memory; she is the maker whose name survives the scene.',
-        caption: 'The ending signs itself with Laura.'
+        id: "side-2",
+        audioId: "audio-side-2",
+        printedTotal: "21:54",
+        tracks: [
+          { number: 10, title: "Overheated", duration: "3:25" },
+          { number: 11, title: "Bellyache", duration: "1:21" },
+          { number: 12, title: "Ocean Eyes", duration: "1:34" },
+          { number: 13, title: "Bored", duration: "1:12" },
+          { number: 14, title: "Getting Older", duration: "4:14" },
+          { number: 15, title: "Lost Cause", duration: "3:32" },
+          { number: 16, title: "Everything I Wanted (Edit)", duration: "4:05" },
+          { number: 17, title: "Happier Than Ever (Edit)", duration: "2:27" }
+        ]
       }
     ];
 
-    function storyForFrame(frameNumber) {
-      return storyBeats.find((beat) => frameNumber >= beat.start && frameNumber <= beat.end) || storyBeats[0];
-    }
+    const toSeconds = (value) => {
+      const [minutes, seconds] = value.split(":").map(Number);
+      return (minutes * 60) + seconds;
+    };
 
-    const frames = Array.from({ length: totalFrames }, (_, index) => {
-      const number = String(index + 1).padStart(2, '0');
-      const beat = storyForFrame(index + 1);
-      return {
-        number,
-        src: `${assetBase}scene-${number}.jpg`,
-        alt: `Laura in Sequence still ${index + 1} of ${totalFrames}`,
-        beat
+    const formatClock = (seconds) => {
+      const safe = Math.max(0, Math.floor(seconds));
+      const minutes = Math.floor(safe / 60);
+      const remainder = safe % 60;
+      return `${minutes}:${String(remainder).padStart(2, "0")}`;
+    };
+
+    const buildTrackMarkup = (track, index) => {
+      const item = document.createElement("li");
+      item.className = "track";
+      item.dataset.index = String(index);
+      item.innerHTML = `
+        <span class="track-number">${String(track.number).padStart(2, "0")}</span>
+        <div>
+          <strong>${track.title}</strong>
+          <p class="track-meta">printed sleeve cue</p>
+        </div>
+        <span class="track-time">${track.duration}</span>
+      `;
+      return item;
+    };
+
+    const initialiseSide = (config) => {
+      const card = document.getElementById(`${config.id}-card`);
+      const audio = document.getElementById(config.audioId);
+      const list = card.querySelector('[data-role="tracklist"]');
+      const currentTitle = card.querySelector('[data-role="current-title"]');
+      const currentRange = card.querySelector('[data-role="current-range"]');
+      const nextTitle = card.querySelector('[data-role="next-title"]');
+      const nextStart = card.querySelector('[data-role="next-start"]');
+      const status = card.querySelector('[data-role="status"]');
+
+      config.tracks.forEach((track, index) => {
+        track.printedSeconds = toSeconds(track.duration);
+        list.appendChild(buildTrackMarkup(track, index));
+      });
+
+      const trackEls = [...list.querySelectorAll('.track')];
+      const printedTotalSeconds = toSeconds(config.printedTotal);
+
+      const applyTimings = () => {
+        const actualDuration = audio.duration || printedTotalSeconds;
+        const scale = actualDuration / printedTotalSeconds;
+        let cursor = 0;
+
+        config.tracks.forEach((track, index) => {
+          const scaledDuration = track.printedSeconds * scale;
+          track.start = cursor;
+          track.end = index === config.tracks.length - 1 ? actualDuration : cursor + scaledDuration;
+          cursor = track.end;
+        });
+
+        status.textContent = `Printed sleeve total ${config.printedTotal}; mapped to actual audio length ${formatClock(actualDuration)}.`;
+        updateForTime(audio.currentTime || 0);
       };
-    });
-    let activeIndex = 0;
 
-    function setFrame(index) {
-      activeIndex = (index + totalFrames) % totalFrames;
-      const frame = frames[activeIndex];
-      activeImage.src = frame.src;
-      activeImage.alt = frame.alt;
-      activeNumber.textContent = frame.number;
-      activeTotal.textContent = `of ${totalFrames}`;
-      activeCaption.textContent = frame.beat.caption;
-      document.getElementById('edition-title').textContent = frame.beat.title;
-      storyEyebrow.textContent = frame.beat.eyebrow;
-      storyCopy.textContent = frame.beat.copy;
-      storyMeta.textContent = `Frames ${String(frame.beat.start).padStart(2, '0')}-${String(frame.beat.end).padStart(2, '0')} · current ${frame.number}`;
-      progressLabel.textContent = `${frame.number} / ${totalFrames}`;
-      progressBar.style.setProperty('--progress', `${((activeIndex + 1) / totalFrames) * 100}%`);
-      stage.style.setProperty('--active-image', `url("${frame.src}")`);
-      thumbStrip.querySelectorAll('.thumb').forEach((button, buttonIndex) => {
-        const isActive = buttonIndex === activeIndex;
-        button.setAttribute('aria-current', isActive ? 'true' : 'false');
-        if (isActive) button.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
-      });
-    }
+      const updateForTime = (currentTime) => {
+        let activeIndex = config.tracks.findIndex((track) => currentTime >= track.start && currentTime < track.end);
+        if (activeIndex === -1 && currentTime >= (audio.duration || 0)) {
+          activeIndex = config.tracks.length - 1;
+        }
 
-    function buildThumbs() {
-      const fragment = document.createDocumentFragment();
-      frames.forEach((frame, index) => {
-        const button = document.createElement('button');
-        button.className = 'thumb';
-        button.type = 'button';
-        button.setAttribute('aria-label', `Show still ${index + 1}`);
-        const image = document.createElement('img');
-        image.src = frame.src;
-        image.alt = '';
-        image.loading = index < 12 ? 'eager' : 'lazy';
-        button.appendChild(image);
-        button.addEventListener('click', () => setFrame(index));
-        fragment.appendChild(button);
-      });
-      thumbStrip.appendChild(fragment);
-    }
+        trackEls.forEach((el, index) => {
+          const track = config.tracks[index];
+          let progress = 0;
+          el.classList.toggle('is-active', index === activeIndex);
+          el.classList.toggle('is-complete', currentTime >= track.end && index !== activeIndex);
 
-    prevButton.addEventListener('click', () => setFrame(activeIndex - 1));
-    nextButton.addEventListener('click', () => setFrame(activeIndex + 1));
-    stage.addEventListener('click', (event) => {
-      if (event.target.closest('button, a')) return;
-      setFrame(activeIndex + 1);
-    });
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'ArrowLeft') setFrame(activeIndex - 1);
-      if (event.key === 'ArrowRight') setFrame(activeIndex + 1);
-    });
+          if (currentTime >= track.end) {
+            progress = 1;
+          } else if (currentTime > track.start && currentTime < track.end) {
+            progress = (currentTime - track.start) / (track.end - track.start);
+          }
 
-    buildThumbs();
-    setFrame(0);
+          el.style.setProperty('--track-progress', progress.toFixed(4));
+        });
+
+        if (activeIndex < 0) {
+          currentTitle.textContent = audio.paused ? 'Press play' : 'Cue loading';
+          currentRange.textContent = `This side runs ${formatClock(audio.duration || printedTotalSeconds)}.`;
+          nextTitle.textContent = config.tracks[0].title;
+          nextStart.textContent = `Starts near 0:00.`;
+          return;
+        }
+
+        const currentTrack = config.tracks[activeIndex];
+        const nextTrack = config.tracks[activeIndex + 1];
+        currentTitle.textContent = currentTrack.title;
+        currentRange.textContent = `${formatClock(currentTrack.start)}-${formatClock(currentTrack.end)} · about ${Math.max(0, Math.ceil(currentTrack.end - currentTime))} sec left in this cue.`;
+
+        if (nextTrack) {
+          nextTitle.textContent = nextTrack.title;
+          nextStart.textContent = `Estimated handoff at ${formatClock(nextTrack.start)}.`;
+        } else {
+          nextTitle.textContent = 'End of side';
+          nextStart.textContent = `This stream wraps at ${formatClock(audio.duration || printedTotalSeconds)}.`;
+        }
+      };
+
+      audio.addEventListener('loadedmetadata', applyTimings);
+      audio.addEventListener('durationchange', applyTimings);
+      audio.addEventListener('timeupdate', () => updateForTime(audio.currentTime || 0));
+      audio.addEventListener('play', () => updateForTime(audio.currentTime || 0));
+      audio.addEventListener('seeked', () => updateForTime(audio.currentTime || 0));
+      audio.addEventListener('ended', () => updateForTime(audio.duration || 0));
+
+      applyTimings();
+    };
+
+    sideData.forEach(initialiseSide);
   </script>
 </body>
 </html>

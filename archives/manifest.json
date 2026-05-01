@@ -124,5 +124,11 @@
     "label": "2026-04-30 · Always / Everything Draft",
     "blurb": "Twenty-chapter live draft preserved before the Laura in Sequence carousel edition.",
     "publishedAt": "2026-04-30"
+  },
+  {
+    "slug": "2026-05-01-laura-in-sequence-snapshot",
+    "label": "2026-05-01 · Laura in Sequence Snapshot",
+    "blurb": "Snapshot of the outgoing Laura in Sequence homepage before the Billie at the London O2 audio edition.",
+    "publishedAt": "2026-05-01"
   }
 ]
