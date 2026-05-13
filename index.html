@@ -3,646 +3,394 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>NEWAIYORK · Billie at the London O2</title>
-  <meta name="description" content="A Billie Eilish London O2 edition with two side-long streams, sleeve-derived track cues, and iPhone Safari-friendly playback." />
+  <title>Velvet Airlock · New AI York</title>
+  <meta name="description" content="A private New AI York threshold." />
   <link rel="canonical" href="./" />
   <style>
     :root {
       color-scheme: dark;
-      --bg: #080808;
-      --panel: rgba(17, 13, 14, 0.84);
-      --panel-strong: rgba(24, 16, 18, 0.94);
-      --line: rgba(255, 244, 236, 0.14);
-      --line-strong: rgba(255, 244, 236, 0.26);
-      --ink: #fff4ec;
-      --ink-soft: rgba(255, 244, 236, 0.74);
-      --accent: #57f59c;
-      --accent-soft: rgba(87, 245, 156, 0.18);
-      --rose: #ff8f8f;
-      --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+      --black: #030403;
+      --ink: #fff6ea;
+      --muted: rgba(255, 246, 234, 0.68);
+      --quiet: rgba(255, 246, 234, 0.48);
+      --line: rgba(255, 246, 234, 0.22);
+      --field: rgba(3, 4, 3, 0.58);
+      --green: #55f0a0;
+      --red: #ff5c4f;
+      --gold: #d8b468;
+      --steel: #98b5bc;
       font-family: Inter, "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     html,
     body {
-      margin: 0;
       min-height: 100%;
-      background:
-        radial-gradient(circle at 14% 14%, rgba(87, 245, 156, 0.22), transparent 24%),
-        radial-gradient(circle at 82% 12%, rgba(255, 143, 143, 0.28), transparent 30%),
-        linear-gradient(180deg, #140d0d 0%, #090909 44%, #050505 100%);
+      margin: 0;
+      background: var(--black);
       color: var(--ink);
     }
 
     body {
-      padding: 0 0 calc(env(safe-area-inset-bottom) + 2rem);
+      overflow-x: hidden;
+    }
+
+    button,
+    input {
+      font: inherit;
     }
 
     a {
       color: inherit;
       text-decoration: none;
-      border-bottom: 1px solid rgba(255, 244, 236, 0.35);
     }
 
-    img {
-      display: block;
-      width: 100%;
-    }
-
-    .hud {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: calc(env(safe-area-inset-top) + 0.95rem) clamp(1rem, 3vw, 2rem) 0.95rem;
-      background: rgba(8, 8, 8, 0.82);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--line);
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      font-size: 0.68rem;
-    }
-
-    .brand {
-      letter-spacing: 0.34em;
-      white-space: nowrap;
-    }
-
-    .nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      gap: 0.85rem;
-    }
-
-    main {
-      width: min(1180px, calc(100% - 1.5rem));
-      margin: 0 auto;
-      padding: 1rem 0 0;
-    }
-
-    .hero,
-    .side-card,
-    .note {
-      border: 1px solid var(--line);
-      background: var(--panel);
-      backdrop-filter: blur(14px);
-      box-shadow: var(--shadow);
-    }
-
-    .hero {
-      display: grid;
-      gap: 1.25rem;
-      padding: clamp(1rem, 4vw, 1.6rem);
-      border-radius: 28px;
-    }
-
-    .hero-copy {
-      display: grid;
-      gap: 0.9rem;
-      align-content: start;
-    }
-
-    .eyebrow,
-    .meta,
-    .label,
-    .track-meta,
-    .cue-note,
-    .footer-label {
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      font-size: 0.67rem;
-      color: var(--ink-soft);
-    }
-
-    h1,
-    h2,
-    h3,
-    p {
-      margin: 0;
-    }
-
-    h1 {
-      font-size: clamp(1.8rem, 5vw, 3.8rem);
-      line-height: 0.96;
-      text-transform: uppercase;
-      max-width: 11ch;
-    }
-
-    .dek {
-      max-width: 54ch;
-      line-height: 1.6;
-      color: var(--ink-soft);
-      font-size: clamp(0.96rem, 2vw, 1.06rem);
-    }
-
-    .hero-grid {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .cover-frame {
-      overflow: hidden;
-      border-radius: 22px;
-      border: 1px solid var(--line-strong);
-      background: rgba(0, 0, 0, 0.28);
-      min-height: 280px;
-    }
-
-    .cover-frame img {
-      height: 100%;
-      object-fit: cover;
-      object-position: 58% center;
-    }
-
-    .meta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-    }
-
-    .meta-chip {
-      padding: 0.55rem 0.75rem;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.03);
-      font-size: 0.76rem;
-    }
-
-    .sides {
-      display: grid;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .side-card {
-      border-radius: 24px;
-      padding: clamp(1rem, 3vw, 1.3rem);
-      display: grid;
-      gap: 1rem;
-    }
-
-    .side-header {
-      display: grid;
-      gap: 0.55rem;
-    }
-
-    .side-title-row {
-      display: flex;
-      align-items: start;
-      justify-content: space-between;
-      gap: 0.9rem;
-    }
-
-    .side-title-row h2 {
-      font-size: clamp(1.25rem, 3vw, 1.8rem);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .duration-pill {
-      white-space: nowrap;
-      padding: 0.48rem 0.68rem;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      border: 1px solid rgba(87, 245, 156, 0.32);
-      color: #d7ffe8;
-      font-size: 0.78rem;
-    }
-
-    .side-subtitle {
-      max-width: 62ch;
-      line-height: 1.55;
-      color: var(--ink-soft);
-    }
-
-    audio {
-      width: 100%;
-      height: 54px;
-      border-radius: 14px;
-    }
-
-    .cue-panel {
-      display: grid;
-      gap: 0.7rem;
-      padding: 0.95rem;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: rgba(0, 0, 0, 0.18);
-    }
-
-    .cue-grid {
-      display: grid;
-      gap: 0.75rem;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    }
-
-    .cue-box {
-      display: grid;
-      gap: 0.28rem;
-      padding: 0.85rem;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 244, 236, 0.08);
-      min-height: 86px;
-    }
-
-    .cue-box strong {
-      font-size: 1.05rem;
-      line-height: 1.2;
-    }
-
-    .cue-box span {
-      color: var(--ink-soft);
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-
-    .tracklist {
-      display: grid;
-      gap: 0.55rem;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .track {
+    .cover {
       position: relative;
-      overflow: hidden;
+      min-height: 100svh;
       display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 0.75rem;
-      align-items: center;
-      padding: 0.85rem 0.9rem;
-      border-radius: 16px;
-      border: 1px solid rgba(255, 244, 236, 0.08);
-      background: rgba(255, 255, 255, 0.025);
-      transition: border-color 140ms ease, background 140ms ease, transform 140ms ease;
+      align-items: end;
+      isolation: isolate;
+      overflow: hidden;
+      padding: calc(env(safe-area-inset-top) + 24px) clamp(18px, 4vw, 64px) calc(env(safe-area-inset-bottom) + 28px);
     }
 
-    .track::before {
+    .cover::before,
+    .cover::after {
       content: "";
       position: absolute;
       inset: 0;
-      width: calc(var(--track-progress, 0) * 100%);
-      background: linear-gradient(90deg, rgba(87, 245, 156, 0.22), rgba(255, 143, 143, 0.16));
+      z-index: -1;
       pointer-events: none;
-      z-index: 0;
     }
 
-    .track > * {
-      position: relative;
-      z-index: 1;
+    .cover::before {
+      background:
+        linear-gradient(90deg, rgba(3, 4, 3, 0.92) 0%, rgba(3, 4, 3, 0.52) 42%, rgba(3, 4, 3, 0.18) 100%),
+        linear-gradient(180deg, rgba(3, 4, 3, 0.26) 0%, rgba(3, 4, 3, 0.2) 48%, rgba(3, 4, 3, 0.9) 100%),
+        url("assets/newaiyork/velvet-airlock-hero.jpg") center / cover no-repeat;
     }
 
-    .track-number {
-      font-variant-numeric: tabular-nums;
-      color: var(--ink-soft);
-      min-width: 2ch;
+    .cover::after {
+      opacity: 0.28;
+      background-image:
+        linear-gradient(rgba(255, 246, 234, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 246, 234, 0.05) 1px, transparent 1px);
+      background-size: 90px 90px;
+      mask-image: linear-gradient(90deg, black, transparent 76%);
     }
 
-    .track strong {
-      display: block;
-      font-size: 0.98rem;
-      line-height: 1.3;
+    .mast {
+      position: absolute;
+      top: calc(env(safe-area-inset-top) + 22px);
+      left: clamp(18px, 4vw, 64px);
+      right: clamp(18px, 4vw, 64px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
     }
 
-    .track-meta {
-      margin-top: 0.2rem;
-      letter-spacing: 0.18em;
-      font-size: 0.58rem;
+    .mast-mark {
+      color: var(--ink);
+      letter-spacing: 0.34em;
     }
 
-    .track-time {
-      font-variant-numeric: tabular-nums;
-      color: var(--ink-soft);
-      font-size: 0.92rem;
+    .signal {
+      display: inline-grid;
+      grid-template-columns: repeat(3, 7px);
+      gap: 6px;
+      align-items: center;
     }
 
-    .track.is-active {
-      border-color: rgba(87, 245, 156, 0.44);
-      background: rgba(87, 245, 156, 0.08);
-      transform: translateY(-1px);
+    .signal span {
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      box-shadow: 0 0 18px rgba(85, 240, 160, 0.8);
     }
 
-    .track.is-complete {
-      border-color: rgba(255, 244, 236, 0.14);
-      background: rgba(255, 255, 255, 0.05);
+    .signal span:nth-child(2) {
+      background: var(--gold);
+      box-shadow: 0 0 18px rgba(216, 180, 104, 0.78);
     }
 
-    .note {
-      margin-top: 1rem;
-      border-radius: 20px;
-      padding: 1rem 1.05rem;
-      line-height: 1.6;
-      color: var(--ink-soft);
+    .signal span:nth-child(3) {
+      background: var(--red);
+      box-shadow: 0 0 18px rgba(255, 92, 79, 0.72);
     }
 
-    .note strong {
+    .stage {
+      width: min(1160px, 100%);
+      display: grid;
+      gap: clamp(28px, 5vw, 64px);
+      align-items: end;
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .title-block {
+      display: grid;
+      gap: 16px;
+      max-width: 780px;
+    }
+
+    .kicker,
+    .field-label,
+    .error,
+    .status-line,
+    .entry-link {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .kicker {
+      color: var(--steel);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 9ch;
+      font-size: clamp(4.4rem, 13vw, 12rem);
+      line-height: 0.82;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .subline {
+      width: min(520px, 100%);
+      height: 2px;
+      background: linear-gradient(90deg, var(--green), var(--gold) 48%, var(--red));
+      box-shadow: 0 0 26px rgba(85, 240, 160, 0.34);
+    }
+
+    .gate {
+      width: min(390px, 100%);
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(3, 4, 3, 0.48);
+      backdrop-filter: blur(22px);
+      box-shadow: 0 26px 90px rgba(0, 0, 0, 0.44);
+    }
+
+    .field-label {
+      display: grid;
+      gap: 9px;
+      color: var(--muted);
+    }
+
+    .password-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      border: 1px solid rgba(255, 246, 234, 0.28);
+      background: var(--field);
+    }
+
+    .password-row:focus-within {
+      border-color: rgba(85, 240, 160, 0.72);
+      box-shadow: 0 0 0 3px rgba(85, 240, 160, 0.16);
+    }
+
+    input {
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      padding: 14px;
+      background: transparent;
+      color: var(--ink);
+      font-size: 1rem;
+      letter-spacing: 0;
+    }
+
+    button {
+      border: 0;
+      border-left: 1px solid rgba(255, 246, 234, 0.24);
+      padding: 0 15px;
+      background: rgba(255, 246, 234, 0.94);
+      color: var(--black);
+      cursor: pointer;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    button:disabled {
+      cursor: wait;
+      opacity: 0.72;
+    }
+
+    .error {
+      min-height: 1rem;
+      margin: 0;
+      color: #ffb5ac;
+    }
+
+    .unlocked {
+      display: none;
+      gap: 12px;
+      border-top: 1px solid rgba(255, 246, 234, 0.18);
+      padding-top: 14px;
+    }
+
+    .is-open .unlocked {
+      display: grid;
+    }
+
+    .is-open .field-label,
+    .is-open .password-row,
+    .is-open .error {
+      display: none;
+    }
+
+    .status-line {
+      margin: 0;
+      color: var(--green);
+    }
+
+    .entry-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .entry-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 0 12px;
+      border: 1px solid rgba(255, 246, 234, 0.24);
+      background: rgba(255, 246, 234, 0.08);
+      color: var(--ink);
+    }
+
+    noscript {
+      position: fixed;
+      inset: auto 18px 18px;
+      z-index: 2;
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: var(--black);
       color: var(--ink);
     }
 
     @media (min-width: 860px) {
-      .hero-grid {
-        grid-template-columns: minmax(0, 1.05fr) minmax(320px, 440px);
-        align-items: stretch;
-      }
-
-      .sides {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        align-items: start;
+      .stage {
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 390px);
       }
     }
 
     @media (max-width: 680px) {
-      .hud {
-        align-items: start;
+      .cover {
+        min-height: 100dvh;
       }
 
-      .nav {
-        justify-content: flex-start;
+      .mast {
+        align-items: flex-start;
       }
 
-      .side-title-row {
-        flex-direction: column;
+      h1 {
+        font-size: clamp(3.6rem, 19vw, 6.4rem);
       }
 
-      .duration-pill {
-        justify-self: start;
+      .gate {
+        padding: 14px;
       }
 
-      .track {
-        grid-template-columns: auto 1fr;
+      .password-row {
+        grid-template-columns: 1fr;
       }
 
-      .track-time {
-        grid-column: 2;
+      button {
+        min-height: 44px;
+        border-left: 0;
+        border-top: 1px solid rgba(255, 246, 234, 0.24);
       }
     }
   </style>
 </head>
 <body>
-  <nav class="hud" aria-label="Primary">
-    <div class="brand">NEWAIYORK</div>
-    <div class="nav">
-      <a href="archive.html">Laurarchive</a>
-      <a href="blog.html">Werkwelt</a>
-      <a href="archives/2026-05-01-laura-in-sequence-snapshot/">Previous edition snapshot</a>
-    </div>
-  </nav>
+  <main class="cover" aria-labelledby="cover-title">
+    <header class="mast" aria-label="New AI York">
+      <div class="mast-mark">NEWAIYORK</div>
+      <div class="signal" aria-hidden="true"><span></span><span></span><span></span></div>
+    </header>
 
-  <main>
-    <section class="hero" aria-labelledby="edition-title">
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">Billie Eilish · London O2 · 2022</p>
-          <h1 id="edition-title">Billie at the London O2</h1>
-          <p class="dek">
-            Two side-long live streams, one sleeve shot, and a running on-screen cue estimate based on the printed
-            track list from the cover art. Built for touch-first playback so it behaves cleanly in iPhone Safari.
-          </p>
-          <div class="meta-row" aria-label="Edition facts">
-            <span class="meta-chip">Side 1 stream · 24:42</span>
-            <span class="meta-chip">Side 2 stream · 21:50</span>
-            <span class="meta-chip">Cue timings scaled from sleeve durations</span>
+    <section class="stage">
+      <div class="title-block">
+        <p class="kicker">New AI York</p>
+        <h1 id="cover-title">Velvet Airlock</h1>
+        <div class="subline" aria-hidden="true"></div>
+      </div>
+
+      <form class="gate" id="gate" autocomplete="off">
+        <label class="field-label" for="password">Passphrase</label>
+        <div class="password-row">
+          <input id="password" name="password" type="password" autocomplete="current-password" />
+          <button type="submit">Enter</button>
+        </div>
+        <p class="error" id="gate-error" role="alert" aria-live="polite"></p>
+        <div class="unlocked" aria-live="polite">
+          <p class="status-line">Access open</p>
+          <div class="entry-links" aria-label="Private entries">
+            <a class="entry-link" href="archive.html">Archive</a>
+            <a class="entry-link" href="blog.html">Werkwelt</a>
           </div>
         </div>
-        <figure class="cover-frame">
-          <img src="assets/Billieeilish/album-cover-track-list.jpg" alt="Billie Eilish Live at the London O2 2022 cover showing the printed side one and side two track list." />
-        </figure>
-      </div>
-    </section>
-
-    <section class="sides" aria-label="Billie streams">
-      <article class="side-card" id="side-1-card" data-side="side-1">
-        <header class="side-header">
-          <p class="label">Stream 1</p>
-          <div class="side-title-row">
-            <h2>Side 1</h2>
-            <span class="duration-pill">audio length: 24:42</span>
-          </div>
-          <p class="side-subtitle">Side one opens with the short “Bury A Friend” edit and runs through the acoustic “Your Power” close.</p>
-        </header>
-
-        <audio id="audio-side-1" controls preload="metadata" playsinline>
-          <source src="assets/Billieeilish/Billie%20Eilish%20live%20at%20the%20London%20O2%202022%20A.m4a" type="audio/mp4" />
-        </audio>
-
-        <section class="cue-panel" aria-live="polite">
-          <p class="cue-note">Estimated live cue display</p>
-          <div class="cue-grid">
-            <div class="cue-box">
-              <p class="label">Now playing</p>
-              <strong data-role="current-title">Press play</strong>
-              <span data-role="current-range">Estimated track window will appear here.</span>
-            </div>
-            <div class="cue-box">
-              <p class="label">Up next</p>
-              <strong data-role="next-title">—</strong>
-              <span data-role="next-start">Next cue appears after playback starts.</span>
-            </div>
-          </div>
-          <p class="cue-note" data-role="status">Sleeve timings are aligned to the actual file length automatically.</p>
-        </section>
-
-        <ol class="tracklist" data-role="tracklist"></ol>
-      </article>
-
-      <article class="side-card" id="side-2-card" data-side="side-2">
-        <header class="side-header">
-          <p class="label">Stream 2</p>
-          <div class="side-title-row">
-            <h2>Side 2</h2>
-            <span class="duration-pill">audio length: 21:50</span>
-          </div>
-          <p class="side-subtitle">Side two pivots from “Overheated” into the run through “Happier Than Ever” to close the set.</p>
-        </header>
-
-        <audio id="audio-side-2" controls preload="metadata" playsinline>
-          <source src="assets/Billieeilish/Billie%20Eilish%20live%20at%20the%20London%20O2%202022%20B.m4a" type="audio/mp4" />
-        </audio>
-
-        <section class="cue-panel" aria-live="polite">
-          <p class="cue-note">Estimated live cue display</p>
-          <div class="cue-grid">
-            <div class="cue-box">
-              <p class="label">Now playing</p>
-              <strong data-role="current-title">Press play</strong>
-              <span data-role="current-range">Estimated track window will appear here.</span>
-            </div>
-            <div class="cue-box">
-              <p class="label">Up next</p>
-              <strong data-role="next-title">—</strong>
-              <span data-role="next-start">Next cue appears after playback starts.</span>
-            </div>
-          </div>
-          <p class="cue-note" data-role="status">Sleeve timings are aligned to the actual file length automatically.</p>
-        </section>
-
-        <ol class="tracklist" data-role="tracklist"></ol>
-      </article>
-    </section>
-
-    <section class="note">
-      <p><strong>Timing note:</strong> the on-screen song changes are estimates derived from the text on the uploaded sleeve photo, then scaled to each uploaded audio file so the cueing lands on the real stream length. That keeps the visible markers practical even though the printed totals and file durations differ by a few seconds.</p>
+      </form>
     </section>
   </main>
 
+  <noscript>This threshold needs JavaScript.</noscript>
+  <script src="assets/js/password-gate.js" data-password-gate="manual"></script>
   <script>
-    const sideData = [
-      {
-        id: "side-1",
-        audioId: "audio-side-1",
-        printedTotal: "24:54",
-        tracks: [
-          { number: 1, title: "Bury A Friend (Edit)", duration: "0:28" },
-          { number: 2, title: "Therefore I Am", duration: "2:56" },
-          { number: 3, title: "My Strange Addiction", duration: "2:23" },
-          { number: 4, title: "Idontwannabeyouanymore - Lovely", duration: "3:12" },
-          { number: 5, title: "Billie Bossa Nova", duration: "3:14" },
-          { number: 6, title: "Goldwing", duration: "3:13" },
-          { number: 7, title: "Halley's Comet", duration: "2:20" },
-          { number: 8, title: "Ilomilo", duration: "1:55" },
-          { number: 9, title: "Your Power (Acoustic)", duration: "5:00" }
-        ]
-      },
-      {
-        id: "side-2",
-        audioId: "audio-side-2",
-        printedTotal: "21:54",
-        tracks: [
-          { number: 10, title: "Overheated", duration: "3:25" },
-          { number: 11, title: "Bellyache", duration: "1:21" },
-          { number: 12, title: "Ocean Eyes", duration: "1:34" },
-          { number: 13, title: "Bored", duration: "1:12" },
-          { number: 14, title: "Getting Older", duration: "4:14" },
-          { number: 15, title: "Lost Cause", duration: "3:32" },
-          { number: 16, title: "Everything I Wanted (Edit)", duration: "4:05" },
-          { number: 17, title: "Happier Than Ever (Edit)", duration: "2:27" }
-        ]
+    const gate = document.getElementById("gate");
+    const input = document.getElementById("password");
+    const error = document.getElementById("gate-error");
+    const button = gate.querySelector("button");
+
+    const openGate = () => {
+      gate.classList.add("is-open");
+      input.value = "";
+    };
+
+    window.NewAIYorkGate.ready.then((hasAccess) => {
+      if (hasAccess) {
+        openGate();
+      } else {
+        input.focus();
       }
-    ];
+    });
 
-    const toSeconds = (value) => {
-      const [minutes, seconds] = value.split(":").map(Number);
-      return (minutes * 60) + seconds;
-    };
+    gate.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      error.textContent = "";
+      button.disabled = true;
 
-    const formatClock = (seconds) => {
-      const safe = Math.max(0, Math.floor(seconds));
-      const minutes = Math.floor(safe / 60);
-      const remainder = safe % 60;
-      return `${minutes}:${String(remainder).padStart(2, "0")}`;
-    };
-
-    const buildTrackMarkup = (track, index) => {
-      const item = document.createElement("li");
-      item.className = "track";
-      item.dataset.index = String(index);
-      item.innerHTML = `
-        <span class="track-number">${String(track.number).padStart(2, "0")}</span>
-        <div>
-          <strong>${track.title}</strong>
-          <p class="track-meta">printed sleeve cue</p>
-        </div>
-        <span class="track-time">${track.duration}</span>
-      `;
-      return item;
-    };
-
-    const initialiseSide = (config) => {
-      const card = document.getElementById(`${config.id}-card`);
-      const audio = document.getElementById(config.audioId);
-      const list = card.querySelector('[data-role="tracklist"]');
-      const currentTitle = card.querySelector('[data-role="current-title"]');
-      const currentRange = card.querySelector('[data-role="current-range"]');
-      const nextTitle = card.querySelector('[data-role="next-title"]');
-      const nextStart = card.querySelector('[data-role="next-start"]');
-      const status = card.querySelector('[data-role="status"]');
-
-      config.tracks.forEach((track, index) => {
-        track.printedSeconds = toSeconds(track.duration);
-        list.appendChild(buildTrackMarkup(track, index));
-      });
-
-      const trackEls = [...list.querySelectorAll('.track')];
-      const printedTotalSeconds = toSeconds(config.printedTotal);
-
-      const applyTimings = () => {
-        const actualDuration = audio.duration || printedTotalSeconds;
-        const scale = actualDuration / printedTotalSeconds;
-        let cursor = 0;
-
-        config.tracks.forEach((track, index) => {
-          const scaledDuration = track.printedSeconds * scale;
-          track.start = cursor;
-          track.end = index === config.tracks.length - 1 ? actualDuration : cursor + scaledDuration;
-          cursor = track.end;
-        });
-
-        status.textContent = `Printed sleeve total ${config.printedTotal}; mapped to actual audio length ${formatClock(actualDuration)}.`;
-        updateForTime(audio.currentTime || 0);
-      };
-
-      const updateForTime = (currentTime) => {
-        let activeIndex = config.tracks.findIndex((track) => currentTime >= track.start && currentTime < track.end);
-        if (activeIndex === -1 && currentTime >= (audio.duration || 0)) {
-          activeIndex = config.tracks.length - 1;
-        }
-
-        trackEls.forEach((el, index) => {
-          const track = config.tracks[index];
-          let progress = 0;
-          el.classList.toggle('is-active', index === activeIndex);
-          el.classList.toggle('is-complete', currentTime >= track.end && index !== activeIndex);
-
-          if (currentTime >= track.end) {
-            progress = 1;
-          } else if (currentTime > track.start && currentTime < track.end) {
-            progress = (currentTime - track.start) / (track.end - track.start);
-          }
-
-          el.style.setProperty('--track-progress', progress.toFixed(4));
-        });
-
-        if (activeIndex < 0) {
-          currentTitle.textContent = audio.paused ? 'Press play' : 'Cue loading';
-          currentRange.textContent = `This side runs ${formatClock(audio.duration || printedTotalSeconds)}.`;
-          nextTitle.textContent = config.tracks[0].title;
-          nextStart.textContent = `Starts near 0:00.`;
+      try {
+        if (await window.NewAIYorkGate.verify(input.value)) {
+          openGate();
           return;
         }
 
-        const currentTrack = config.tracks[activeIndex];
-        const nextTrack = config.tracks[activeIndex + 1];
-        currentTitle.textContent = currentTrack.title;
-        currentRange.textContent = `${formatClock(currentTrack.start)}-${formatClock(currentTrack.end)} · about ${Math.max(0, Math.ceil(currentTrack.end - currentTime))} sec left in this cue.`;
-
-        if (nextTrack) {
-          nextTitle.textContent = nextTrack.title;
-          nextStart.textContent = `Estimated handoff at ${formatClock(nextTrack.start)}.`;
-        } else {
-          nextTitle.textContent = 'End of side';
-          nextStart.textContent = `This stream wraps at ${formatClock(audio.duration || printedTotalSeconds)}.`;
-        }
-      };
-
-      audio.addEventListener('loadedmetadata', applyTimings);
-      audio.addEventListener('durationchange', applyTimings);
-      audio.addEventListener('timeupdate', () => updateForTime(audio.currentTime || 0));
-      audio.addEventListener('play', () => updateForTime(audio.currentTime || 0));
-      audio.addEventListener('seeked', () => updateForTime(audio.currentTime || 0));
-      audio.addEventListener('ended', () => updateForTime(audio.duration || 0));
-
-      applyTimings();
-    };
-
-    sideData.forEach(initialiseSide);
+        error.textContent = "That did not open it.";
+        input.select();
+      } catch (verificationError) {
+        error.textContent = verificationError.message;
+      } finally {
+        button.disabled = false;
+      }
+    });
   </script>
 </body>
 </html>
