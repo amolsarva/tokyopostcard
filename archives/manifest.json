@@ -130,5 +130,11 @@
     "label": "2026-05-01 · Laura in Sequence Snapshot",
     "blurb": "Snapshot of the outgoing Laura in Sequence homepage before the Billie at the London O2 audio edition.",
     "publishedAt": "2026-05-01"
+  },
+  {
+    "slug": "2026-05-14-billie-at-the-london-o2",
+    "label": "2026-05-14 · Billie at the London O2",
+    "blurb": "Audio edition with two live Billie Eilish recordings and setlist artwork from London O2.",
+    "publishedAt": "2026-05-14"
   }
 ]
