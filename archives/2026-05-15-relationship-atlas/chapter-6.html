@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Distance, Jet Lag, Partnership · Relationship Atlas</title>
+  <meta name="description" content="A private multi-lens relationship-history atlas built from the January-February 2026 message sequence." />
+  <link rel="canonical" href="/archives/2026-05-15-relationship-atlas/" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #060607;
+      --panel: #101113;
+      --panel-2: #17191c;
+      --ink: #f5efe7;
+      --muted: rgba(245, 239, 231, 0.68);
+      --quiet: rgba(245, 239, 231, 0.48);
+      --line: rgba(245, 239, 231, 0.18);
+      --red: #ef5d51;
+      --blue: #71a7ff;
+      --green: #65d59a;
+      --gold: #d8b56d;
+      --violet: #b894ff;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); }
+    body { overflow-x: hidden; }
+    body {
+      background:
+        linear-gradient(90deg, rgba(239, 93, 81, 0.08), transparent 24%, rgba(113, 167, 255, 0.08) 68%, transparent),
+        linear-gradient(180deg, #060607 0%, #111216 38%, #060607 100%);
+    }
+    a { color: inherit; text-decoration: none; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px clamp(16px, 3vw, 34px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(6, 6, 7, 0.88);
+      backdrop-filter: blur(20px);
+    }
+    .brand {
+      display: grid;
+      gap: 2px;
+      min-width: max-content;
+    }
+    .brand strong {
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+    .brand span {
+      color: var(--quiet);
+      font-size: 0.72rem;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      padding-bottom: 2px;
+    }
+    .nav a {
+      flex: 0 0 auto;
+      min-height: 32px;
+      display: inline-grid;
+      place-items: center;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      background: rgba(245, 239, 231, 0.06);
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .nav a.active, .nav a:hover, .nav a:focus-visible {
+      color: var(--ink);
+      border-color: rgba(216, 181, 109, 0.7);
+      outline: none;
+    }
+    .utility {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      font-size: 0.72rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .utility a { border-bottom: 1px solid rgba(245, 239, 231, 0.32); padding-bottom: 2px; }
+    main { width: min(1680px, 100%); margin: 0 auto; padding: clamp(28px, 5vw, 72px) clamp(14px, 3vw, 34px) 64px; }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+      gap: clamp(22px, 4vw, 56px);
+      align-items: end;
+      margin-bottom: clamp(28px, 5vw, 64px);
+    }
+    .kicker {
+      margin: 0 0 12px;
+      color: var(--gold);
+      font-size: 0.74rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      max-width: min(12ch, 100%);
+      font-size: clamp(3.2rem, 9vw, 9.8rem);
+      line-height: 0.88;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+    .dek {
+      margin: 20px 0 0;
+      max-width: 820px;
+      color: var(--muted);
+      font-size: clamp(1.02rem, 1.5vw, 1.32rem);
+      line-height: 1.6;
+    }
+    .meta-panel {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: rgba(16, 17, 19, 0.78);
+    }
+    .meta-row {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 12px;
+      border-bottom: 1px solid rgba(245, 239, 231, 0.1);
+      padding-bottom: 12px;
+    }
+    .meta-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    .meta-row span:first-child {
+      color: var(--quiet);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .meta-row span:last-child { color: var(--ink); line-height: 1.45; }
+    .notice {
+      margin: 0 0 24px;
+      max-width: 980px;
+      padding: 14px 16px;
+      border-left: 3px solid var(--gold);
+      background: rgba(216, 181, 109, 0.1);
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .chapter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .chapter-card {
+      min-height: 270px;
+      display: grid;
+      align-content: space-between;
+      gap: 20px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(23, 25, 28, 0.96), rgba(8, 8, 9, 0.96));
+    }
+    .chapter-card:hover, .chapter-card:focus-visible {
+      border-color: rgba(216, 181, 109, 0.72);
+      outline: none;
+    }
+    .chapter-card .num {
+      color: var(--blue);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .chapter-card h2 {
+      margin: 0;
+      font-size: 1.3rem;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .chapter-card p { margin: 0; color: var(--muted); line-height: 1.5; }
+    .chapter-card .date { color: var(--gold); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; }
+    .lens-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      background: rgba(8, 8, 9, 0.78);
+      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.36);
+    }
+    table {
+      width: 2520px;
+      min-width: 2520px;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    th, td {
+      width: 230px;
+      vertical-align: top;
+      border-right: 1px solid rgba(245, 239, 231, 0.13);
+      border-bottom: 1px solid rgba(245, 239, 231, 0.13);
+      padding: 13px 14px;
+      text-align: left;
+    }
+    th {
+      position: sticky;
+      top: 61px;
+      z-index: 10;
+      background: #101113;
+      color: var(--gold);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    td {
+      color: rgba(245, 239, 231, 0.82);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+    tr:nth-child(even) td { background: rgba(245, 239, 231, 0.025); }
+    td:first-child, th:first-child { width: 120px; color: var(--blue); }
+    td:nth-child(2), th:nth-child(2) { width: 210px; }
+    td:nth-child(3), th:nth-child(3) { width: 280px; color: var(--ink); }
+    td:nth-child(4), th:nth-child(4) { width: 270px; }
+    .chapter-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .chapter-footer a {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      background: rgba(245, 239, 231, 0.06);
+      color: var(--ink);
+      font-size: 0.76rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    @media (max-width: 900px) {
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .utility { justify-content: flex-start; }
+      .hero { grid-template-columns: 1fr; }
+      h1 { font-size: clamp(2.5rem, 14vw, 4.6rem); }
+      th { top: 122px; }
+      td { font-size: 0.86rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><strong>Relationship Atlas</strong><span>Private edition · Jan 12-Feb 15</span></a>
+    <nav class="nav" aria-label="Chapter navigation">
+      <a href="index.html">Overview</a>
+<a href="chapter-1.html">01</a>
+<a href="chapter-2.html">02</a>
+<a href="chapter-3.html">03</a>
+<a href="chapter-4.html">04</a>
+<a href="chapter-5.html">05</a>
+<a class="active" href="chapter-6.html">06</a>
+<a href="chapter-7.html">07</a>
+<a href="chapter-8.html">08</a>
+    </nav>
+    <div class="utility">
+      <a href="../../index.html">Cover</a>
+      <a href="../../archive.html">Laurarchive</a>
+      <a href="../../blog.html">Werkwelt</a>
+    </div>
+  </header>
+  <main>
+    
+<section class="hero" aria-labelledby="chapter-title">
+  <div>
+    <p class="kicker">Chapter 06 · Feb 7-9, 2026</p>
+    <h1 id="chapter-title">Distance, Jet Lag, Partnership</h1>
+    <p class="dek">As Amol moves through Asia and Laura returns to London rhythms, the messages mix fashion, sun, jealousy, explicit love, partnership anxiety, cultural/age jokes, and a demand that the relationship be more than pictures and praise.</p>
+  </div>
+  <aside class="meta-panel" aria-label="Chapter metadata">
+    <div class="meta-row"><span>Temperature</span><span>Distance / recalibration</span></div>
+    <div class="meta-row"><span>Rows</span><span>4 time slices</span></div>
+    <div class="meta-row"><span>Use</span><span>Scroll sideways through the lenses. Each row is one compressed movement inside the chapter.</span></div>
+  </aside>
+</section>
+<div class="lens-wrap" role="region" aria-label="Multi-lens chapter table" tabindex="0">
+  <table>
+    <thead><tr><th scope="col">Date</th><th scope="col">Location Guess</th><th scope="col">Key Messages</th><th scope="col">Simple: What Is Happening</th><th scope="col">Freudian Lens</th><th scope="col">Her Mom</th><th scope="col">My Mom</th><th scope="col">Her Best Friend</th><th scope="col">My Best Friend</th><th scope="col">Laura Avatar</th><th scope="col">Amol Avatar</th></tr></thead>
+    <tbody>
+      <tr><td>Feb 7</td><td>Amol in Tokyo/Hong Kong or similar travel context; Laura in London/Europe sending photos, asking for calls.</td><td>They discuss paintings, jackets, Tokyo shops, sex-shop jokes, sunny days, missing, calls, Amol saying he should not have said love because he does love her, and Laura reassuring him that feelings can come and go.</td><td>Love is said again, then immediately managed. She offers emotional containment so he does not feel trapped by his own words.</td><td>Confession triggers anxiety about obligation. Her reassurance lets the confession exist without becoming a contract.</td><td>She is being very emotionally mature, maybe too soothing for someone else.</td><td>He is ashamed of intensity, then moved by being accepted in it.</td><td>You are kind to him. Make sure he is also steady for you when you need containment.</td><td>She handled your panic better than you did. Remember that.</td><td>I will not punish him for feeling, but I still need to know what his feeling can do.</td><td>I love her; saying it creates stress because love wants promises my calendar has not earned.</td></tr><tr><td>Feb 8</td><td>Amol alone by sea/cold Sunday in Asia; Laura back to London life and besties.</td><td>They talk tattoos, Lost in Translation, loneliness, body marks, saints, beauty, dreams, being loved, and the impossibility of love.</td><td>Distance makes him melancholic. She becomes the person he wants to dream toward at the edge of a lonely travel day.</td><td>The tattoo question is about inscription: what does the body record when love feels both temporary and eternal?</td><td>I would worry about body marks made during emotional weather.</td><td>His lonely Sunday is real. He should not turn loneliness into a permanent decision.</td><td>You can tell him he is loved without being responsible for curing the far-away sadness.</td><td>Lost in Translation is a clue: the romance thrives in hotel-time, night-time, elsewhere-time.</td><td>I can love him across distance, but I cannot be his only source of warmth.</td><td>Cold sea, sleepless night, far away land: the feeling becomes cinematic because the setting is empty enough for her to fill it.</td></tr><tr><td>Feb 9 morning</td><td>Amol airport/flight toward Tokyo/Hong Kong; Laura trying to survive the week and stay alive by Saturday.</td><td>Jet lag, Tokyo/HK itinerary, sleep masks, not wanting only nice pictures and praise, partnership rather than young/sexy muse, church/chapel beauty, hair/eye contact, safe flight.</td><td>Laura asks for equality. She wants the bond to be partnership, not a one-way engine where her youth and photos make him feel alive.</td><td>The muse refuses object-status. Desire must mature from gaze to reciprocity.</td><td>Good. She names the risk directly.</td><td>He needs to hear this as a structural point, not reassurance-seeking.</td><td>This is one of your strongest messages: partnership, not ornament.</td><td>If you only praise her, you flatten her. She is asking for the harder kind of love.</td><td>I want to be seen as a person building beside him, not a beautiful feed that regulates him.</td><td>I want to be my best version for her, which means not reducing her to the feeling she gives me.</td></tr><tr><td>Feb 9 evening</td><td>Amol sleep-deprived before important dinner; Laura careful not to bother him after a hard exchange.</td><td>They discuss work/prospect language, intensity, sleep deprivation, an apology about something hard, and leaving the phone on if she calls.</td><td>The first meaningful strain appears: intensity has caused hurt or confusion, and both try to preserve care while exhausted.</td><td>The relationship tests whether it can survive frustration, not only idealization. Apology becomes an attempt to repair the object before sleep erases contact.</td><td>Exhaustion makes everything sharper. Rest before interpretation.</td><td>Leaving the phone on is sweet, but the deeper repair will need waking attention.</td><td>Do not minimize hurt just because he is tired.</td><td>Important dinner or not, if you nicked a vulnerable place, repair it clearly.</td><td>I can give space, but I will remember how it felt.</td><td>I am sorry it is hard. I want to sleep and also remain reachable, because disappearing would make it worse.</td></tr>
+    </tbody>
+  </table>
+</div>
+<nav class="chapter-footer" aria-label="Chapter pagination">
+  <a href="chapter-5.html">Previous · Chapter 05</a>
+  <a href="index.html">All Chapters</a>
+  <a href="chapter-7.html">Next · Chapter 07</a>
+</nav>
+
+  </main>
+  <script src="../../assets/js/password-gate.js"></script>
+</body>
+</html>
