@@ -1,398 +1,324 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Velvet Airlock · New AI York</title>
-  <meta name="description" content="A private New AI York threshold." />
-  <link rel="canonical" href="./" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Every Day Is Muse Day — Laura’s Paris</title>
+  <meta name="description" content="A private guide to Laura’s rock-and-roll Paris birthday weekend.">
+  <meta property="og:title" content="Every Day Is Muse Day — Laura’s Paris">
+  <meta property="og:description" content="A rock-and-roll birthday told across Paris.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="og.png">
   <style>
-    :root {
-      color-scheme: dark;
-      --black: #030403;
-      --ink: #fff6ea;
-      --muted: rgba(255, 246, 234, 0.68);
-      --quiet: rgba(255, 246, 234, 0.48);
-      --line: rgba(255, 246, 234, 0.22);
-      --field: rgba(3, 4, 3, 0.58);
-      --green: #55f0a0;
-      --red: #ff5c4f;
-      --gold: #d8b468;
-      --steel: #98b5bc;
-      font-family: Inter, "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      min-height: 100%;
-      margin: 0;
-      background: var(--black);
-      color: var(--ink);
-    }
-
-    body {
-      overflow-x: hidden;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .cover {
-      position: relative;
-      min-height: 100svh;
-      display: grid;
-      align-items: end;
-      isolation: isolate;
-      overflow: hidden;
-      padding: calc(env(safe-area-inset-top) + 24px) clamp(18px, 4vw, 64px) calc(env(safe-area-inset-bottom) + 28px);
-    }
-
-    .cover::before,
-    .cover::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    .cover::before {
-      background:
-        linear-gradient(90deg, rgba(3, 4, 3, 0.92) 0%, rgba(3, 4, 3, 0.52) 42%, rgba(3, 4, 3, 0.18) 100%),
-        linear-gradient(180deg, rgba(3, 4, 3, 0.26) 0%, rgba(3, 4, 3, 0.2) 48%, rgba(3, 4, 3, 0.9) 100%),
-        url("assets/newaiyork/velvet-airlock-hero.jpg") center / cover no-repeat;
-    }
-
-    .cover::after {
-      opacity: 0.28;
-      background-image:
-        linear-gradient(rgba(255, 246, 234, 0.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 246, 234, 0.05) 1px, transparent 1px);
-      background-size: 90px 90px;
-      mask-image: linear-gradient(90deg, black, transparent 76%);
-    }
-
-    .mast {
-      position: absolute;
-      top: calc(env(safe-area-inset-top) + 22px);
-      left: clamp(18px, 4vw, 64px);
-      right: clamp(18px, 4vw, 64px);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      color: var(--muted);
-      font-size: 0.72rem;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-    }
-
-    .mast-mark {
-      color: var(--ink);
-      letter-spacing: 0.34em;
-    }
-
-    .signal {
-      display: inline-grid;
-      grid-template-columns: repeat(3, 7px);
-      gap: 6px;
-      align-items: center;
-    }
-
-    .signal span {
-      width: 7px;
-      height: 7px;
-      background: var(--green);
-      box-shadow: 0 0 18px rgba(85, 240, 160, 0.8);
-    }
-
-    .signal span:nth-child(2) {
-      background: var(--gold);
-      box-shadow: 0 0 18px rgba(216, 180, 104, 0.78);
-    }
-
-    .signal span:nth-child(3) {
-      background: var(--red);
-      box-shadow: 0 0 18px rgba(255, 92, 79, 0.72);
-    }
-
-    .stage {
-      width: min(1160px, 100%);
-      display: grid;
-      gap: clamp(28px, 5vw, 64px);
-      align-items: end;
-      grid-template-columns: minmax(0, 1fr);
-    }
-
-    .title-block {
-      display: grid;
-      gap: 16px;
-      max-width: 780px;
-    }
-
-    .kicker,
-    .field-label,
-    .error,
-    .status-line,
-    .entry-link {
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-
-    .kicker {
-      color: var(--steel);
-    }
-
-    h1 {
-      margin: 0;
-      max-width: 9ch;
-      font-size: clamp(4.4rem, 13vw, 12rem);
-      line-height: 0.82;
-      letter-spacing: 0;
-      text-transform: uppercase;
-    }
-
-    .subline {
-      width: min(520px, 100%);
-      height: 2px;
-      background: linear-gradient(90deg, var(--green), var(--gold) 48%, var(--red));
-      box-shadow: 0 0 26px rgba(85, 240, 160, 0.34);
-    }
-
-    .gate {
-      width: min(390px, 100%);
-      display: grid;
-      gap: 14px;
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(3, 4, 3, 0.48);
-      backdrop-filter: blur(22px);
-      box-shadow: 0 26px 90px rgba(0, 0, 0, 0.44);
-    }
-
-    .field-label {
-      display: grid;
-      gap: 9px;
-      color: var(--muted);
-    }
-
-    .password-row {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      border: 1px solid rgba(255, 246, 234, 0.28);
-      background: var(--field);
-    }
-
-    .password-row:focus-within {
-      border-color: rgba(85, 240, 160, 0.72);
-      box-shadow: 0 0 0 3px rgba(85, 240, 160, 0.16);
-    }
-
-    input {
-      min-width: 0;
-      border: 0;
-      outline: 0;
-      padding: 14px;
-      background: transparent;
-      color: var(--ink);
-      font-size: 1rem;
-      letter-spacing: 0;
-    }
-
-    button {
-      border: 0;
-      border-left: 1px solid rgba(255, 246, 234, 0.24);
-      padding: 0 15px;
-      background: rgba(255, 246, 234, 0.94);
-      color: var(--black);
-      cursor: pointer;
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    button:disabled {
-      cursor: wait;
-      opacity: 0.72;
-    }
-
-    .error {
-      min-height: 1rem;
-      margin: 0;
-      color: #ffb5ac;
-    }
-
-    .unlocked {
-      display: none;
-      gap: 12px;
-      border-top: 1px solid rgba(255, 246, 234, 0.18);
-      padding-top: 14px;
-    }
-
-    .is-open .unlocked {
-      display: grid;
-    }
-
-    .is-open .field-label,
-    .is-open .password-row,
-    .is-open .error {
-      display: none;
-    }
-
-    .status-line {
-      margin: 0;
-      color: var(--green);
-    }
-
-    .entry-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .entry-link {
-      display: inline-flex;
-      align-items: center;
-      min-height: 38px;
-      padding: 0 12px;
-      border: 1px solid rgba(255, 246, 234, 0.24);
-      background: rgba(255, 246, 234, 0.08);
-      color: var(--ink);
-    }
-
-    noscript {
-      position: fixed;
-      inset: auto 18px 18px;
-      z-index: 2;
-      padding: 14px;
-      border: 1px solid var(--line);
-      background: var(--black);
-      color: var(--ink);
-    }
-
-    @media (min-width: 860px) {
-      .stage {
-        grid-template-columns: minmax(0, 1fr) minmax(320px, 390px);
-      }
-    }
-
-    @media (max-width: 680px) {
-      .cover {
-        min-height: 100dvh;
-      }
-
-      .mast {
-        align-items: flex-start;
-      }
-
-      h1 {
-        font-size: clamp(3.6rem, 19vw, 6.4rem);
-      }
-
-      .gate {
-        padding: 14px;
-      }
-
-      .password-row {
-        grid-template-columns: 1fr;
-      }
-
-      button {
-        min-height: 44px;
-        border-left: 0;
-        border-top: 1px solid rgba(255, 246, 234, 0.24);
-      }
-    }
-  </style>
+:root{--font-sans:Arial,Helvetica,sans-serif;--font-mono:"Courier New",monospace;--font-serif:Georgia,"Times New Roman",serif;--ink:#151416;--cream:#f0e8d8;--red:#e13a32;--pink:#e9a5b4;--acid:#d9ed4a;--line:rgba(21,20,22,.18)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--font-sans),sans-serif}a{color:inherit;text-decoration:none}
+.hero{min-height:100vh;background:var(--ink);color:var(--cream);padding:0 5vw;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;width:60vw;height:60vw;border:1px solid rgba(240,232,216,.16);border-radius:50%;right:-20vw;top:5vh;box-shadow:0 0 0 10vw rgba(240,232,216,.025),0 0 0 20vw rgba(240,232,216,.02)}
+.nav{height:100px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(240,232,216,.22);position:relative;z-index:2}
+.brand{font:600 25px/1 var(--font-serif);letter-spacing:.1em}.brand span{color:var(--red);padding:0 2px}.navlinks{display:flex;gap:32px;font:11px var(--font-mono);letter-spacing:.13em;text-transform:uppercase}.navlinks a:hover{color:var(--pink)}
+.heroGrid{min-height:calc(100vh - 100px);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto;align-content:center;position:relative;z-index:1;padding:7vh 0 9vh}
+.eyebrow,.sectionLabel{font:11px var(--font-mono);letter-spacing:.16em;text-transform:uppercase}.eyebrow{grid-column:1/-1;color:var(--pink);margin-bottom:4vh}
+h1{grid-column:1/-1;font:500 clamp(70px,13vw,190px)/.72 var(--font-serif);letter-spacing:-.07em;margin:0;text-transform:uppercase;max-width:1200px}h1 em{color:var(--red);font-weight:400}
+.lede{font:400 clamp(18px,2vw,27px)/1.35 var(--font-serif);max-width:540px;margin:6vh 0 0}.jump{align-self:end;justify-self:start;margin-top:6vh;border-bottom:1px solid var(--cream);padding:0 0 9px;font:12px var(--font-mono);letter-spacing:.1em;text-transform:uppercase}.jump span{padding-left:25px}
+.seal{position:absolute;right:2vw;bottom:7vh;width:152px;height:152px;border-radius:50%;background:var(--acid);color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(8deg);box-shadow:8px 8px 0 var(--red)}.seal span,.seal small{font:10px var(--font-mono);letter-spacing:.22em}.seal strong{font:600 70px/.8 var(--font-serif)}
+.manifesto{padding:12vh 8vw;border-bottom:1px solid var(--line)}.bigQuote{font:500 clamp(42px,7vw,100px)/.96 var(--font-serif);letter-spacing:-.04em;max-width:1200px;margin:6vh 0}.bigQuote em{color:var(--red)}.principles{border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);padding-top:20px;gap:24px}.principles span{font:11px var(--font-mono);letter-spacing:.05em}
+.section{padding:12vh 5vw}.sectionHead{display:grid;grid-template-columns:1.5fr .7fr;gap:8vw;margin-bottom:8vh;align-items:end}.sectionHead h2{font:500 clamp(54px,7vw,98px)/.87 var(--font-serif);letter-spacing:-.045em;margin:2vh 0 0}.sectionHead>p{font:17px/1.55 var(--font-serif);margin:0;max-width:430px}.sectionLabel{color:var(--red);margin:0}
+.days{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--ink);border-left:1px solid var(--ink)}.day{padding:34px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);min-height:460px}.dayTop{display:flex;justify-content:space-between;font:12px var(--font-mono);letter-spacing:.1em}.dayTop strong{background:var(--red);color:white;padding:5px 7px}.day h3{font:500 39px/1 var(--font-serif);margin:55px 0 35px;max-width:330px}.event{display:grid;grid-template-columns:80px 1fr;border-top:1px solid var(--line);padding:14px 0}.event time{font:10px var(--font-mono);text-transform:uppercase}.event div{display:flex;flex-direction:column;gap:5px}.event strong{font-size:14px}.event span{font:14px var(--font-serif);opacity:.72}
+.keepsakes{background:var(--red);color:var(--cream)}.keepsakes .sectionLabel{color:var(--acid)}.sectionHead.light>p{color:rgba(240,232,216,.78)}.keepsakeGrid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(240,232,216,.7);border-left:1px solid rgba(240,232,216,.7)}.keepsake{padding:28px;border-right:1px solid rgba(240,232,216,.7);border-bottom:1px solid rgba(240,232,216,.7);min-height:420px;display:flex;flex-direction:column}.number{font:12px var(--font-mono);color:var(--acid)}.keepsake h3{font:500 38px/1 var(--font-serif);margin:60px 0 25px}.keepsake p{font:16px/1.55 var(--font-serif);margin:0}.keepsake small{font:10px/1.45 var(--font-mono);letter-spacing:.05em;text-transform:uppercase;margin-top:auto;padding-top:30px;color:var(--acid)}
+.encoreList{border-top:1px solid var(--ink)}.encoreList article{display:grid;grid-template-columns:80px 1fr 1.2fr;gap:3vw;align-items:center;padding:30px 0;border-bottom:1px solid var(--ink)}.encoreList article>span{font:11px var(--font-mono);color:var(--red)}.encoreList h3{font:500 clamp(28px,3.3vw,48px)/1 var(--font-serif);margin:0}.encoreList p{font:15px/1.55 var(--font-serif);margin:0;max-width:540px}
+.finale{background:var(--pink);text-align:center;padding:15vh 5vw}.finale>p{font:11px var(--font-mono);letter-spacing:.17em}.finale h2{font:500 clamp(60px,10vw,140px)/.8 var(--font-serif);letter-spacing:-.05em;margin:5vh 0 8vh}.prompts{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}.prompts span{border:1px solid var(--ink);border-radius:100px;padding:10px 18px;font:11px var(--font-mono);text-transform:uppercase}
+footer{background:var(--ink);color:var(--cream);padding:8vh 5vw;display:grid;grid-template-columns:.5fr 1fr 1fr;gap:5vw;align-items:end}footer p{font:13px/1.6 var(--font-serif);max-width:420px;margin:0}.privacy{opacity:.55;text-align:right}.site-links{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:16px;font:11px var(--font-mono);letter-spacing:.12em;text-transform:uppercase}.site-links a{border-bottom:1px solid rgba(240,232,216,.55);padding-bottom:4px}.site-links a:hover{color:var(--pink);border-color:var(--pink)}
+@media(max-width:800px){.navlinks{gap:7px;flex-direction:column;align-items:flex-end;font-size:9px}.navlinks a[href^="#"]{display:none}.heroGrid{display:block;padding-top:10vh}.eyebrow{margin-bottom:5vh}h1{font-size:21vw}.lede{margin-top:7vh;max-width:75%}.seal{width:105px;height:105px;right:1vw;bottom:5vh}.seal strong{font-size:48px}.seal span,.seal small{font-size:8px}.principles{grid-template-columns:1fr;gap:12px}.sectionHead{grid-template-columns:1fr;gap:30px}.days,.keepsakeGrid{grid-template-columns:1fr}.day{min-height:unset}.keepsake{min-height:340px}.encoreList article{grid-template-columns:45px 1fr}.encoreList p{grid-column:2}.finale h2{font-size:18vw}footer{grid-template-columns:1fr}.privacy{text-align:left}.nav{height:82px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
 </head>
 <body>
-  <main class="cover" aria-labelledby="cover-title">
-    <header class="mast" aria-label="New AI York">
-      <div class="mast-mark">NEWAIYORK</div>
-      <div class="signal" aria-hidden="true"><span></span><span></span><span></span></div>
-    </header>
-
-    <section class="stage">
-      <div class="title-block">
-        <p class="kicker">New AI York</p>
-        <h1 id="cover-title">Velvet Airlock</h1>
-        <div class="subline" aria-hidden="true"></div>
-      </div>
-
-      <form class="gate" id="gate" autocomplete="off">
-        <label class="field-label" for="password">Passphrase</label>
-        <div class="password-row">
-          <input id="password" name="password" type="password" autocomplete="current-password" />
-          <button type="submit">Enter</button>
-        </div>
-        <p class="error" id="gate-error" role="alert" aria-live="polite"></p>
-        <div class="unlocked" aria-live="polite">
-          <p class="status-line">Access open</p>
-          <div class="entry-links" aria-label="Private entries">
-            <a class="entry-link" href="archives/2026-05-15-relationship-atlas/">Main Edition</a>
-            <a class="entry-link" href="archive.html">Archive</a>
-            <a class="entry-link" href="archives/2026-05-14-billie-at-the-london-o2/">Latest: Billie O2</a>
-            <a class="entry-link" href="blog.html">Werkwelt</a>
-          </div>
-        </div>
-      </form>
-    </section>
-  </main>
-
-  <noscript>This threshold needs JavaScript.</noscript>
-  <script src="assets/js/password-gate.js" data-password-gate="manual"></script>
-  <script>
-    const gate = document.getElementById("gate");
-    const input = document.getElementById("password");
-    const error = document.getElementById("gate-error");
-    const button = gate.querySelector("button");
-
-    const openGate = () => {
-      gate.classList.add("is-open");
-      input.value = "";
-    };
-
-    window.NewAIYorkGate.ready.then((hasAccess) => {
-      if (hasAccess) {
-        openGate();
-      } else {
-        input.focus();
-      }
-    });
-
-    gate.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      error.textContent = "";
-      button.disabled = true;
-
-      try {
-        if (await window.NewAIYorkGate.verify(input.value)) {
-          openGate();
-          return;
-        }
-
-        error.textContent = "That did not open it.";
-        input.select();
-      } catch (verificationError) {
-        error.textContent = verificationError.message;
-      } finally {
-        button.disabled = false;
-      }
-    });
-  </script>
+<main>
+<header class="hero">
+<nav class="nav">
+<a class="brand" href="#top" aria-label="Laura&#x27;s Paris home">L<span>★</span>P</a>
+<div class="navlinks">
+<a href="#weekend">Weekend</a>
+<a href="#keepsakes">Keepsakes</a>
+<a href="#encore">Encore</a>
+<a href="archive.html">Laurarchive</a>
+<a href="blog.html">Werkwelt</a>
+</div>
+</nav>
+<div id="top" class="heroGrid">
+<div class="eyebrow">PARIS · 24—27 JULY 2026 · 28 ON THE 27TH</div>
+<h1>Every day is<br/>
+<em>muse</em> day.</h1>
+<p class="lede">A rock-and-roll birthday told across the city—river light, private art, late-night dancing, and a trail of memories that lasts longer than the candles.</p>
+<a class="jump" href="#weekend">Enter the weekend <span>↓</span>
+</a>
+<div class="seal" aria-hidden="true">
+<span>LAURA</span>
+<strong>28</strong>
+<small>PARIS</small>
+</div>
+</div>
+</header>
+<section class="manifesto">
+<p class="sectionLabel">THE IDEA</p>
+<p class="bigQuote">Not one static party. <em>A cinematic adventure</em> with Paris as the main stage.</p>
+<div class="principles">
+<span>01 / Reveal one chapter at a time</span>
+<span>02 / Elegant until it gets chaotic</span>
+<span>03 / Make artifacts, not just content</span>
+</div>
+</section>
+<section id="weekend" class="weekend section">
+<div class="sectionHead">
+<div>
+<p class="sectionLabel">THE WEEKEND</p>
+<h2>Four days,<br/>one unfolding story.</h2>
+</div>
+<p>Based on the Muse Day run of show and the birthday-planning conversations. Times are the useful anchors; everything between them should still feel spontaneous.</p>
+</div>
+<div class="days">
+<article class="day">
+<div class="dayTop">
+<strong>FRI</strong>
+<span>24 JUL</span>
+</div>
+<h3>The river opens the story</h3>
+<div class="events">
+<div class="event">
+<time>16:00</time>
+<div>
+<strong>Welcome drinks</strong>
+<span>By the Seine near L’Escale, Île Saint-Louis</span>
+</div>
+</div>
+<div class="event">
+<time>Evening</time>
+<div>
+<strong>Dinner at L’Escale</strong>
+<span>An easy first-night table by the water</span>
+</div>
+</div>
+<div class="event">
+<time>22:00</time>
+<div>
+<strong>Costume change</strong>
+<span>Swap daytime Paris for rock-and-roll</span>
+</div>
+</div>
+<div class="event">
+<time>Late</time>
+<div>
+<strong>Silencio</strong>
+<span>Dancing, dark rooms, and a properly late finish</span>
+</div>
+</div>
+</div>
+</article>
+<article class="day">
+<div class="dayTop">
+<strong>SAT</strong>
+<span>25 JUL</span>
+</div>
+<h3>Art, then cocktails</h3>
+<div class="events">
+<div class="event">
+<time>12:00</time>
+<div>
+<strong>Slow morning</strong>
+<span>Coffee, film-camera debrief, no rush</span>
+</div>
+</div>
+<div class="event">
+<time>15:00</time>
+<div>
+<strong>Private gallery tour</strong>
+<span>Hauser &amp; Wirth Paris</span>
+</div>
+</div>
+<div class="event">
+<time>19:00</time>
+<div>
+<strong>Cocktail party</strong>
+<span>251 Rue Saint-Martin · until 21:00</span>
+</div>
+</div>
+<div class="event">
+<time>After</time>
+<div>
+<strong>Choose the next chapter</strong>
+<span>A hidden bar, music, or a Seine walk</span>
+</div>
+</div>
+</div>
+</article>
+<article class="day">
+<div class="dayTop">
+<strong>SUN</strong>
+<span>26 JUL</span>
+</div>
+<h3>Paris in swimwear</h3>
+<div class="events">
+<div class="event">
+<time>12:00</time>
+<div>
+<strong>Wake gently</strong>
+<span>A long lunch is a feature, not a bug</span>
+</div>
+</div>
+<div class="event">
+<time>Afternoon</time>
+<div>
+<strong>Swim in the Seine</strong>
+<span>Near Île Saint-Louis; check live conditions</span>
+</div>
+</div>
+<div class="event">
+<time>Golden hour</time>
+<div>
+<strong>Love-lock walk</strong>
+<span>Symbolic placements, portraits, GPS pins</span>
+</div>
+</div>
+<div class="event">
+<time>Evening</time>
+<div>
+<strong>Dinner on the Seine</strong>
+<span>A soft landing after the weekend’s crescendo</span>
+</div>
+</div>
+</div>
+</article>
+<article class="day">
+<div class="dayTop">
+<strong>MON</strong>
+<span>27 JUL</span>
+</div>
+<h3>The birthday itself</h3>
+<div class="events">
+<div class="event">
+<time>Morning</time>
+<div>
+<strong>No agenda</strong>
+<span>Sleep, pastries, and recovered stories</span>
+</div>
+</div>
+<div class="event">
+<time>Afternoon</time>
+<div>
+<strong>The gift reveal</strong>
+<span>Giant card, letters, playlist, first photos</span>
+</div>
+</div>
+<div class="event">
+<time>Evening</time>
+<div>
+<strong>Dinner for A + L</strong>
+<span>Small, intimate, and entirely about Laura</span>
+</div>
+</div>
+</div>
+</article>
+</div>
+</section>
+<section id="keepsakes" class="keepsakes section">
+<div class="sectionHead light">
+<div>
+<p class="sectionLabel">TAKE IT WITH YOU</p>
+<h2>The party ends.<br/>The artifacts don’t.</h2>
+</div>
+<p>The best ideas from the planning weren’t venues. They were objects and rituals Laura can keep: tactile, imperfect, and made by the people who love her.</p>
+</div>
+<div class="keepsakeGrid">
+<article class="keepsake">
+<span class="number">01</span>
+<h3>One-time-use cameras</h3>
+<p>One per 2–3 guests, plus two extras. Label them with prompts: Laura laughing, Paris after dark, something she didn’t see. No reviewing during the party.</p>
+<small>After: high-res scans + negatives returned</small>
+</article>
+<article class="keepsake">
+<span class="number">02</span>
+<h3>The giant birthday card</h3>
+<p>Turn the oversized plastic card in the living room into a collective artwork: illustration on the front, memories and predictions inside, instant photos added as the weekend unfolds.</p>
+<small>Ask for: a memory, an admiration, a prediction</small>
+</article>
+<article class="keepsake">
+<span class="number">03</span>
+<h3>Laura’s Paris map</h3>
+<p>Guests decorate small locks with paint pens, then choose a meaningful permitted or symbolic placement. Photograph each moment, save the coordinates, and explain why the spot matters.</p>
+<small>Final form: a printed atlas, not bridge clutter</small>
+</article>
+<article class="keepsake">
+<span class="number">04</span>
+<h3>27 reasons we love Laura</h3>
+<p>Collect one line from every guest. Fold the notes into a beautiful box or scatter them through the weekend as secret messages at each stop.</p>
+<small>Small effort, enormous emotional return</small>
+</article>
+</div>
+</section>
+<section id="encore" class="encore section">
+<div class="sectionHead">
+<div>
+<p class="sectionLabel">THE ENCORE</p>
+<h2>Six more reasons<br/>to stay in Paris.</h2>
+</div>
+<p>Conversation finds that fit the birthday mood—fashion, art, film, food, and a little more mischief.</p>
+</div>
+<div class="encoreList">
+<article>
+<span>01</span>
+<h3>Vintage treasure hunt</h3>
+<p>Passion Luxe, Closet 2 Closet, then Rue de Turenne for a bargain Céline or another beautiful accident.</p>
+</article>
+<article>
+<span>02</span>
+<h3>Independent Marais</h3>
+<p>SimpleRainbow at 21 Rue Pastourelle, then wander Rue Charlot and Rue de Saintonge.</p>
+</article>
+<article>
+<span>03</span>
+<h3>Palais de Tokyo</h3>
+<p>A 90-minute art detour: prioritize Jesse Darling, Benoît Piéron, then Cathy de Monchaux.</p>
+</article>
+<article>
+<span>04</span>
+<h3>Film-lab finale</h3>
+<p>Drop the cameras at L’Atelier Publimod in the Marais; request high-resolution scans and returned negatives.</p>
+</article>
+<article>
+<span>05</span>
+<h3>Birthday dessert</h3>
+<p>A simple fruit tart is the elegant move when butter is fine but milk and cream are not. Confirm with the pâtisserie.</p>
+</article>
+<article>
+<span>06</span>
+<h3>Progressive Paris night</h3>
+<p>One meeting point, then reveal each chapter: rooftop champagne, intimate dinner, surprise music, hidden dancing.</p>
+</article>
+</div>
+</section>
+<section class="finale">
+<p>THE RULE FOR THE WEEKEND</p>
+<h2>Don’t photograph<br/>the obvious things.</h2>
+<div class="prompts">
+<span>little moments</span>
+<span>shoes</span>
+<span>reflections</span>
+<span>wine glasses</span>
+<span>laughter</span>
+</div>
+</section>
+<footer>
+<div class="brand">L<span>★</span>P</div>
+<div>
+<p>Assembled from your birthday-planning conversations and the “Every Day is Muse Day” messages in the Sarva inbox.</p>
+<nav class="site-links" aria-label="More from Tokyo Postcard">
+<a href="archive.html">Laurarchive</a>
+<a href="blog.html">Werkwelt</a>
+</nav>
+</div>
+<p class="privacy">Private family guide · access codes and personal links intentionally omitted</p>
+</footer>
+</main>
 </body>
 </html>
