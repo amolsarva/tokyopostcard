@@ -1,5 +1,7 @@
 (function passwordGate() {
   var SESSION_KEY = 'naiy_access_session_v4';
+  var DEVICE_KEY = 'naiy_access_device_v3';
+  var DEVICE_TTL_MS = 90 * 24 * 60 * 60 * 1000;
   var HASH_SALT_HEX = '3b9ededaa5d836767826a0f0b582a17d';
   var HASH_ITERATIONS = 210000;
   var HASH_HEX = '4d5cf6b2dc9dfad2a9ac4f23168ebab50e05ce181d8b29397d5c85bd04cd333e';
@@ -17,9 +19,48 @@
     document.head.appendChild(pendingStyle);
   }
 
+  function now() {
+    return Date.now();
+  }
+
+  function parseRecord(raw) {
+    if (!raw) {
+      return null;
+    }
+
+    try {
+      var parsed = JSON.parse(raw);
+      if (!parsed || typeof parsed !== 'object') {
+        return null;
+      }
+      if (typeof parsed.grantedAt !== 'number' || typeof parsed.expiresAt !== 'number') {
+        return null;
+      }
+      return parsed;
+    } catch (error) {
+      return null;
+    }
+  }
+
   function hasSessionAccess() {
     try {
       return window.sessionStorage.getItem(SESSION_KEY) === 'true';
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function hasDeviceAccess() {
+    try {
+      var record = parseRecord(window.localStorage.getItem(DEVICE_KEY));
+      if (!record) {
+        return false;
+      }
+      if (record.expiresAt < now()) {
+        window.localStorage.removeItem(DEVICE_KEY);
+        return false;
+      }
+      return true;
     } catch (error) {
       return false;
     }
@@ -30,6 +71,18 @@
       window.sessionStorage.setItem(SESSION_KEY, 'true');
     } catch (error) {
       // Session storage unavailable.
+    }
+
+    try {
+      window.localStorage.setItem(
+        DEVICE_KEY,
+        JSON.stringify({
+          grantedAt: now(),
+          expiresAt: now() + DEVICE_TTL_MS
+        })
+      );
+    } catch (error) {
+      // Local storage unavailable.
     }
   }
 
@@ -96,12 +149,21 @@
     return valid;
   }
 
-  var ready = Promise.resolve(hasSessionAccess());
+  var ready = Promise.resolve(hasSessionAccess() || hasDeviceAccess()).then(function normalizeAccess(hasAccess) {
+    if (hasAccess) {
+      try {
+        window.sessionStorage.setItem(SESSION_KEY, 'true');
+      } catch (error) {
+        // Ignore session storage failure.
+      }
+    }
+    return hasAccess;
+  });
 
   window.NewAIYorkGate = {
     ready: ready,
     hasAccess: function hasAccess() {
-      return hasSessionAccess();
+      return hasSessionAccess() || hasDeviceAccess();
     },
     verify: verifyPassword
   };
