@@ -1,34 +1,20 @@
 (function passwordGate() {
-  var SESSION_KEY = 'naiy_access_session_v3';
-  var DEVICE_KEY = 'naiy_access_device_v3';
-  var DEVICE_TTL_MS = 90 * 24 * 60 * 60 * 1000;
+  var SESSION_KEY = 'naiy_access_session_v4';
   var HASH_SALT_HEX = '3b9ededaa5d836767826a0f0b582a17d';
   var HASH_ITERATIONS = 210000;
-  var HASH_HEX = 'd5fc2125162bc8d4b06fc03718d1625d1b08322f1c829d5a650b1e900f2c4376';
+  var HASH_HEX = '4d5cf6b2dc9dfad2a9ac4f23168ebab50e05ce181d8b29397d5c85bd04cd333e';
   var currentScript = document.currentScript;
   var mode = currentScript && currentScript.dataset.passwordGate ? currentScript.dataset.passwordGate : 'overlay';
 
-  function now() {
-    return Date.now();
-  }
-
-  function parseRecord(raw) {
-    if (!raw) {
-      return null;
-    }
-
-    try {
-      var parsed = JSON.parse(raw);
-      if (!parsed || typeof parsed !== 'object') {
-        return null;
-      }
-      if (typeof parsed.grantedAt !== 'number' || typeof parsed.expiresAt !== 'number') {
-        return null;
-      }
-      return parsed;
-    } catch (error) {
-      return null;
-    }
+  if (mode !== 'manual') {
+    var pendingStyle = document.createElement('style');
+    pendingStyle.id = 'naiy-gate-pending-style';
+    pendingStyle.textContent = [
+      'html.naiy-gate-pending{background:#050505;}',
+      'html.naiy-gate-pending body>*:not(.naiy-gate-overlay){visibility:hidden!important;}'
+    ].join('');
+    document.documentElement.classList.add('naiy-gate-pending');
+    document.head.appendChild(pendingStyle);
   }
 
   function hasSessionAccess() {
@@ -39,39 +25,11 @@
     }
   }
 
-  function hasDeviceAccess() {
-    try {
-      var record = parseRecord(window.localStorage.getItem(DEVICE_KEY));
-      if (!record) {
-        return false;
-      }
-      if (record.expiresAt < now()) {
-        window.localStorage.removeItem(DEVICE_KEY);
-        return false;
-      }
-      return true;
-    } catch (error) {
-      return false;
-    }
-  }
-
   function grantAccess() {
     try {
       window.sessionStorage.setItem(SESSION_KEY, 'true');
     } catch (error) {
       // Session storage unavailable.
-    }
-
-    try {
-      window.localStorage.setItem(
-        DEVICE_KEY,
-        JSON.stringify({
-          grantedAt: now(),
-          expiresAt: now() + DEVICE_TTL_MS
-        })
-      );
-    } catch (error) {
-      // Local storage unavailable.
     }
   }
 
@@ -129,7 +87,8 @@
   }
 
   async function verifyPassword(password) {
-    var derived = await derivePasswordHash(password || '');
+    var normalized = (password || '').trim().toLocaleLowerCase('en-US');
+    var derived = await derivePasswordHash(normalized);
     var valid = secureCompare(derived, HASH_HEX);
     if (valid) {
       grantAccess();
@@ -137,21 +96,12 @@
     return valid;
   }
 
-  var ready = Promise.resolve(hasSessionAccess() || hasDeviceAccess()).then(function normalizeAccess(hasAccess) {
-    if (hasAccess) {
-      try {
-        window.sessionStorage.setItem(SESSION_KEY, 'true');
-      } catch (error) {
-        // Ignore session storage failure.
-      }
-    }
-    return hasAccess;
-  });
+  var ready = Promise.resolve(hasSessionAccess());
 
   window.NewAIYorkGate = {
     ready: ready,
     hasAccess: function hasAccess() {
-      return hasSessionAccess() || hasDeviceAccess();
+      return hasSessionAccess();
     },
     verify: verifyPassword
   };
@@ -159,6 +109,10 @@
   function installOverlay() {
     ready.then(function maybeShowOverlay(hasAccess) {
       if (hasAccess) {
+        document.documentElement.classList.remove('naiy-gate-pending');
+        if (pendingStyle) {
+          pendingStyle.remove();
+        }
         return;
       }
 
@@ -206,6 +160,10 @@
           if (await verifyPassword(input.value)) {
             overlay.remove();
             style.remove();
+            document.documentElement.classList.remove('naiy-gate-pending');
+            if (pendingStyle) {
+              pendingStyle.remove();
+            }
             return;
           }
           error.textContent = 'That did not open it.';
