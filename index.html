@@ -4,321 +4,666 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Every Day Is Muse Day — Laura’s Paris</title>
-  <meta name="description" content="A private guide to Laura’s rock-and-roll Paris birthday weekend.">
+  <meta name="description" content="A private, photo-led record of Laura’s Paris birthday.">
   <meta property="og:title" content="Every Day Is Muse Day — Laura’s Paris">
-  <meta property="og:description" content="A rock-and-roll birthday told across Paris.">
+  <meta property="og:description" content="A private birthday edition from Paris.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="og.png">
+  <meta name="theme-color" content="#161312">
   <style>
+    :root {
+      --ink: #161312;
+      --paper: #f2eadb;
+      --red: #ef3b33;
+      --pink: #eda4b5;
+      --acid: #d9ed4a;
+      --blue: #a9c7df;
+      --line: rgba(22, 19, 18, 0.2);
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Arial, Helvetica, sans-serif;
+      --mono: "Courier New", monospace;
+    }
 
-:root{--font-sans:Arial,Helvetica,sans-serif;--font-mono:"Courier New",monospace;--font-serif:Georgia,"Times New Roman",serif;--ink:#151416;--cream:#f0e8d8;--red:#e13a32;--pink:#e9a5b4;--acid:#d9ed4a;--line:rgba(21,20,22,.18)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--font-sans),sans-serif}a{color:inherit;text-decoration:none}
-.hero{min-height:100vh;background:var(--ink);color:var(--cream);padding:0 5vw;position:relative;overflow:hidden}
-.hero:before{content:"";position:absolute;width:60vw;height:60vw;border:1px solid rgba(240,232,216,.16);border-radius:50%;right:-20vw;top:5vh;box-shadow:0 0 0 10vw rgba(240,232,216,.025),0 0 0 20vw rgba(240,232,216,.02)}
-.nav{height:100px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(240,232,216,.22);position:relative;z-index:2}
-.brand{font:600 25px/1 var(--font-serif);letter-spacing:.1em}.brand span{color:var(--red);padding:0 2px}.navlinks{display:flex;gap:32px;font:11px var(--font-mono);letter-spacing:.13em;text-transform:uppercase}.navlinks a:hover{color:var(--pink)}
-.heroGrid{min-height:calc(100vh - 100px);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto;align-content:center;position:relative;z-index:1;padding:7vh 0 9vh}
-.eyebrow,.sectionLabel{font:11px var(--font-mono);letter-spacing:.16em;text-transform:uppercase}.eyebrow{grid-column:1/-1;color:var(--pink);margin-bottom:4vh}
-h1{grid-column:1/-1;font:500 clamp(70px,13vw,190px)/.72 var(--font-serif);letter-spacing:-.07em;margin:0;text-transform:uppercase;max-width:1200px}h1 em{color:var(--red);font-weight:400}
-.lede{font:400 clamp(18px,2vw,27px)/1.35 var(--font-serif);max-width:540px;margin:6vh 0 0}.jump{align-self:end;justify-self:start;margin-top:6vh;border-bottom:1px solid var(--cream);padding:0 0 9px;font:12px var(--font-mono);letter-spacing:.1em;text-transform:uppercase}.jump span{padding-left:25px}
-.seal{position:absolute;right:2vw;bottom:7vh;width:152px;height:152px;border-radius:50%;background:var(--acid);color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(8deg);box-shadow:8px 8px 0 var(--red)}.seal span,.seal small{font:10px var(--font-mono);letter-spacing:.22em}.seal strong{font:600 70px/.8 var(--font-serif)}
-.manifesto{padding:12vh 8vw;border-bottom:1px solid var(--line)}.bigQuote{font:500 clamp(42px,7vw,100px)/.96 var(--font-serif);letter-spacing:-.04em;max-width:1200px;margin:6vh 0}.bigQuote em{color:var(--red)}.principles{border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);padding-top:20px;gap:24px}.principles span{font:11px var(--font-mono);letter-spacing:.05em}
-.section{padding:12vh 5vw}.sectionHead{display:grid;grid-template-columns:1.5fr .7fr;gap:8vw;margin-bottom:8vh;align-items:end}.sectionHead h2{font:500 clamp(54px,7vw,98px)/.87 var(--font-serif);letter-spacing:-.045em;margin:2vh 0 0}.sectionHead>p{font:17px/1.55 var(--font-serif);margin:0;max-width:430px}.sectionLabel{color:var(--red);margin:0}
-.days{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--ink);border-left:1px solid var(--ink)}.day{padding:34px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);min-height:460px}.dayTop{display:flex;justify-content:space-between;font:12px var(--font-mono);letter-spacing:.1em}.dayTop strong{background:var(--red);color:white;padding:5px 7px}.day h3{font:500 39px/1 var(--font-serif);margin:55px 0 35px;max-width:330px}.event{display:grid;grid-template-columns:80px 1fr;border-top:1px solid var(--line);padding:14px 0}.event time{font:10px var(--font-mono);text-transform:uppercase}.event div{display:flex;flex-direction:column;gap:5px}.event strong{font-size:14px}.event span{font:14px var(--font-serif);opacity:.72}
-.keepsakes{background:var(--red);color:var(--cream)}.keepsakes .sectionLabel{color:var(--acid)}.sectionHead.light>p{color:rgba(240,232,216,.78)}.keepsakeGrid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(240,232,216,.7);border-left:1px solid rgba(240,232,216,.7)}.keepsake{padding:28px;border-right:1px solid rgba(240,232,216,.7);border-bottom:1px solid rgba(240,232,216,.7);min-height:420px;display:flex;flex-direction:column}.number{font:12px var(--font-mono);color:var(--acid)}.keepsake h3{font:500 38px/1 var(--font-serif);margin:60px 0 25px}.keepsake p{font:16px/1.55 var(--font-serif);margin:0}.keepsake small{font:10px/1.45 var(--font-mono);letter-spacing:.05em;text-transform:uppercase;margin-top:auto;padding-top:30px;color:var(--acid)}
-.encoreList{border-top:1px solid var(--ink)}.encoreList article{display:grid;grid-template-columns:80px 1fr 1.2fr;gap:3vw;align-items:center;padding:30px 0;border-bottom:1px solid var(--ink)}.encoreList article>span{font:11px var(--font-mono);color:var(--red)}.encoreList h3{font:500 clamp(28px,3.3vw,48px)/1 var(--font-serif);margin:0}.encoreList p{font:15px/1.55 var(--font-serif);margin:0;max-width:540px}
-.finale{background:var(--pink);text-align:center;padding:15vh 5vw}.finale>p{font:11px var(--font-mono);letter-spacing:.17em}.finale h2{font:500 clamp(60px,10vw,140px)/.8 var(--font-serif);letter-spacing:-.05em;margin:5vh 0 8vh}.prompts{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}.prompts span{border:1px solid var(--ink);border-radius:100px;padding:10px 18px;font:11px var(--font-mono);text-transform:uppercase}
-footer{background:var(--ink);color:var(--cream);padding:8vh 5vw;display:grid;grid-template-columns:.5fr 1fr 1fr;gap:5vw;align-items:end}footer p{font:13px/1.6 var(--font-serif);max-width:420px;margin:0}.privacy{opacity:.55;text-align:right}.site-links{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:16px;font:11px var(--font-mono);letter-spacing:.12em;text-transform:uppercase}.site-links a{border-bottom:1px solid rgba(240,232,216,.55);padding-bottom:4px}.site-links a:hover{color:var(--pink);border-color:var(--pink)}
-@media(max-width:800px){.navlinks{gap:7px;flex-direction:column;align-items:flex-end;font-size:9px}.navlinks a[href^="#"]{display:none}.heroGrid{display:block;padding-top:10vh}.eyebrow{margin-bottom:5vh}h1{font-size:21vw}.lede{margin-top:7vh;max-width:75%}.seal{width:105px;height:105px;right:1vw;bottom:5vh}.seal strong{font-size:48px}.seal span,.seal small{font-size:8px}.principles{grid-template-columns:1fr;gap:12px}.sectionHead{grid-template-columns:1fr;gap:30px}.days,.keepsakeGrid{grid-template-columns:1fr}.day{min-height:unset}.keepsake{min-height:340px}.encoreList article{grid-template-columns:45px 1fr}.encoreList p{grid-column:2}.finale h2{font-size:18vw}footer{grid-template-columns:1fr}.privacy{text-align:left}.nav{height:82px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-</style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+    }
+    body.locked { overflow: hidden; }
+    a { color: inherit; }
+    button, input { font: inherit; }
+
+    .gate {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      min-height: 100svh;
+      padding: 28px clamp(20px, 5vw, 72px);
+      overflow: auto;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(237, 164, 181, 0.25), transparent 30%),
+        radial-gradient(circle at 15% 80%, rgba(217, 237, 74, 0.16), transparent 32%),
+        var(--ink);
+      color: var(--paper);
+      transition: opacity 500ms ease, visibility 500ms ease;
+    }
+    .gate[hidden] {
+      display: grid;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .gate-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(242, 234, 219, 0.25);
+      font: 11px/1.2 var(--mono);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .gate-links { display: flex; gap: 22px; }
+    .gate-links a { text-underline-offset: 5px; }
+    .gate-center {
+      display: grid;
+      align-content: center;
+      width: min(920px, 100%);
+      margin: 0 auto;
+      padding: 8vh 0;
+    }
+    .gate-kicker {
+      margin: 0 0 3vh;
+      color: var(--pink);
+      font: 11px/1.3 var(--mono);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .gate h1 {
+      max-width: 900px;
+      margin: 0;
+      font: 500 clamp(64px, 12vw, 170px)/0.75 var(--serif);
+      letter-spacing: -0.07em;
+      text-transform: uppercase;
+    }
+    .gate h1 em { color: var(--red); font-weight: 400; }
+    .unlock-form {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      width: min(620px, 100%);
+      margin-top: 7vh;
+      border-bottom: 1px solid var(--paper);
+    }
+    .unlock-form input {
+      min-width: 0;
+      padding: 16px 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--paper);
+      font: 18px var(--serif);
+    }
+    .unlock-form input::placeholder { color: rgba(242, 234, 219, 0.45); }
+    .unlock-form button {
+      border: 0;
+      background: transparent;
+      color: var(--acid);
+      cursor: pointer;
+      font: 11px var(--mono);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .unlock-form button:disabled { cursor: wait; opacity: 0.5; }
+    .gate-status {
+      min-height: 20px;
+      margin: 12px 0 0;
+      color: var(--pink);
+      font: 11px/1.4 var(--mono);
+      letter-spacing: 0.06em;
+    }
+    .gate-note {
+      margin: 0;
+      color: rgba(242, 234, 219, 0.5);
+      font: 10px/1.5 var(--mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .site-header {
+      position: absolute;
+      inset: 0 0 auto;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin: 0 clamp(20px, 5vw, 72px);
+      padding: 26px 0;
+      border-bottom: 1px solid rgba(242, 234, 219, 0.3);
+      color: var(--paper);
+    }
+    .brand {
+      font: 600 22px/1 var(--serif);
+      letter-spacing: 0.12em;
+      text-decoration: none;
+    }
+    .brand span { color: var(--red); }
+    .site-nav { display: flex; gap: 24px; }
+    .site-nav a {
+      font: 10px var(--mono);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-underline-offset: 5px;
+    }
+
+    .photo-hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      background: #25211f;
+      color: var(--paper);
+    }
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 35%;
+      opacity: 0;
+      transform: scale(1.025);
+      transition: opacity 900ms ease, transform 1400ms ease;
+    }
+    .hero-photo.ready { opacity: 0.74; transform: scale(1); }
+    .photo-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(22, 19, 18, 0.12), rgba(22, 19, 18, 0.08) 40%, rgba(22, 19, 18, 0.9));
+    }
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 4vw;
+      padding: 20vh clamp(20px, 5vw, 72px) 7vh;
+    }
+    .eyebrow, .section-label {
+      font: 10px/1.4 var(--mono);
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+    }
+    .eyebrow { color: var(--pink); }
+    .hero-title {
+      max-width: 1000px;
+      margin: 3vh 0 0;
+      font: 500 clamp(68px, 13vw, 180px)/0.73 var(--serif);
+      letter-spacing: -0.07em;
+      text-transform: uppercase;
+    }
+    .hero-title em { color: var(--red); font-weight: 400; }
+    .hero-aside {
+      max-width: 250px;
+      margin: 0;
+      font: 16px/1.45 var(--serif);
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: 0.35fr 1.65fr;
+      gap: 6vw;
+      padding: 12vh clamp(20px, 8vw, 120px);
+      border-bottom: 1px solid var(--line);
+    }
+    .intro blockquote {
+      max-width: 1100px;
+      margin: 0;
+      font: 500 clamp(42px, 7vw, 104px)/0.94 var(--serif);
+      letter-spacing: -0.045em;
+    }
+    .intro blockquote em { color: var(--red); }
+
+    .reel {
+      padding: 10vh clamp(12px, 3vw, 42px);
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .reel-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      margin: 0 clamp(8px, 2vw, 30px) 6vh;
+    }
+    .reel-head h2 {
+      margin: 1.5vh 0 0;
+      font: 500 clamp(52px, 8vw, 110px)/0.85 var(--serif);
+      letter-spacing: -0.05em;
+    }
+    .load-status {
+      margin: 0;
+      color: var(--acid);
+      font: 10px var(--mono);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: clamp(8px, 1.3vw, 20px);
+    }
+    .frame {
+      position: relative;
+      grid-column: span 4;
+      min-height: 55vw;
+      margin: 0;
+      overflow: hidden;
+      background: #2d2927;
+    }
+    .frame.wide { grid-column: span 8; min-height: 40vw; }
+    .frame.small { grid-column: span 3; min-height: 42vw; }
+    .frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 650ms ease;
+    }
+    .frame img.ready { opacity: 1; }
+    .frame figcaption {
+      position: absolute;
+      inset: auto 0 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 28px 18px 14px;
+      background: linear-gradient(transparent, rgba(22, 19, 18, 0.72));
+      color: white;
+      font: 9px var(--mono);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .itinerary { padding: 12vh clamp(20px, 6vw, 90px); }
+    .itinerary-head {
+      display: grid;
+      grid-template-columns: 1fr 0.5fr;
+      gap: 8vw;
+      align-items: end;
+      margin-bottom: 7vh;
+    }
+    .itinerary h2 {
+      margin: 2vh 0 0;
+      font: 500 clamp(54px, 8vw, 112px)/0.85 var(--serif);
+      letter-spacing: -0.05em;
+    }
+    .itinerary-head > p { margin: 0; font: 17px/1.5 var(--serif); }
+    .days {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--ink);
+      border-left: 1px solid var(--ink);
+    }
+    .day {
+      min-height: 380px;
+      padding: 28px;
+      border-right: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+    }
+    .day time {
+      display: block;
+      color: var(--red);
+      font: 10px var(--mono);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .day h3 { margin: 8vh 0 3vh; font: 500 34px/1 var(--serif); }
+    .day p { margin: 0; font: 14px/1.6 var(--serif); }
+
+    .finale {
+      padding: 14vh 5vw;
+      background: var(--pink);
+      text-align: center;
+    }
+    .finale p {
+      margin: 0;
+      font: 10px var(--mono);
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+    }
+    .finale h2 {
+      margin: 5vh auto 0;
+      font: 500 clamp(60px, 10vw, 145px)/0.8 var(--serif);
+      letter-spacing: -0.055em;
+    }
+    footer {
+      display: grid;
+      grid-template-columns: 0.5fr 1fr 1fr;
+      gap: 5vw;
+      align-items: end;
+      padding: 8vh 5vw;
+      background: var(--ink);
+      color: var(--paper);
+    }
+    footer p { max-width: 440px; margin: 0; font: 13px/1.6 var(--serif); }
+    .footer-links { display: flex; gap: 22px; margin-top: 18px; }
+    .footer-links a {
+      font: 10px var(--mono);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-underline-offset: 5px;
+    }
+    .privacy { opacity: 0.55; text-align: right; }
+
+    @media (max-width: 850px) {
+      .gate h1, .hero-title { font-size: 20vw; }
+      .gate-links, .site-nav { gap: 12px; }
+      .hero-copy, .intro, .itinerary-head { grid-template-columns: 1fr; }
+      .hero-aside { max-width: 70%; }
+      .intro { gap: 5vh; }
+      .frame, .frame.small { grid-column: span 6; min-height: 85vw; }
+      .frame.wide { grid-column: span 12; min-height: 70vw; }
+      .days { grid-template-columns: repeat(2, 1fr); }
+      footer { grid-template-columns: 1fr; }
+      .privacy { text-align: left; }
+    }
+
+    @media (max-width: 520px) {
+      .gate { padding-inline: 18px; }
+      .gate-bar { align-items: flex-start; }
+      .gate-links { flex-direction: column; }
+      .unlock-form { grid-template-columns: 1fr; }
+      .unlock-form button { padding: 12px 0; text-align: left; }
+      .site-header { margin-inline: 18px; }
+      .site-nav a:first-child { display: none; }
+      .hero-copy { padding-inline: 18px; }
+      .frame, .frame.small, .frame.wide { grid-column: span 12; min-height: 125vw; }
+      .days { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+  </style>
 </head>
-<body>
-<main>
-<header class="hero">
-<nav class="nav">
-<a class="brand" href="#top" aria-label="Laura&#x27;s Paris home">L<span>★</span>P</a>
-<div class="navlinks">
-<a href="#weekend">Weekend</a>
-<a href="#keepsakes">Keepsakes</a>
-<a href="#encore">Encore</a>
-<a href="archive.html">Laurarchive</a>
-<a href="blog.html">Werkwelt</a>
-</div>
-</nav>
-<div id="top" class="heroGrid">
-<div class="eyebrow">PARIS · 24—27 JULY 2026 · 28 ON THE 27TH</div>
-<h1>Every day is<br/>
-<em>muse</em> day.</h1>
-<p class="lede">A rock-and-roll birthday told across the city—river light, private art, late-night dancing, and a trail of memories that lasts longer than the candles.</p>
-<a class="jump" href="#weekend">Enter the weekend <span>↓</span>
-</a>
-<div class="seal" aria-hidden="true">
-<span>LAURA</span>
-<strong>28</strong>
-<small>PARIS</small>
-</div>
-</div>
-</header>
-<section class="manifesto">
-<p class="sectionLabel">THE IDEA</p>
-<p class="bigQuote">Not one static party. <em>A cinematic adventure</em> with Paris as the main stage.</p>
-<div class="principles">
-<span>01 / Reveal one chapter at a time</span>
-<span>02 / Elegant until it gets chaotic</span>
-<span>03 / Make artifacts, not just content</span>
-</div>
-</section>
-<section id="weekend" class="weekend section">
-<div class="sectionHead">
-<div>
-<p class="sectionLabel">THE WEEKEND</p>
-<h2>Four days,<br/>one unfolding story.</h2>
-</div>
-<p>Based on the Muse Day run of show and the birthday-planning conversations. Times are the useful anchors; everything between them should still feel spontaneous.</p>
-</div>
-<div class="days">
-<article class="day">
-<div class="dayTop">
-<strong>FRI</strong>
-<span>24 JUL</span>
-</div>
-<h3>The river opens the story</h3>
-<div class="events">
-<div class="event">
-<time>16:00</time>
-<div>
-<strong>Welcome drinks</strong>
-<span>By the Seine near L’Escale, Île Saint-Louis</span>
-</div>
-</div>
-<div class="event">
-<time>Evening</time>
-<div>
-<strong>Dinner at L’Escale</strong>
-<span>An easy first-night table by the water</span>
-</div>
-</div>
-<div class="event">
-<time>22:00</time>
-<div>
-<strong>Costume change</strong>
-<span>Swap daytime Paris for rock-and-roll</span>
-</div>
-</div>
-<div class="event">
-<time>Late</time>
-<div>
-<strong>Silencio</strong>
-<span>Dancing, dark rooms, and a properly late finish</span>
-</div>
-</div>
-</div>
-</article>
-<article class="day">
-<div class="dayTop">
-<strong>SAT</strong>
-<span>25 JUL</span>
-</div>
-<h3>Art, then cocktails</h3>
-<div class="events">
-<div class="event">
-<time>12:00</time>
-<div>
-<strong>Slow morning</strong>
-<span>Coffee, film-camera debrief, no rush</span>
-</div>
-</div>
-<div class="event">
-<time>15:00</time>
-<div>
-<strong>Private gallery tour</strong>
-<span>Hauser &amp; Wirth Paris</span>
-</div>
-</div>
-<div class="event">
-<time>19:00</time>
-<div>
-<strong>Cocktail party</strong>
-<span>251 Rue Saint-Martin · until 21:00</span>
-</div>
-</div>
-<div class="event">
-<time>After</time>
-<div>
-<strong>Choose the next chapter</strong>
-<span>A hidden bar, music, or a Seine walk</span>
-</div>
-</div>
-</div>
-</article>
-<article class="day">
-<div class="dayTop">
-<strong>SUN</strong>
-<span>26 JUL</span>
-</div>
-<h3>Paris in swimwear</h3>
-<div class="events">
-<div class="event">
-<time>12:00</time>
-<div>
-<strong>Wake gently</strong>
-<span>A long lunch is a feature, not a bug</span>
-</div>
-</div>
-<div class="event">
-<time>Afternoon</time>
-<div>
-<strong>Swim in the Seine</strong>
-<span>Near Île Saint-Louis; check live conditions</span>
-</div>
-</div>
-<div class="event">
-<time>Golden hour</time>
-<div>
-<strong>Love-lock walk</strong>
-<span>Symbolic placements, portraits, GPS pins</span>
-</div>
-</div>
-<div class="event">
-<time>Evening</time>
-<div>
-<strong>Dinner on the Seine</strong>
-<span>A soft landing after the weekend’s crescendo</span>
-</div>
-</div>
-</div>
-</article>
-<article class="day">
-<div class="dayTop">
-<strong>MON</strong>
-<span>27 JUL</span>
-</div>
-<h3>The birthday itself</h3>
-<div class="events">
-<div class="event">
-<time>Morning</time>
-<div>
-<strong>No agenda</strong>
-<span>Sleep, pastries, and recovered stories</span>
-</div>
-</div>
-<div class="event">
-<time>Afternoon</time>
-<div>
-<strong>The gift reveal</strong>
-<span>Giant card, letters, playlist, first photos</span>
-</div>
-</div>
-<div class="event">
-<time>Evening</time>
-<div>
-<strong>Dinner for A + L</strong>
-<span>Small, intimate, and entirely about Laura</span>
-</div>
-</div>
-</div>
-</article>
-</div>
-</section>
-<section id="keepsakes" class="keepsakes section">
-<div class="sectionHead light">
-<div>
-<p class="sectionLabel">TAKE IT WITH YOU</p>
-<h2>The party ends.<br/>The artifacts don’t.</h2>
-</div>
-<p>The best ideas from the planning weren’t venues. They were objects and rituals Laura can keep: tactile, imperfect, and made by the people who love her.</p>
-</div>
-<div class="keepsakeGrid">
-<article class="keepsake">
-<span class="number">01</span>
-<h3>One-time-use cameras</h3>
-<p>One per 2–3 guests, plus two extras. Label them with prompts: Laura laughing, Paris after dark, something she didn’t see. No reviewing during the party.</p>
-<small>After: high-res scans + negatives returned</small>
-</article>
-<article class="keepsake">
-<span class="number">02</span>
-<h3>The giant birthday card</h3>
-<p>Turn the oversized plastic card in the living room into a collective artwork: illustration on the front, memories and predictions inside, instant photos added as the weekend unfolds.</p>
-<small>Ask for: a memory, an admiration, a prediction</small>
-</article>
-<article class="keepsake">
-<span class="number">03</span>
-<h3>Laura’s Paris map</h3>
-<p>Guests decorate small locks with paint pens, then choose a meaningful permitted or symbolic placement. Photograph each moment, save the coordinates, and explain why the spot matters.</p>
-<small>Final form: a printed atlas, not bridge clutter</small>
-</article>
-<article class="keepsake">
-<span class="number">04</span>
-<h3>27 reasons we love Laura</h3>
-<p>Collect one line from every guest. Fold the notes into a beautiful box or scatter them through the weekend as secret messages at each stop.</p>
-<small>Small effort, enormous emotional return</small>
-</article>
-</div>
-</section>
-<section id="encore" class="encore section">
-<div class="sectionHead">
-<div>
-<p class="sectionLabel">THE ENCORE</p>
-<h2>Six more reasons<br/>to stay in Paris.</h2>
-</div>
-<p>Conversation finds that fit the birthday mood—fashion, art, film, food, and a little more mischief.</p>
-</div>
-<div class="encoreList">
-<article>
-<span>01</span>
-<h3>Vintage treasure hunt</h3>
-<p>Passion Luxe, Closet 2 Closet, then Rue de Turenne for a bargain Céline or another beautiful accident.</p>
-</article>
-<article>
-<span>02</span>
-<h3>Independent Marais</h3>
-<p>SimpleRainbow at 21 Rue Pastourelle, then wander Rue Charlot and Rue de Saintonge.</p>
-</article>
-<article>
-<span>03</span>
-<h3>Palais de Tokyo</h3>
-<p>A 90-minute art detour: prioritize Jesse Darling, Benoît Piéron, then Cathy de Monchaux.</p>
-</article>
-<article>
-<span>04</span>
-<h3>Film-lab finale</h3>
-<p>Drop the cameras at L’Atelier Publimod in the Marais; request high-resolution scans and returned negatives.</p>
-</article>
-<article>
-<span>05</span>
-<h3>Birthday dessert</h3>
-<p>A simple fruit tart is the elegant move when butter is fine but milk and cream are not. Confirm with the pâtisserie.</p>
-</article>
-<article>
-<span>06</span>
-<h3>Progressive Paris night</h3>
-<p>One meeting point, then reveal each chapter: rooftop champagne, intimate dinner, surprise music, hidden dancing.</p>
-</article>
-</div>
-</section>
-<section class="finale">
-<p>THE RULE FOR THE WEEKEND</p>
-<h2>Don’t photograph<br/>the obvious things.</h2>
-<div class="prompts">
-<span>little moments</span>
-<span>shoes</span>
-<span>reflections</span>
-<span>wine glasses</span>
-<span>laughter</span>
-</div>
-</section>
-<footer>
-<div class="brand">L<span>★</span>P</div>
-<div>
-<p>Assembled from your birthday-planning conversations and the “Every Day is Muse Day” messages in the Sarva inbox.</p>
-<nav class="site-links" aria-label="More from Tokyo Postcard">
-<a href="archive.html">Laurarchive</a>
-<a href="blog.html">Werkwelt</a>
-</nav>
-</div>
-<p class="privacy">Private family guide · access codes and personal links intentionally omitted</p>
-</footer>
-</main>
+<body class="locked">
+  <aside class="gate" id="gate" aria-labelledby="gate-title">
+    <div class="gate-bar">
+      <span>Private photo edition · Paris 2026</span>
+      <nav class="gate-links" aria-label="Public site links">
+        <a href="archive.html">Laurarchive</a>
+        <a href="blog.html">Werkwelt</a>
+      </nav>
+    </div>
+    <div class="gate-center">
+      <p class="gate-kicker">Laura’s Paris · encrypted in the browser</p>
+      <h1 id="gate-title">Every day is<br><em>muse</em> day.</h1>
+      <form class="unlock-form" id="unlock-form">
+        <input id="passphrase" type="password" autocomplete="off" autocapitalize="none"
+          spellcheck="false" aria-label="Edition password" placeholder="Enter the edition password">
+        <button id="unlock-button" type="submit">Open edition →</button>
+      </form>
+      <p class="gate-status" id="gate-status" role="status" aria-live="polite"></p>
+    </div>
+    <p class="gate-note">The photographs are encrypted files. They are decrypted only in this browser.</p>
+  </aside>
+
+  <main id="edition" aria-hidden="true">
+    <header class="photo-hero">
+      <img class="hero-photo" id="hero-photo" alt="Laura in Paris">
+      <div class="site-header">
+        <a class="brand" href="#top" aria-label="Laura’s Paris home">L<span>★</span>P</a>
+        <nav class="site-nav" aria-label="Site navigation">
+          <a href="#photographs">Photographs</a>
+          <a href="archive.html">Laurarchive</a>
+          <a href="blog.html">Werkwelt</a>
+        </nav>
+      </div>
+      <div class="hero-copy" id="top">
+        <div>
+          <p class="eyebrow">Paris · 24—27 July 2026 · 28 on the 27th</p>
+          <h1 class="hero-title">Every day is<br><em>muse</em> day.</h1>
+        </div>
+        <p class="hero-aside">One birthday, one city, forty-four glimpses of the beautiful in-between.</p>
+      </div>
+    </header>
+
+    <section class="intro">
+      <p class="section-label">The developed roll</p>
+      <blockquote>Not one static party. <em>A cinematic adventure</em> with Paris as the main stage.</blockquote>
+    </section>
+
+    <section class="reel" id="photographs">
+      <div class="reel-head">
+        <div>
+          <p class="section-label">The photographs</p>
+          <h2>Paris,<br>as it happened.</h2>
+        </div>
+        <p class="load-status" id="load-status">Preparing 44 photographs</p>
+      </div>
+      <div class="photo-grid" id="photo-grid"></div>
+    </section>
+
+    <section class="itinerary" id="weekend">
+      <div class="itinerary-head">
+        <div>
+          <p class="section-label">The weekend</p>
+          <h2>Four days,<br>one unfolding story.</h2>
+        </div>
+        <p>The plan became the pictures: river light, private art, late-night dancing, and the birthday itself.</p>
+      </div>
+      <div class="days">
+        <article class="day">
+          <time>Friday · 24 July</time>
+          <h3>The river opens the story</h3>
+          <p>Welcome drinks by the Seine, dinner at L’Escale, a costume change, then Silencio after dark.</p>
+        </article>
+        <article class="day">
+          <time>Saturday · 25 July</time>
+          <h3>Art, then cocktails</h3>
+          <p>A slow morning, Hauser &amp; Wirth, the apartment filling up, and the next chapter chosen together.</p>
+        </article>
+        <article class="day">
+          <time>Sunday · 26 July</time>
+          <h3>Paris in swimwear</h3>
+          <p>Long lunch, Seine air, locks and portraits, then a soft landing after the weekend’s crescendo.</p>
+        </article>
+        <article class="day">
+          <time>Monday · 27 July</time>
+          <h3>The birthday itself</h3>
+          <p>Pastries, recovered stories, the gift reveal, and one intimate final dinner for A + L.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="finale">
+      <p>The rule for the weekend</p>
+      <h2>Don’t photograph<br>the obvious things.</h2>
+    </section>
+
+    <footer>
+      <div class="brand">L<span>★</span>P</div>
+      <div>
+        <p>A private photo record of Laura’s Paris birthday weekend.</p>
+        <nav class="footer-links" aria-label="More from Tokyo Postcard">
+          <a href="archive.html">Laurarchive</a>
+          <a href="blog.html">Werkwelt</a>
+        </nav>
+      </div>
+      <p class="privacy">Private family edition · photographs encrypted at rest</p>
+    </footer>
+  </main>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const ASSET_ROOT = "assets/p-7f3a9d2c/";
+      const gate = document.getElementById("gate");
+      const form = document.getElementById("unlock-form");
+      const input = document.getElementById("passphrase");
+      const button = document.getElementById("unlock-button");
+      const status = document.getElementById("gate-status");
+      const edition = document.getElementById("edition");
+      const hero = document.getElementById("hero-photo");
+      const grid = document.getElementById("photo-grid");
+      const loadStatus = document.getElementById("load-status");
+      let manifest;
+      let key;
+      let loaded = 0;
+
+      form.addEventListener("submit", unlock);
+      input.focus();
+
+      async function unlock(event) {
+        event.preventDefault();
+        const passphrase = input.value.trim().toLocaleLowerCase("en-US");
+
+        if (!passphrase) {
+          status.textContent = "Enter the edition password.";
+          return;
+        }
+
+        setBusy(true, "Opening the encrypted photographs…");
+
+        try {
+          manifest ||= await fetchJson(`${ASSET_ROOT}manifest.json`);
+          key = await deriveKey(passphrase, manifest.keyDerivation);
+          const firstUrl = await decryptImage(manifest.images[0]);
+
+          hero.src = firstUrl;
+          hero.addEventListener("load", () => hero.classList.add("ready"), { once: true });
+          revealEdition();
+          buildGrid();
+          await loadGrid();
+        } catch (error) {
+          console.error(error);
+          input.select();
+          setBusy(false, "That password didn’t open the edition. Try again.");
+        }
+      }
+
+      function revealEdition() {
+        gate.hidden = true;
+        document.body.classList.remove("locked");
+        edition.setAttribute("aria-hidden", "false");
+        window.setTimeout(() => {
+          gate.setAttribute("aria-hidden", "true");
+        }, 550);
+      }
+
+      function buildGrid() {
+        const fragment = document.createDocumentFragment();
+
+        manifest.images.slice(1).forEach((item, index) => {
+          const frame = document.createElement("figure");
+          const displayIndex = index + 2;
+          const isWide = [7, 18, 29, 38].includes(displayIndex);
+          const isSmall = [12, 13, 14, 24, 25, 26].includes(displayIndex);
+          frame.className = `frame${isWide ? " wide" : ""}${isSmall ? " small" : ""}`;
+          frame.dataset.imageIndex = String(index + 1);
+
+          const image = document.createElement("img");
+          image.alt = `Muse Day in Paris, photograph ${displayIndex} of ${manifest.images.length}`;
+          image.loading = "lazy";
+          image.decoding = "async";
+
+          const caption = document.createElement("figcaption");
+          caption.innerHTML = `<span>Muse Day · Paris</span><span>${item.id} / ${manifest.images.length}</span>`;
+
+          frame.append(image, caption);
+          fragment.append(frame);
+        });
+
+        grid.append(fragment);
+      }
+
+      async function loadGrid() {
+        const frames = [...grid.querySelectorAll(".frame")];
+
+        for (const frame of frames) {
+          const item = manifest.images[Number(frame.dataset.imageIndex)];
+          const image = frame.querySelector("img");
+
+          try {
+            image.src = await decryptImage(item);
+            image.addEventListener("load", () => image.classList.add("ready"), { once: true });
+            loaded += 1;
+            loadStatus.textContent = `${loaded + 1} / ${manifest.images.length} photographs ready`;
+          } catch (error) {
+            frame.hidden = true;
+            console.error(`Unable to decrypt photograph ${item.id}`, error);
+          }
+
+          await new Promise((resolve) => requestAnimationFrame(resolve));
+        }
+
+        loadStatus.textContent = `${manifest.images.length} photographs · decrypted in this browser`;
+      }
+
+      async function deriveKey(passphrase, options) {
+        const material = await crypto.subtle.importKey(
+          "raw",
+          new TextEncoder().encode(passphrase),
+          "PBKDF2",
+          false,
+          ["deriveKey"]
+        );
+
+        return crypto.subtle.deriveKey(
+          {
+            name: "PBKDF2",
+            hash: options.hash,
+            iterations: options.iterations,
+            salt: fromBase64(options.salt),
+          },
+          material,
+          { name: "AES-GCM", length: 256 },
+          false,
+          ["decrypt"]
+        );
+      }
+
+      async function decryptImage(item) {
+        const response = await fetch(`${ASSET_ROOT}${item.file}`, { cache: "force-cache" });
+        if (!response.ok) throw new Error(`Encrypted file returned ${response.status}`);
+
+        const clear = await crypto.subtle.decrypt(
+          { name: "AES-GCM", iv: fromBase64(item.iv), tagLength: 128 },
+          key,
+          await response.arrayBuffer()
+        );
+
+        return URL.createObjectURL(new Blob([clear], { type: item.type }));
+      }
+
+      async function fetchJson(url) {
+        const response = await fetch(url, { cache: "no-store" });
+        if (!response.ok) throw new Error(`Manifest returned ${response.status}`);
+        return response.json();
+      }
+
+      function fromBase64(value) {
+        return Uint8Array.from(atob(value), (character) => character.charCodeAt(0));
+      }
+
+      function setBusy(busy, message) {
+        button.disabled = busy;
+        input.disabled = busy;
+        status.textContent = message;
+      }
+    })();
+  </script>
 </body>
 </html>
