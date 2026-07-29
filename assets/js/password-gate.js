@@ -84,6 +84,51 @@
     } catch (error) {
       // Local storage unavailable.
     }
+
+    scheduleProtectedLinkChecks();
+  }
+
+  function markProtectedLinks() {
+    var links = document.querySelectorAll('a[href]');
+    Array.prototype.forEach.call(links, function markLink(link) {
+      var url;
+      try {
+        url = new URL(link.getAttribute('href'), window.location.href);
+      } catch (error) {
+        return;
+      }
+
+      if (!url.pathname.endsWith('/archive.html') && !url.pathname.endsWith('/blog.html')) {
+        return;
+      }
+      if (link.querySelector('.naiy-access-check')) {
+        return;
+      }
+
+      var check = document.createElement('span');
+      check.className = 'naiy-access-check';
+      check.textContent = '✓';
+      check.setAttribute('aria-label', 'access remembered');
+      check.title = 'Access remembered';
+      link.appendChild(check);
+    });
+
+    if (!document.getElementById('naiy-access-check-style')) {
+      var checkStyle = document.createElement('style');
+      checkStyle.id = 'naiy-access-check-style';
+      checkStyle.textContent = [
+        '.naiy-access-check{display:inline-block;margin-left:.42em;color:#55f0a0;font-family:Arial,Helvetica,sans-serif;font-size:.9em;font-weight:800;line-height:1;text-shadow:0 0 10px rgba(85,240,160,.35);vertical-align:.05em;}'
+      ].join('');
+      document.head.appendChild(checkStyle);
+    }
+  }
+
+  function scheduleProtectedLinkChecks() {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', markProtectedLinks, { once: true });
+    } else {
+      markProtectedLinks();
+    }
   }
 
   function hexToBytes(hex) {
@@ -156,6 +201,7 @@
       } catch (error) {
         // Ignore session storage failure.
       }
+      scheduleProtectedLinkChecks();
     }
     return hasAccess;
   });
