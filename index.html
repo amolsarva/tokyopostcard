@@ -259,6 +259,25 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
+    .snap-reel {
+      background: var(--acid);
+      color: var(--ink);
+    }
+    .snap-reel .reel-head {
+      align-items: start;
+    }
+    .snap-reel .reel-note {
+      max-width: 360px;
+      margin: 1.5vh 0 0;
+      font: 16px/1.5 var(--serif);
+    }
+    .snap-reel .load-status {
+      color: var(--red);
+    }
+    .snap-reel .frame {
+      background: #cbcfa7;
+      box-shadow: 0 0 0 1px rgba(22, 19, 18, 0.18);
+    }
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -436,7 +455,7 @@
           <p class="eyebrow">Paris · 24—27 July 2026 · 28 on the 27th</p>
           <h1 class="hero-title">Every day is<br><em>muse</em> day.</h1>
         </div>
-        <p class="hero-aside">One birthday, one city, forty-four glimpses of the beautiful in-between.</p>
+        <p class="hero-aside">One birthday, one city, seventy-nine glimpses of the beautiful in-between.</p>
       </div>
     </header>
 
@@ -454,6 +473,18 @@
         <p class="load-status" id="load-status">Preparing 44 photographs</p>
       </div>
       <div class="photo-grid" id="photo-grid"></div>
+    </section>
+
+    <section class="reel snap-reel" id="disposable-cameras">
+      <div class="reel-head">
+        <div>
+          <p class="section-label">Three disposable cameras</p>
+          <h2>The pictures<br>between pictures.</h2>
+          <p class="reel-note">Thirty-five frames from Sylv, Hannah and Laura: flash, grain, missed focus, and the parts of the weekend nobody posed for.</p>
+        </div>
+        <p class="load-status" id="snap-load-status">Preparing 35 photographs</p>
+      </div>
+      <div class="photo-grid" id="snap-photo-grid"></div>
     </section>
 
     <section class="itinerary" id="weekend">
@@ -511,6 +542,7 @@
       "use strict";
 
       const ASSET_ROOT = "assets/p-7f3a9d2c/";
+      const SNAP_ASSET_ROOT = "assets/p-snaps-35/";
       const gate = document.getElementById("gate");
       const form = document.getElementById("unlock-form");
       const input = document.getElementById("passphrase");
@@ -520,9 +552,14 @@
       const hero = document.getElementById("hero-photo");
       const grid = document.getElementById("photo-grid");
       const loadStatus = document.getElementById("load-status");
+      const snapGrid = document.getElementById("snap-photo-grid");
+      const snapLoadStatus = document.getElementById("snap-load-status");
       let manifest;
+      let snapManifest;
       let key;
+      let snapKey;
       let loaded = 0;
+      let snapsLoaded = 0;
 
       form.addEventListener("submit", unlock);
       input.focus();
@@ -539,15 +576,22 @@
         setBusy(true, "Opening the encrypted photographs…");
 
         try {
-          manifest ||= await fetchJson(`${ASSET_ROOT}manifest.json`);
-          key = await deriveKey(passphrase, manifest.keyDerivation);
+          [manifest, snapManifest] = await Promise.all([
+            manifest || fetchJson(`${ASSET_ROOT}manifest.json`),
+            snapManifest || fetchJson(`${SNAP_ASSET_ROOT}manifest.json`),
+          ]);
+          [key, snapKey] = await Promise.all([
+            deriveKey(passphrase, manifest.keyDerivation),
+            deriveKey(passphrase, snapManifest.keyDerivation),
+          ]);
           const firstUrl = await decryptImage(manifest.images[0]);
 
           hero.src = firstUrl;
           hero.addEventListener("load", () => hero.classList.add("ready"), { once: true });
           revealEdition();
           buildGrid();
-          await loadGrid();
+          buildSnapGrid();
+          await Promise.all([loadGrid(), loadSnapGrid()]);
         } catch (error) {
           console.error(error);
           input.select();
@@ -590,6 +634,33 @@
         grid.append(fragment);
       }
 
+      function buildSnapGrid() {
+        const fragment = document.createDocumentFragment();
+
+        snapManifest.images.forEach((item, index) => {
+          const frame = document.createElement("figure");
+          const displayIndex = index + 1;
+          const isWide = [3, 8, 15, 22, 29, 34].includes(displayIndex);
+          const isSmall = [5, 6, 17, 18, 26, 27].includes(displayIndex);
+          const rollNumber = displayIndex <= 12 ? 1 : displayIndex <= 20 ? 2 : 3;
+          frame.className = `frame${isWide ? " wide" : ""}${isSmall ? " small" : ""}`;
+          frame.dataset.imageIndex = String(index);
+
+          const image = document.createElement("img");
+          image.alt = `Disposable-camera photograph ${displayIndex} of ${snapManifest.images.length}`;
+          image.loading = "lazy";
+          image.decoding = "async";
+
+          const caption = document.createElement("figcaption");
+          caption.innerHTML = `<span>Disposable roll ${String(rollNumber).padStart(2, "0")}</span><span>${item.id} / ${snapManifest.images.length}</span>`;
+
+          frame.append(image, caption);
+          fragment.append(frame);
+        });
+
+        snapGrid.append(fragment);
+      }
+
       async function loadGrid() {
         const frames = [...grid.querySelectorAll(".frame")];
 
@@ -611,6 +682,29 @@
         }
 
         loadStatus.textContent = `${manifest.images.length} photographs · decrypted in this browser`;
+      }
+
+      async function loadSnapGrid() {
+        const frames = [...snapGrid.querySelectorAll(".frame")];
+
+        for (const frame of frames) {
+          const item = snapManifest.images[Number(frame.dataset.imageIndex)];
+          const image = frame.querySelector("img");
+
+          try {
+            image.src = await decryptImage(item, SNAP_ASSET_ROOT, snapKey);
+            image.addEventListener("load", () => image.classList.add("ready"), { once: true });
+            snapsLoaded += 1;
+            snapLoadStatus.textContent = `${snapsLoaded} / ${snapManifest.images.length} photographs ready`;
+          } catch (error) {
+            frame.hidden = true;
+            console.error(`Unable to decrypt disposable photograph ${item.id}`, error);
+          }
+
+          await new Promise((resolve) => requestAnimationFrame(resolve));
+        }
+
+        snapLoadStatus.textContent = `${snapManifest.images.length} photographs · decrypted in this browser`;
       }
 
       async function deriveKey(passphrase, options) {
@@ -636,13 +730,13 @@
         );
       }
 
-      async function decryptImage(item) {
-        const response = await fetch(`${ASSET_ROOT}${item.file}`, { cache: "force-cache" });
+      async function decryptImage(item, assetRoot = ASSET_ROOT, decryptionKey = key) {
+        const response = await fetch(`${assetRoot}${item.file}`, { cache: "force-cache" });
         if (!response.ok) throw new Error(`Encrypted file returned ${response.status}`);
 
         const clear = await crypto.subtle.decrypt(
           { name: "AES-GCM", iv: fromBase64(item.iv), tagLength: 128 },
-          key,
+          decryptionKey,
           await response.arrayBuffer()
         );
 
