@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="Manhattan for Laura — a black-and-white love letter to New York in thirty-two frames.">
+  <meta property="og:title" content="Manhattan, for Laura">
+  <meta property="og:description" content="New York, seen like a memory before it happened.">
+  <meta property="og:image" content="../../assets/archive-thumbs/2026-08-10-manhattan-for-laura.jpg">
+  <title>Manhattan, for Laura</title>
+  <style>
+    :root { --black:#080808; --white:#f1f0eb; --grey:#989894; --line:#343434; --serif:Georgia,"Times New Roman",serif; --sans:Arial,Helvetica,sans-serif; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; background:var(--black); }
+    body { margin:0; overflow-x:hidden; background:var(--black); color:var(--white); font-family:var(--sans); }
+    a { color:inherit; }
+    button { color:inherit; font:inherit; }
+    .grain { position:fixed; inset:-40%; z-index:20; pointer-events:none; opacity:.045; background-image:repeating-radial-gradient(circle at 20% 30%,#fff 0 1px,transparent 1px 4px); background-size:9px 11px; animation:grain .22s steps(2) infinite; }
+    @keyframes grain { 0%{transform:translate(0)} 25%{transform:translate(4%,-3%)} 50%{transform:translate(-3%,5%)} 75%{transform:translate(5%,2%)} }
+    .hero { position:relative; min-height:100svh; display:grid; align-items:end; overflow:hidden; isolation:isolate; }
+    .hero img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; z-index:-2; filter:contrast(1.08) brightness(.72); }
+    .hero::after { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.06) 40%,rgba(0,0,0,.95)); }
+    .mast { position:absolute; top:0; left:clamp(20px,4vw,64px); right:clamp(20px,4vw,64px); display:flex; justify-content:space-between; gap:20px; padding:25px 0; border-bottom:1px solid rgba(255,255,255,.45); font:10px/1.2 var(--sans); letter-spacing:.24em; text-transform:uppercase; }
+    .mast a { text-underline-offset:5px; }
+    .hero-copy { padding:18vh clamp(20px,5vw,80px) 6vh; }
+    .kicker { margin:0 0 18px; font-size:10px; letter-spacing:.26em; text-transform:uppercase; }
+    h1 { max-width:12ch; margin:0; font:italic 400 clamp(72px,15vw,218px)/.74 var(--serif); letter-spacing:-.075em; }
+    .hero-foot { display:flex; justify-content:space-between; align-items:end; gap:30px; margin-top:5vh; }
+    .hero-foot p { max-width:500px; margin:0; font:clamp(17px,2vw,25px)/1.35 var(--serif); }
+    .scroll-note { color:#d0d0cc; font-size:9px; letter-spacing:.22em; text-transform:uppercase; white-space:nowrap; }
+    .prologue { display:grid; grid-template-columns:minmax(0,.6fr) minmax(0,1.4fr); gap:8vw; padding:14vh clamp(22px,8vw,140px); border-bottom:1px solid var(--line); }
+    .label { color:var(--grey); font-size:9px; letter-spacing:.25em; text-transform:uppercase; }
+    .prologue blockquote { margin:0; font:400 clamp(35px,5.5vw,82px)/.98 var(--serif); letter-spacing:-.04em; }
+    .prologue em { color:#a7a7a3; }
+    .chapter { padding:11vh clamp(12px,3.5vw,56px) 5vh; }
+    .chapter-head { display:flex; justify-content:space-between; align-items:end; gap:30px; margin:0 clamp(8px,2vw,26px) 28px; padding-bottom:16px; border-bottom:1px solid var(--line); }
+    .chapter h2 { margin:4px 0 0; font:400 clamp(40px,7vw,94px)/.9 var(--serif); letter-spacing:-.05em; }
+    .chapter-no { color:var(--grey); font:italic 40px var(--serif); }
+    .frames { display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(8px,1.2vw,18px); }
+    figure { position:relative; grid-column:span 7; margin:0; overflow:hidden; background:#181818; }
+    figure:nth-child(3n+2) { grid-column:6 / span 7; }
+    figure:nth-child(3n) { grid-column:2 / span 9; }
+    figure img { display:block; width:100%; aspect-ratio:16/9; object-fit:cover; transition:filter .5s ease,transform 1s ease; }
+    figure:hover img { filter:contrast(1.08); transform:scale(1.012); }
+    figcaption { display:flex; justify-content:space-between; gap:16px; padding:11px 2px 22px; color:var(--grey); font-size:9px; letter-spacing:.18em; text-transform:uppercase; }
+    .intertitle { min-height:75svh; display:grid; place-items:center; padding:12vh 24px; text-align:center; }
+    .intertitle p { max-width:900px; margin:0; font:italic 400 clamp(48px,8vw,126px)/.92 var(--serif); letter-spacing:-.05em; }
+    .intertitle span { display:block; margin-top:26px; color:var(--grey); font:9px var(--sans); letter-spacing:.25em; text-transform:uppercase; }
+    .finale { position:relative; min-height:100svh; display:grid; align-items:end; overflow:hidden; }
+    .finale img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.6) contrast(1.1); }
+    .finale::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.9)); }
+    .finale-copy { position:relative; z-index:1; padding:12vh clamp(22px,7vw,110px); }
+    .finale h2 { max-width:9ch; margin:0; font:italic 400 clamp(68px,13vw,190px)/.76 var(--serif); letter-spacing:-.07em; }
+    .dedication { display:flex; justify-content:space-between; gap:30px; margin-top:7vh; padding-top:18px; border-top:1px solid rgba(255,255,255,.45); font-size:10px; letter-spacing:.22em; text-transform:uppercase; }
+    .projector { position:fixed; right:18px; bottom:18px; z-index:30; width:54px; height:54px; border:1px solid rgba(255,255,255,.45); border-radius:50%; background:rgba(0,0,0,.58); cursor:pointer; font-size:8px; letter-spacing:.12em; text-transform:uppercase; }
+    body.projecting figcaption, body.projecting .chapter-head { opacity:0; }
+    figcaption, .chapter-head { transition:opacity .35s ease; }
+    .sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+    @media (max-width:700px) { .prologue{grid-template-columns:1fr; gap:36px}.hero-foot{align-items:start;flex-direction:column}.scroll-note{display:none}.chapter{padding-left:10px;padding-right:10px}figure,figure:nth-child(3n+2),figure:nth-child(3n){grid-column:1/-1}.finale{min-height:80svh}.dedication{flex-direction:column}.mast span:last-child{display:none} }
+    @media (prefers-reduced-motion:reduce) { html{scroll-behavior:auto}.grain{animation:none}figure img{transition:none} }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="hero">
+    <img src="assets/01.jpg" alt="The Manhattan skyline in black and white">
+    <nav class="mast" aria-label="Edition navigation"><a href="../../archive.html">Laurarchive</a><span>New York City · 1979 / 2026</span><span>For Laura, always</span></nav>
+    <div class="hero-copy"><p class="kicker">A city symphony in thirty-two frames</p><h1>Manhattan, for Laura</h1><div class="hero-foot"><p>Some cities are places. New York is a point of view — impatient, tender, impossible to finish.</p><span class="scroll-note">Scroll to begin ↓</span></div></div>
+  </header>
+
+  <section class="prologue"><p class="label">Overture · Rhapsody in grey</p><blockquote>New York was his town, and it always would be. But tonight, <em>it belongs to you.</em></blockquote></section>
+  <main id="film"></main>
+  <section class="intertitle"><div><p>“Chapter one. She adored New York City.”</p><span>Especially when it looked like this</span></div></section>
+  <footer class="finale"><img src="assets/32.jpg" alt="The Manhattan skyline at sunset"><div class="finale-copy"><p class="kicker">The last frame is never the end</p><h2>Meet me in Manhattan.</h2><div class="dedication"><span>Made for Laura</span><span>New York · August 10, 2026</span></div></div></footer>
+
+  <button class="projector" type="button" aria-pressed="false" aria-label="Toggle projection mode">Cinema</button>
+  <script>
+    const chapters = [
+      { title:'The city announces itself', range:[2,8], note:'Steel · stone · signs' },
+      { title:'Eight million close-ups', range:[9,16], note:'Markets · crossings · crowds' },
+      { title:'A little weather', range:[17,24], note:'Snow · parks · side streets' },
+      { title:'The beautiful argument', range:[25,31], note:'Museums · commerce · motion' }
+    ];
+    const captions = ['Midtown, before the dialogue','Parking / Manhattan','Traffic as choreography','The Queensboro Bridge','Lunch is a landmark','Snow makes the avenue quiet','The market never holds still','No walking, still moving','Across the river','A crowd becomes a city','Fifth Avenue in passing','A pause at the pier','The Strand after snow','Washington Square, bright again','Garment district faces','School is out','Behind the fence','Trees keep the secret','A corner conversation','Rush hour underground','One way / don’t walk','Sun between buildings','The art of looking','Gucci, as architecture','Carriages at the Plaza','The final westward light','New York keeps going','Every street, a scene'];
+    const film = document.querySelector('#film');
+    let captionIndex = 0;
+    chapters.forEach((chapter, chapterIndex) => {
+      const section = document.createElement('section'); section.className = 'chapter';
+      section.innerHTML = `<header class="chapter-head"><div><span class="label">Reel ${chapterIndex + 1} · ${chapter.note}</span><h2>${chapter.title}</h2></div><span class="chapter-no">0${chapterIndex + 1}</span></header><div class="frames"></div>`;
+      const frames = section.querySelector('.frames');
+      for (let n = chapter.range[0]; n <= chapter.range[1]; n++) {
+        const figure = document.createElement('figure');
+        const number = String(n).padStart(2,'0');
+        const caption = captions[captionIndex++] || 'Manhattan in passing';
+        figure.innerHTML = `<img src="assets/${number}.jpg" alt="${caption}" loading="lazy" decoding="async"><figcaption><span>${caption}</span><span>${number} / 32</span></figcaption>`;
+        frames.appendChild(figure);
+      }
+      film.appendChild(section);
+    });
+
+    const projector = document.querySelector('.projector');
+    projector.addEventListener('click', () => {
+      const on = document.body.classList.toggle('projecting');
+      projector.setAttribute('aria-pressed', String(on));
+      projector.textContent = on ? 'Exit' : 'Cinema';
+    });
+  </script>
+</body>
+</html>
