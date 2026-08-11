@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#080808">
-  <meta name="description" content="Manhattan for Laura — a black-and-white love letter to New York in thirty-two frames.">
+  <meta name="description" content="Manhattan for Laura — a New York love letter where Manhattan meets Annie Hall and When Harry Met Sally.">
   <meta property="og:title" content="Manhattan, for Laura">
-  <meta property="og:description" content="New York, seen like a memory before it happened.">
+  <meta property="og:description" content="Thirty-two city frames, seven romantic complications, and one New York love letter.">
   <meta property="og:image" content="../../assets/archive-thumbs/2026-08-10-manhattan-for-laura.jpg">
   <title>Manhattan, for Laura</title>
   <style>
@@ -44,6 +44,40 @@
     figure img { display:block; width:100%; aspect-ratio:16/9; object-fit:cover; transition:filter .5s ease,transform 1s ease; }
     figure:hover img { filter:contrast(1.08); transform:scale(1.012); }
     figcaption { display:flex; justify-content:space-between; gap:16px; padding:11px 2px 22px; color:var(--grey); font-size:9px; letter-spacing:.18em; text-transform:uppercase; }
+    .romance { --cream:#efe4cf; --wine:#7e201f; --leaf:#566147; position:relative; margin-top:7vh; overflow:hidden; background:var(--cream); color:#211c18; }
+    .romance-opening { min-height:100svh; display:grid; grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr); }
+    .romance-copy { display:flex; flex-direction:column; justify-content:space-between; gap:44px; padding:clamp(34px,7vw,110px); }
+    .romance .label { color:var(--wine); }
+    .romance h2 { max-width:8ch; margin:0; font:italic 400 clamp(64px,10vw,150px)/.78 var(--serif); letter-spacing:-.07em; }
+    .romance h2 span { display:block; color:var(--wine); }
+    .romance-deck { max-width:420px; margin:0; font:clamp(18px,2.1vw,27px)/1.35 var(--serif); }
+    .romance-opening figure { grid-column:auto; min-height:100%; background:#15110f; }
+    .romance-opening figure img { height:100%; aspect-ratio:auto; object-fit:cover; object-position:center; }
+    .romance-opening figcaption { position:absolute; inset:auto 22px 18px; z-index:1; padding:12px 0 0; color:white; border-top:1px solid rgba(255,255,255,.58); }
+    .romance-opening figure::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.68)); pointer-events:none; }
+    .meet-cute { display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(12px,2vw,30px); padding:12vh clamp(14px,4vw,66px); border-top:1px solid rgba(33,28,24,.24); }
+    .meet-cute figure { grid-column:auto; background:transparent; overflow:visible; }
+    .meet-cute figure img { aspect-ratio:16/10; box-shadow:0 20px 60px rgba(43,31,22,.18); }
+    .meet-cute .sally { grid-column:1 / span 7; }
+    .meet-cute .harry { grid-column:7 / span 6; margin-top:18vh; }
+    .meet-cute figcaption { color:#635a52; }
+    .meet-cute-copy { grid-column:2 / span 7; padding:9vh 0 2vh; }
+    .meet-cute-copy p { max-width:860px; margin:0; font:400 clamp(36px,6vw,88px)/.98 var(--serif); letter-spacing:-.045em; }
+    .meet-cute-copy em { color:var(--wine); }
+    .split-screen { display:grid; grid-template-columns:1fr 1fr; min-height:100svh; background:#1d211b; color:var(--cream); }
+    .split-screen article { display:grid; grid-template-rows:minmax(0,1fr) auto; min-height:100svh; border-right:1px solid rgba(239,228,207,.25); }
+    .split-screen article:last-child { border-right:0; }
+    .split-screen figure { grid-column:auto; width:100%; height:100%; background:#090909; }
+    .split-screen figure img { width:100%; height:100%; aspect-ratio:auto; object-fit:cover; }
+    .split-screen .scene-copy { padding:clamp(25px,4vw,60px); }
+    .split-screen h3 { margin:10px 0 14px; font:400 clamp(34px,5vw,72px)/.9 var(--serif); letter-spacing:-.04em; }
+    .split-screen p { max-width:520px; margin:0; color:rgba(239,228,207,.7); font:17px/1.5 var(--serif); }
+    .romance-coda { position:relative; min-height:92svh; display:grid; align-items:end; overflow:hidden; background:#0c0c0b; color:white; }
+    .romance-coda img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.68); }
+    .romance-coda::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.86)); }
+    .romance-coda div { position:relative; z-index:1; padding:10vh clamp(24px,7vw,112px); }
+    .romance-coda p { max-width:12ch; margin:0; font:italic 400 clamp(54px,9vw,130px)/.88 var(--serif); letter-spacing:-.055em; }
+    .romance-coda span { display:block; margin-top:28px; font-size:9px; letter-spacing:.24em; text-transform:uppercase; }
     .intertitle { min-height:75svh; display:grid; place-items:center; padding:12vh 24px; text-align:center; }
     .intertitle p { max-width:900px; margin:0; font:italic 400 clamp(48px,8vw,126px)/.92 var(--serif); letter-spacing:-.05em; }
     .intertitle span { display:block; margin-top:26px; color:var(--grey); font:9px var(--sans); letter-spacing:.25em; text-transform:uppercase; }
@@ -54,10 +88,10 @@
     .finale h2 { max-width:9ch; margin:0; font:italic 400 clamp(68px,13vw,190px)/.76 var(--serif); letter-spacing:-.07em; }
     .dedication { display:flex; justify-content:space-between; gap:30px; margin-top:7vh; padding-top:18px; border-top:1px solid rgba(255,255,255,.45); font-size:10px; letter-spacing:.22em; text-transform:uppercase; }
     .projector { position:fixed; right:18px; bottom:18px; z-index:30; width:54px; height:54px; border:1px solid rgba(255,255,255,.45); border-radius:50%; background:rgba(0,0,0,.58); cursor:pointer; font-size:8px; letter-spacing:.12em; text-transform:uppercase; }
-    body.projecting figcaption, body.projecting .chapter-head { opacity:0; }
-    figcaption, .chapter-head { transition:opacity .35s ease; }
+    body.projecting figcaption, body.projecting .chapter-head, body.projecting .scene-copy, body.projecting .romance-copy, body.projecting .meet-cute-copy, body.projecting .romance-coda div { opacity:0; }
+    figcaption, .chapter-head, .scene-copy, .romance-copy, .meet-cute-copy, .romance-coda div { transition:opacity .35s ease; }
     .sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
-    @media (max-width:700px) { .prologue{grid-template-columns:1fr; gap:36px}.hero-foot{align-items:start;flex-direction:column}.scroll-note{display:none}.chapter{padding-left:10px;padding-right:10px}figure,figure:nth-child(3n+2),figure:nth-child(3n){grid-column:1/-1}.finale{min-height:80svh}.dedication{flex-direction:column}.mast span:last-child{display:none} }
+    @media (max-width:700px) { .prologue{grid-template-columns:1fr; gap:36px}.hero-foot{align-items:start;flex-direction:column}.scroll-note{display:none}.chapter{padding-left:10px;padding-right:10px}figure,figure:nth-child(3n+2),figure:nth-child(3n){grid-column:1/-1}.romance-opening{grid-template-columns:1fr}.romance-copy{min-height:75svh}.romance-opening figure{min-height:72svh}.meet-cute .sally,.meet-cute .harry,.meet-cute .meet-cute-copy{grid-column:1/-1}.meet-cute .harry{margin-top:2vh}.split-screen{grid-template-columns:1fr}.split-screen article{min-height:85svh;border-right:0;border-bottom:1px solid rgba(239,228,207,.25)}.finale{min-height:80svh}.dedication{flex-direction:column}.mast span:last-child{display:none} }
     @media (prefers-reduced-motion:reduce) { html{scroll-behavior:auto}.grain{animation:none}figure img{transition:none} }
   </style>
 </head>
@@ -71,6 +105,47 @@
 
   <section class="prologue"><p class="label">Overture · Rhapsody in grey</p><blockquote>New York was his town, and it always would be. But tonight, <em>it belongs to you.</em></blockquote></section>
   <main id="film"></main>
+
+  <section class="romance" aria-labelledby="romance-title">
+    <div class="romance-opening">
+      <div class="romance-copy">
+        <div><p class="label">Second feature · A romantic complication</p><h2 id="romance-title">Annie Hall <span>meets Harry &amp; Sally</span></h2></div>
+        <p class="romance-deck">Two New York love stories walk into the same frame. One is all digression and downtown nerves. The other takes twelve years to admit what everyone else already knows.</p>
+      </div>
+      <figure><img src="assets/romance/02-autumn.jpg" alt="Two silhouettes crossing before a wall of autumn trees" loading="lazy" decoding="async"><figcaption><span>New York in autumn</span><span>The long way around</span></figcaption></figure>
+    </div>
+
+    <div class="meet-cute">
+      <figure class="sally"><img src="assets/romance/03-sally.jpg" alt="Sally considering the argument across a crowded table" loading="lazy" decoding="async"><figcaption><span>She has a point</span><span>Scene I</span></figcaption></figure>
+      <figure class="harry"><img src="assets/romance/01-harry.jpg" alt="Harry talking over lunch in a crowded delicatessen" loading="lazy" decoding="async"><figcaption><span>He has several theories</span><span>Scene II</span></figcaption></figure>
+      <div class="meet-cute-copy"><p>They disagree about almost everything—except that the conversation is <em>too good to leave.</em></p></div>
+    </div>
+
+    <div class="split-screen">
+      <article>
+        <figure><img src="assets/romance/07-annie.jpg" alt="Annie smiling in her signature waistcoat, tie, and hat" loading="lazy" decoding="async"></figure>
+        <div class="scene-copy"><span class="label">Annie says</span><h3>Be singular.</h3><p>Wear the tie. Tell the strange story. Laugh before the punchline gets there.</p></div>
+      </article>
+      <article>
+        <figure><img src="assets/romance/04-annie-walk.jpg" alt="Annie hurrying down a New York brownstone street" loading="lazy" decoding="async"></figure>
+        <div class="scene-copy"><span class="label">Sally says</span><h3>Be particular.</h3><p>Know what you want. Ask for it on the side. Leave, return, and finally say the thing.</p></div>
+      </article>
+    </div>
+
+    <div class="split-screen">
+      <article>
+        <figure><img src="assets/romance/05-alvy-crowd.jpg" alt="Alvy arguing with another man in a crowded cinema lobby" loading="lazy" decoding="async"></figure>
+        <div class="scene-copy"><span class="label">The Allen version</span><h3>Love as debate.</h3><p>A running commentary with occasional kissing and no reliable conclusion.</p></div>
+      </article>
+      <article>
+        <figure><img src="assets/romance/06-alvy-walk.jpg" alt="A couple walking together through a busy New York corridor" loading="lazy" decoding="async"></figure>
+        <div class="scene-copy"><span class="label">The Ephron version</span><h3>Love as return.</h3><p>The right person, the wrong year, and a city patient enough to keep the table.</p></div>
+      </article>
+    </div>
+
+    <div class="romance-coda"><img src="assets/romance/02-autumn.jpg" alt="Autumn trees beyond two people walking apart" loading="lazy" decoding="async"><div><p>Maybe the happy ending is simply choosing the same person in every genre.</p><span>For Laura · La-di-da meets I’ll have what she’s having</span></div></div>
+  </section>
+
   <section class="intertitle"><div><p>“Chapter one. She adored New York City.”</p><span>Especially when it looked like this</span></div></section>
   <footer class="finale"><img src="assets/32.jpg" alt="The Manhattan skyline at sunset"><div class="finale-copy"><p class="kicker">The last frame is never the end</p><h2>Meet me in Manhattan.</h2><div class="dedication"><span>Made for Laura</span><span>New York · August 10, 2026</span></div></div></footer>
 
