@@ -78,3 +78,10 @@ Use this exact wording when needed:
 - Keep references relative-path correct for homepage vs `archives/<slug>/index.html` depth.
 - Keep tone concise, atmospheric, and postcard-like.
 - Include accessible fallbacks (reduced motion, contrast-aware text, meaningful links).
+
+
+## Canonical carousel template (first-5-edition baseline)
+- Use `templates/edition-carousel/edition-carousel.template.html` as the default build scaffold.
+- Fill scene content using `templates/edition-carousel/edition-scenes.template.json`.
+- Reference `templates/edition-carousel/README.md` for constraints derived from the first five editions.
+- Do **not** produce blog/post-style pages for editions; keep one-screen-per-scene carousel flow.

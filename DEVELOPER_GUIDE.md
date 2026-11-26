@@ -30,6 +30,7 @@ This repository is a postcard-style static site with a rotating current homepage
 - Archives index data: `archives/manifest.json`
 - Archive pages: `archives/*/index.html`
 - Asset roots: `assets/`, plus some edition-local `archives/<slug>/assets/`
+- Canonical carousel template: `templates/edition-carousel/edition-carousel.template.html` with scene data from `templates/edition-carousel/edition-scenes.template.json`.
 
 ## Werkwelt email capture workflow
 - `blog.html` includes a `mailto:` quick-action for drafting Werkwelt posts.

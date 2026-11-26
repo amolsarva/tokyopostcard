@@ -1,0 +1,27 @@
+{
+  "edition": {
+    "slug": "YYYY-MM-DD-edition-slug",
+    "title": "Edition Title",
+    "introWhisper": "tap to begin",
+    "introLine": "EDITION intro line",
+    "epilogueWhisper": "Edition complete",
+    "epilogueLine": "Tap anywhere when you are ready to replay.",
+    "epilogueMicro": "Replay ritual"
+  },
+  "scenes": [
+    {
+      "image": "assets/photos/scene-01.jpg",
+      "fallback": "linear-gradient(125deg, #111827, #1f2937, #4b5563)",
+      "whisper": "Scene cue",
+      "line": "Primary line for this screen.",
+      "micro": "Tap to continue"
+    },
+    {
+      "image": "assets/photos/scene-02.jpg",
+      "fallback": "linear-gradient(125deg, #1e1b4b, #312e81, #6366f1)",
+      "whisper": "Second cue",
+      "line": "Second screen line.",
+      "micro": "Tap for next frame"
+    }
+  ]
+}
